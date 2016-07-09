@@ -1,0 +1,74 @@
+/**********/
+/* LAYOUT */
+/**********/
+#topBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 50px;
+    overflow: hidden;
+    overflow-y: auto;
+    
+    background: #BD1E51;
+    background-image: linear-gradient(totop,#3737370,#4646465px);
+    color: #fff;
+    
+    font-size: Large;
+}
+#topBar * {
+    padding: 5px;
+    margin: 10px;
+}
+#panel {
+    position: absolute;
+    top: 50px;
+    bottom: 0;    
+    left: 0;
+    width: 40%;
+}
+#persooPreview {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    right: 0;
+    width: 60%;
+    
+    background: #EEE;
+}
+
+/*****************/
+/* TABS in PANEL */
+/*****************/
+#panelTabs {
+	width: 100%;
+	height: 20px;
+	padding: 10px;
+	background: #DDD;
+	color: #444;
+}
+#panelTabs span {
+	margin: 10px 10px;
+}
+#panelTabs span.active {
+	font-weight: bold;
+}
+#panel div.panel {
+	display: none;
+	padding: 20px;
+}
+#panel div.panel.active {
+	display: block;
+}
+
+
+
+
+/***********/
+/* UTILITY */
+/***********/
+.center {
+    text-align: center;
+    margin: auto;
+}

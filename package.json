@@ -1,0 +1,34 @@
+{
+  "name": "persoo-templates",
+  "version": "1.0.0",
+  "description": "Templates for persoo widgets.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha --reporter spec",
+    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*",
+    "build": "mkdir -p build && node_modules/browserify/bin/cmd.js editor/editor-app.js > build/editor-app-bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/persoo/persoo-templates.git"
+  },
+  "keywords": [
+    "Persoo",
+    "templates",
+    "preview",
+    "render"
+  ],
+  "author": "Jakub Cerny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/persoo/persoo-templates/issues"
+  },
+  "homepage": "https://github.com/persoo/persoo-templates#readme",
+  "devDependencies": {
+    "browserify": "^13.0.1",
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
+    "istanbul": "^0.4.4",
+    "mocha": "^2.5.3"
+  }
+}

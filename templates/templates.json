@@ -1,0 +1,16 @@
+{
+    "customHTML": {
+        "class": "webWidget",
+        "name": "Custom HTML",
+        "fields": [
+            {
+                "id": "template",
+                "label": "Template",
+                "formFieldType": "html",
+                "defaultValue": "<div>...your html code ...</div>"
+            }
+        ],
+        "template": "<%= template %>",
+        "minScenariosCount": 0
+    }
+}

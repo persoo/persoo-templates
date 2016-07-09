@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	<meta charset="utf-8">
+	
+	<title>Preview Persoo Widgets</title>
+	<meta name="description" content="Persoo Persoo Widgets">
+	<meta name="author" content="Persoo">
+	
+	<link rel="stylesheet" href="style.css">
+	
+	<script src="//scripts.persoo.cz/_default/persoo.js"></script>
+	<script src="//scripts.persoo.cz/shared/ace/ace.js"></script>
+</head>
+
+<body>
+  <div id="main">	  
+      <div id="topBar">
+          <span id="topBarTitle">
+          	Persoo Widgets Editor
+          </span>
+          <select id="templateID">
+              <!-- load templateIDs dynamically -->
+          </select>
+          <button id="reload">Reload</button>
+      </div>
+      <div id="panel">
+          <div id="panelTabs">
+	          <span id="tabDeveloper">Developer</span> |
+	          <span id="tabUser" class="active">User Fields</span> |
+	          <span id="tabProfile">Profile</span>          
+          </div>          
+          <div id="panelDeveloper" class="panel">Developer Panel</div>
+          <div id="panelUser" class="panel active">User Panel</div>
+          <div id="panelProfile" class="panel">Profile Panel</div>
+          
+      </div>
+      <div id="persooPreview">
+          <div class="center">
+          	Here you will see preview ...
+          </div>
+      </div>
+   </div>
+   <!-- to be sure that all elements exists -->
+   <script src="../build/editor-app-bundle.js"></script>
+</body>
+</html>
