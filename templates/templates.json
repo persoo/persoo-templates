@@ -13,32 +13,82 @@
         "template": "<%= template %>",
         "minScenariosCount": 0
     },
-    "customHTML2": {
+    "popup": {
         "class": "webWidget",
-        "name": "Custom HTML 2 Name",
         "fields": [
             {
-                "id": "template",
-                "label": "Template",
+                "defaultValue": "<style></style>",
                 "formFieldType": "html",
-                "defaultValue": "<div>...your html code ...</div>"
-            }
-        ],
-        "template": "<%= template %>",
-        "minScenariosCount": 0
-    },
-    "customHTML3": {
-        "class": "webWidget",
-        "name": "Custom HTML 3 Name",
-        "fields": [
+                "id": "PersooVarible_wysivygCss",
+                "label": "CSS kód banneru"
+            },
             {
-                "id": "template",
-                "label": "Template",
+                "defaultValue": "<div></div>",
                 "formFieldType": "html",
-                "defaultValue": "<div>...your html code ...</div>"
+                "id": "PersooVarible_wysivygHtml",
+                "label": "HTML kód banneru"
+            },
+            {
+                "defaultValue": "out",
+                "formFieldType": "select",
+                "id": "PersooVarible_crossPosition",
+                "label": "Pozice křížku pro zavření",
+                "options": [
+                    {
+                        "label": "V rohu stránky",
+                        "value": "out"
+                    },
+                    {
+                        "label": "Na půl mimo banner",
+                        "value": "outHalf"
+                    },
+                    {
+                        "label": "V rohu banneru",
+                        "value": "in"
+                    }
+                ]
+            },
+            {
+                "defaultValue": "15",
+                "formFieldType": "number",
+                "id": "PersooVarible_marginIN",
+                "label": "Vnitřní margin (hodnota se na webu promítne v px)"
+            },
+            {
+                "defaultValue": "1",
+                "formFieldType": "number",
+                "id": "PersooVarible_border",
+                "label": "Tloušťka rámečku kolem banneru (hodnota se na webu promítne v px)"
+            },
+            {
+                "defaultValue": "30",
+                "formFieldType": "number",
+                "id": "PersooVarible_marginOUT",
+                "label": "Vnější margin (hodnota se na webu promítne v px)"
+            },
+            {
+                "defaultValue": true,
+                "formFieldType": "checkbox",
+                "id": "PersooVarible_responsiveDektop",
+                "label": "Zobrazit na PC"
+            },
+            {
+                "defaultValue": true,
+                "formFieldType": "checkbox",
+                "id": "PersooVarible_responsiveTablet",
+                "label": "Zobrazit na tabletu"
+            },
+            {
+                "defaultValue": true,
+                "formFieldType": "checkbox",
+                "id": "PersooVarible_responsiveMobile",
+                "label": "Zobrazit na mobilu"
             }
         ],
-        "template": "<%= template %>",
-        "minScenariosCount": 0
+        "id": "f0e3fe17a48b4a05a27e430cb880d965",
+        "isActive": true,
+        "minScenariosCount": 0,
+        "name": "Popup",
+        "template": "<%\n/*EDIT*/\n  /*Name template Top Products*/\n  var PersooVarible_templateName = \"BASIC\";\n/*EDIT - END*/\n\n/*NOEDIT*/\n  /*Name template Top Products for Class*/\n  var PersooTemplateName = \"PersooTemplate_Popup_\" + PersooVarible_templateName ;\n\n  /*Name template Top Products for ID*/\n  var PersooTemplateNameID = \"#\" + PersooTemplateName;\n\n  /*Persoo prefix for css class*/\n  var PersooPrefix = \"persoo_\";\n/*NOEDIT - END*/\n%>\n<div id=\"<%= PersooTemplateName %>\" class=\"persoo<% if(PersooVarible_responsiveDektop == true) { %> <%= PersooPrefix %>showDesktop<% } %><% if(PersooVarible_responsiveTablet == true) { %> <%= PersooPrefix %>showTablet<% } %><% if(PersooVarible_responsiveMobile == true) { %> <%= PersooPrefix %>showMobile<% } %>\">\n\n  <style>\n  /*main style - area*/\n  <%= PersooTemplateNameID %>{display:none;position:fixed;z-index:10000;top:0;right:0;bottom:0;left:0;}\n  /*show class teprve priprava*/\n  @media (min-width:993px){\n    <%= PersooTemplateNameID %>.<%= PersooPrefix %>showDesktop{display:block;}\n  }\n  @media (min-width:769px) and (max-width:992px){\n    <%= PersooTemplateNameID %>.<%= PersooPrefix %>showTablet{display:block;}\n  }\n  @media (max-width:768px){\n    <%= PersooTemplateNameID %>.<%= PersooPrefix %>showMobile{display:block;}\n  }\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>popup{position:fixed;z-index:10000;overflow-y:auto;top:0;right:0;bottom:0;left:0;background:url('https://scripts.persoo.cz/shared/img/template-popup-bg.png') repeat center center;text-align:center;}\n  /*main style - close*/\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>close{position:absolute;z-index:100001;left:0;right:0;top:0;bottom:0;width:100%;height:100%;display:inline-block;font-weight:normal;}\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>cross {position:absolute;z-index:100003;right:6px;top:12px;width:32px;height:32px;opacity:0.4;cursor: pointer;background:url('https://scripts.persoo.cz/shared/img/template-popup-close.png') repeat center center;}\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>cross.<%= PersooPrefix %>in{background-color:black;right:3px;top:3px;width:24px;height:24px}\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>cross.<%= PersooPrefix %>outHalf{background-color:black;right:-10px;top:-10px;width:24px;height:24px;border-radius:100%;-moz-border-radius:100%;-webkit-border-radius:100%;opacity:1;border:2px solid white;}\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>cross:hover{opacity:1;}\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>cross.<%= PersooPrefix %>outHalf:hover{opacity:0.7;}\n  /*main style - middle block*/\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>middle{display:table;height:100%;width:100%;}\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>middle2{display:table-cell;text-align:center;vertical-align:middle;}\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>container{position:relative;z-index:100000002;display:inline-block;background:#fff;margin:64px 0;}\n  /*margin and border*/\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>boxPopup{margin:30px;border:1px solid #d8d8d8;background:#fff;}\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>boxPopupContents{display:block;margin:15px;padding:15px;width:690px;height:210px;background-color:#B7B7B7;}\n  </style>\n  <%= PersooVarible_wysivygCss %>\n  <div class=\"<%= PersooPrefix %>popup\">\n    <div class=\"<%= PersooPrefix %>close\" onclick=\"Persoo_PopupClose()\">\n      <% if(PersooVarible_crossPosition == \"out\") { %>\n        <div class=\"<%= PersooPrefix %>cross <%= PersooPrefix %>out\" onclick=\"Persoo_PopupClose()\"></div>\n      <% } %>\n    </div>\n    <div class=\"<%= PersooPrefix %>middle\">\n      <div class=\"<%= PersooPrefix %>middle2\">\n        <div id=\"persooPopupContainer\" class=\"<%= PersooPrefix %>container\">\n          <% if(PersooVarible_crossPosition == \"in\" || PersooVarible_crossPosition == \"outHalf\") { %>\n            <div class=\"<%= PersooPrefix %>cross <%= PersooPrefix %><%= PersooVarible_crossPosition %>\" onclick=\"Persoo_PopupClose()\"></div>\n          <% } %>\n          <div class=\"<%= PersooPrefix %>boxPopup\" style=\"margin:<%= PersooVarible_marginOUT %>px;border:<%= PersooVarible_border %>px solid #d8d8d8;\">\n            <div class=\"<%= PersooPrefix %>boxPopupContents\" style=\"margin:<%= PersooVarible_marginIN %>px;\">\n              <%= PersooVarible_wysivygHtml %>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <script language=\"javaScript\">\n    //click on close button\n    function Persoo_PopupClose() {\n      document.getElementById(\"<%= PersooTemplateName %>\").style.display = \"none\";\n    }\n    //resize popup\n    function Persoo_PopupResize(){\n      //Width screen and popup\n      var PersooPopupWidth = document.getElementById(\"<%= PersooTemplateName %>\").offsetWidth;\n      var PersooPopupContainerWidth = document.getElementById(\"persooPopupContainer\").offsetWidth;\n\n      //else Width screen is smaller than Popup container\n      if(PersooPopupContainerWidth > PersooPopupWidth){\n        document.getElementById(\"<%= PersooTemplateName %>\").style.display = \"none\";\n      }\n    }\n    window.addEventListener(\"resize\", Persoo_PopupResize);\n  </script>\n</div>\n"
     }    
 }

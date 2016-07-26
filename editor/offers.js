@@ -34,7 +34,7 @@ module.exports = {
             var offerContent = offer.variants[0].content;
             var oldOfferContent = oldOffer.variants[0].content;
             for (var fieldID in offerContent) {
-                if (oldOfferContent[fieldID]) {
+                if (typeof oldOfferContent[fieldID] != 'undefined') {
                     offerContent[fieldID] = oldOfferContent[fieldID];
                 }
             } 

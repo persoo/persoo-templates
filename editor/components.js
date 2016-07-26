@@ -2,6 +2,7 @@ require('codemirror/mode/xml/xml');
 require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/css/css');
 require('codemirror/mode/htmlmixed/htmlmixed');
+require('codemirror/addon/display/fullscreen');
 
 var CodeMirror = require('codemirror/lib/codemirror');
 var persooTemplates = require('../lib/index');
@@ -76,7 +77,13 @@ module.exports = {
           mode: 'javascript',
           lineWrapping: true,
           extraKeys: {
-            'Ctrl-Space': 'autocomplete'
+            'Ctrl-Space': 'autocomplete',            
+            'F11': function(cm) {
+                       cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+            },
+            'Esc': function(cm) {
+                       if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+            }
           },
           lineNumbers: true
         });
@@ -103,7 +110,13 @@ module.exports = {
           mode: 'javascript',
           lineWrapping: true,
           extraKeys: {
-            'Ctrl-Space': 'autocomplete'
+            'Ctrl-Space': 'autocomplete',
+            'F11': function(cm) {
+                cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+		     },
+		     'Esc': function(cm) {
+		                if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+		     }
           },
           lineNumbers: true
         });
