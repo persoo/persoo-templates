@@ -28,7 +28,7 @@
     left: 0;
     width: 40%;
 }
-#persooPreview {
+#persooPreviewContainer {
     position: absolute;
     top: 50px;
     bottom: 0;
@@ -36,6 +36,16 @@
     width: 60%;
     
     background: #EEE;
+}
+#persooPreview { /* center iframe in the container */
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 0;
+    background: #DDD;
 }
 
 /*****************/
@@ -71,4 +81,8 @@
 .center {
     text-align: center;
     margin: auto;
+}
+
+.CodeMirror {
+    border: 1px solid #ccc;
 }

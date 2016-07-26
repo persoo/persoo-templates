@@ -27,8 +27,13 @@
   "devDependencies": {
     "browserify": "^13.0.1",
     "chai": "^3.5.0",
+    "codemirror": "^5.17.0",
     "coveralls": "^2.11.9",
+    "ejs": "^2.4.2",
     "istanbul": "^0.4.4",
     "mocha": "^2.5.3"
+  },
+  "dependencies": {
+    "ejs": "^2.5.1"
   }
 }

@@ -12,5 +12,33 @@
         ],
         "template": "<%= template %>",
         "minScenariosCount": 0
-    }
+    },
+    "customHTML2": {
+        "class": "webWidget",
+        "name": "Custom HTML 2 Name",
+        "fields": [
+            {
+                "id": "template",
+                "label": "Template",
+                "formFieldType": "html",
+                "defaultValue": "<div>...your html code ...</div>"
+            }
+        ],
+        "template": "<%= template %>",
+        "minScenariosCount": 0
+    },
+    "customHTML3": {
+        "class": "webWidget",
+        "name": "Custom HTML 3 Name",
+        "fields": [
+            {
+                "id": "template",
+                "label": "Template",
+                "formFieldType": "html",
+                "defaultValue": "<div>...your html code ...</div>"
+            }
+        ],
+        "template": "<%= template %>",
+        "minScenariosCount": 0
+    }    
 }

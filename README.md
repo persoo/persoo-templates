@@ -6,20 +6,51 @@ Templates for Persoo widgets
 
 ## Installation
 
-  `npm install @jacerny/persoo-templates`
+  `npm install @persoo/persoo-templates`
 
 ## Usage
 
-    var numFormatter = require('@jacerny/persoo-templates');
-    var formattedNum = numFormatter(35666);
+    var persooTemplates = require('@persoo/persoo-templates');
+    
+    var offerTemplate = {
+        "class": "webWidget",
+        "name": "Custom HTML",
+        "fields": [
+            {
+                "id": "fieldID",
+                "label": "My field",
+                "formFieldType": "html",
+                "defaultValue": "<div>...your html code with EJS...</div>"
+            }
+        ],
+        "template": "Master template using predefined field as EJS variables, i.e. <%= fieldID %>",
+        "minScenariosCount": 0
+    };
+    var offer = {
+    		variants: [{
+    			templateID: 'templateID1',
+    			content: {
+    			    fieldID: 'myFieldValue'
+    			}
+    		}]
+    };
+    var context = {};
+        
+    var renderedHTML = persooTemplates.render(offerTemplate, offer.variants[0], context);
   
+  Output should be `Master template using predefined field as EJS variables, i.e. myFieldValue`
   
-  Output should be `35,666`
+  See unit tests for more examples.
 
 
 ## Tests
 
   `npm test`
+
+## Editor
+  
+  For easy templates debuging and unit testing, you can use JSON editor with widget preview.
+  Run `npm run build` and then open /editor/preview.html in your browser.  
 
 ## Contributing
 

@@ -8,6 +8,8 @@
 	<meta name="author" content="Persoo">
 	
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../node_modules/codemirror/lib/codemirror.css">
+	<link rel="stylesheet" href="../node_modules/codemirror/theme/monokai.css">
 	
 	<script src="//scripts.persoo.cz/_default/persoo.js"></script>
 	<script src="//scripts.persoo.cz/shared/ace/ace.js"></script>
@@ -26,19 +28,25 @@
       </div>
       <div id="panel">
           <div id="panelTabs">
-	          <span id="tabDeveloper">Developer</span> |
-	          <span id="tabUser" class="active">User Fields</span> |
+	          <span id="tabDeveloper" class="active">Developer</span> |
+	          <span id="tabUser">User Fields</span> |
 	          <span id="tabProfile">Profile</span>          
           </div>          
-          <div id="panelDeveloper" class="panel">Developer Panel</div>
-          <div id="panelUser" class="panel active">User Panel</div>
-          <div id="panelProfile" class="panel">Profile Panel</div>
+          <div id="panelDeveloper" class="panel active">
+          	  Template JSON: <br>
+          	  <textarea id="templateCode">No template code present.</textarea>
+          </div>
+          <div id="panelUser" class="panel">
+              Offer JSON: <br>
+              <textarea id="offerCode">No offer code present.</textarea>
+          </div>
+          <div id="panelProfile" class="panel">
+              Profile Panel
+          </div>
           
       </div>
-      <div id="persooPreview">
-          <div class="center">
-          	Here you will see preview ...
-          </div>
+      <div id="persooPreviewContainer">        	
+          <iframe id="persooPreview"></iframe>
       </div>
    </div>
    <!-- to be sure that all elements exists -->
