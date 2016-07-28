@@ -21,34 +21,34 @@ module.exports = {
         return this.offers[offerID];
     },    
     setOffer: function(offerID, offerJSON) {
-    	if (!offerID) offerID = templates.currentTemplateID;
+        if (!offerID) offerID = templates.currentTemplateID;
         this.offers[offerID] = offerJSON;
         this.callUpdateNotifications();
     },
     getOfferField(offerID, path) {
-    	var offer = this.getOffer(offerID);    	
-    	return utils.getFieldFromJSON(offer, path);
+        var offer = this.getOffer(offerID);        
+        return utils.getFieldFromJSON(offer, path);
     },
     setOfferField(offerID, path, value) {
-    	var offer = this.getOffer(offerID);
-    	offer = utils.updateFieldInJSON(offer, path, value);
+        var offer = this.getOffer(offerID);
+        offer = utils.updateFieldInJSON(offer, path, value);
         this.setOffer(offerID, offer);
     },
     // return getOfferField function, which appends pathPrefix to path
     getOfferFieldFactory(offerID, pathPrefix) {
-    	var getterFunc = this.getOfferField.bind(this, offerID);
-    	return function (path) {
-    		path = path ? pathPrefix + '.' + path : pathPrefix;
-    	    return getterFunc(path);
-    	};
+        var getterFunc = this.getOfferField.bind(this, offerID);
+        return function (path) {
+            path = path ? pathPrefix + '.' + path : pathPrefix;
+            return getterFunc(path);
+        };
     },
     // return getOfferField function, which appends pathPrefix to path
     setOfferFieldFactory(offerID, pathPrefix) {
-    	var setterFunc = this.setOfferField.bind(this, offerID);
-    	return function (path, value) {
-    		path = path ? pathPrefix + '.' + path : pathPrefix;
-    	    return setterFunc(path, value);	
-    	};
+        var setterFunc = this.setOfferField.bind(this, offerID);
+        return function (path, value) {
+            path = path ? pathPrefix + '.' + path : pathPrefix;
+            return setterFunc(path, value);    
+        };
     },
     
     // Fix fields in case, the default offer fields has changed

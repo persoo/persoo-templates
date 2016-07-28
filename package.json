@@ -1,8 +1,8 @@
 {
   "name": "persoo-templates",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Templates for persoo widgets.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "node_modules/.bin/mocha --reporter spec",
     "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*",

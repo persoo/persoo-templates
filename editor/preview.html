@@ -1,26 +1,26 @@
 <!doctype html>
 <html lang="en">
-	<head>
-	<meta charset="utf-8">
-	
-	<title>Preview Persoo Widgets</title>
-	<meta name="description" content="Persoo Persoo Widgets">
-	<meta name="author" content="Persoo">
-	
-	<link rel="stylesheet" href="../node_modules/codemirror/lib/codemirror.css">
-	<link rel="stylesheet" href="../node_modules/codemirror/addon/display/fullscreen.css">
-	<link rel="stylesheet" href="../node_modules/codemirror/theme/monokai.css">
-	<link rel="stylesheet" href="style.css">
-	
-	<script src="//scripts.persoo.cz/_default/persoo.js"></script>
-	<script src="//scripts.persoo.cz/shared/ace/ace.js"></script>
+    <head>
+    <meta charset="utf-8">
+    
+    <title>Preview Persoo Widgets</title>
+    <meta name="description" content="Persoo Persoo Widgets">
+    <meta name="author" content="Persoo">
+    
+    <link rel="stylesheet" href="../node_modules/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="../node_modules/codemirror/addon/display/fullscreen.css">
+    <link rel="stylesheet" href="../node_modules/codemirror/theme/monokai.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="//scripts.persoo.cz/_default/persoo.js"></script>
+    <script src="//scripts.persoo.cz/shared/ace/ace.js"></script>
 </head>
 
 <body>
-  <div id="main">	  
+  <div id="main">      
       <div id="topBar">
           <span id="topBarTitle">
-          	Persoo Widgets Editor
+              Persoo Widgets Editor
           </span>
           <select id="templateID">
               <!-- load templateIDs dynamically -->
@@ -29,20 +29,19 @@
       </div>
       <div id="panel">
           <div id="panelTabs">
-	          <span id="tabDeveloper" class="active">Developer</span> |
-	          <span id="tabUser">User Fields</span> |
-	          <span id="tabProfile">Profile</span>          
+              <span id="tabDeveloper" class="active">Developer</span> |
+              <span id="tabUser">User Fields</span> |
+              <span id="tabContext">Context</span>          
           </div>          
           <div id="panelDeveloper" class="panel active">
           </div>
           <div id="panelUser" class="panel">
           </div>
-          <div id="panelProfile" class="panel">
-              Profile Panel
+          <div id="panelContext" class="panel">
           </div>
-          
+
       </div>
-      <div id="persooPreviewContainer">        	
+      <div id="persooPreviewContainer">
           <iframe id="persooPreview"></iframe>
       </div>
    </div>

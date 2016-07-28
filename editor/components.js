@@ -7,9 +7,11 @@ require('codemirror/addon/display/fullscreen');
 var CodeMirror = require('codemirror/lib/codemirror');
 var persooTemplates = require('../lib/index');
 var formFields = require('./formfields.js');
+var Utils = require('./utils.js');
+
 var templateStore = require('./templateStore.js');
 var offerStore = require('./offerStore.js');
-var Utils = require('./utils.js');
+var contextStore = require('./contextStore.js');
 
 module.exports = {
     panelFormFields: {}, // list of formFields on each panelID
@@ -17,10 +19,10 @@ module.exports = {
     updatePanelFields: function(panelID) {
         var formFields = this.panelFormFields[panelID];
         if (formFields) {
-	        for (var i = 0; i < formFields.length; i++) {
-	            var formField = formFields[i];
-	            formField.update();
-	        }
+            for (var i = 0; i < formFields.length; i++) {
+                var formField = formFields[i];
+                formField.update();
+            }
         }
     },
     onTabClick: function (event) {
@@ -38,8 +40,8 @@ module.exports = {
         element = document.getElementById('panel' + tabID);
         element.classList.add("active");
         
-    	this['unmount' + tabID + 'Panel']();
-    	this['mount' + tabID + 'Panel']();
+        this['unmount' + tabID + 'Panel']();
+        this['mount' + tabID + 'Panel']();
     },
 
     installPanelTabsClickListeners: function() {
@@ -49,7 +51,7 @@ module.exports = {
         }
     },
     installTopBarListeners: function() {
-    	var myThis = this;
+        var myThis = this;
         var button = document.querySelector('#reload');
         button.onclick = templateStore.reloadTemplates.bind(templateStore);
         
@@ -62,8 +64,8 @@ module.exports = {
             // refresh tabs
             var activeTabElem = document.querySelector('#panelTabs span.active');
             var tabID = activeTabElem.id.replace('tab','');
-        	myThis['unmount' + tabID + 'Panel']();
-        	myThis['mount' + tabID + 'Panel']();
+            myThis['unmount' + tabID + 'Panel']();
+            myThis['mount' + tabID + 'Panel']();
         }
     },
 
@@ -82,25 +84,25 @@ module.exports = {
         
         var parentElement = document.getElementById('panelDeveloper');
         this.panelFormFields[panelID] = [
-        		new formFields.TextFormField('Name', 
-		                parentElement,                         
-		                templateStore.getTemplateFieldFactory(null, 'name'),
-		                templateStore.setTemplateFieldFactory(null, 'name')
+                new formFields.TextFormField('Name', 
+                        parentElement,                         
+                        templateStore.getTemplateFieldFactory(null, 'name'),
+                        templateStore.setTemplateFieldFactory(null, 'name')
                 ),
-        		new formFields.HtmlFormField('Main Template',
-		                parentElement,                         
-		                templateStore.getTemplateFieldFactory(null, 'template'),
-		                templateStore.setTemplateFieldFactory(null, 'template')
+                new formFields.HtmlFormField('Main Template',
+                        parentElement,                         
+                        templateStore.getTemplateFieldFactory(null, 'template'),
+                        templateStore.setTemplateFieldFactory(null, 'template')
                 ),
-        		new formFields.JsonFormField('Fields',
-		                parentElement,                         
-		                templateStore.getTemplateFieldFactory(null, 'fields'),
-		                templateStore.setTemplateFieldFactory(null, 'fields')
+                new formFields.JsonFormField('Fields',
+                        parentElement,                         
+                        templateStore.getTemplateFieldFactory(null, 'fields'),
+                        templateStore.setTemplateFieldFactory(null, 'fields')
                 ),
-        		new formFields.JsonFormField('Template JSON', 
-		                parentElement,                         
-		                templateStore.getTemplateFieldFactory(null, ''),
-		                templateStore.setTemplateFieldFactory(null, '')
+                new formFields.JsonFormField('Template JSON', 
+                        parentElement,                         
+                        templateStore.getTemplateFieldFactory(null, ''),
+                        templateStore.setTemplateFieldFactory(null, '')
                 )
         ];
         
@@ -121,30 +123,30 @@ module.exports = {
     },
     
     renderOfferFields: function(template, parentElement) {
-    	var list = [];
-    	var templateFields = template.fields;
-    	for (var i = 0; i < templateFields.length; i++) {
-    		var field = templateFields[i];
-    		var type = field.formFieldType;
-    		var Type = type[0].toUpperCase() + type.slice(1);
-    		
-    		if (formFields.formFieldTypes[type]) {
-	    	    list.push(
-	    	    		new formFields[Type + 'FormField'](field.label || field.id, 
-	    		                parentElement,                         
-	    		                offerStore.getOfferFieldFactory(null, 'variants[0].content.' + field.id),
-	    		                offerStore.setOfferFieldFactory(null, 'variants[0].content.' + field.id),
-	    		                field.options
-	                    )
-	    	    );
-    		} else {
-    			var elem = document.createElement('div');
-    			parentElement.appendChild(elem);
-    			elem.innerHTML = 'Unsupported form field type "' + type + '".';
-    		}
-    		
-    	}    	
-    	return list;
+        var list = [];
+        var templateFields = template.fields;
+        for (var i = 0; i < templateFields.length; i++) {
+            var field = templateFields[i];
+            var type = field.formFieldType;
+            var Type = type[0].toUpperCase() + type.slice(1);
+            
+            if (formFields.formFieldTypes[type]) {
+                list.push(
+                        new formFields[Type + 'FormField'](field.label || field.id, 
+                                parentElement,                         
+                                offerStore.getOfferFieldFactory(null, 'variants[0].content.' + field.id),
+                                offerStore.setOfferFieldFactory(null, 'variants[0].content.' + field.id),
+                                field.options
+                        )
+                );
+            } else {
+                var elem = document.createElement('div');
+                parentElement.appendChild(elem);
+                elem.innerHTML = 'Unsupported form field type "' + type + '".';
+            }
+            
+        }        
+        return list;
     },
     
     mountUserPanel: function() {
@@ -154,10 +156,10 @@ module.exports = {
         var parentElement = document.getElementById('panelUser');
         var list1 = this.renderOfferFields(templateStore.getTemplate(), parentElement);
         var list2 = [
-        		new formFields.JsonFormField('Offer JSON', 
-		                parentElement,                         
-		                offerStore.getOfferFieldFactory(null, ''),
-		                offerStore.setOfferFieldFactory(null, '')
+                new formFields.JsonFormField('Offer JSON', 
+                        parentElement,                         
+                        offerStore.getOfferFieldFactory(null, ''),
+                        offerStore.setOfferFieldFactory(null, '')
                 )
         ];        
         this.panelFormFields[panelID] = list1.concat(list2);
@@ -183,14 +185,59 @@ module.exports = {
         parentElement.innerHTML = "";
     },
 
-    mountProfilePanel: function() {
-        var panelID = 'Profile';        
+    mountContextPanel: function() {
+        var panelID = 'Context';
+        this.panelFormFields[panelID] = [];
+        
+        var parentElement = document.getElementById('panelContext');
+        this.panelFormFields[panelID] = [
+                new formFields.TextFormField('Persoo AccountID', 
+                        parentElement,                         
+                        contextStore.getContextFieldFactory(null, 'accountID'),
+                        contextStore.setContextFieldFactory(null, 'accountID')
+                ),
+                new formFields.SelectFormField('Preview Product Mode',
+                        parentElement,                         
+                        contextStore.getContextFieldFactory(null, 'productPreviewMode'),
+                        contextStore.setContextFieldFactory(null, 'productPreviewMode'),
+                        [
+                            {value: 'mock', label: 'Persoo Mock Product'},
+                            {value: 'selected', label: 'Your selected product'},
+                            {value: 'bestsellers', label: 'Take products from bestsellers'}
+                        ]
+                ),
+                new formFields.TextFormField('Preview Product ID (only for 2nd option)',
+                        parentElement,                         
+                        contextStore.getContextFieldFactory(null, 'productPreviewProductID'),
+                        contextStore.setContextFieldFactory(null, 'productPreviewProductID')
+                ),
+                new formFields.SelectFormField('Preview on Device',
+                        parentElement,                         
+                        contextStore.getContextFieldFactory(null, 'previewDevice'),
+                        contextStore.setContextFieldFactory(null, 'previewDevice'),
+                        [
+                            {value: 'desktop', label: 'Desktop'},
+                            {value: 'tablet', label: 'Tablet'},
+                            {value: 'mobile', label: 'Mobile'}
+                        ]
+                ),
+                new formFields.JsonFormField('Context JSON', 
+                        parentElement,                         
+                        contextStore.getContextFieldFactory(null, ''),
+                        contextStore.setContextFieldFactory(null, '')
+                )                
+        ];
+        contextStore.updateCallbacks.push(this.updateContextPanel.bind(this));
+        this.updateContextPanel();
     },
-    unmountProfilePanel: function() {
-        var panelID = 'Profile';
+	updateContextPanel: function() {
+	    this.updatePanelFields('Context');
+	},    
+    unmountContextPanel: function() {
+        var panelID = 'Context';
         this.panelFormFields[panelID] = [];
                
-        var parentElement = document.getElementById('panelProfile');
+        var parentElement = document.getElementById('panelContext');
         parentElement.innerHTML = "";
     },
 
