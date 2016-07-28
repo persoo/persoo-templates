@@ -49,19 +49,19 @@
                 ]
             },
             {
-                "defaultValue": "15",
+                "defaultValue": 15,
                 "formFieldType": "number",
                 "id": "PersooVarible_marginIN",
                 "label": "Vnitřní margin (hodnota se na webu promítne v px)"
             },
             {
-                "defaultValue": "1",
+                "defaultValue": 1,
                 "formFieldType": "number",
                 "id": "PersooVarible_border",
                 "label": "Tloušťka rámečku kolem banneru (hodnota se na webu promítne v px)"
             },
             {
-                "defaultValue": "30",
+                "defaultValue": 30,
                 "formFieldType": "number",
                 "id": "PersooVarible_marginOUT",
                 "label": "Vnější margin (hodnota se na webu promítne v px)"

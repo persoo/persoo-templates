@@ -1,6 +1,11 @@
 /**********/
 /* LAYOUT */
 /**********/
+body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
 #topBar {
     position: fixed;
     top: 0;
@@ -70,12 +75,16 @@
 }
 #panel div.panel {
 	display: none;
-	padding: 20px;
+	padding: 1.5%;
 }
-#panel div.panel.active {
-	display: block;
+#panel div.panel.active {    
+    position: fixed;
+    top: 90px;
+    bottom: 0;
+    display: block;
+    overflow-y: auto;    
+    width: 37%;
 }
-
 
 
 
@@ -89,4 +98,17 @@
 
 .CodeMirror {
     border: 1px solid #ccc;
+    height: auto;
+}
+.CodeMirror-scroll {
+  height: auto;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+.formField {
+    margin-top: 10px;
+}
+.formField .label {
+	margin-right: 5px;
 }

@@ -1,5 +1,5 @@
 var components = require('./components.js');
-var templates = require('./templates.js');
+var templates = require('./templateStore.js');
 
 components.installPanelTabsClickListeners();
 components.installTopBarListeners()

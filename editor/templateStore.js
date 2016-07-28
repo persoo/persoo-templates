@@ -1,4 +1,4 @@
-var MyPackage = require('../lib/index');
+var utils = require('./utils.js');
 
 var TEMPLATES_FILENAME = '../templates/templates.json'
 
@@ -47,10 +47,39 @@ module.exports = {
     getTemplate: function(templateID) {
         if (!templateID) templateID = this.currentTemplateID;
         return this.templates[templateID];
-    },    
+    },
     setTemplate: function(templateID, templateJSON) {
+    	if (!templateID) templateID = this.currentTemplateID;
         this.templates[templateID] = templateJSON;
         this.callUpdateNotifications();
+    },
+    
+    getTemplateField(templateID, path) {
+    	var template = this.getTemplate(templateID);
+    	
+    	return utils.getFieldFromJSON(template, path);
+    },
+    setTemplateField(templateID, path, value) {
+    	var template = this.getTemplate(templateID);
+    	template = utils.updateFieldInJSON(template, path, value);
+        this.setTemplate(templateID, template);
+    },
+    
+    // return getTemplateField function, which appends pathPrefix to path
+    getTemplateFieldFactory(templateID, pathPrefix) {
+    	var getterFunc = this.getTemplateField.bind(this, templateID);
+    	return function (path) {
+    		path = path ? pathPrefix + '.' + path : pathPrefix;
+    	    return getterFunc(path);
+    	};
+    },
+    // return getTemplateField function, which appends pathPrefix to path
+    setTemplateFieldFactory(templateID, pathPrefix) {
+    	var setterFunc = this.setTemplateField.bind(this, templateID);
+    	return function (path, value) {
+    		path = path ? pathPrefix + '.' + path : pathPrefix;
+    	    return setterFunc(path, value);	
+    	};
     },
     
     reloadTemplates: function() {
@@ -75,7 +104,7 @@ module.exports = {
         
         var offer = {
                 variants:[{
-                    templeteID: templateID,
+                    templateID: templateID,
                     content: {}
                 }]            
         };
