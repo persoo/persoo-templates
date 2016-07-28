@@ -6,11 +6,11 @@ Templates for Persoo widgets
 
 ## Installation
 
-  `npm install @persoo/persoo-templates`
+  `npm install persoo-templates`
 
 ## Usage
 
-    var persooTemplates = require('@persoo/persoo-templates');
+    var persooTemplates = require('persoo-templates');
     
     var offerTemplate = {
         "class": "webWidget",
@@ -31,7 +31,10 @@ Templates for Persoo widgets
     			templateID: 'templateID1',
     			content: {
     			    fieldID: 'myFieldValue'
-    			}
+    			},
+    			scenarios: [
+    			    {id: 'products1', scenarioID: 'sampleScenarioID'}
+    			]
     		}]
     };
     var context = {};

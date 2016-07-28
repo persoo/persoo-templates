@@ -1,8 +1,8 @@
 var utils = require('./utils.js');
 
 module.exports = {
-	contexts: {},
-	currentContextID: 'theOne',
+    contexts: {},
+    currentContextID: 'theOne',
     updateCallbacks: [], // list of callback functions
     
     callUpdateNotifications: function() {
@@ -51,10 +51,18 @@ module.exports = {
       
     createDefaultContext: function(contextID) {
         var context = {
-        		accountID: 'qhql07k7dh5h9l7oarrp9tlt',
-        		productPreviewMode: 'mock',
-        		productPreviewProductID: '14312',
-        		previewDevice: 'desktop'
+                accountID: 'qhql07k7dh5h9l7oarrp9tlt',
+                productPreviewMode: 'mock',
+                productPreviewProductID: '14312',
+                productPreviewMockProduct: {
+                    title: 'Sample Product Title',
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                    price: 1990,
+                    priceOriginal: 2990,
+                    link: '#',
+                    imageLink: 'http://lorempixel.com/300/300/food'                    
+                },
+                previewDevice: 'desktop'
         };
         this.contexts[contextID] = context;
         return context;

@@ -230,9 +230,9 @@ module.exports = {
         contextStore.updateCallbacks.push(this.updateContextPanel.bind(this));
         this.updateContextPanel();
     },
-	updateContextPanel: function() {
-	    this.updatePanelFields('Context');
-	},    
+    updateContextPanel: function() {
+        this.updatePanelFields('Context');
+    },    
     unmountContextPanel: function() {
         var panelID = 'Context';
         this.panelFormFields[panelID] = [];
@@ -256,8 +256,22 @@ module.exports = {
             var currentTemplate = templateStore.templates[templateStore.currentTemplateID];
             var currentOffer = offerStore.offers[templateStore.currentTemplateID];
             var currentContext = {};
+            this.addProductsToContext(currentContext, currentOffer.variants[0]);
             var previewHTML = persooTemplates.render(currentTemplate, currentOffer.variants[0], currentContext);
             previewDoc.body.innerHTML = previewHTML ? previewHTML : 'Error: Cannot render template.';
         }
+    },
+    addProductsToContext: function(context, offerVariant) {
+        var scenarios = offerVariant.scenarios;
+        for (var i = 0; i < scenarios.length; i++) {
+            var scenarioConfig = scenarios[i];        
+            context[scenarioConfig.id] = [];
+            var list = context[scenarioConfig.id];
+            // TODO add support for other Preview product options
+            var sampleProduct = contextStore.getContextField(null, 'productPreviewMockProduct')
+            for (var j = 0; j < 20; j++) {
+                list.push(sampleProduct);
+            }
+        }        
     }
 };

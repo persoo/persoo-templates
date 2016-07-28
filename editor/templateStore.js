@@ -105,10 +105,12 @@ module.exports = {
         var offer = {
                 variants:[{
                     templateID: templateID,
-                    content: {}
+                    content: {},
+                    scenarios: []
                 }]            
         };
         var offerContent = offer.variants[0].content;
+        var offerScenarios = offer.variants[0].scenarios;
         
         if (template.fields) {
             for (var i = 0; i < template.fields.length; i++) {
@@ -122,6 +124,12 @@ module.exports = {
             }
         } else {
             this.notifyTemplateError(templateID, 'has no fields.')
+        }
+        
+        if (template.minScenariosCount && template.minScenariosCount > 0) {
+            for (var i = 0; i < template.minScenariosCount; i++) {
+                offerScenarios.push({id: 'products' + (i + 1), scenarioID: 'MockScnearioID'});
+            }
         }
 
         return offer;
