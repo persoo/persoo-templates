@@ -258,7 +258,15 @@ module.exports = {
             var currentContext = {};
             this.addProductsToContext(currentContext, currentOffer.variants[0]);
             var previewHTML = persooTemplates.render(currentTemplate, currentOffer.variants[0], currentContext);
+            
+            // add html to preview iFrame
             previewDoc.body.innerHTML = previewHTML ? previewHTML : 'Error: Cannot render template.';
+            
+            // run javascripts contained in the html in iFrame context           
+            var scriptElements = previewDoc.body.getElementsByTagName('script');
+            for (var i = 0; i < scriptElements.length; i++) {
+            	previewIframe.contentWindow.eval(scriptElements[i].innerHTML);
+            }
         }
     },
     addProductsToContext: function(context, offerVariant) {
