@@ -1,6 +1,6 @@
 {
   "name": "persoo-templates",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Templates for persoo widgets.",
   "main": "lib/index.js",
   "scripts": {
