@@ -6,7 +6,10 @@
   "scripts": {
     "test": "node_modules/.bin/mocha --reporter spec",
     "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*",
-    "build": "mkdir -p build && node_modules/browserify/bin/cmd.js editor/editor-app.js > build/editor-app-bundle.js"
+    "lint": "jshint lib/**.js",
+    "build": "mkdir -p build && node_modules/browserify/bin/cmd.js editor/editor-app.js > build/editor-app-bundle.js",
+    "build:tests": "mkdir -p build && node_modules/browserify/bin/cmd.js test/test.js > build/test.js",
+    "watch:tests": "watch 'npm run build:tests' ./test ./lib"
   },
   "repository": {
     "type": "git",
@@ -29,11 +32,10 @@
     "chai": "^3.5.0",
     "codemirror": "^5.17.0",
     "coveralls": "^2.11.9",
-    "ejs": "^2.4.2",
     "istanbul": "^0.4.4",
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "jshint": "latest",
+    "watch": "latest"
   },
-  "dependencies": {
-    "ejs": "^2.5.1"
-  }
+  "dependencies": {}
 }
