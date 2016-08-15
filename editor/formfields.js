@@ -262,5 +262,6 @@ module.exports = {
     CheckboxFormField: CheckboxFormField,
     SelectFormField: SelectFormField,
     HtmlFormField: HtmlFormField,
+    RichTextFormField: HtmlFormField,
     JsonFormField: JsonFormField
 };

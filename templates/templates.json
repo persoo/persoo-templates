@@ -6,8 +6,15 @@
             {
                 "id": "template",
                 "label": "Template",
+                "group": "main",
                 "formFieldType": "html",
                 "defaultValue": "<div>...your html code ...</div>"
+            }
+        ],
+        "groups": [
+            {
+            	"id": "main",
+            	"label": "Main"
             }
         ],
         "template": "<%= template %>",
@@ -19,10 +26,12 @@
             {
                 "defaultValue": "<style></style>",
                 "formFieldType": "html",
+                "group": "main",
                 "id": "PersooVarible_wysivygCss",
                 "label": "CSS kód banneru"
             },
             {
+                "group": "main",
                 "defaultValue": "<div></div>",
                 "formFieldType": "html",
                 "id": "PersooVarible_wysivygHtml",
@@ -33,6 +42,7 @@
                 "formFieldType": "select",
                 "id": "PersooVarible_crossPosition",
                 "label": "Pozice křížku pro zavření",
+                "group": "main",
                 "options": [
                     {
                         "label": "V rohu stránky",
@@ -49,40 +59,52 @@
                 ]
             },
             {
+                "group": "main",
                 "defaultValue": 15,
                 "formFieldType": "number",
                 "id": "PersooVarible_marginIN",
                 "label": "Vnitřní margin (hodnota se na webu promítne v px)"
             },
             {
+                "group": "main",
                 "defaultValue": 1,
                 "formFieldType": "number",
                 "id": "PersooVarible_border",
                 "label": "Tloušťka rámečku kolem banneru (hodnota se na webu promítne v px)"
             },
             {
+                "group": "main",
                 "defaultValue": 30,
                 "formFieldType": "number",
                 "id": "PersooVarible_marginOUT",
                 "label": "Vnější margin (hodnota se na webu promítne v px)"
             },
             {
+                "group": "main",
                 "defaultValue": true,
                 "formFieldType": "checkbox",
                 "id": "PersooVarible_responsiveDektop",
                 "label": "Zobrazit na PC"
             },
             {
+                "group": "main",
                 "defaultValue": true,
                 "formFieldType": "checkbox",
                 "id": "PersooVarible_responsiveTablet",
                 "label": "Zobrazit na tabletu"
             },
             {
+                "group": "main",
                 "defaultValue": true,
                 "formFieldType": "checkbox",
                 "id": "PersooVarible_responsiveMobile",
                 "label": "Zobrazit na mobilu"
+            }
+        ],
+        "groups": [
+            {
+            	"id": "main",
+            	"label": "Main"
             }
         ],
         "id": "f0e3fe17a48b4a05a27e430cb880d965",
@@ -95,16 +117,24 @@
         "class": "webWidget",
         "fields": [
             {
+                "group": "main",
                 "defaultValue": "Nejprodávanější",
                 "formFieldType": "text",
                 "id": "Persoo_listName1",
                 "label": "Název karty 1"
             },
             {
+                "group": "main",
                 "defaultValue": "Co právě frčí",
                 "formFieldType": "text",
                 "id": "Persoo_listName2",
                 "label": "Název karty 2"
+            }
+        ],
+        "groups": [
+            {
+            	"id": "main",
+            	"label": "Main"
             }
         ],
         "id": "fdd0bdfb46cf4ac7a6877c4ae29fc25e",

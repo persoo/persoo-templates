@@ -99,6 +99,11 @@ module.exports = {
                         templateStore.getTemplateFieldFactory(null, 'fields'),
                         templateStore.setTemplateFieldFactory(null, 'fields')
                 ),
+                new formFields.JsonFormField('Groups',
+                        parentElement,                         
+                        templateStore.getTemplateFieldFactory(null, 'groups'),
+                        templateStore.setTemplateFieldFactory(null, 'groups')
+                ),
                 new formFields.JsonFormField('Template JSON', 
                         parentElement,                         
                         templateStore.getTemplateFieldFactory(null, ''),
@@ -122,30 +127,75 @@ module.exports = {
         parentElement.innerHTML = "";
     },
     
+    
+    toggleGroup: function (event) {
+        element = event.currentTarget.parentNode;
+        element.classList.toggle("active");
+        this.updateUserPanel();
+    },
+    renderMenuGroup: function(parentElement, label) {
+    	var groupElem = document.createElement('div');
+    	var groupTitleElem = document.createElement('h2');
+    	var groupFieldsElem = document.createElement('div');
+    	groupElem.className = 'menuGroup';
+    	groupFieldsElem.className = 'menuGroupFields';
+    	groupTitleElem.innerHTML = label;
+    	groupTitleElem.onclick = this.toggleGroup.bind(this);
+    	groupElem.appendChild(groupTitleElem);
+    	groupElem.appendChild(groupFieldsElem);
+        parentElement.appendChild(groupElem);
+        
+        return groupFieldsElem;
+    },
     renderOfferFields: function(template, parentElement) {
         var list = [];
+
         var templateFields = template.fields;
-        for (var i = 0; i < templateFields.length; i++) {
+        var templateGroups = JSON.parse(JSON.stringify(template.groups));
+        var templateGroupIndex = {};
+        // split fields to groups
+        for (var j = 0;j < templateGroups.length; j++) {
+        	var templateGroup = templateGroups[j];
+        	templateGroup.fields = [];
+        	templateGroupIndex[templateGroup.id] = templateGroup;
+        }
+    	for (var i = 0; i < templateFields.length; i++) {
             var field = templateFields[i];
-            var type = field.formFieldType;
-            var Type = type[0].toUpperCase() + type.slice(1);
-            
-            if (formFields.formFieldTypes[type]) {
-                list.push(
-                        new formFields[Type + 'FormField'](field.label || field.id, 
-                                parentElement,                         
-                                offerStore.getOfferFieldFactory(null, 'variants[0].content.' + field.id),
-                                offerStore.setOfferFieldFactory(null, 'variants[0].content.' + field.id),
-                                field.options
-                        )
-                );
-            } else {
-                var elem = document.createElement('div');
-                parentElement.appendChild(elem);
-                elem.innerHTML = 'Unsupported form field type "' + type + '".';
+            var group = field.group;
+            if (templateGroupIndex[group]) {
+            	templateGroupIndex[group].fields.push(field);
             }
+    	}
+        
+    	// render html
+        for (var j = 0;j < templateGroups.length; j++) {
+        	var templateGroup = templateGroups[j];
+        	
+        	var label = templateGroups[j].label + ' (' + templateGroups[j].fields.length + ')';
+        	var groupFieldsElem = this.renderMenuGroup(parentElement, label);
             
-        }        
+	        for (var i = 0; i < templateGroup.fields.length; i++) {
+	            var field = templateGroup.fields[i];
+	            var type = field.formFieldType;
+	            var Type = type[0].toUpperCase() + type.slice(1);
+	            
+	            if (formFields.formFieldTypes[type]) {
+	                list.push(
+	                        new formFields[Type + 'FormField'](field.label || field.id, 
+	                        		groupFieldsElem,                         
+	                                offerStore.getOfferFieldFactory(null, 'variants[0].content.' + field.id),
+	                                offerStore.setOfferFieldFactory(null, 'variants[0].content.' + field.id),
+	                                field.options
+	                        )
+	                );
+	            } else {
+	                var elem = document.createElement('div');
+	                parentElement.appendChild(elem);
+	                elem.innerHTML = 'Unsupported form field type "' + type + '".';
+	            }
+	            
+	        }
+        }
         return list;
     },
     
@@ -155,9 +205,11 @@ module.exports = {
 
         var parentElement = document.getElementById('panelUser');
         var list1 = this.renderOfferFields(templateStore.getTemplate(), parentElement);
+        
+        var groupFieldsElem = this.renderMenuGroup(parentElement, 'Offer JSON');
         var list2 = [
                 new formFields.JsonFormField('Offer JSON', 
-                        parentElement,                         
+                		groupFieldsElem,                         
                         offerStore.getOfferFieldFactory(null, ''),
                         offerStore.setOfferFieldFactory(null, '')
                 )
