@@ -9,7 +9,8 @@
     "lint": "jshint lib/**.js",
     "build": "mkdir -p build && node_modules/browserify/bin/cmd.js editor/editor-app.js > build/editor-app-bundle.js",
     "build:tests": "mkdir -p build && node_modules/browserify/bin/cmd.js test/test.js > build/test.js",
-    "watch:tests": "watch 'npm run build:tests' ./test ./lib"
+    "watch:tests": "watch 'npm run build:tests' ./test ./lib",
+    "watch:editor": "watch 'npm run build' ./editor ./lib"
   },
   "repository": {
     "type": "git",

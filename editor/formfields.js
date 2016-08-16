@@ -73,6 +73,7 @@ var formFieldTypes = {
     select: 'select',
     checkbox: 'checkbox',
     html: 'html',
+    richtext: 'richtext',
     javascript: 'javascript',
     css: 'css'
 };
@@ -254,6 +255,49 @@ HtmlFormField.prototype.onChange = function() {
 }
 
 
+function CssFormField(label, parentElement, dataGetter, dataSetter) {
+    FormField.call(this, formFieldTypes.input, label, parentElement, dataGetter, dataSetter);
+    
+    var value = this.dataGetter("");
+    if (typeof value !== 'string') value = '[Error: value is not a string.]';
+    this.formElementParent.innerHTML = '<textarea>' + value + '</textarea>';
+    this.formElement = this.formElementParent.children[0];
+        
+    this.editor = CodeMirror.fromTextArea(this.formElement, {
+      mode: 'css',
+      lineWrapping: true,
+      extraKeys: {
+        'Ctrl-Space': 'autocomplete',            
+        'F11': function(cm) {
+                   cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+        },
+        'Esc': function(cm) {
+                   if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+        }
+      },
+      lineNumbers: true
+    });
+    this.editor.on('changes', this.onChange.bind(this));    
+}
+CssFormField.prototype = Object.create(FormField.prototype);
+CssFormField.prototype.constructor = CssFormField;
+CssFormField.prototype.update = function() {
+    var value = this.dataGetter("");    
+    if (typeof value != 'undefined') {
+        if (typeof value !== 'string') value = '[Error: value is not a string.]';
+        // update only if values are different
+        var editorValue = this.editor.getDoc().getValue();        
+        if (editorValue != value) {
+            this.editor.getDoc().setValue(value);
+        }
+    }
+    this.editor.refresh();
+};
+CssFormField.prototype.onChange = function() {
+    var value = this.editor.getDoc().getValue();
+    this.parentOnChange(value);
+}
+
 
 module.exports = {
     formFieldTypes: formFieldTypes,
@@ -262,6 +306,8 @@ module.exports = {
     CheckboxFormField: CheckboxFormField,
     SelectFormField: SelectFormField,
     HtmlFormField: HtmlFormField,
-    RichTextFormField: HtmlFormField,
-    JsonFormField: JsonFormField
+    RichtextFormField: HtmlFormField,
+    JsonFormField: JsonFormField,
+    JavascriptFormField: JsonFormField,
+    CssFormField: CssFormField
 };

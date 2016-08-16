@@ -311,6 +311,11 @@ module.exports = {
             this.addProductsToContext(currentContext, currentOffer.variants[0]);
             var previewHTML = persooTemplates.render(currentTemplate, currentOffer.variants[0], currentContext);
             
+            // open all link from iFrame in new window
+            var baseElem = previewDoc.createElement('base');
+            baseElem.target = '_blank';
+            previewDoc.head.appendChild(baseElem);
+            
             // add html to preview iFrame
             previewDoc.body.innerHTML = previewHTML ? previewHTML : 'Error: Cannot render template.';
             
