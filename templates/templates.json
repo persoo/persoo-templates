@@ -376,16 +376,20 @@
                 "formFieldType": "select",
                 "options": [
                     {
-                        "label": "Inside box",
+                        "label": "Inside Box",
                         "value": "in"
                     },
                     {
-                        "label": "On the box border",
+                        "label": "On the Box Border",
                         "value": "border"
                     },
                     {
+                        "label": "To the Right of Box Corner",
+                        "value": "right"
+                    },
+                    {
                         "label": "Page Top Right Corner",
-                        "value": "topRight"
+                        "value": "page"
                     }
                 ],
                 "defaultValue": "in"

@@ -53,7 +53,19 @@ Templates for Persoo widgets
 ## Editor
   
   For easy templates debuging and unit testing, you can use JSON editor with widget preview.
-  Run `npm run build` and then open /editor/preview.html in your browser.  
+  Run `npm run build` and then open /editor/preview.html in your browser.
+  
+  Chrome does not allow to load JSON file with templates through file:// protocol. Thus if you cannot access preview.html 
+  through http:// protocol (from local webserver), try to start Chrome with allowed access to local files
+  (generally it is not permitted because of security reasons).
+  
+  On Windows:
+  
+	chrome.exe --allow-file-access-from-files
+	
+  On Mac:
+
+	open /Applications/Google\ Chrome.app/ --args --allow-file-access-from-files
 
 ## Contributing
 
