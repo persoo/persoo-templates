@@ -171,17 +171,17 @@ module.exports = {
         for (var j = 0;j < templateGroups.length; j++) {
         	var templateGroup = templateGroups[j];
         	
-        	var label = templateGroups[j].label + ' (' + templateGroups[j].fields.length + ')';
+        	var label = templateGroups[j].name + ' (' + templateGroups[j].fields.length + ')';
         	var groupFieldsElem = this.renderMenuGroup(parentElement, label);
             
 	        for (var i = 0; i < templateGroup.fields.length; i++) {
 	            var field = templateGroup.fields[i];
-	            var type = field.formFieldType;
+	            var type = field.type;
 	            var Type = type[0].toUpperCase() + type.slice(1);
 	            
 	            if (formFields.formFieldTypes[type]) {
 	                list.push(
-	                        new formFields[Type + 'FormField'](field.label || field.id, 
+	                        new formFields[Type + 'FormField'](field.name || field.id, 
 	                        		groupFieldsElem,                         
 	                                offerStore.getOfferFieldFactory(null, 'variants[0].content.' + field.id),
 	                                offerStore.setOfferFieldFactory(null, 'variants[0].content.' + field.id),

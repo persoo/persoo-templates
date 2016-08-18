@@ -93,7 +93,7 @@ body {
     display: block;
     margin: 20px 0;
 }
-.menuGroup h2 {
+.menuGroup > h2 {
     cursor: pointer;
     position: relative;
     display: block;
@@ -104,7 +104,7 @@ body {
     color: #ffffff;
     font-size: 1.2rem;
 }
-.menuGroup h2:before {
+.menuGroup > h2:before {
     /* icons */
     content: '';
     display: inline-block;
@@ -130,7 +130,7 @@ body {
     -o-transform: translateY(-50%) rotate(-90deg);
     transform: translateY(-50%) rotate(-90deg);
 }
-.menuGroup.active h2:before{
+.menuGroup.active > h2:before{
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);

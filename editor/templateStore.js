@@ -116,9 +116,10 @@ module.exports = {
             for (var i = 0; i < template.fields.length; i++) {
                 var field = template.fields[i];
                 if (!field.id) this.notifyTemplateError(templateID, 'fields[' + i +'].id is missing.');
-                if (!field.defaultValue) this.notifyTemplateError(templateID, 'fields[' + i +'].defaultValue is missing.');
-                
-                if (field.id && field.defaultValue) {
+                if (typeof field.defaultValue === 'undefined' && field.type != 'section') {
+                    this.notifyTemplateError(templateID, 'fields[' + i +'].defaultValue is missing.');
+                }
+                if (field.id && typeof field.defaultValue !== 'undefined') {
                     offerContent[field.id] = field.defaultValue;
                 }
             }

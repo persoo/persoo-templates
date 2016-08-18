@@ -68,6 +68,7 @@ FormField.prototype.parentOnChange = function (value){
 //---------------------------------------------------------------------------------
 
 var formFieldTypes = {
+	section: 'section',
     text: 'text',
     number: 'number',
     select: 'select',
@@ -77,6 +78,15 @@ var formFieldTypes = {
     javascript: 'javascript',
     css: 'css'
 };
+
+function SectionFormField(label, parentElement, dataGetter, dataSetter) {
+	FormField.call(this, formFieldTypes.section, label, parentElement, dataGetter, dataSetter);
+    this.element.innerHTML = '<h2>' + label + '</h2>';
+    this.element.className = 'section';
+}
+SectionFormField.prototype = Object.create(FormField.prototype);
+SectionFormField.prototype.constructor = SectionFormField;
+
 
 // INPUTS ---------------------------------------------------------------------------
 
@@ -301,6 +311,7 @@ CssFormField.prototype.onChange = function() {
 
 module.exports = {
     formFieldTypes: formFieldTypes,
+    SectionFormField: SectionFormField,
     TextFormField: TextFormField,
     NumberFormField: NumberFormField,
     CheckboxFormField: CheckboxFormField,
