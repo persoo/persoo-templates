@@ -507,20 +507,20 @@
                 "defaultValue": "Nejprodávanější",
                 "type": "text",
                 "id": "Persoo_listName1",
-                "name": "Název karty 1"
+                "name": "Tab Name 1"
             },
             {
                 "group": "main",
                 "defaultValue": "Co právě frčí",
                 "type": "text",
                 "id": "Persoo_listName2",
-                "name": "Název karty 2"
+                "name": "Tab Name 2"
             }
         ],
         "groups": [
             {
                 "id": "main",
-                "name": "Main"
+                "name": "Main Content"
             }
         ],
         "id": "fdd0bdfb46cf4ac7a6877c4ae29fc25e",
@@ -528,5 +528,275 @@
         "minScenariosCount": 2,
         "name": "Top products",
         "template": "<%\n/*EDIT VARIBLES*/\n  /*Name template Top Products*/\n  var PersooVarible_TemplateName = \"BASIC\";\n  /*List name - admin.persoo.cz*/\n  var listName = [Persoo_listName1, Persoo_listName2];\n  /*Varible for Alg*/\n  var listVarible = [products1, products2];\n/*EDIT VARIBLES - END*/\n\n\n/*Name template Top Products for Class*/\nvar PersooTemplateName = \"PersooTemplate_TopProducts_\" + PersooVarible_TemplateName ;\n\n/*Name template Top Products for ID*/\nvar PersooTemplateNameID = \"#\" + PersooTemplateName;\n\n/*Persoo prefix for css class*/\nvar PersooPrefix = \"persoo_\";\n\n/*Price print*/\nfunction printPrice(p){\n  return String(Math.round(p)).replace(/(.*)([0-9]{3})/,'$1 $2');\n}\n%>\n<div id=\"<%= PersooTemplateName %>\" class=\"persoo persooTemplate\">\n<% if (listVarible[0].length >= 3 || listVarible[1].length >= 3) { %>\n<style>\n<%= PersooTemplateNameID %>{margin:-28px 0 30px 0;padding-top:28px;}\n<%= PersooTemplateNameID %> *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;}\n/*change link*/\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>changer{width:100%;display:block;border-bottom:1px solid #dfdfdf;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>changer a{display:inline-block;font-family:'fBold';cursor: pointer;font-size:18px;line-height:49px;background:#FFF;padding:0 15px;font-weight:normal;color:#989898;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>changer a.<%= PersooPrefix %>link.active{color:#cb1040;margin-bottom:-1px;border-top:1px solid #dfdfdf;border-left:1px solid #dfdfdf;border-right:1px solid #dfdfdf;border-bottom:1px solid #fff;text-decoration:none;font-weight:bold;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>changer a.<%= PersooPrefix %>link:hover{text-decoration:none;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>changer a.<%= PersooPrefix %>link.active:hover{text-decoration:none;}\n\n/*show/hide items 4-10*/\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>show,\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>hide{width:100%;display:block!important;text-align:center;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>angi{width:90px;height:30px;overflow:hidden;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring{cursor: pointer;display:block;width:90px;height:60px;margin-top:-30px;background-color:#cb1040;-webkit-border-radius:7px;-moz-border-radius:7px;border-radius:7px;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring .<%= PersooPrefix %>square{width:20px;height:20px;display:inline-block;overflow:hidden;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring .<%= PersooPrefix %>square .<%= PersooPrefix %>white .<%= PersooPrefix %>color{width:12px;height:12px;background-color:#cb1040;display:inline-block;margin-top:4px;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring .<%= PersooPrefix %>square .<%= PersooPrefix %>white{width:20px;height:20px;background-color:white;-ms-transform:rotate(45deg);-webkit-transform:rotate(45deg);transform:rotate(45deg);}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>angi:hover .<%= PersooPrefix %>ring{background-color:#860929;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>angi:hover .<%= PersooPrefix %>ring .<%= PersooPrefix %>square .<%= PersooPrefix %>white .<%= PersooPrefix %>color{background-color:#860929;}\n/*show items 4-10*/\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>show .<%= PersooPrefix %>angi{display:inline-block;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>show .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring .<%= PersooPrefix %>square{margin-top:38px;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>show .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring .<%= PersooPrefix %>square .<%= PersooPrefix %>white{margin-top:-11px;}\n/*hide items 4-10*/\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>hide .<%= PersooPrefix %>angi{display:none;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>hide .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring .<%= PersooPrefix %>square{margin-top:31px;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>hide .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring .<%= PersooPrefix %>square .<%= PersooPrefix %>white{margin-top:11px;}\n\n/*templates item*/\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items{display:none;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items.<%= PersooPrefix %>list0{display:block;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item{position:relative;width:100%;height:74px;padding:5px 0;font-size:0;display:block;border-bottom:1px solid #e1e1e1;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>open{display:block;height:0px;overflow:hidden;-webkit-transition: all 0.3s;-moz-transition: all 0.3s;-o-transition: all 0.3s;transition: all 0.3s;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>open .<%= PersooPrefix %>box{display:block;width:100%;}\n\n/*medails and numbers*/\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>number{float:left;width:29px;height:64px;padding:22px 0;display:inline-block;text-align:right;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>number span{font-size:11px;left:-29px;line-height:9px;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item.<%= PersooPrefix %>order0 .<%= PersooPrefix %>number span,\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item.<%= PersooPrefix %>order1 .<%= PersooPrefix %>number span,\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item.<%= PersooPrefix %>order2 .<%= PersooPrefix %>number span{line-height:11px;letter-spacing:0;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>number .<%= PersooPrefix %>medail{float:right;width:20px;height:20px;font-size:bold;text-align:center;padding:5.5px 0;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item.<%= PersooPrefix %>order0 .<%= PersooPrefix %>number .<%= PersooPrefix %>medail{font-weight:bold;padding:3.5px 0;margin-right:-1px;background-color:#FFE545;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item.<%= PersooPrefix %>order1 .<%= PersooPrefix %>number .<%= PersooPrefix %>medail{font-weight:bold;padding:3.5px 0;margin-right:-1px;background-color:#D1D0D7;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item.<%= PersooPrefix %>order2 .<%= PersooPrefix %>number .<%= PersooPrefix %>medail{font-weight:bold;padding:3.5px 0;margin-right:-1px;background-color:#E69E2F;}\n/*image*/\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>image{float:left;width:90px;height:64px;display:inline-block;text-align:center;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>image img{width:auto;height:auto;max-width:64px;max-height:64px;}\n/*text*/\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text{float:left;width:100%;height:64px;display:inline-block;padding:0 160px 0 113px;position:absolute;left:0;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text .<%= PersooPrefix %>middle{display:block;text-align:left;width:100%;height:64px;padding:14.5px 0;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text .<%= PersooPrefix %>middle .<%= PersooPrefix %>title{width:100%;overflow:hidden;height:18px;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text .<%= PersooPrefix %>middle .<%= PersooPrefix %>title a{color:#231f20;font-weight:bold;max-width:100%;font-size:15px;line-height:18px;overflow:hidden;white-space:nowrap;display:inline-block;text-decoration:none;\n-ms-text-overflow:ellipsis;-o-text-overflow:ellipsis;text-overflow:ellipsis;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item:hover .<%= PersooPrefix %>text .<%= PersooPrefix %>middle .<%= PersooPrefix %>title a{color:#cb1040;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text .<%= PersooPrefix %>middle .<%= PersooPrefix %>desc{width:100%;font-size:12px;height:14px;line-height:14px;margin-top:3px;overflow:hidden;white-space:nowrap;display:inline-block;\n-ms-text-overflow:ellipsis;-o-text-overflow:ellipsis;text-overflow:ellipsis;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text .<%= PersooPrefix %>middle .<%= PersooPrefix %>desc a{line-height:14px;font-size:13px;font-weight:bold;color:#5f5f5f;}\n/*price*/\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>price{float:right;width:160px;height:64px;display:inline-block;text-align:right;color:#cb1040;padding-top:14px;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>price del.<%= PersooPrefix %>priceMarket{float:left;width:100%;font-size:12px;font-weight:bold;vertical-align:sub;line-height:18px;}\n<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>price strong.<%= PersooPrefix %>productPrice{float:left;width:100%;font-size:16px;vertical-align:sub;line-height:18px;}\n\n/*responzive css*/\n@media (max-width:1215px){\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item{height:74px;}\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text{float:left;width:100%;left:0;padding:0 29px 0 119px;height:64px;display:inline-block;position:absolute;}\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text .<%= PersooPrefix %>middleContainer{height:auto;}\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>price{float:left;width:100%;left:0;padding-left:119px;height:auto;display:inline-block;text-align:left;position:absolute;top:45px;padding-top:0;}\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>price del.<%= PersooPrefix %>priceMarket{width:auto;float:none;padding-right:5px;}\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text .<%= PersooPrefix %>middle{padding:0;}\n}\n@media (max-width:964px){\n  <%= PersooTemplateNameID %>{margin:0 0 30px 0;padding-top:28px;}\n}\n@media (max-width:767px){\n  <%= PersooTemplateNameID %> .<%= PersooPrefix %>changer{text-align:center;}\n}\n</style>\n\n  <!--Button for change list-->\n  <div class=\"<%= PersooPrefix %>changer\">\n    <% for(var iList=0; iList < listName.length; iList++) { %>\n      <a id=\"<%= PersooTemplateName + '_List' + iList %>\" <% if (iList==0) { %> class=\"<%= PersooPrefix %>link active\"<% }else{%> class=\"<%= PersooPrefix %>link\"<%} %> onclick=\"Persoo_changer('<%= PersooTemplateName + '_List' + iList %>')\"><%= listName[iList] %></a>\n    <% } %>\n  </div>\n\n  <!--Lists-->\n  <% for(var iList=0; iList < listName.length; iList++) { %>\n    <div class=\"<%= PersooPrefix %>items <%= PersooTemplateName + '_List' + iList %> <%= PersooPrefix %>list<%= iList %>\">\n      <% for(i=0; i < 11 && i < listVarible[iList].length; i++) { %>\n        <% if (i==3) { %><div class=\"<%= PersooPrefix %>open\"><div class=\"<%= PersooPrefix %>box\"><% } %>\n          <div class=\"<%= PersooPrefix %>item <%= PersooPrefix %>order<%= i %>\">\n            <div class=\"<%= PersooPrefix %>number\">\n              <div class=\"<%= PersooPrefix %>medail\">\n                <span><%= i + 1 %></span>\n              </div>\n            </div>\n            <div class=\"<%= PersooPrefix %>image\">\n              <a title=\"<%= listVarible[iList][i].title %>\" href=\"<%= listVarible[iList][i].link %>\">\n                <img alt=\"<%= listVarible[iList][i].title %>\" title=\"<%= listVarible[iList][i].title %>\" src=\"<%= listVarible[iList][i].imageLink %>\" />\n              </a>\n            </div>\n            <div class=\"<%= PersooPrefix %>text\">\n              <div class=\"<%= PersooPrefix %>middle\">\n                <div class=\"<%= PersooPrefix %>title\">\n                  <a title=\"<%= listVarible[iList][i].title %>\" href=\"<%= listVarible[iList][i].link %>\"><%= listVarible[iList][i].title %></a>\n                </div>\n                <div class=\"<%= PersooPrefix %>desc\">\n                  <p><%= listVarible[iList][i].description %></p>\n                </div>\n              </div>\n            </div>\n            <div class=\"<%= PersooPrefix %>price\">\n              <del class=\"<%= PersooPrefix %>priceMarket\"><%= listVarible[iList][i].priceOriginal %> <small>K&#269;</small></del> <strong class=\"<%= PersooPrefix %>productPrice\"><%= listVarible[iList][i].price %><small>K&#269;</small></strong>\n            </div>\n          </div>\n        <% } %>\n      <% if (i>2) { %></div></div><% } %>\n    </div>\n  <% } %>\n\n  <!--buttom for show all items-->\n  <div class=\"<%= PersooPrefix %>button\">\n    <div class=\"<%= PersooPrefix %>show\">\n      <div class=\"<%= PersooPrefix %>angi\" onclick=\"Persoo_show('show')\">\n          <div class=\"<%= PersooPrefix %>ring\">\n            <div class=\"<%= PersooPrefix %>square\">\n              <div class=\"<%= PersooPrefix %>white\">\n                <div class=\"<%= PersooPrefix %>color\"></div>\n              </div>\n            </div>\n          </div>\n      </div>\n    </div>\n    <div class=\"<%= PersooPrefix %>hide\">\n      <div class=\"<%= PersooPrefix %>angi\" onclick=\"Persoo_show('hide')\">\n          <div class=\"<%= PersooPrefix %>ring\">\n            <div class=\"<%= PersooPrefix %>square\">\n              <div class=\"<%= PersooPrefix %>white\">\n                <div class=\"<%= PersooPrefix %>color\"></div>\n              </div>\n            </div>\n          </div>\n      </div>\n    </div>\n  </div>\n\n<!--main JS-->\n<script language=\"javaScript\">\n/*Name template Top Products with hashtag*/\nvar buttonChanger = \"\";\nvar valueShow = \"\";\n\n//show button show/hide\nvar showButtonArray = document.querySelectorAll(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>items.<%= PersooPrefix %>list0 .<%= PersooPrefix %>open .<%= PersooPrefix %>item\");\nif(4 > showButtonArray.length){\n  document.querySelector(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>button\").style.display = \"none\";\n}\n\n//scroll to top persooBox\nfunction Persoo_scrollTo(){\n  //position persooDiv\n  var idScrollTo = document.querySelector(\"<%= PersooTemplateNameID %>\").getBoundingClientRect().top;\n  //actual position on page\n  var positionBody = document.body.scrollTop;\n  //scroll to\n  var idScrollToFinal = idScrollTo + positionBody;\n  function runScroll() {\n    scrollTo(document.body, idScrollToFinal, 200);\n  }\n  //animation\n  function scrollTo(element, to, duration) {\n    if (duration <= 0) return;\n    var difference = to - element.scrollTop;\n    var perTick = difference / duration * 10;\n\n    setTimeout(function() {\n      element.scrollTop = element.scrollTop + perTick;\n      if (element.scrollTop == to) return;\n      scrollTo(element, to, duration - 10);\n    }, 10);\n  }\n  //run function\n  runScroll();\n};\n\n//show or hide items 4-10\nfunction Persoo_show(valueShow){\n  if(valueShow==\"show\"){\n    //show items 4-10\n    var boxArray = document.querySelectorAll(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>items\");\n    for(var i = 0; i < boxArray.length; i++){\n      /*how height box*/\n      var boxHeight = document.querySelector(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>list\" + i + \" .<%= PersooPrefix %>open .<%= PersooPrefix %>box\").offsetHeight;\n      document.querySelector(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>list\" + i + \" .<%= PersooPrefix %>open\").style.height = boxHeight + \"px\";\n    }\n    /*add class to persoo box for identification if they are see all items*/\n    document.querySelector(\"<%= PersooTemplateNameID %>\").className = \"persoo persooLocation openAll\";\n    /*hide - show button*/\n    var showArray = document.querySelectorAll(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>show .<%= PersooPrefix %>angi\");\n    for(var i = 0; i < showArray.length; i++){showArray[i].style.display = \"none\";}\n    /*show - hide button*/\n    var hideArray = document.querySelectorAll(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>hide .<%= PersooPrefix %>angi\");\n    for(var i = 0; i < hideArray.length; i++){hideArray[i].style.display = \"inline-block\";}\n  }else{\n    //hide items 4-10\n    var boxArray = document.querySelectorAll(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>items\");\n    for(var i = 0; i < boxArray.length; i++){\n      /*how height box*/\n      document.querySelector(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>list\" + i + \" .<%= PersooPrefix %>open\").style.height = \"0px\";\n    }\n    /*remove class to persoo box for identification if they are see all items*/\n    document.querySelector(\"<%= PersooTemplateNameID %>\").className = \"persoo persooLocation\";\n    /*hide - hide button*/\n    var hideArray = document.querySelectorAll(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>hide .<%= PersooPrefix %>angi\");\n    for(var i = 0; i < hideArray.length; i++){hideArray[i].style.display = \"none\";}\n    /*show - show button*/\n    var showArray = document.querySelectorAll(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>show .<%= PersooPrefix %>angi\");\n    for(var i = 0; i < showArray.length; i++){showArray[i].style.display = \"inline-block\";}\n  }\n  Persoo_scrollTo();\n};\n\n//change show\nfunction Persoo_changer(buttonChanger){\n  /*how much links and all deactive*/\n  var changerArray = document.querySelectorAll(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>changer a\");\n  for(var i = 0; i < changerArray.length; i++){changerArray[i].className = \"<%= PersooPrefix %>link\";}\n  /*activ link*/\n  document.querySelector(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>changer a#\" + buttonChanger).className = \"<%= PersooPrefix %>link active\";\n  /*how much lists and all hide*/\n  var listArray = document.querySelectorAll(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>items\");\n  for(var i = 0; i < listArray.length; i++){listArray[i].style.display = \"none\";}\n  /*show active list*/\n  document.querySelector(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>items.\" + buttonChanger).style.display = \"block\";\n  //show button show/hide\n  var showButtonArray = document.querySelectorAll(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>items.\" + buttonChanger + \" .<%= PersooPrefix %>open .<%= PersooPrefix %>item\");\n  if(4 > showButtonArray.length){\n    document.querySelector(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>button\").style.display = \"none\";\n  }else{\n    document.querySelector(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>button\").style.display = \"block\";\n  }\n  /*show items 4-10*/\n  if (document.querySelector('.persoo.persooLocation.openAll') !== null) {\n    var boxArray = document.querySelectorAll(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>items\");\n    for(var i = 0; i < boxArray.length; i++){\n      document.querySelector(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>list\" + i + \" .<%= PersooPrefix %>open\").style.height = \"auto\";\n      /*how height box*/\n      var boxHeight = document.querySelector(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>list\" + i + \" .<%= PersooPrefix %>open .<%= PersooPrefix %>box\").offsetHeight;\n      document.querySelector(\"<%= PersooTemplateNameID %> .<%= PersooPrefix %>list\" + i + \" .<%= PersooPrefix %>open\").style.height = boxHeight + \"px\";\n    }\n  }\n};\n</script>\n<% } %>\n</div>\n"
-    }
+    },
+	"infobarV0_1": {
+	    "class": "webWidget",
+	    "isActive": true,
+	    "name": "Info bar",
+	    "fields": [
+	        {
+	            "id": "message",
+	            "name": "Main message",
+	            "group": "main",
+	            "type": "richtext",
+	            "defaultValue": "We have secret offer just for you."
+	        },
+	        {
+	            "id": "textColor",
+	            "name": "Text Color",
+	            "group": "main",
+	            "type": "text",
+	            "defaultValue": "rgba(255, 253, 253, 0.81)"
+	        },
+	        
+	        {
+	            "id": "showCtaButton",
+	            "name": "Show Button",
+	            "group": "cta",
+	            "type": "checkbox",
+	            "defaultValue": true
+	        },
+	        {
+	            "id": "ctaButtonLabel",
+	            "name": "Button Label",
+	            "group": "cta",
+	            "type": "text",
+	            "defaultValue": "SHOW ME"
+	        },
+	        {
+	            "id": "ctaButtonAction",
+	            "name": "Button Action",
+	            "group": "cta",
+	            "type": "select",
+	            "options": [
+	                {
+	                    "label": "Redirect to link",
+	                    "value": "redirect"
+	                },
+	                {
+	                    "label": "Close pop-up",
+	                    "value": "close"
+	                }
+	            ],
+	            "defaultValue": "redirect"
+	        },
+	        {
+	            "id": "ctaButtonLink",
+	            "name": "Button Target Link",
+	            "group": "cta",
+	            "type": "text",
+	            "defaultValue": "/your/target/page"
+	        },
+	        {
+	            "id": "ctaTextColor",
+	            "name": "Text Color",
+	            "group": "cta",
+	            "type": "text",
+	            "defaultValue": "white"
+	        },
+	        {
+	            "id": "ctaButtonColor",
+	            "name": "Button Color",
+	            "group": "cta",
+	            "type": "text",
+	            "defaultValue": "rgba(51, 51, 51, 0.34)"
+	        },
+	    
+            {
+                "id": "section_closing",
+                "name": "Closing",
+                "group": "design",
+                "type": "section"
+            },                        
+            {
+                "id": "showClosingX",
+                "name": "Show closing X",
+                "group": "design",
+                "type": "checkbox",
+                "defaultValue": true
+            },
+	        {
+	            "id": "section_background",
+	            "name": "Background",
+	            "group": "design",
+	            "type": "section"
+	        },
+	        {
+	            "id": "backgroundColor",
+	            "name": "Background Color",
+	            "group": "design",
+	            "type": "text",
+	            "defaultValue": "#c00"
+	        },
+	        {
+	            "id": "backgroundOpacity",
+	            "name": "Background Opacity",
+	            "group": "design",
+	            "type": "number",
+	            "defaultValue": 1
+	        },
+	        {
+	            "id": "backgroundImageLink",
+	            "name": "Background Image Link",
+	            "group": "design",
+	            "type": "text",
+	            "defaultValue": ""
+	        },
+	        {
+	            "id": "section_border",
+	            "name": "Border",
+	            "group": "design",
+	            "type": "section"
+	        },
+	        {
+	            "id": "borderSize",
+	            "name": "Border size",
+	            "group": "design",
+	            "type": "number",
+	            "defaultValue": 1
+	        },
+	        {
+	            "id": "borderColor",
+	            "name": "Border Color",
+	            "group": "design",
+	            "type": "text",
+	            "defaultValue": "#ffffff"
+	        },
+	        {
+	            "id": "borderOpacity",
+	            "name": "Border Opacity",
+	            "group": "design",
+	            "type": "number",
+	            "defaultValue": 1
+	        },
+	        {
+	            "id": "boxCorners",
+	            "name": "Box Corners",
+	            "group": "design",
+	            "type": "select",
+	            "options": [
+	                {
+	                    "label": "Rectangular",
+	                    "value": "0"
+	                },
+	                {
+	                    "label": "Mini Rounded",
+	                    "value": "5"
+	                },
+	                {
+	                    "label": "Rounded",
+	                    "value": "15"
+	                }
+	            ],
+	            "defaultValue": "0"
+	        },
+	        {
+	            "id": "boxShadow",
+	            "name": "Box Shadow",
+	            "group": "design",
+	            "type": "select",
+	            "options": [
+	                {
+	                    "label": "None",
+	                    "value": "none"
+	                },
+	                {
+	                    "label": "Low",
+	                    "value": "low"
+	                },
+	                {
+	                    "label": "High",
+	                    "value": "high"
+	                }
+	            ],
+	            "defaultValue": "none"
+	        },
+	        {
+	            "id": "boxShadowColor",
+	            "name": "Box Shadow Color",
+	            "group": "design",
+	            "type": "text",
+	            "defaultValue": "#666666"
+	        },
+            {
+                "id": "section_customCSS",
+                "name": "Custom CSS",
+                "group": "design",
+                "type": "section"
+            },            
+            {
+                "id": "customCSS",
+                "name": "Custom CSS",
+                "group": "design",
+                "type": "css",
+                "defaultValue": "/* your own css rules */"
+            },
+	        
+	        {	            
+	            "group": "settings",
+	            "id": "position",
+	            "name": "Position",
+	            "options": [
+	                {
+	                    "label": "top",
+	                    "value": "top"
+	                },
+	                {
+	                    "label": "bottom",
+	                    "value": "bottom"
+	                }
+	            ],
+	            "type": "select",
+	            "defaultValue": "top"
+	        },
+            {
+                "id": "customHeight",
+                "name": "Custom Height",
+                "group": "settings",
+                "type": "number",
+                "defaultValue": 50
+            },
+            {
+                "id": "autoHeight",
+                "name": "Auto Height",
+                "group": "settings",
+                "type": "checkbox",
+                "defaultValue": true
+            },
+            
+            {
+                "id": "section_customJS",
+                "name": "Custom Javascript",
+                "group": "settings",
+                "type": "section"
+            },                        
+            {
+                "id": "customJS",
+                "name": "Custom Javascript",
+                "group": "settings",
+                "type": "javascript",
+                "defaultValue": "/* your own javascript */"
+            }            	        
+	    ],
+	    "groups": [
+	        {
+	            "id": "main",
+	            "name": "Main content"
+	        },
+	        {
+	            "id": "cta",
+	            "name": "Call to Action"
+	        },
+	        {
+	            "id": "design",
+	            "name": "Design"
+	        },
+	        {
+	            "id": "settings",
+	            "name": "Settings"
+	        }
+        ],
+	    "minScenariosCount": 0,
+	    "template": "<%\n/* TODO\n   improve close X colors, background color\n   minify color utils\n*/\nvar offerID = offerID || 'randomOfferID';\n\nvar getBoxShadowSize = { \n    \"none\": 0, /* in px */\n    \"low\": 11,\n    \"high\": 22\n};\nfunction getBoxHeight(height, autoHeight) {\n    var h = \"auto\";\n    if (!autoHeight) {\n        h = height;\n    }\n    return h;\n}\nvar boxHeight = getBoxHeight(customHeight, autoHeight);\n\n/* Color utils taken from by https://bgrins.github.io/TinyColor */\nvar colorNames = {\n    aliceblue: \"f0f8ff\",\n    antiquewhite: \"faebd7\",\n    aqua: \"0ff\",\n    aquamarine: \"7fffd4\",\n    azure: \"f0ffff\",\n    beige: \"f5f5dc\",\n    bisque: \"ffe4c4\",\n    black: \"000\",\n    blanchedalmond: \"ffebcd\",\n    blue: \"00f\",\n    blueviolet: \"8a2be2\",\n    brown: \"a52a2a\",\n    burlywood: \"deb887\",\n    burntsienna: \"ea7e5d\",\n    cadetblue: \"5f9ea0\",\n    chartreuse: \"7fff00\",\n    chocolate: \"d2691e\",\n    coral: \"ff7f50\",\n    cornflowerblue: \"6495ed\",\n    cornsilk: \"fff8dc\",\n    crimson: \"dc143c\",\n    cyan: \"0ff\",\n    darkblue: \"00008b\",\n    darkcyan: \"008b8b\",\n    darkgoldenrod: \"b8860b\",\n    darkgray: \"a9a9a9\",\n    darkgreen: \"006400\",\n    darkgrey: \"a9a9a9\",\n    darkkhaki: \"bdb76b\",\n    darkmagenta: \"8b008b\",\n    darkolivegreen: \"556b2f\",\n    darkorange: \"ff8c00\",\n    darkorchid: \"9932cc\",\n    darkred: \"8b0000\",\n    darksalmon: \"e9967a\",\n    darkseagreen: \"8fbc8f\",\n    darkslateblue: \"483d8b\",\n    darkslategray: \"2f4f4f\",\n    darkslategrey: \"2f4f4f\",\n    darkturquoise: \"00ced1\",\n    darkviolet: \"9400d3\",\n    deeppink: \"ff1493\",\n    deepskyblue: \"00bfff\",\n    dimgray: \"696969\",\n    dimgrey: \"696969\",\n    dodgerblue: \"1e90ff\",\n    firebrick: \"b22222\",\n    floralwhite: \"fffaf0\",\n    forestgreen: \"228b22\",\n    fuchsia: \"f0f\",\n    gainsboro: \"dcdcdc\",\n    ghostwhite: \"f8f8ff\",\n    gold: \"ffd700\",\n    goldenrod: \"daa520\",\n    gray: \"808080\",\n    green: \"008000\",\n    greenyellow: \"adff2f\",\n    grey: \"808080\",\n    honeydew: \"f0fff0\",\n    hotpink: \"ff69b4\",\n    indianred: \"cd5c5c\",\n    indigo: \"4b0082\",\n    ivory: \"fffff0\",\n    khaki: \"f0e68c\",\n    lavender: \"e6e6fa\",\n    lavenderblush: \"fff0f5\",\n    lawngreen: \"7cfc00\",\n    lemonchiffon: \"fffacd\",\n    lightblue: \"add8e6\",\n    lightcoral: \"f08080\",\n    lightcyan: \"e0ffff\",\n    lightgoldenrodyellow: \"fafad2\",\n    lightgray: \"d3d3d3\",\n    lightgreen: \"90ee90\",\n    lightgrey: \"d3d3d3\",\n    lightpink: \"ffb6c1\",\n    lightsalmon: \"ffa07a\",\n    lightseagreen: \"20b2aa\",\n    lightskyblue: \"87cefa\",\n    lightslategray: \"789\",\n    lightslategrey: \"789\",\n    lightsteelblue: \"b0c4de\",\n    lightyellow: \"ffffe0\",\n    lime: \"0f0\",\n    limegreen: \"32cd32\",\n    linen: \"faf0e6\",\n    magenta: \"f0f\",\n    maroon: \"800000\",\n    mediumaquamarine: \"66cdaa\",\n    mediumblue: \"0000cd\",\n    mediumorchid: \"ba55d3\",\n    mediumpurple: \"9370db\",\n    mediumseagreen: \"3cb371\",\n    mediumslateblue: \"7b68ee\",\n    mediumspringgreen: \"00fa9a\",\n    mediumturquoise: \"48d1cc\",\n    mediumvioletred: \"c71585\",\n    midnightblue: \"191970\",\n    mintcream: \"f5fffa\",\n    mistyrose: \"ffe4e1\",\n    moccasin: \"ffe4b5\",\n    navajowhite: \"ffdead\",\n    navy: \"000080\",\n    oldlace: \"fdf5e6\",\n    olive: \"808000\",\n    olivedrab: \"6b8e23\",\n    orange: \"ffa500\",\n    orangered: \"ff4500\",\n    orchid: \"da70d6\",\n    palegoldenrod: \"eee8aa\",\n    palegreen: \"98fb98\",\n    paleturquoise: \"afeeee\",\n    palevioletred: \"db7093\",\n    papayawhip: \"ffefd5\",\n    peachpuff: \"ffdab9\",\n    peru: \"cd853f\",\n    pink: \"ffc0cb\",\n    plum: \"dda0dd\",\n    powderblue: \"b0e0e6\",\n    purple: \"800080\",\n    rebeccapurple: \"663399\",\n    red: \"f00\",\n    rosybrown: \"bc8f8f\",\n    royalblue: \"4169e1\",\n    saddlebrown: \"8b4513\",\n    salmon: \"fa8072\",\n    sandybrown: \"f4a460\",\n    seagreen: \"2e8b57\",\n    seashell: \"fff5ee\",\n    sienna: \"a0522d\",\n    silver: \"c0c0c0\",\n    skyblue: \"87ceeb\",\n    slateblue: \"6a5acd\",\n    slategray: \"708090\",\n    slategrey: \"708090\",\n    snow: \"fffafa\",\n    springgreen: \"00ff7f\",\n    steelblue: \"4682b4\",\n    tan: \"d2b48c\",\n    teal: \"008080\",\n    thistle: \"d8bfd8\",\n    tomato: \"ff6347\",\n    turquoise: \"40e0d0\",\n    violet: \"ee82ee\",\n    wheat: \"f5deb3\",\n    white: \"fff\",\n    whitesmoke: \"f5f5f5\",\n    yellow: \"ff0\",\n    yellowgreen: \"9acd32\"\n};\nvar colorMatchers = (function() {\n    var CSS_INTEGER = \"[-\\\\+]?\\\\d+%?\";\n    var CSS_NUMBER = \"[-\\\\+]?\\\\d*\\\\.\\\\d+%?\";\n    var CSS_UNIT = \"(?:\" + CSS_NUMBER + \")|(?:\" + CSS_INTEGER + \")\";\n    var PERMISSIVE_MATCH3 = \"[\\\\s|\\\\(]+(\" + CSS_UNIT + \")[,|\\\\s]+(\" + CSS_UNIT + \")[,|\\\\s]+(\" + CSS_UNIT + \")\\\\s*\\\\)?\";\n    var PERMISSIVE_MATCH4 = \"[\\\\s|\\\\(]+(\" + CSS_UNIT + \")[,|\\\\s]+(\" + CSS_UNIT + \")[,|\\\\s]+(\" + CSS_UNIT + \")[,|\\\\s]+(\" + CSS_UNIT + \")\\\\s*\\\\)?\";\n    return {\n        CSS_UNIT: new RegExp(CSS_UNIT),\n        rgb: new RegExp(\"rgb\" + PERMISSIVE_MATCH3),\n        rgba: new RegExp(\"rgba\" + PERMISSIVE_MATCH4),\n        hsl: new RegExp(\"hsl\" + PERMISSIVE_MATCH3),\n        hsla: new RegExp(\"hsla\" + PERMISSIVE_MATCH4),\n        hsv: new RegExp(\"hsv\" + PERMISSIVE_MATCH3),\n        hsva: new RegExp(\"hsva\" + PERMISSIVE_MATCH4),\n        hex3: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,\n        hex6: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,\n        hex4: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,\n        hex8: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/\n    };\n})();\nfunction parseColor(color) {\n    function parseIntFromHex(val) {\n        return parseInt(val, 16);\n    }\n    \n    color = color.toLowerCase();\n    if (colorNames[color]) {\n        color = colorNames[color];\n    }\n    else if (color == 'transparent') {\n        return { r: 0, g: 0, b: 0, a: 0 };\n    }\n\n    var match;\n    if ((match = colorMatchers.rgb.exec(color))) {\n        return { r: match[1], g: match[2], b: match[3] };\n    }\n    if ((match = colorMatchers.rgba.exec(color))) {\n        return { r: match[1], g: match[2], b: match[3], a: match[4] };\n    }\n    if ((match = colorMatchers.hex8.exec(color))) {\n        return {\n            r: parseIntFromHex(match[1]),\n            g: parseIntFromHex(match[2]),\n            b: parseIntFromHex(match[3]),\n            a: convertHexToDecimal(match[4])\n        };\n    }\n    if ((match = colorMatchers.hex6.exec(color))) {\n        return {\n            r: parseIntFromHex(match[1]),\n            g: parseIntFromHex(match[2]),\n            b: parseIntFromHex(match[3])\n        };\n    }\n    if ((match = colorMatchers.hex4.exec(color))) {\n        return {\n            r: parseIntFromHex(match[1] + '' + match[1]),\n            g: parseIntFromHex(match[2] + '' + match[2]),\n            b: parseIntFromHex(match[3] + '' + match[3]),\n            a: convertHexToDecimal(match[4] + '' + match[4])\n        };\n    }\n    if ((match = colorMatchers.hex3.exec(color))) {\n        return {\n            r: parseIntFromHex(match[1] + '' + match[1]),\n            g: parseIntFromHex(match[2] + '' + match[2]),\n            b: parseIntFromHex(match[3] + '' + match[3])\n        };\n    }\n    return false;\n}\nfunction toRGBA(c) {\n   if (typeof c.a !== 'undefined') {\n       return 'rgba(' + c.r +', ' + c.g +', ' + c.b +', ' + c.a + ')';;\n   } else {\n       return 'rgb(' + c.r +', ' + c.g +', ' + c.b + ')';\n   }\n}\nfunction addOpacityToColor(color, opacity) {\n    var c = parseColor(color);\n    c.a = opacity;\n       return toRGBA(c);\n}\nfunction getComplementGreyColor(backgroundColor) {\n   var c = parseColor(backgroundColor);\n   var greyscaleFactor =  0.21*c.r + 0.72*c.g + 0.07*c.b;\n   var darker = Math.round(greyscaleFactor * 1.3);\n   var complement = darker;\n   if (darker > 256) {\n       complement = Math.round(greyscaleFactor/1.3);\n   }\n   return {r: complement, g: complement, b: complement};\n}\n%>    \n<div class=\"persoo-infobar persoo-<%= offerID %>\" \n     id=\"persoo-<%= offerID %>\" \n     style=\"<%= position %>:0;  \n                left: 0; right:0;  \n                position:absolute;\n                \n                height: <%= boxHeight %>;z-index:2147483647;\n                line-height: normal; visibility: visible;\n                background-color: <%= addOpacityToColor(backgroundColor, backgroundOpacity) %>;\n                box-sizing: content-box;\n                box-shadow: <%= boxShadowColor %> 0px 0px <%= getBoxShadowSize[boxShadow] %>px; zoom: 1;\n                border: <%= borderSize %>px solid <%= addOpacityToColor(borderColor, borderOpacity) %>;\n                border-radius: <%= boxCorners %>px;\n                padding: 5px;\n\">                \n    <style type=\"text/css\">\n        .persoo-infobar {\n            font-family: Arial, Helvetica, sans-serif;            \n            background-clip: padding-box;\n            -webkit-font-smoothing: antialiased;\n        }\n        .persoo-infobar > div:last-child, #persoo-content > div:last-child {\n            margin-bottom: 0 !important;\n        }\n    \n        .persoo-content {\n            position: relative;\n        }\n\n\t\t.persoo-close-x {\n\t\t    cursor: pointer;\n\t\t    font-size:32px;\t\t    \n\t\t}\n\t\t.persoo-close-x:hover {opacity:1;}\n\t\t.persoo-close-x>span.persoo-icon:before{\n\t\t    content:\"\\2715\"; /* or \\2716 */\n\t\t    display: block;\n\t\t    font-weight: normal;\n\t\t    font-style: normal;\n\t\t    text-align: center;\n\t\t    -webkit-font-smoothing: antialiased;\n\t\t}\n\n        /* reset css inside */    \n        .persoo-infobar *, .persoo-infobar p, .persoo-infobar a, .persoo-infobar strong, .persoo-infobar em, .persoo-infobar span, .persoo-infobar ul, .persoo-infobar li, .persoo-infobar input, .persoo-infobar button {\n            margin: 0;\n            padding: 0;\n            font-family: inherit;\n        }\n        .persoo-infobar hr {\n            border: 0;\n            border-top: 1px solid #eee;\n            border-bottom: 1px solid #fff;\n        }    \n        .persoo-infobar input{\n            padding: 4px 6px;\n            margin-right: 0px;\n        }\n        .persoo-infobar p{\n            margin-bottom: 10px;\n        }\n        .persoo-infobar strong{\n            font-weight: bold;\n        }\n        .persoo-infobar em{\n            font-style: italic;\n            font-family: inherit;\n        }\n        .persoo-infobar .optin-block{\n            margin: 0 auto;\n            text-align: center;\n        }\n        .persoo-infobar input{\n            margin-right: 0;\n        }\n        .persoo-infobar .optin-block input:first-child{\n            margin-right: 0px;\n        }\n        .persoo-infobar input[type=\"text\"] {\n            color: #999;\n            border: 1px solid #cccccc !important;\n            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n               -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n                    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n            -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;\n               -moz-transition: border linear 0.2s, box-shadow linear 0.2s;\n                 -o-transition: border linear 0.2s, box-shadow linear 0.2s;\n                    transition: border linear 0.2s, box-shadow linear 0.2s;\n            display: inline-block;\n            float: none;\n            font-size: 14px;\n            line-height: 20px;\n            vertical-align: middle;\n            -webkit-border-radius: 4px;\n               -moz-border-radius: 4px;\n                    border-radius: 4px;\n            font-family: Arial, Helvetica, sans-serif;\n            font-weight: 300;\n        }\n        .persoo-infobar input[type=\"submit\"],\n            a.persoo-building-block-action {\n            font-family: 'Arial,Helvetica, sans-serif';\n            font-weight: 300;\n        }\n        .persoo-infobar p {\n            font-family: 'Arial, Helvetica,sans-serif';\n            font-weight: 300;\n            color: #5e5e64;\n        }\n        .persoo-infobar h1 {\n            font-family: 'Arial, Helvetica,sans-serif';\n            font-weight: 700;\n            color: #5e5e64;\n            font-size: 28px;\n            line-height: 41.59375px;\n        }\n    \n        /* utility classes */\n        .persoo-background-image {\n            width: 100%;\n            height: 100%;\n            position: absolute;\n            top: 0;\n            left: 0;\n            z-index: 0;\n        }\n        .persoo-icon {\n            background: transparent;\n            display: inline-block;\n            font-style: normal;\n            vertical-align: baseline;\n            position: relative;        \n        }\n        .persoo-content img {\n            max-width: 100%;\n            max-height: 100%;\n        }\n    </style>\n    <style type=\"text/css\">\n        <%= customCSS %>\n    </style>\n    <% if (backgroundImageLink){ %>\n        <img class=\"persoo-background-image\" src=\"<%= backgroundImageLink %>\" alt=\"background\">\n    <% } %>\n\n    <div class=\"persoo-content\" style=\"display:table;width:100%;padding-right:100px;min-height:50px;\">\n            <div class=\"persoo-message\" style=\"display:table-cell;text-align: center;vertical-align:middle;color:<%= textColor %>\">\n                <span>\n                    <%= message %>\n                </span>\n\t            <% if (showCtaButton) { %>                \n\t\t            <div class=\"persoo-cta\" style=\"text-align: center;display:inline-block; color:<%= ctaTextColor %>;margin-left: 15px;\">\n\t\t                <a class=\"persoo-building-block-action\" \n\t\t                   href=\"<%= ctaButtonLink %>\"\n\t\t                   style=\"display: inline-block;text-decoration: none;border-bottom: 0px solid rgb(138, 119, 69);border-bottom: 0px solid rgba(39,65,90, 0.3); zoom: 1; border-radius:2px; min-height: 22px; line-height: 22px;padding: 6px 12px; color: #ffffff; background-color: <%= ctaButtonColor %>; font-family: Arial; font-size: 14px;\"\n\t\t                   target=\"_blank\"><%= ctaButtonLabel %></a>\n\t\t            </div>\n\t            <% } %>\n            </div>\n\t\t    <% if (showClosingX){ %>\n\t\t        <a class=\"persoo-close-x\" href=\"javascript:persoo_close_<%= offerID %>();\" id=\"close-persoo-<%= offerID %>\"\n\t\t           style=\"display: table-cell;vertical-align: middle;color:<%= textColor %>\"\n\t\t        ><span class=\"persoo-icon\"></span></a>\n\t\t    <% } %>            \n    </div>       \n\n    <script type=\"text/javascript\">\n        function persoo_close_<%= offerID %>() {\n            var elem = document.getElementById(\"persoo-<%= offerID %>\");\n            elem.style.display = \"none\";\n        }\n    </script>\n    <script type=\"text/javascript\">\n        <%= customJS %>\n    </script>    \n</div>\n"
+	}    
 }
