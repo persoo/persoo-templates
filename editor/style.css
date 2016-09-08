@@ -163,7 +163,7 @@ body {
 	margin-right: 5px;
 }
 .formField.color input.hex {width: 8ex;}
-.formField.color input.alpha {width: 3ex;}
+.formField.color input.alpha {width: 5ex;}
 .formField.color span.colorPreview {
     display: inline-block; 
     width: 20px; height:20px; 

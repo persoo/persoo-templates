@@ -135,6 +135,7 @@ function ColorFormField(label, parentElement, dataGetter, dataSetter) {
     this.formElementParent.innerHTML = '<span class="colorPreview" style="background-color:' + value + ';"> ' +
                                        '</span><span>hex:</span><input class="hex" type="text" value="' + color.toHexString() + '"> ' +
                                        '<span>alpha:</span><input class="alpha" type="number" value="' + color.getAlpha() + '">';
+    this.colorPreviewElement = this.formElementParent.children[0];
     this.formElement = this.formElementParent.children[2];
     this.formElement2 = this.formElementParent.children[4];
     this.formElement.onchange = this.onChange.bind(this);
@@ -149,6 +150,7 @@ ColorFormField.prototype.update = function (){
     if (this.formElement && this.formElement2 && color.isValid()) {
         this.formElement.value = color.toHexString();
         this.formElement2.value = color.getAlpha();
+        this.colorPreviewElement.style.backgroundColor = color.toRgbString();
     }
 };
 ColorFormField.prototype.onChange = function (value){
@@ -157,6 +159,8 @@ ColorFormField.prototype.onChange = function (value){
         var alpha = parseFloat(this.formElement2.value);
     	color.setAlpha(alpha);
         this.parentOnChange(color.toRgbString());
+        
+        this.colorPreviewElement.style.backgroundColor = color.toRgbString();
     }
 };
 
