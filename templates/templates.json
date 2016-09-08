@@ -132,7 +132,7 @@
                 "name": "Show Button",
                 "group": "cta",
                 "type": "checkbox",
-                "defaultValue": true
+                "defaultValue": false
             },
             {
                 "id": "ctaButtonLabel",
@@ -164,6 +164,35 @@
                 "group": "cta",
                 "type": "text",
                 "defaultValue": "/your/target/page"
+            },
+
+            {
+                "id": "collectEmail",
+                "name": "Collect Email Address",
+                "group": "collectEmail",
+                "type": "checkbox",
+                "defaultValue": true
+            },
+            {
+                "id": "collectEmailInputLabel",
+                "name": "Input Label",
+                "group": "collectEmail",
+                "type": "text",
+                "defaultValue": "Your email"
+            },
+            {
+                "id": "collectEmailSubmitLabel",
+                "name": "Submit Button Text",
+                "group": "collectEmail",
+                "type": "text",
+                "defaultValue": "SUBSCRIBE"
+            },
+            {
+                "id": "collectEmailThankYouMessage",
+                "name": "Thank you message",
+                "group": "collectEmail",
+                "type": "text",
+                "defaultValue": "Thank you for subscription"
             },
 
             {
@@ -204,49 +233,6 @@
                     }
                 ],
                 "defaultValue": "center"
-            },
-            
-             {
-                "id": "section_animations",
-                "name": "Animations",
-                "group": "design",
-                "type": "section"
-            },
-            {
-                "id": "animationPosition",
-                "name": "Position",
-                "group": "design",
-                "type": "select",
-                "options": [
-                    {
-                        "label": "None",
-                        "value": "none"
-                    },
-                    {
-                        "label": "down to up",
-                        "value": "down_to_up"
-                    },
-                    {
-                        "label": "up to down",
-                        "value": "up_to_down"
-                    },
-                    {
-                        "label": "left to right",
-                        "value": "left_to_right"
-                    },
-                    {
-                        "label": "right to left",
-                        "value": "right_to_left"
-                    }
-                ],
-                "defaultValue": "none"
-            },
-            {
-                "id": "animationDuration",
-                "name": "Duration",
-                "group": "design",
-                "type": "text",
-                "defaultValue": "0.6s"
             },
                 
             {
@@ -300,6 +286,49 @@
                 "group": "design",
                 "type": "checkbox",
                 "defaultValue": true
+            },
+
+            {
+                "id": "section_animation",
+                "name": "Animation",
+                "group": "design",
+                "type": "section"
+            },
+            {
+                "id": "animationEffect",
+                "name": "Effect",
+                "group": "design",
+                "type": "select",
+                "options": [
+                    {
+                        "label": "None",
+                        "value": "none"
+                    },
+                    {
+                        "label": "Move Down to Up",
+                        "value": "down_to_up"
+                    },
+                    {
+                        "label": "Move Up to Down",
+                        "value": "up_to_down"
+                    },
+                    {
+                        "label": " Move Left to Right",
+                        "value": "left_to_right"
+                    },
+                    {
+                        "label": "Move Right to Left",
+                        "value": "right_to_left"
+                    }
+                ],
+                "defaultValue": "none"
+            },
+            {
+                "id": "animationDuration",
+                "name": "Duration",
+                "group": "design",
+                "type": "text",
+                "defaultValue": "0.6s"
             },
 
             {
@@ -363,8 +392,8 @@
             },            
             
             {
-                "id": "section_textColors",
-                "name": "Text Colors",
+                "id": "section_texts",
+                "name": "Texts",
                 "group": "design",
                 "type": "section"
             },
@@ -374,9 +403,39 @@
                 "group": "design",
                 "type": "color",
                 "defaultValue": "#404040"
+            },
+            {
+                "id": "textFont",
+                "name": "Text Font",
+                "group": "design",
+                "type": "text",
+                "defaultValue": "normal normal 300 medium Arial, Helvetica, sans-serif"
+            },
+            {
+                "id": "section_buttonsAndForms",
+                "name": "Button & Form",
+                "group": "design",
+                "type": "section"
+            },
+            {
+                "id": "ctaStyle",
+                "name": "Button & Form style",
+                "group": "design",
+                "type": "select",
+                "options": [
+                    {
+                        "label": "Classic",
+                        "value": "classic"
+                    },
+                    {
+                        "label": "Outline",
+                        "value": "outline"
+                    }
+                ],
+                "defaultValue": "classic"
             },            
             {
-                "id": "ctaTextColor",
+                "id": "ctaButtonTextColor",
                 "name": "Button Text Color",
                 "group": "design",
                 "type": "color",
@@ -389,6 +448,14 @@
                 "type": "color",
                 "defaultValue": "#a28c51"
             },
+            {
+                "id": "ctaButtonTextFont",
+                "name": "Button Font",
+                "group": "design",
+                "type": "text",
+                "defaultValue": "normal normal 600 large Arial, Helvetica, sans-serif"
+            },
+            
             {
                 "id": "section_background",
                 "name": "Background",
@@ -537,11 +604,15 @@
                 "name": "Call to Action"
             },
             {
+                "id": "collectEmail",
+                "name": "Collect Email"
+            },
+            {
                 "id": "design",
                 "name": "Design"
             }            
         ],        
-        "template": "<%\n/* TODO\n   improve close X colors, background color\n   add javascript function - close pop-up, submit,...\n   minify color utils\n   track click javascripts on conversion and close\n*/\nvar offerID = offerID || 'randomOfferID';\n\nvar getBoxShadowSize = { \n    \"none\": 0, /* in px */\n    \"low\": 11,\n    \"high\": 22\n};\nfunction getBoxWidth(boxSize, width) {\n    var getWidth = {\n        \"s\": 230,\n        \"m\": 460,\n        \"l\": 720,\n    };\n    var w = getWidth[boxSize];\n    if (!w) { /* custom */\n        w = width;\n    }\n    return w;\n}\nfunction getBoxHeight(boxSize, height, autoHeight) {\n    var h = \"auto\";\n    if (boxSize == 'custom' && !autoHeight) {\n        h = height;\n    }\n    return h;\n}\n\nvar boxWidth = getBoxWidth(size, customWidth);\nvar boxHeight = getBoxHeight(size, customHeight, autoHeight);\n\nvar getPosition = { /* FIXME use boxHeight instead of boxWidth */\n    center: {top: \"50%\", left: \"50%\", margin_left: -boxWidth/2, margin_top: -boxWidth/2 },\n    left: {top: \"50%\", left: \"0\", margin_top: -boxWidth/2},\n    right: {top: \"50%\", right: \"0\", margin_top: -boxWidth/2},\n    bottom: {left: \"50%\", bottom: \"0\", margin_left: -boxWidth/2, margin_bottom: 15},\n    bottomLeft: {bottom: \"0\", left: \"0\"},\n    bottomRight: {bottom: \"0\", right: \"0\"}\n};\n\nvar getAnimationProps = {\n    left_to_right: {\n        start: {left: \"-50%\"},\n        stop: {left: \"50%\"}\n    },\n    right_to_left: {\n        start: {left: \"150%\"},\n        stop: {left: \"50%\"}\n    },\n    up_to_down: {\n        start: {top: \"-50%\"},\n        stop: {top: \"50%\"}\n    },\n    down_to_up: {\n        start: {top: \"150%\"},\n        stop: {top: \"50%\"}\n    }\n};\n\n%>    \n    \n<div id=\"persoo-<%= offerID %>\" class=\"persoo-animation-<%= animationPosition %>\" style=\"line-height: normal; visibility: visible;\">\n    <style type=\"text/css\">\n        .persoo-popin {\n            font-family: Arial, Helvetica, sans-serif;\n            padding: 20px !important;\n            background-clip: padding-box;\n            -webkit-font-smoothing: antialiased;\n        }\n        .persoo-popin > div:last-child, #persoo-content > div:last-child {\n            margin-bottom: 0 !important;\n        }\n    \n        .persoo-content {\n            position: relative;\n        }\n\n.persoo-close-x {\n                 display: inline-block;position:absolute;z-index:19999999;\n                 right:6px;top:12px;\n                 text-align: center;\n                 opacity:0.8;cursor: pointer;\n                 color: <%= '#333' %>;\n                 /* background:url('https://scripts.persoo.cz/shared/img/template-popup-close.png') repeat center center;*/\n}\n.persoo-close-x>span.persoo-icon:before{\n    content:\"\\2716\";\n    display: block;\n    font-weight: normal;\n    font-style: normal;\n    text-align: center;\n    -webkit-font-smoothing: antialiased;\n}\n.persoo-close-x.persoo-x-position-page>span.persoo-icon:before,\n.persoo-close-x.persoo-x-position-right>span.persoo-icon:before{\n    content:\"\\2715\";\n}\n.persoo-close-x:hover {opacity:1;}\n.persoo-close-x.persoo-x-position-page {font-size:32px;}\n.persoo-close-x.persoo-x-position-in {background-color:<%= backgroundColor %>; right:3px;top:3px;}\n.persoo-close-x.persoo-x-position-right {background-color: transparent; right:<%= -24 - borderSize %>px;top:<%= 0 - borderSize %>px;font-size:20px; line-height: 20px;}\n.persoo-close-x.persoo-x-position-border {background-color:black; right:-10px;top:-10px;width:24px;height:24px;font-size:18px; line-height: 24px; \n    border-radius:100%;-moz-border-radius:100%;-webkit-border-radius:100%;\n    border:2px solid <%= closeXColor %>;}\n.persoo-close-x.persoo-x-position-border:hover {opacity:1;}        \n\n        /* reset css inside */    \n        .persoo-popin *, .persoo-popin p, .persoo-popin a, .persoo-popin strong, .persoo-popin em, .persoo-popin span, .persoo-popin ul, .persoo-popin li, .persoo-popin input, .persoo-popin button {\n            margin: 0;\n            padding: 0;\n            font-family: inherit;\n        }\n        .persoo-popin hr {\n            border: 0;\n            border-top: 1px solid #eee;\n            border-bottom: 1px solid #fff;\n        }    \n        .persoo-popin input{\n            padding: 4px 6px;\n            margin-right: 0px;\n        }\n        .persoo-popin p{\n            margin-bottom: 10px;\n        }\n        .persoo-popin strong{\n            font-weight: bold;\n        }\n        .persoo-popin em{\n            font-style: italic;\n            font-family: inherit;\n        }\n        .persoo-popin .optin-block{\n            margin: 0 auto;\n            text-align: center;\n        }\n        .persoo-popin input{\n            margin-right: 0;\n        }\n        .persoo-popin .optin-block input:first-child{\n            margin-right: 0px;\n        }\n        .persoo-popin input[type=\"text\"] {\n            color: #999;\n            border: 1px solid #cccccc !important;\n            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n               -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n                    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n            -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;\n               -moz-transition: border linear 0.2s, box-shadow linear 0.2s;\n                 -o-transition: border linear 0.2s, box-shadow linear 0.2s;\n                    transition: border linear 0.2s, box-shadow linear 0.2s;\n            display: inline-block;\n            float: none;\n            font-size: 14px;\n            line-height: 20px;\n            vertical-align: middle;\n            -webkit-border-radius: 4px;\n               -moz-border-radius: 4px;\n                    border-radius: 4px;\n            font-family: Arial, Helvetica, sans-serif;\n            font-weight: 300;\n        }\n        .persoo-popin input[type=\"submit\"],\n            a.persoo-building-block-action {\n            font-family: 'Arial,Helvetica, sans-serif';\n            font-weight: 300;\n        }\n        .persoo-popin p {\n            font-family: 'Arial, Helvetica,sans-serif';\n            font-weight: 300;\n            color: <%= textColor %>;\n        }\n        .persoo-popin h1 {\n            font-family: 'Arial, Helvetica,sans-serif';\n            font-weight: 700;\n            color: <%= textColor %>;\n            font-size: 28px;\n            line-height: 41.59375px;\n        }\n    \n        /* utility classes */\n        .persoo-background-image {\n            width: 100%;\n            height: 100%;\n            position: absolute;\n            top: 0;\n            left: 0;\n            z-index: 0;\n        }\n        .persoo-icon {\n            background: transparent;\n            display: inline-block;\n            font-style: normal;\n            vertical-align: baseline;\n            position: relative;        \n        }\n        .persoo-content img {\n            max-width: 100%;\n            max-height: 100%;\n        }\n\n<% if (animationPosition && animationPosition != 'none') {\n    var animationProps = getAnimationProps[animationPosition]; \n%>\n\t@keyframes persoo-animation-<%= offerID %>-<%= animationPosition %> {\n\t   0% { <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>\n\t        <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %> }\n\t   100% { <%= animationProps.stop.left ? 'left: ' + animationProps.stop.left + ';' : '' %>\n\t        <%= animationProps.stop.top ? 'top: ' + animationProps.stop.top + ';' : '' %> }\n\t}        \n\t@-webkit-keyframes persoo-animation-<%= offerID %>-<%= animationPosition %> {\n\t   0% { <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>\n\t        <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %> }\n\t   100% { <%= animationProps.stop.left ? 'left: ' + animationProps.stop.left + ';' : '' %>\n\t        <%= animationProps.stop.top ? 'top: ' + animationProps.stop.top + ';' : '' %> }\n\t}        \n\t.persoo-animation-<%= animationPosition %> .persoo-popin{\n\t    animation: persoo-animation-<%= offerID %>-<%= animationPosition %> <%= animationDuration %> ease 0s 1 alternate;\n\t    -webkit-animation: persoo-animation-<%= offerID %>-<%= animationPosition %> <%= animationDuration %> ease 0s 1 alternate;\n\t}\n<% } %>\n    </style>\n    <style type=\"text/css\">\n        <%= customCSS %>\n    </style>\n    <% if (useOverlay) { %>\n    <div class=\"persooAction persoo-overlay\" id=\"persoo-overlay-<%= offerID %>\"\n        <% if (closeOnClickOutside) { %> onclick=\"persoo_close_<%= offerID %>()\"<% } %>\n        style=\"position: fixed;\n               width: 100%; height: 100%; top: 0; left: 0; z-index: 9999999;\n               background-color: <%= overlayColor %>;\">\n    </div>\n        <% if (showClosingX && closingXPosition == 'page'){ %>\n        <a class=\"persooAction persoo-close-x persoo-x-position-<%= closingXPosition %>\" href=\"javascript:persoo_close_<%= offerID %>();\" id=\"close-persoo-<%= offerID %>\"><span class=\"persoo-icon\"></span></a>\n        <% } %>\n    <% } %>\n    \n    <div class=\"persoo-popin\" id=\"persoo-popin-<%= offerID %>\" \n         style=\"box-sizing: content-box; border: <%= borderSize %>px solid <%= borderColor %>;\n                padding: 20px; position: fixed; z-index: 10000000;                 \n                <%= getPosition[position].top ? 'top:'+ getPosition[position].top +';' : '' %>\n                <%= getPosition[position].bottom ? 'bottom:'+ getPosition[position].bottom +';' : '' %>\n                <%= getPosition[position].left ? 'left:'+ getPosition[position].left +';' : '' %>\n                <%= getPosition[position].right ? 'right:'+ getPosition[position].right +';' : '' %>\n                <%= getPosition[position].margin_top ? 'margin-top:'+ getPosition[position].margin_top +'px;' : '' %>\n                <%= getPosition[position].margin_bottom ? 'margin-bottom:'+ getPosition[position].margin_bottom +'px;' : '' %>\n                <%= getPosition[position].margin_left ? 'margin-left:'+ getPosition[position].margin_left +'px;' : '' %>\n                <%= getPosition[position].margin_right ? 'margin-right:'+ getPosition[position].margin_right +'px;' : '' %>                 \n                width: <%= getBoxWidth(size, customWidth) %>px;\n                height: <%= getBoxHeight(size, customHeight, autoHeight) %>px; \n                border-radius: <%= boxCorners %>px; \n                box-shadow: <%= boxShadowColor %> 0px 0px <%= getBoxShadowSize[boxShadow] %>px; zoom: 1;\n                color: <%= textColor %>;\n                background-color: <%= backgroundColor %>;\">\n        <% if (showClosingX && closingXPosition != 'page'){ %>\n            <a class=\"persooAction persoo-close-x persoo-x-position-<%= closingXPosition %>\" href=\"javascript:persoo_close_<%= offerID %>();\" id=\"close-persoo-<%= offerID %>\"><span class=\"persoo-icon\"></span></a>\n        <% } %>\n        <% if (backgroundImageLink){ %>\n            <img class=\"persoo-background-image\" src=\"<%= backgroundImageLink %>\" alt=\"background\">\n        <% } %>\n        <div class=\"persoo-content\" id=\"persoo-content\">\n                <div class=\"persoo-message\" style=\"text-align: center;margin-bottom: 15px;\">\n                    <%= message %>\n                </div>\n                <% if (showCtaButton) { %>                \n                <div class=\"persoo-cta\" style=\"text-align: center;margin-bottom: 15px;\">\n                    <a class=\"persoo-building-block-action\" \n                       href=\"<% if (ctaButtonAction == 'redirect') { %><%= ctaButtonLink %><% } else { %>javascript:persoo_close_<%= offerID %>()<% } %>\"\n                       style=\"display: inline-block;text-decoration: none;border-bottom: 0px solid rgb(138, 119, 69);border-bottom: 0px solid rgba(39,65,90, 0.3); zoom: 1; border-radius:2px; min-height: 22px; line-height: 22px;padding: 6px 12px; color: <%= ctaTextColor %>; background-color: <%= ctaButtonColor %>; font-family: Arial; font-size: 14px;\"\n                       target=\"_blank\"><%= ctaButtonLabel %></a>\n                </div>\n                <% } %>\n                <div class=\"building-block building-block-separator separator-\" style=\"position: relative;margin-bottom: 15px;\">\n                    <div class=\"persoo-separator persoo-separator-2 persoo-separator-width-2\" style=\"color: #ffffff;\"></div>\n                </div>\n                <div class=\"persoo-dismiss-links\" data-type=\"dismiss-links\" style=\"text-align:center;margin-bottom: 15px;\">\n                    <a class=\"persooAction\" data-action=\"close\" href=\"javascript:persoo_close_<%= offerID %>()\"\n                       style=\"font-size: 12px; color: #696558; text-decoration: underline; margin-left: 10px;\">\n                    <%= closingTextInFooter %></a>\n                </div>\n        </div>\n        <div style=\"height: 20px;\"></div>\n    </div>\n    <script type=\"text/javascript\">\n        function persoo_close_<%= offerID %>() {\n            var elem = document.getElementById(\"persoo-<%= offerID %>\");\n            elem.style.display = \"none\";\n            persoo('send', 'close', {offerID: \"<%= offerID %>\"});\n        }\n    </script>\n    <script type=\"text/javascript\">\n        <%= customJS %>\n    </script>\n</div>"
+        "template": "<%\nvar offerID = offerID || 'randomOfferID';\n\nvar getBoxShadowSize = { \n    \"none\": 0, /* in px */\n    \"low\": 11,\n    \"high\": 22\n};\nfunction getBoxWidth(boxSize, width) {\n    var getWidth = {\n        \"s\": 230,\n        \"m\": 460,\n        \"l\": 720,\n    };\n    var w = getWidth[boxSize];\n    if (!w) { /* custom */\n        w = width;\n    }\n    return w;\n}\nfunction getBoxHeight(boxSize, height, autoHeight) {\n    var h = \"auto\";\n    if (boxSize == 'custom' && !autoHeight) {\n        h = height;\n    }\n    return h;\n}\n\nvar boxWidth = getBoxWidth(size, customWidth);\nvar boxHeight = getBoxHeight(size, customHeight, autoHeight);\n\nvar getPosition = { /* FIXME use boxHeight instead of boxWidth */\n    center: {top: \"50%\", left: \"50%\", margin_left: -boxWidth/2, margin_top: -boxWidth/2 },\n    left: {top: \"50%\", left: \"0\", margin_top: -boxWidth/2},\n    right: {top: \"50%\", right: \"0\", margin_top: -boxWidth/2},\n    bottom: {left: \"50%\", bottom: \"0\", margin_left: -boxWidth/2, margin_bottom: 15},\n    bottomLeft: {bottom: \"0\", left: \"0\"},\n    bottomRight: {bottom: \"0\", right: \"0\"}\n};\n\nvar getAnimationProps = {\n    left_to_right: {\n        start: {left: \"-50%\"},\n        stop: {left: \"50%\"}\n    },\n    right_to_left: {\n        start: {left: \"150%\"},\n        stop: {left: \"50%\"}\n    },\n    up_to_down: {\n        start: {top: \"-50%\"},\n        stop: {top: \"50%\"}\n    },\n    down_to_up: {\n        start: {top: \"150%\"},\n        stop: {top: \"50%\"}\n    }\n};\n\nvar getButtonAndFormInlineStyle = {\n    classic: \"text-decoration: none; \" + \n             \"border: 0px solid; zoom: 1; border-radius:2px; \" + \n             \"min-height: 22px; line-height: 22px;padding: 6px 12px; \" +\n\t         \"color: \" + ctaButtonTextColor +\"; background-color: \" + ctaButtonColor + \"; \" + \n\t         \"font: \" + ctaButtonTextFont + \";\",\n    outline: \"text-decoration: none; \" + \n             \"border: 1px solid \" + ctaButtonColor + \"; zoom: 1; border-radius:2px; \" + \n             \"min-height: 22px; line-height: 22px;padding: 6px 12px; \" +\n\t         \"color: \" + ctaButtonTextColor +\"; background-color: transparent; \" + \n\t         \"font: \" + ctaButtonTextFont + \";\"\n}\n\n%>    \n    \n<div id=\"persoo-<%= offerID %>\" class=\"persoo-animation-<%= animationEffect %>\" style=\"line-height: normal; visibility: visible;\">\n    <style type=\"text/css\">\n        .persoo-popin {\n            font-family: <%= textFont %>;\n            padding: 20px !important;\n            background-clip: padding-box;\n            -webkit-font-smoothing: antialiased;\n        }\n        .persoo-popin > div:last-child, #persoo-content > div:last-child {\n            margin-bottom: 0 !important;\n        }\n    \n        .persoo-content {\n            position: relative;\n        }\n\n.persoo-close-x {\n                 display: inline-block;position:absolute;z-index:19999999;\n                 right:6px;top:12px;\n                 text-align: center;\n                 opacity:0.8;cursor: pointer;\n                 color: <%= closeXColor %>;\n                 /* background:url('https://scripts.persoo.cz/shared/img/template-popup-close.png') repeat center center;*/\n}\n.persoo-close-x>span.persoo-icon:before{\n    content:\"\\2716\";\n    display: block;\n    font-weight: normal;\n    font-style: normal;\n    text-align: center;\n    -webkit-font-smoothing: antialiased;\n}\n.persoo-close-x.persoo-x-position-page>span.persoo-icon:before,\n.persoo-close-x.persoo-x-position-right>span.persoo-icon:before{\n    content:\"\\2715\";\n}\n.persoo-close-x:hover {opacity:1;}\n.persoo-close-x.persoo-x-position-page {font-size:32px;}\n.persoo-close-x.persoo-x-position-in {background-color:<%= backgroundColor %>; right:3px;top:3px;}\n.persoo-close-x.persoo-x-position-right {background-color: transparent; right:<%= -24 - borderSize %>px;top:<%= 0 - borderSize %>px;font-size:20px; line-height: 20px;}\n.persoo-close-x.persoo-x-position-border {background-color:black; right:-10px;top:-10px;width:24px;height:24px;font-size:18px; line-height: 24px; \n    border-radius:100%;-moz-border-radius:100%;-webkit-border-radius:100%;\n    border:2px solid <%= closeXColor %>;}\n.persoo-close-x.persoo-x-position-border:hover {opacity:1;}        \n\n        /* reset css inside */    \n        .persoo-popin *, .persoo-popin p, .persoo-popin a, .persoo-popin strong, .persoo-popin em, .persoo-popin span, .persoo-popin ul, .persoo-popin li, .persoo-popin input, .persoo-popin button {\n            margin: 0;\n            padding: 0;\n            font-family: inherit;\n        }\n        .persoo-popin hr {\n            border: 0;\n            border-top: 1px solid #eee;\n            border-bottom: 1px solid #fff;\n        }    \n        .persoo-popin input{\n            padding: 4px 6px;\n            margin-right: 0px;\n        }\n        .persoo-popin p{\n            margin-bottom: 10px;\n        }\n        .persoo-popin strong{\n            font-weight: bold;\n        }\n        .persoo-popin em{\n            font-style: italic;\n            font-family: inherit;\n        }\n        .persoo-popin .optin-block{\n            margin: 0 auto;\n            text-align: center;\n        }\n        .persoo-popin input{\n            margin-right: 0;\n        }\n        .persoo-popin .optin-block input:first-child{\n            margin-right: 0px;\n        }\n        .persoo-popin input[type=\"text\"] {\n            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n               -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n                    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n            -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;\n               -moz-transition: border linear 0.2s, box-shadow linear 0.2s;\n                 -o-transition: border linear 0.2s, box-shadow linear 0.2s;\n                    transition: border linear 0.2s, box-shadow linear 0.2s;\n            display: inline-block;\n            float: none;\n            vertical-align: middle;\n        }\n        .persoo-popin input[type=\"submit\"], a.persoo-building-block-action {\n            font: <%= ctaButtonTextFont %>;\n        }\n        .persoo-popin p {\n            font: <%= textFont %>;\n            color: <%= textColor %>;\n        }\n        .persoo-popin h1 {\n            font: <%= textFont %>;            \n            font-weight: 700;\n            color: <%= textColor %>;\n            font-size: 28px;\n            line-height: 41.59375px;\n        }\n    \n        /* utility classes */\n        .persoo-background-image {\n            width: 100%;\n            height: 100%;\n            position: absolute;\n            top: 0;\n            left: 0;\n            z-index: 0;\n        }\n        .persoo-icon {\n            background: transparent;\n            display: inline-block;\n            font-style: normal;\n            vertical-align: baseline;\n            position: relative;        \n        }\n        .persoo-content img {\n            max-width: 100%;\n            max-height: 100%;\n        }\n\n<% if (animationEffect && animationEffect != 'none') {\n    var animationProps = getAnimationProps[animationEffect]; \n%>\n\t@keyframes persoo-animation-<%= offerID %>-<%= animationEffect %> {\n\t   0% { <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>\n\t        <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %> }\n\t   100% { <%= animationProps.stop.left ? 'left: ' + animationProps.stop.left + ';' : '' %>\n\t        <%= animationProps.stop.top ? 'top: ' + animationProps.stop.top + ';' : '' %> }\n\t}        \n\t@-webkit-keyframes persoo-animation-<%= offerID %>-<%= animationEffect %> {\n\t   0% { <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>\n\t        <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %> }\n\t   100% { <%= animationProps.stop.left ? 'left: ' + animationProps.stop.left + ';' : '' %>\n\t        <%= animationProps.stop.top ? 'top: ' + animationProps.stop.top + ';' : '' %> }\n\t}        \n\t.persoo-animation-<%= animationEffect %> .persoo-popin{\n\t    animation: persoo-animation-<%= offerID %>-<%= animationEffect %> <%= animationDuration %> ease 0s 1 alternate;\n\t    -webkit-animation: persoo-animation-<%= offerID %>-<%= animationEffect %> <%= animationDuration %> ease 0s 1 alternate;\n\t}\n<% } %>\n    </style>\n    <style type=\"text/css\">\n        <%= customCSS %>\n    </style>\n    <% if (useOverlay) { %>\n    <div class=\"persooAction persoo-overlay\" id=\"persoo-overlay-<%= offerID %>\"\n        <% if (closeOnClickOutside) { %> onclick=\"persoo_close_<%= offerID %>()\"<% } %>\n        style=\"position: fixed;\n               width: 100%; height: 100%; top: 0; left: 0; z-index: 9999999;\n               background-color: <%= overlayColor %>;\">\n    </div>\n        <% if (showClosingX && closingXPosition == 'page'){ %>\n        <a class=\"persooAction persoo-close-x persoo-x-position-<%= closingXPosition %>\" href=\"javascript:persoo_close_<%= offerID %>();\" id=\"close-persoo-<%= offerID %>\"><span class=\"persoo-icon\"></span></a>\n        <% } %>\n    <% } %>\n    \n    <div class=\"persoo-popin\" id=\"persoo-popin-<%= offerID %>\" \n         style=\"box-sizing: content-box; border: <%= borderSize %>px solid <%= borderColor %>;\n                padding: 20px; position: fixed; z-index: 10000000;                 \n                <%= getPosition[position].top ? 'top:'+ getPosition[position].top +';' : '' %>\n                <%= getPosition[position].bottom ? 'bottom:'+ getPosition[position].bottom +';' : '' %>\n                <%= getPosition[position].left ? 'left:'+ getPosition[position].left +';' : '' %>\n                <%= getPosition[position].right ? 'right:'+ getPosition[position].right +';' : '' %>\n                <%= getPosition[position].margin_top ? 'margin-top:'+ getPosition[position].margin_top +'px;' : '' %>\n                <%= getPosition[position].margin_bottom ? 'margin-bottom:'+ getPosition[position].margin_bottom +'px;' : '' %>\n                <%= getPosition[position].margin_left ? 'margin-left:'+ getPosition[position].margin_left +'px;' : '' %>\n                <%= getPosition[position].margin_right ? 'margin-right:'+ getPosition[position].margin_right +'px;' : '' %>                 \n                width: <%= getBoxWidth(size, customWidth) %>px;\n                height: <%= getBoxHeight(size, customHeight, autoHeight) %>px; \n                border-radius: <%= boxCorners %>px; \n                box-shadow: <%= boxShadowColor %> 0px 0px <%= getBoxShadowSize[boxShadow] %>px; zoom: 1;\n                color: <%= textColor %>;\n                background-color: <%= backgroundColor %>;\">\n        <% if (showClosingX && closingXPosition != 'page'){ %>\n            <a class=\"persooAction persoo-close-x persoo-x-position-<%= closingXPosition %>\" href=\"javascript:persoo_close_<%= offerID %>();\" id=\"close-persoo-<%= offerID %>\"><span class=\"persoo-icon\"></span></a>\n        <% } %>\n        <% if (backgroundImageLink){ %>\n            <img class=\"persoo-background-image\" src=\"<%= backgroundImageLink %>\" alt=\"background\">\n        <% } %>\n        <div class=\"persoo-content\" id=\"persoo-content\">\n                <div class=\"persoo-message\" style=\"text-align: center;margin-bottom: 15px;\">\n                    <%= message %>\n                </div>\n                \n                <% if (showCtaButton) { %>                \n                <div class=\"persoo-cta\" style=\"text-align: center;margin-bottom: 15px;\">\n                    <a class=\"persoo-building-block-action\" \n                       href=\"<% if (ctaButtonAction == 'redirect') { %><%= ctaButtonLink %><% } else { %>javascript:persoo_close_<%= offerID %>()<% } %>\"\n                       style=\"display: inline-block; <%= getButtonAndFormInlineStyle[ctaStyle] %>\"\n                       target=\"_blank\"><%= ctaButtonLabel %></a>\n                </div>\n                <% } %>\n                \n                <% if (collectEmail) { %>                \n                <div class=\"persoo-collectEmail\" style=\"text-align: center;margin-bottom: 15px;\">\n                    <form id=\"persooSubmitEmailForm_<%= offerID %>\" onsubmit=\"return persoo_submit_email_<%= offerID %>()\">\n\t                    <input id=\"persoo_email_<%= offerID %>\" type=\"text\" value=\"<%= collectEmailInputLabel %>\"\n\t                           style=\"display: inline-block; <%= getButtonAndFormInlineStyle[ctaStyle] %>\">\n\t                    <input type=\"submit\" value=\"<%= collectEmailSubmitLabel %>\" class=\"persooAction\"\n\t                           style=\"display: inline-block;<%= getButtonAndFormInlineStyle[ctaStyle] %>\">\n                    </form>\n                    <div id=\"persooThankYou_<%= offerID %>\" style=\"display: none;<%= getButtonAndFormInlineStyle[ctaStyle] %>\">\n\t                    <%= collectEmailThankYouMessage %>\n\t                </div>\n                </div>\n                <% } %>                \n                \n                <div class=\"building-block building-block-separator separator-\" style=\"position: relative;margin-bottom: 15px;\">\n                    <div class=\"persoo-separator persoo-separator-2 persoo-separator-width-2\" style=\"color: #ffffff;\"></div>\n                </div>\n                <div class=\"persoo-dismiss-links\" data-type=\"dismiss-links\" style=\"text-align:center;margin-bottom: 15px;\">\n                    <a class=\"persooAction\" data-action=\"close\" href=\"javascript:persoo_close_<%= offerID %>()\"\n                       style=\"font-size: 12px; color: <%= textColor %>; text-decoration: underline; margin-left: 10px;\">\n                    <%= closingTextInFooter %></a>\n                </div>\n        </div>\n        <div style=\"height: 20px;\"></div>\n    </div>\n    <script type=\"text/javascript\">\n        window.persoo = window.persoo || function () {}; /* TODO until having persoo in preview */\n        function persoo_close_<%= offerID %>() {\n            var elem = document.getElementById(\"persoo-<%= offerID %>\");\n            elem.style.display = \"none\";\n            window.persoo('send', 'close', {offerID: \"<%= offerID %>\"});\n        }\n        function persoo_submit_email_<%= offerID %>() {\n            var elem = document.getElementById(\"persoo_email_<%= offerID %>\");\n            var email = elem.value.replace(/^\\s*/,'').replace(/\\s*$/,'');\n            try {\n\t            if (!email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$/)) {\n\t                // invalid email address\n\t                elem.style.border = \"3px solid red\";\n\t            } else {\n\t                // submit\n\t                console.log('Persoo: submitting email ' + email);\n\t                window.persoo('send','submit', {offerID: \"<%= offerID %>\", email: email});  // TODO use callback for confirmation?\n\t                \n\t                document.getElementById(\"persooSubmitEmailForm_<%= offerID %>\").style.display = \"none\";\n\t                document.getElementById(\"persooThankYou_<%= offerID %>\").style.display = \"inline-block\";\n\t            }\n            } catch(err) {}\n            \n            return false;\n        }      \n    </script>\n    <script type=\"text/javascript\">\n        <%= customJS %>\n    </script>\n</div>"
     },
     "topProducts": {
         "class": "webWidget",
