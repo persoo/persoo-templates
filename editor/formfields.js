@@ -69,7 +69,7 @@ FormField.prototype.parentOnChange = function (value){
 //---------------------------------------------------------------------------------
 
 var formFieldTypes = {
-	section: 'section',
+    section: 'section',
     text: 'text',
     number: 'number',
     color: 'color',
@@ -82,7 +82,7 @@ var formFieldTypes = {
 };
 
 function SectionFormField(label, parentElement, dataGetter, dataSetter) {
-	FormField.call(this, formFieldTypes.section, label, parentElement, dataGetter, dataSetter);
+    FormField.call(this, formFieldTypes.section, label, parentElement, dataGetter, dataSetter);
     this.element.innerHTML = '<h2>' + label + '</h2>';
     this.element.className = 'section';
 }
@@ -155,9 +155,9 @@ ColorFormField.prototype.update = function (){
 };
 ColorFormField.prototype.onChange = function (value){
     if (this.formElement && this.formElement2) {
-    	var color = tinycolor(this.formElement.value)
+        var color = tinycolor(this.formElement.value)
         var alpha = parseFloat(this.formElement2.value);
-    	color.setAlpha(alpha);
+        color.setAlpha(alpha);
         this.parentOnChange(color.toRgbString());
         
         this.colorPreviewElement.style.backgroundColor = color.toRgbString();
