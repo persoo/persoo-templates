@@ -34,8 +34,9 @@
     "codemirror": "^5.17.0",
     "coveralls": "^2.11.9",
     "istanbul": "^0.4.4",
-    "mocha": "^2.5.3",
     "jshint": "latest",
+    "mocha": "^2.5.3",
+    "tinycolor2": "^1.4.1",
     "watch": "latest"
   },
   "dependencies": {}

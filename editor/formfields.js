@@ -5,6 +5,7 @@ require('codemirror/mode/htmlmixed/htmlmixed');
 require('codemirror/addon/display/fullscreen');
 
 var CodeMirror = require('codemirror/lib/codemirror');
+var tinycolor = require("tinycolor2");
 var utils = require('./utils.js');
 
 /**
@@ -71,6 +72,7 @@ var formFieldTypes = {
 	section: 'section',
     text: 'text',
     number: 'number',
+    color: 'color',
     select: 'select',
     checkbox: 'checkbox',
     html: 'html',
@@ -122,6 +124,39 @@ NumberFormField.prototype.onChange = function (value){
     if (this.formElement) {
         var numericValue = parseFloat(this.formElement.value);
         this.parentOnChange(numericValue);
+    }
+};
+
+function ColorFormField(label, parentElement, dataGetter, dataSetter) {
+    FormField.call(this, formFieldTypes.color, label, parentElement, dataGetter, dataSetter);
+    
+    var value = this.dataGetter("");
+    var color = tinycolor(value);
+    this.formElementParent.innerHTML = '<span class="colorPreview" style="background-color:' + value + ';"> ' +
+                                       '</span><span>hex:</span><input class="hex" type="text" value="' + color.toHexString() + '"> ' +
+                                       '<span>alpha:</span><input class="alpha" type="number" value="' + color.getAlpha() + '">';
+    this.formElement = this.formElementParent.children[2];
+    this.formElement2 = this.formElementParent.children[4];
+    this.formElement.onchange = this.onChange.bind(this);
+    this.formElement2.onchange = this.onChange.bind(this);
+}
+ColorFormField.prototype = Object.create(FormField.prototype);
+ColorFormField.prototype.constructor = ColorFormField;
+ColorFormField.prototype.update = function (){
+    var value = this.dataGetter("")
+    var color = tinycolor(value);
+    
+    if (this.formElement && this.formElement2 && color.isValid()) {
+        this.formElement.value = color.toHexString();
+        this.formElement2.value = color.getAlpha();
+    }
+};
+ColorFormField.prototype.onChange = function (value){
+    if (this.formElement && this.formElement2) {
+    	var color = tinycolor(this.formElement.value)
+        var alpha = parseFloat(this.formElement2.value);
+    	color.setAlpha(alpha);
+        this.parentOnChange(color.toRgbString());
     }
 };
 
@@ -314,6 +349,7 @@ module.exports = {
     SectionFormField: SectionFormField,
     TextFormField: TextFormField,
     NumberFormField: NumberFormField,
+    ColorFormField: ColorFormField,
     CheckboxFormField: CheckboxFormField,
     SelectFormField: SelectFormField,
     HtmlFormField: HtmlFormField,
