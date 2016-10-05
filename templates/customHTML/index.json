@@ -1,0 +1,21 @@
+{
+    "class": "webWidget",
+    "name": "Custom HTML",
+    "fields": [
+        {
+            "id": "template",
+            "name": "Template",
+            "group": "main",
+            "type": "html",
+            "defaultValue": "<div>...your html code ...</div>"
+        }
+    ],
+    "groups": [
+        {
+            "id": "main",
+            "name": "Main Content"
+        }
+    ],
+    "template": "@template",
+    "minScenariosCount": 0
+}

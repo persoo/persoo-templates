@@ -1,0 +1,89 @@
+<%
+/*EDIT*/
+  /*Name template Top Products*/
+  var PersooVarible_templateName = "BASIC";
+/*EDIT - END*/
+
+/*NOEDIT*/
+  /*Name template Top Products for Class*/
+  var PersooTemplateName = "PersooTemplate_Popup_" + PersooVarible_templateName ;
+
+  /*Name template Top Products for ID*/
+  var PersooTemplateNameID = "#" + PersooTemplateName;
+
+  /*Persoo prefix for css class*/
+  var PersooPrefix = "persoo_";
+/*NOEDIT - END*/
+%>
+<div id="<%= PersooTemplateName %>" class="persoo<% if(PersooVarible_responsiveDektop == true) { %> <%= PersooPrefix %>showDesktop<% } %><% if(PersooVarible_responsiveTablet == true) { %> <%= PersooPrefix %>showTablet<% } %><% if(PersooVarible_responsiveMobile == true) { %> <%= PersooPrefix %>showMobile<% } %>">
+
+  <style>
+  /*main style - area*/
+  <%= PersooTemplateNameID %>{display:none;position:fixed;z-index:10000;top:0;right:0;bottom:0;left:0;}
+  /*show class teprve priprava*/
+  @media (min-width:993px){
+    <%= PersooTemplateNameID %>.<%= PersooPrefix %>showDesktop{display:block;}
+  }
+  @media (min-width:769px) and (max-width:992px){
+    <%= PersooTemplateNameID %>.<%= PersooPrefix %>showTablet{display:block;}
+  }
+  @media (max-width:768px){
+    <%= PersooTemplateNameID %>.<%= PersooPrefix %>showMobile{display:block;}
+  }
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>popup{position:fixed;z-index:10000;overflow-y:auto;top:0;right:0;bottom:0;left:0;background:url('https://scripts.persoo.cz/shared/img/template-popup-bg.png') repeat center center;text-align:center;}
+  /*main style - close*/
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>close{position:absolute;z-index:100001;left:0;right:0;top:0;bottom:0;width:100%;height:100%;display:inline-block;font-weight:normal;}
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>cross {position:absolute;z-index:100003;right:6px;top:12px;width:32px;height:32px;opacity:0.4;cursor: pointer;background:url('https://scripts.persoo.cz/shared/img/template-popup-close.png') repeat center center;}
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>cross.<%= PersooPrefix %>in{background-color:black;right:3px;top:3px;width:24px;height:24px}
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>cross.<%= PersooPrefix %>outHalf{background-color:black;right:-10px;top:-10px;width:24px;height:24px;border-radius:100%;-moz-border-radius:100%;-webkit-border-radius:100%;opacity:1;border:2px solid white;}
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>cross:hover{opacity:1;}
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>cross.<%= PersooPrefix %>outHalf:hover{opacity:0.7;}
+  /*main style - middle block*/
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>middle{display:table;height:100%;width:100%;}
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>middle2{display:table-cell;text-align:center;vertical-align:middle;}
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>container{position:relative;z-index:100000002;display:inline-block;background:#fff;margin:64px 0;}
+  /*margin and border*/
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>boxPopup{margin:30px;border:1px solid #d8d8d8;background:#fff;}
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>boxPopupContents{display:block;margin:15px;padding:15px;width:690px;height:210px;background-color:#B7B7B7;}
+  </style>
+  <%= PersooVarible_wysivygCss %>
+  <div class="<%= PersooPrefix %>popup">
+    <div class="<%= PersooPrefix %>close" onclick="Persoo_PopupClose()">
+      <% if(PersooVarible_crossPosition == "out") { %>
+        <div class="<%= PersooPrefix %>cross <%= PersooPrefix %>out" onclick="Persoo_PopupClose()"></div>
+      <% } %>
+    </div>
+    <div class="<%= PersooPrefix %>middle">
+      <div class="<%= PersooPrefix %>middle2">
+        <div id="persooPopupContainer" class="<%= PersooPrefix %>container">
+          <% if(PersooVarible_crossPosition == "in" || PersooVarible_crossPosition == "outHalf") { %>
+            <div class="<%= PersooPrefix %>cross <%= PersooPrefix %><%= PersooVarible_crossPosition %>" onclick="Persoo_PopupClose()"></div>
+          <% } %>
+          <div class="<%= PersooPrefix %>boxPopup" style="margin:<%= PersooVarible_marginOUT %>px;border:<%= PersooVarible_border %>px solid #d8d8d8;">
+            <div class="<%= PersooPrefix %>boxPopupContents" style="margin:<%= PersooVarible_marginIN %>px;">
+              <%= PersooVarible_wysivygHtml %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script language="javaScript">
+    //click on close button
+    function Persoo_PopupClose() {
+      document.getElementById("<%= PersooTemplateName %>").style.display = "none";
+    }
+    //resize popup
+    function Persoo_PopupResize(){
+      //Width screen and popup
+      var PersooPopupWidth = document.getElementById("<%= PersooTemplateName %>").offsetWidth;
+      var PersooPopupContainerWidth = document.getElementById("persooPopupContainer").offsetWidth;
+
+      //else Width screen is smaller than Popup container
+      if(PersooPopupContainerWidth > PersooPopupWidth){
+        document.getElementById("<%= PersooTemplateName %>").style.display = "none";
+      }
+    }
+    window.addEventListener("resize", Persoo_PopupResize);
+  </script>
+</div>

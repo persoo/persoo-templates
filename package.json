@@ -7,10 +7,13 @@
     "test": "node_modules/.bin/mocha --reporter spec",
     "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*",
     "lint": "jshint lib/**.js",
-    "build": "mkdir -p build && node_modules/browserify/bin/cmd.js editor/editor-app.js > build/editor-app-bundle.js",
+    "build": "npm run build:editor && npm run build:tests && npm run build:templates",
+    "build:editor": "mkdir -p build && node_modules/browserify/bin/cmd.js editor/editor-app.js > build/editor-app-bundle.js",
     "build:tests": "mkdir -p build && node_modules/browserify/bin/cmd.js test/test.js > build/test.js",
+    "build:templates": "node templates/buildTemplates.js",
     "watch:tests": "watch 'npm run build:tests' ./test ./lib",
-    "watch:editor": "watch 'npm run build' ./editor ./lib"
+    "watch:templates": "watch 'npm run build:templates' ./templates",
+    "watch:editor": "watch 'npm run build:editor' ./editor ./lib"
   },
   "repository": {
     "type": "git",

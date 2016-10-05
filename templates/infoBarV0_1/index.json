@@ -1,0 +1,268 @@
+{
+    "class": "webWidget",
+    "isActive": true,
+    "name": "Info bar (v0.1)",
+    "fields": [
+        {
+            "id": "message",
+            "name": "Main message",
+            "group": "main",
+            "type": "richtext",
+            "defaultValue": "We have secret offer just for you."
+        },
+        
+        {
+            "id": "showCtaButton",
+            "name": "Show Button",
+            "group": "cta",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "ctaButtonLabel",
+            "name": "Button Text",
+            "group": "cta",
+            "type": "text",
+            "defaultValue": "SHOW ME"
+        },
+        {
+            "id": "ctaButtonAction",
+            "name": "Button Action",
+            "group": "cta",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Redirect to link",
+                    "value": "redirect"
+                },
+                {
+                    "label": "Close pop-up",
+                    "value": "close"
+                }
+            ],
+            "defaultValue": "redirect"
+        },
+        {
+            "id": "ctaButtonLink",
+            "name": "Button Target Link",
+            "group": "cta",
+            "type": "text",
+            "defaultValue": "/your/target/page"
+        },
+    
+        {
+            "id": "section_closing",
+            "name": "Closing",
+            "group": "design",
+            "type": "section"
+        },                        
+        {
+            "id": "showClosingX",
+            "name": "Show closing X",
+            "group": "design",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "section_size",
+            "name": "Size",
+            "group": "design",
+            "type": "section"
+        },                        
+        {
+            "id": "autoHeight",
+            "name": "Auto Height",
+            "group": "design",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "customHeight",
+            "name": "Custom Height",
+            "group": "design",
+            "type": "number",
+            "defaultValue": 50
+        },
+        {
+            "id": "section_textColors",
+            "name": "Text Colors",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "textColor",
+            "name": "Text Color",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "rgba(255, 253, 253, 0.81)"
+        },            
+        {
+            "id": "ctaTextColor",
+            "name": "Button Text Color",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "white"
+        },
+        {
+            "id": "ctaButtonColor",
+            "name": "Button Color",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "rgba(51, 51, 51, 0.34)"
+        },
+        {
+            "id": "section_background",
+            "name": "Background",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "backgroundColor",
+            "name": "Background Color",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "#c00"
+        },
+        {
+            "id": "backgroundImageLink",
+            "name": "Background Image Link",
+            "group": "design",
+            "type": "text",
+            "defaultValue": ""
+        },
+        {
+            "id": "section_border",
+            "name": "Border",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "borderSize",
+            "name": "Border size",
+            "group": "design",
+            "type": "number",
+            "defaultValue": 1
+        },
+        {
+            "id": "borderColor",
+            "name": "Border Color",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "#ffffff"
+        },
+        {
+            "id": "boxCorners",
+            "name": "Box Corners",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Rectangular",
+                    "value": "0"
+                },
+                {
+                    "label": "Mini Rounded",
+                    "value": "5"
+                },
+                {
+                    "label": "Rounded",
+                    "value": "15"
+                }
+            ],
+            "defaultValue": "0"
+        },
+        {
+            "id": "boxShadow",
+            "name": "Box Shadow",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "None",
+                    "value": "none"
+                },
+                {
+                    "label": "Low",
+                    "value": "low"
+                },
+                {
+                    "label": "High",
+                    "value": "high"
+                }
+            ],
+            "defaultValue": "none"
+        },
+        {
+            "id": "boxShadowColor",
+            "name": "Box Shadow Color",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "#666666"
+        },
+        {
+            "id": "section_customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "section"
+        },            
+        {
+            "id": "customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "css",
+            "defaultValue": "/* your own css rules */"
+        },
+        
+        {                
+            "group": "settings",
+            "id": "position",
+            "name": "Position",
+            "options": [
+                {
+                    "label": "top",
+                    "value": "top"
+                },
+                {
+                    "label": "bottom",
+                    "value": "bottom"
+                }
+            ],
+            "type": "select",
+            "defaultValue": "top"
+        },
+        
+        {
+            "id": "section_customJS",
+            "name": "Custom Javascript",
+            "group": "settings",
+            "type": "section"
+        },                        
+        {
+            "id": "customJS",
+            "name": "Custom Javascript",
+            "group": "settings",
+            "type": "javascript",
+            "defaultValue": "/* your own javascript */"
+        }                        
+    ],
+    "groups": [
+        {
+            "id": "main",
+            "name": "Main content"
+        },
+        {
+            "id": "cta",
+            "name": "Call to Action"
+        },
+        {
+            "id": "design",
+            "name": "Design"
+        },
+        {
+            "id": "settings",
+            "name": "Settings"
+        }
+    ],
+    "minScenariosCount": 0,
+    "template": "@template.html"
+}

@@ -1,0 +1,285 @@
+<%
+/*EDIT VARIBLES*/
+  /*Name template Top Products*/
+  var PersooVarible_TemplateName = "BASIC";
+  /*List name - admin.persoo.cz*/
+  var listName = [Persoo_listName1, Persoo_listName2];
+  /*Varible for Alg*/
+  var listVarible = [products1, products2];
+/*EDIT VARIBLES - END*/
+
+
+/*Name template Top Products for Class*/
+var PersooTemplateName = "PersooTemplate_TopProducts_" + PersooVarible_TemplateName ;
+
+/*Name template Top Products for ID*/
+var PersooTemplateNameID = "#" + PersooTemplateName;
+
+/*Persoo prefix for css class*/
+var PersooPrefix = "persoo_";
+
+/*Price print*/
+function printPrice(p){
+  return String(Math.round(p)).replace(/(.*)([0-9]{3})/,'$1 $2');
+}
+%>
+<div id="<%= PersooTemplateName %>" class="persoo persooTemplate">
+<% if (listVarible[0].length >= 3 || listVarible[1].length >= 3) { %>
+<style>
+<%= PersooTemplateNameID %>{margin:-28px 0 30px 0;padding-top:28px;}
+<%= PersooTemplateNameID %> *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;}
+/*change link*/
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>changer{width:100%;display:block;border-bottom:1px solid #dfdfdf;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>changer a{display:inline-block;font-family:'fBold';cursor: pointer;font-size:18px;line-height:49px;background:#FFF;padding:0 15px;font-weight:normal;color:#989898;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>changer a.<%= PersooPrefix %>link.active{color:#cb1040;margin-bottom:-1px;border-top:1px solid #dfdfdf;border-left:1px solid #dfdfdf;border-right:1px solid #dfdfdf;border-bottom:1px solid #fff;text-decoration:none;font-weight:bold;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>changer a.<%= PersooPrefix %>link:hover{text-decoration:none;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>changer a.<%= PersooPrefix %>link.active:hover{text-decoration:none;}
+
+/*show/hide items 4-10*/
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>show,
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>hide{width:100%;display:block!important;text-align:center;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>angi{width:90px;height:30px;overflow:hidden;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring{cursor: pointer;display:block;width:90px;height:60px;margin-top:-30px;background-color:#cb1040;-webkit-border-radius:7px;-moz-border-radius:7px;border-radius:7px;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring .<%= PersooPrefix %>square{width:20px;height:20px;display:inline-block;overflow:hidden;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring .<%= PersooPrefix %>square .<%= PersooPrefix %>white .<%= PersooPrefix %>color{width:12px;height:12px;background-color:#cb1040;display:inline-block;margin-top:4px;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring .<%= PersooPrefix %>square .<%= PersooPrefix %>white{width:20px;height:20px;background-color:white;-ms-transform:rotate(45deg);-webkit-transform:rotate(45deg);transform:rotate(45deg);}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>angi:hover .<%= PersooPrefix %>ring{background-color:#860929;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>angi:hover .<%= PersooPrefix %>ring .<%= PersooPrefix %>square .<%= PersooPrefix %>white .<%= PersooPrefix %>color{background-color:#860929;}
+/*show items 4-10*/
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>show .<%= PersooPrefix %>angi{display:inline-block;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>show .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring .<%= PersooPrefix %>square{margin-top:38px;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>show .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring .<%= PersooPrefix %>square .<%= PersooPrefix %>white{margin-top:-11px;}
+/*hide items 4-10*/
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>hide .<%= PersooPrefix %>angi{display:none;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>hide .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring .<%= PersooPrefix %>square{margin-top:31px;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>button .<%= PersooPrefix %>hide .<%= PersooPrefix %>angi .<%= PersooPrefix %>ring .<%= PersooPrefix %>square .<%= PersooPrefix %>white{margin-top:11px;}
+
+/*templates item*/
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items{display:none;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items.<%= PersooPrefix %>list0{display:block;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item{position:relative;width:100%;height:74px;padding:5px 0;font-size:0;display:block;border-bottom:1px solid #e1e1e1;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>open{display:block;height:0px;overflow:hidden;-webkit-transition: all 0.3s;-moz-transition: all 0.3s;-o-transition: all 0.3s;transition: all 0.3s;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>open .<%= PersooPrefix %>box{display:block;width:100%;}
+
+/*medails and numbers*/
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>number{float:left;width:29px;height:64px;padding:22px 0;display:inline-block;text-align:right;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>number span{font-size:11px;left:-29px;line-height:9px;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item.<%= PersooPrefix %>order0 .<%= PersooPrefix %>number span,
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item.<%= PersooPrefix %>order1 .<%= PersooPrefix %>number span,
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item.<%= PersooPrefix %>order2 .<%= PersooPrefix %>number span{line-height:11px;letter-spacing:0;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>number .<%= PersooPrefix %>medail{float:right;width:20px;height:20px;font-size:bold;text-align:center;padding:5.5px 0;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item.<%= PersooPrefix %>order0 .<%= PersooPrefix %>number .<%= PersooPrefix %>medail{font-weight:bold;padding:3.5px 0;margin-right:-1px;background-color:#FFE545;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item.<%= PersooPrefix %>order1 .<%= PersooPrefix %>number .<%= PersooPrefix %>medail{font-weight:bold;padding:3.5px 0;margin-right:-1px;background-color:#D1D0D7;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item.<%= PersooPrefix %>order2 .<%= PersooPrefix %>number .<%= PersooPrefix %>medail{font-weight:bold;padding:3.5px 0;margin-right:-1px;background-color:#E69E2F;}
+/*image*/
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>image{float:left;width:90px;height:64px;display:inline-block;text-align:center;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>image img{width:auto;height:auto;max-width:64px;max-height:64px;}
+/*text*/
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text{float:left;width:100%;height:64px;display:inline-block;padding:0 160px 0 113px;position:absolute;left:0;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text .<%= PersooPrefix %>middle{display:block;text-align:left;width:100%;height:64px;padding:14.5px 0;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text .<%= PersooPrefix %>middle .<%= PersooPrefix %>title{width:100%;overflow:hidden;height:18px;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text .<%= PersooPrefix %>middle .<%= PersooPrefix %>title a{color:#231f20;font-weight:bold;max-width:100%;font-size:15px;line-height:18px;overflow:hidden;white-space:nowrap;display:inline-block;text-decoration:none;
+-ms-text-overflow:ellipsis;-o-text-overflow:ellipsis;text-overflow:ellipsis;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item:hover .<%= PersooPrefix %>text .<%= PersooPrefix %>middle .<%= PersooPrefix %>title a{color:#cb1040;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text .<%= PersooPrefix %>middle .<%= PersooPrefix %>desc{width:100%;font-size:12px;height:14px;line-height:14px;margin-top:3px;overflow:hidden;white-space:nowrap;display:inline-block;
+-ms-text-overflow:ellipsis;-o-text-overflow:ellipsis;text-overflow:ellipsis;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text .<%= PersooPrefix %>middle .<%= PersooPrefix %>desc a{line-height:14px;font-size:13px;font-weight:bold;color:#5f5f5f;}
+/*price*/
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>price{float:right;width:160px;height:64px;display:inline-block;text-align:right;color:#cb1040;padding-top:14px;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>price del.<%= PersooPrefix %>priceMarket{float:left;width:100%;font-size:12px;font-weight:bold;vertical-align:sub;line-height:18px;}
+<%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>price strong.<%= PersooPrefix %>productPrice{float:left;width:100%;font-size:16px;vertical-align:sub;line-height:18px;}
+
+/*responzive css*/
+@media (max-width:1215px){
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item{height:74px;}
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text{float:left;width:100%;left:0;padding:0 29px 0 119px;height:64px;display:inline-block;position:absolute;}
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text .<%= PersooPrefix %>middleContainer{height:auto;}
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>price{float:left;width:100%;left:0;padding-left:119px;height:auto;display:inline-block;text-align:left;position:absolute;top:45px;padding-top:0;}
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>price del.<%= PersooPrefix %>priceMarket{width:auto;float:none;padding-right:5px;}
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>items .<%= PersooPrefix %>item .<%= PersooPrefix %>text .<%= PersooPrefix %>middle{padding:0;}
+}
+@media (max-width:964px){
+  <%= PersooTemplateNameID %>{margin:0 0 30px 0;padding-top:28px;}
+}
+@media (max-width:767px){
+  <%= PersooTemplateNameID %> .<%= PersooPrefix %>changer{text-align:center;}
+}
+</style>
+
+  <!--Button for change list-->
+  <div class="<%= PersooPrefix %>changer">
+    <% for(var iList=0; iList < listName.length; iList++) { %>
+      <a id="<%= PersooTemplateName + '_List' + iList %>" <% if (iList==0) { %> class="<%= PersooPrefix %>link active"<% }else{%> class="<%= PersooPrefix %>link"<%} %> onclick="Persoo_changer('<%= PersooTemplateName + '_List' + iList %>')"><%= listName[iList] %></a>
+    <% } %>
+  </div>
+
+  <!--Lists-->
+  <% for(var iList=0; iList < listName.length; iList++) { %>
+    <div class="<%= PersooPrefix %>items <%= PersooTemplateName + '_List' + iList %> <%= PersooPrefix %>list<%= iList %>">
+      <% for(i=0; i < 11 && i < listVarible[iList].length; i++) { %>
+        <% if (i==3) { %><div class="<%= PersooPrefix %>open"><div class="<%= PersooPrefix %>box"><% } %>
+          <div class="<%= PersooPrefix %>item <%= PersooPrefix %>order<%= i %>">
+            <div class="<%= PersooPrefix %>number">
+              <div class="<%= PersooPrefix %>medail">
+                <span><%= i + 1 %></span>
+              </div>
+            </div>
+            <div class="<%= PersooPrefix %>image">
+              <a title="<%= listVarible[iList][i].title %>" href="<%= listVarible[iList][i].link %>">
+                <img alt="<%= listVarible[iList][i].title %>" title="<%= listVarible[iList][i].title %>" src="<%= listVarible[iList][i].imageLink %>" />
+              </a>
+            </div>
+            <div class="<%= PersooPrefix %>text">
+              <div class="<%= PersooPrefix %>middle">
+                <div class="<%= PersooPrefix %>title">
+                  <a title="<%= listVarible[iList][i].title %>" href="<%= listVarible[iList][i].link %>"><%= listVarible[iList][i].title %></a>
+                </div>
+                <div class="<%= PersooPrefix %>desc">
+                  <p><%= listVarible[iList][i].description %></p>
+                </div>
+              </div>
+            </div>
+            <div class="<%= PersooPrefix %>price">
+              <del class="<%= PersooPrefix %>priceMarket"><%= listVarible[iList][i].priceOriginal %> <small>K&#269;</small></del> <strong class="<%= PersooPrefix %>productPrice"><%= listVarible[iList][i].price %><small>K&#269;</small></strong>
+            </div>
+          </div>
+        <% } %>
+      <% if (i>2) { %></div></div><% } %>
+    </div>
+  <% } %>
+
+  <!--buttom for show all items-->
+  <div class="<%= PersooPrefix %>button">
+    <div class="<%= PersooPrefix %>show">
+      <div class="<%= PersooPrefix %>angi" onclick="Persoo_show('show')">
+          <div class="<%= PersooPrefix %>ring">
+            <div class="<%= PersooPrefix %>square">
+              <div class="<%= PersooPrefix %>white">
+                <div class="<%= PersooPrefix %>color"></div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="<%= PersooPrefix %>hide">
+      <div class="<%= PersooPrefix %>angi" onclick="Persoo_show('hide')">
+          <div class="<%= PersooPrefix %>ring">
+            <div class="<%= PersooPrefix %>square">
+              <div class="<%= PersooPrefix %>white">
+                <div class="<%= PersooPrefix %>color"></div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+<!--main JS-->
+<script language="javaScript">
+/*Name template Top Products with hashtag*/
+var buttonChanger = "";
+var valueShow = "";
+
+//show button show/hide
+var showButtonArray = document.querySelectorAll("<%= PersooTemplateNameID %> .<%= PersooPrefix %>items.<%= PersooPrefix %>list0 .<%= PersooPrefix %>open .<%= PersooPrefix %>item");
+if(4 > showButtonArray.length){
+  document.querySelector("<%= PersooTemplateNameID %> .<%= PersooPrefix %>button").style.display = "none";
+}
+
+//scroll to top persooBox
+function Persoo_scrollTo(){
+  //position persooDiv
+  var idScrollTo = document.querySelector("<%= PersooTemplateNameID %>").getBoundingClientRect().top;
+  //actual position on page
+  var positionBody = document.body.scrollTop;
+  //scroll to
+  var idScrollToFinal = idScrollTo + positionBody;
+  function runScroll() {
+    scrollTo(document.body, idScrollToFinal, 200);
+  }
+  //animation
+  function scrollTo(element, to, duration) {
+    if (duration <= 0) return;
+    var difference = to - element.scrollTop;
+    var perTick = difference / duration * 10;
+
+    setTimeout(function() {
+      element.scrollTop = element.scrollTop + perTick;
+      if (element.scrollTop == to) return;
+      scrollTo(element, to, duration - 10);
+    }, 10);
+  }
+  //run function
+  runScroll();
+};
+
+//show or hide items 4-10
+function Persoo_show(valueShow){
+  if(valueShow=="show"){
+    //show items 4-10
+    var boxArray = document.querySelectorAll("<%= PersooTemplateNameID %> .<%= PersooPrefix %>items");
+    for(var i = 0; i < boxArray.length; i++){
+      /*how height box*/
+      var boxHeight = document.querySelector("<%= PersooTemplateNameID %> .<%= PersooPrefix %>list" + i + " .<%= PersooPrefix %>open .<%= PersooPrefix %>box").offsetHeight;
+      document.querySelector("<%= PersooTemplateNameID %> .<%= PersooPrefix %>list" + i + " .<%= PersooPrefix %>open").style.height = boxHeight + "px";
+    }
+    /*add class to persoo box for identification if they are see all items*/
+    document.querySelector("<%= PersooTemplateNameID %>").className = "persoo persooLocation openAll";
+    /*hide - show button*/
+    var showArray = document.querySelectorAll("<%= PersooTemplateNameID %> .<%= PersooPrefix %>show .<%= PersooPrefix %>angi");
+    for(var i = 0; i < showArray.length; i++){showArray[i].style.display = "none";}
+    /*show - hide button*/
+    var hideArray = document.querySelectorAll("<%= PersooTemplateNameID %> .<%= PersooPrefix %>hide .<%= PersooPrefix %>angi");
+    for(var i = 0; i < hideArray.length; i++){hideArray[i].style.display = "inline-block";}
+  }else{
+    //hide items 4-10
+    var boxArray = document.querySelectorAll("<%= PersooTemplateNameID %> .<%= PersooPrefix %>items");
+    for(var i = 0; i < boxArray.length; i++){
+      /*how height box*/
+      document.querySelector("<%= PersooTemplateNameID %> .<%= PersooPrefix %>list" + i + " .<%= PersooPrefix %>open").style.height = "0px";
+    }
+    /*remove class to persoo box for identification if they are see all items*/
+    document.querySelector("<%= PersooTemplateNameID %>").className = "persoo persooLocation";
+    /*hide - hide button*/
+    var hideArray = document.querySelectorAll("<%= PersooTemplateNameID %> .<%= PersooPrefix %>hide .<%= PersooPrefix %>angi");
+    for(var i = 0; i < hideArray.length; i++){hideArray[i].style.display = "none";}
+    /*show - show button*/
+    var showArray = document.querySelectorAll("<%= PersooTemplateNameID %> .<%= PersooPrefix %>show .<%= PersooPrefix %>angi");
+    for(var i = 0; i < showArray.length; i++){showArray[i].style.display = "inline-block";}
+  }
+  Persoo_scrollTo();
+};
+
+//change show
+function Persoo_changer(buttonChanger){
+  /*how much links and all deactive*/
+  var changerArray = document.querySelectorAll("<%= PersooTemplateNameID %> .<%= PersooPrefix %>changer a");
+  for(var i = 0; i < changerArray.length; i++){changerArray[i].className = "<%= PersooPrefix %>link";}
+  /*activ link*/
+  document.querySelector("<%= PersooTemplateNameID %> .<%= PersooPrefix %>changer a#" + buttonChanger).className = "<%= PersooPrefix %>link active";
+  /*how much lists and all hide*/
+  var listArray = document.querySelectorAll("<%= PersooTemplateNameID %> .<%= PersooPrefix %>items");
+  for(var i = 0; i < listArray.length; i++){listArray[i].style.display = "none";}
+  /*show active list*/
+  document.querySelector("<%= PersooTemplateNameID %> .<%= PersooPrefix %>items." + buttonChanger).style.display = "block";
+  //show button show/hide
+  var showButtonArray = document.querySelectorAll("<%= PersooTemplateNameID %> .<%= PersooPrefix %>items." + buttonChanger + " .<%= PersooPrefix %>open .<%= PersooPrefix %>item");
+  if(4 > showButtonArray.length){
+    document.querySelector("<%= PersooTemplateNameID %> .<%= PersooPrefix %>button").style.display = "none";
+  }else{
+    document.querySelector("<%= PersooTemplateNameID %> .<%= PersooPrefix %>button").style.display = "block";
+  }
+  /*show items 4-10*/
+  if (document.querySelector('.persoo.persooLocation.openAll') !== null) {
+    var boxArray = document.querySelectorAll("<%= PersooTemplateNameID %> .<%= PersooPrefix %>items");
+    for(var i = 0; i < boxArray.length; i++){
+      document.querySelector("<%= PersooTemplateNameID %> .<%= PersooPrefix %>list" + i + " .<%= PersooPrefix %>open").style.height = "auto";
+      /*how height box*/
+      var boxHeight = document.querySelector("<%= PersooTemplateNameID %> .<%= PersooPrefix %>list" + i + " .<%= PersooPrefix %>open .<%= PersooPrefix %>box").offsetHeight;
+      document.querySelector("<%= PersooTemplateNameID %> .<%= PersooPrefix %>list" + i + " .<%= PersooPrefix %>open").style.height = boxHeight + "px";
+    }
+  }
+};
+</script>
+<% } %>
+</div>

@@ -1,0 +1,333 @@
+<%
+var offerID = offerID || 'randomOfferID';
+
+var getBoxShadowSize = { 
+    "none": 0, /* in px */
+    "low": 11,
+    "high": 22
+};
+function getBoxWidth(boxSize, width) {
+    var getWidth = {
+        "s": 230,
+        "m": 460,
+        "l": 720,
+    };
+    var w = getWidth[boxSize];
+    if (!w) { /* custom */
+        w = width;
+    }
+    return w;
+}
+function getBoxHeight(boxSize, height, autoHeight) {
+    var h = "auto";
+    if (boxSize == 'custom' && !autoHeight) {
+        h = height;
+    }
+    return h;
+}
+
+var boxWidth = getBoxWidth(size, customWidth);
+var boxHeight = getBoxHeight(size, customHeight, autoHeight);
+
+var getPosition = { /* FIXME use boxHeight instead of boxWidth */
+    center: {top: "50%", left: "50%", margin_left: -boxWidth/2, margin_top: -boxWidth/2 },
+    left: {top: "50%", left: "0", margin_top: -boxWidth/2},
+    right: {top: "50%", right: "0", margin_top: -boxWidth/2},
+    bottom: {left: "50%", bottom: "0", margin_left: -boxWidth/2, margin_bottom: 15},
+    bottomLeft: {bottom: "0", left: "0"},
+    bottomRight: {bottom: "0", right: "0"}
+};
+
+var getAnimationProps = {
+    left_to_right: {
+        start: {left: "-50%"},
+        stop: {left: "50%"}
+    },
+    right_to_left: {
+        start: {left: "150%"},
+        stop: {left: "50%"}
+    },
+    up_to_down: {
+        start: {top: "-50%"},
+        stop: {top: "50%"}
+    },
+    down_to_up: {
+        start: {top: "150%"},
+        stop: {top: "50%"}
+    }
+};
+
+var getButtonAndFormInlineStyle = {
+    classic: "text-decoration: none; " + 
+             "border: 0px solid; zoom: 1; border-radius:2px; " + 
+             "min-height: 22px; line-height: 22px;padding: 6px 12px; " +
+	         "color: " + ctaButtonTextColor +"; background-color: " + ctaButtonColor + "; " + 
+	         "font: " + ctaButtonTextFont + ";",
+    outline: "text-decoration: none; " + 
+             "border: 1px solid " + ctaButtonColor + "; zoom: 1; border-radius:2px; " + 
+             "min-height: 22px; line-height: 22px;padding: 6px 12px; " +
+	         "color: " + ctaButtonTextColor +"; background-color: transparent; " + 
+	         "font: " + ctaButtonTextFont + ";"
+}
+
+%>    
+    
+<div id="persoo-<%= offerID %>" class="persoo-animation-<%= animationEffect %>" style="line-height: normal; visibility: visible;">
+    <style type="text/css">
+        .persoo-popin {
+            font-family: <%= textFont %>;
+            padding: 20px !important;
+            background-clip: padding-box;
+            -webkit-font-smoothing: antialiased;
+        }
+        .persoo-popin > div:last-child, #persoo-content > div:last-child {
+            margin-bottom: 0 !important;
+        }
+    
+        .persoo-content {
+            position: relative;
+        }
+
+.persoo-close-x {
+                 display: inline-block;position:absolute;z-index:19999999;
+                 right:6px;top:12px;
+                 text-align: center;
+                 opacity:0.8;cursor: pointer;
+                 color: <%= closeXColor %>;
+                 /* background:url('https://scripts.persoo.cz/shared/img/template-popup-close.png') repeat center center;*/
+}
+.persoo-close-x>span.persoo-icon:before{
+    content:"\2716";
+    display: block;
+    font-weight: normal;
+    font-style: normal;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+}
+.persoo-close-x.persoo-x-position-page>span.persoo-icon:before,
+.persoo-close-x.persoo-x-position-right>span.persoo-icon:before{
+    content:"\2715";
+}
+.persoo-close-x:hover {opacity:1;}
+.persoo-close-x.persoo-x-position-page {font-size:32px;}
+.persoo-close-x.persoo-x-position-in {background-color:<%= backgroundColor %>; right:3px;top:3px;}
+.persoo-close-x.persoo-x-position-right {background-color: transparent; right:<%= -24 - borderSize %>px;top:<%= 0 - borderSize %>px;font-size:20px; line-height: 20px;}
+.persoo-close-x.persoo-x-position-border {background-color:black; right:-10px;top:-10px;width:24px;height:24px;font-size:18px; line-height: 24px; 
+    border-radius:100%;-moz-border-radius:100%;-webkit-border-radius:100%;
+    border:2px solid <%= closeXColor %>;}
+.persoo-close-x.persoo-x-position-border:hover {opacity:1;}        
+
+        /* reset css inside */    
+        .persoo-popin *, .persoo-popin p, .persoo-popin a, .persoo-popin strong, .persoo-popin em, .persoo-popin span, .persoo-popin ul, .persoo-popin li, .persoo-popin input, .persoo-popin button {
+            margin: 0;
+            padding: 0;
+            font-family: inherit;
+        }
+        .persoo-popin hr {
+            border: 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #fff;
+        }    
+        .persoo-popin input{
+            padding: 4px 6px;
+            margin-right: 0px;
+        }
+        .persoo-popin p{
+            margin-bottom: 10px;
+        }
+        .persoo-popin strong{
+            font-weight: bold;
+        }
+        .persoo-popin em{
+            font-style: italic;
+            font-family: inherit;
+        }
+        .persoo-popin .optin-block{
+            margin: 0 auto;
+            text-align: center;
+        }
+        .persoo-popin input{
+            margin-right: 0;
+        }
+        .persoo-popin .optin-block input:first-child{
+            margin-right: 0px;
+        }
+        .persoo-popin input[type="text"] {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+               -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+                    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+               -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+                 -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+                    transition: border linear 0.2s, box-shadow linear 0.2s;
+            display: inline-block;
+            float: none;
+            vertical-align: middle;
+        }
+        .persoo-popin input[type="submit"], a.persoo-building-block-action {
+            font: <%= ctaButtonTextFont %>;
+            float: none;
+            vertical-align: middle;
+        }
+        .persoo-popin p {
+            font: <%= textFont %>;
+            color: <%= textColor %>;
+        }
+        .persoo-popin h1 {
+            font: <%= textFont %>;            
+            font-weight: 700;
+            color: <%= textColor %>;
+            font-size: 28px;
+            line-height: 41.59375px;
+        }
+    
+        /* utility classes */
+        .persoo-background-image {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        .persoo-icon {
+            background: transparent;
+            display: inline-block;
+            font-style: normal;
+            vertical-align: baseline;
+            position: relative;        
+        }
+        .persoo-content img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+<% if (animationEffect && animationEffect != 'none') {
+    var animationProps = getAnimationProps[animationEffect]; 
+%>
+	@keyframes persoo-animation-<%= offerID %>-<%= animationEffect %> {
+	   0% { <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
+	        <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %> }
+	   100% { <%= animationProps.stop.left ? 'left: ' + animationProps.stop.left + ';' : '' %>
+	        <%= animationProps.stop.top ? 'top: ' + animationProps.stop.top + ';' : '' %> }
+	}        
+	@-webkit-keyframes persoo-animation-<%= offerID %>-<%= animationEffect %> {
+	   0% { <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
+	        <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %> }
+	   100% { <%= animationProps.stop.left ? 'left: ' + animationProps.stop.left + ';' : '' %>
+	        <%= animationProps.stop.top ? 'top: ' + animationProps.stop.top + ';' : '' %> }
+	}        
+	.persoo-animation-<%= animationEffect %> .persoo-popin{
+	    animation: persoo-animation-<%= offerID %>-<%= animationEffect %> <%= animationDuration %> ease 0s 1 alternate;
+	    -webkit-animation: persoo-animation-<%= offerID %>-<%= animationEffect %> <%= animationDuration %> ease 0s 1 alternate;
+	}
+<% } %>
+    </style>
+    <style type="text/css">
+        <%= customCSS %>
+    </style>
+    <% if (useOverlay) { %>
+    <div class="persooAction persoo-overlay" id="persoo-overlay-<%= offerID %>"
+        <% if (closeOnClickOutside) { %> onclick="persoo_close_<%= offerID %>()"<% } %>
+        style="position: fixed;
+               width: 100%; height: 100%; top: 0; left: 0; z-index: 9999999;
+               background-color: <%= overlayColor %>;">
+    </div>
+        <% if (showClosingX && closingXPosition == 'page'){ %>
+        <a class="persooAction persoo-close-x persoo-x-position-<%= closingXPosition %>" href="javascript:persoo_close_<%= offerID %>();" id="close-persoo-<%= offerID %>"><span class="persoo-icon"></span></a>
+        <% } %>
+    <% } %>
+    
+    <div class="persoo-popin" id="persoo-popin-<%= offerID %>" 
+         style="box-sizing: content-box; border: <%= borderSize %>px solid <%= borderColor %>;
+                padding: 20px; position: fixed; z-index: 10000000;                 
+                <%= getPosition[position].top ? 'top:'+ getPosition[position].top +';' : '' %>
+                <%= getPosition[position].bottom ? 'bottom:'+ getPosition[position].bottom +';' : '' %>
+                <%= getPosition[position].left ? 'left:'+ getPosition[position].left +';' : '' %>
+                <%= getPosition[position].right ? 'right:'+ getPosition[position].right +';' : '' %>
+                <%= getPosition[position].margin_top ? 'margin-top:'+ getPosition[position].margin_top +'px;' : '' %>
+                <%= getPosition[position].margin_bottom ? 'margin-bottom:'+ getPosition[position].margin_bottom +'px;' : '' %>
+                <%= getPosition[position].margin_left ? 'margin-left:'+ getPosition[position].margin_left +'px;' : '' %>
+                <%= getPosition[position].margin_right ? 'margin-right:'+ getPosition[position].margin_right +'px;' : '' %>                 
+                width: <%= getBoxWidth(size, customWidth) %>px;
+                height: <%= getBoxHeight(size, customHeight, autoHeight) %>px; 
+                border-radius: <%= boxCorners %>px; 
+                box-shadow: <%= boxShadowColor %> 0px 0px <%= getBoxShadowSize[boxShadow] %>px; zoom: 1;
+                color: <%= textColor %>;
+                background-color: <%= backgroundColor %>;">
+        <% if (showClosingX && closingXPosition != 'page'){ %>
+            <a class="persooAction persoo-close-x persoo-x-position-<%= closingXPosition %>" href="javascript:persoo_close_<%= offerID %>();" id="close-persoo-<%= offerID %>"><span class="persoo-icon"></span></a>
+        <% } %>
+        <% if (backgroundImageLink){ %>
+            <img class="persoo-background-image" src="<%= backgroundImageLink %>" alt="background">
+        <% } %>
+        <div class="persoo-content" id="persoo-content">
+                <div class="persoo-message" style="text-align: center;margin-bottom: 15px;">
+                    <%= message %>
+                </div>
+                
+                <% if (showCtaButton) { %>                
+                <div class="persoo-cta" style="text-align: center;margin-bottom: 15px;">
+                    <a class="persoo-building-block-action" 
+                       href="<% if (ctaButtonAction == 'redirect') { %><%= ctaButtonLink %><% } else { %>javascript:persoo_close_<%= offerID %>()<% } %>"
+                       style="display: inline-block; <%= getButtonAndFormInlineStyle[ctaStyle] %>"
+                       target="_blank"><%= ctaButtonLabel %></a>
+                </div>
+                <% } %>
+                
+                <% if (collectEmail) { %>                
+                <div class="persoo-collectEmail" style="text-align: center;margin-bottom: 15px;">
+                    <form id="persooSubmitEmailForm_<%= offerID %>" onsubmit="return persoo_submit_email_<%= offerID %>()">
+	                    <input id="persoo_email_<%= offerID %>" type="text" value="<%= collectEmailInputLabel %>"
+	                           style="display: inline-block; <%= getButtonAndFormInlineStyle[ctaStyle] %>">
+	                    <input type="submit" value="<%= collectEmailSubmitLabel %>" class="persooAction"
+	                           style="display: inline-block;<%= getButtonAndFormInlineStyle[ctaStyle] %>">
+                    </form>
+                    <div id="persooThankYou_<%= offerID %>" style="display: none;<%= getButtonAndFormInlineStyle[ctaStyle] %>">
+	                    <%= collectEmailThankYouMessage %>
+	                </div>
+                </div>
+                <% } %>                
+                
+                <div class="building-block building-block-separator separator-" style="position: relative;margin-bottom: 15px;">
+                    <div class="persoo-separator persoo-separator-2 persoo-separator-width-2" style="color: #ffffff;"></div>
+                </div>
+                <div class="persoo-dismiss-links" data-type="dismiss-links" style="text-align:center;margin-bottom: 15px;">
+                    <a class="persooAction" data-action="close" href="javascript:persoo_close_<%= offerID %>()"
+                       style="font-size: 12px; color: <%= textColor %>; text-decoration: underline; margin-left: 10px;">
+                    <%= closingTextInFooter %></a>
+                </div>
+        </div>
+        <div style="height: 20px;"></div>
+    </div>
+    <script type="text/javascript">
+        window.persoo = window.persoo || function () {}; /* TODO until having persoo in preview */
+        function persoo_close_<%= offerID %>() {
+            var elem = document.getElementById("persoo-<%= offerID %>");
+            elem.style.display = "none";
+            window.persoo('send', 'close', {offerID: "<%= offerID %>"});
+        }
+        function persoo_submit_email_<%= offerID %>() {
+            var elem = document.getElementById("persoo_email_<%= offerID %>");
+            var email = elem.value.replace(/^\s*/,'').replace(/\s*$/,'');
+            try {
+	            if (!email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+	                // invalid email address
+	                elem.style.border = "3px solid red";
+	            } else {
+	                // submit
+	                console.log('Persoo: submitting email ' + email);
+	                window.persoo('send','submit', {offerID: "<%= offerID %>", email: email});  // TODO use callback for confirmation?
+	                
+	                document.getElementById("persooSubmitEmailForm_<%= offerID %>").style.display = "none";
+	                document.getElementById("persooThankYou_<%= offerID %>").style.display = "inline-block";
+	            }
+            } catch(err) {}
+            
+            return false;
+        }      
+    </script>
+    <script type="text/javascript">
+        <%= customJS %>
+    </script>
+</div>

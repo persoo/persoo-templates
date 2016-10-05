@@ -1,0 +1,501 @@
+{
+    "class": "webWidget",
+    "isActive": true,
+    "minScenariosCount": 0,
+    "name": "Pop-up (v0.2)",
+    "fields": [
+        {
+            "id": "message",
+            "name": "Main message",
+            "group": "main",
+            "type": "richtext",
+            "defaultValue": "                <div style=\"margin-bottom: 15px;\">\n                    <div>\n                        <img src=\n                        \"//s3-eu-west-1.amazonaws.com/cz.persoo.images/sample-popup-image-shoes.png\"\n                        style=\n                        \"display: block; margin: auto; margin-bottom:10px;max-width:100%;\">\n                        <div style=\n                        \"display: block;height: 0;clear: both;visibility: hidden;\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"\" style=\n                \"line-height: 20px;min-height: 30px;margin-bottom: 15px;\">\n                    <span style=\"font-size:12px;\"></span>\n                    <p style=\"text-align:center;margin-top:30px;\"><span style=\n                    \"font-size:12px;\"><span style=\n                    \"font-size:16px;line-height:1.4;\"><span style=\n                    \"font-family:vollkorn;\">We\n                    just received our new product.<br>\n                    There is a limited amount, go take a look\n                    now!</span></span></span></p>\n                </div>"
+        },
+        
+        {
+            "id": "showCtaButton",
+            "name": "Show Button",
+            "group": "cta",
+            "type": "checkbox",
+            "defaultValue": false
+        },
+        {
+            "id": "ctaButtonLabel",
+            "name": "Button Text",
+            "group": "cta",
+            "type": "text",
+            "defaultValue": "SHOW ME"
+        },
+        {
+            "id": "ctaButtonAction",
+            "name": "Button Action",
+            "group": "cta",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Redirect to link",
+                    "value": "redirect"
+                },
+                {
+                    "label": "Close pop-up",
+                    "value": "close"
+                }
+            ],
+            "defaultValue": "redirect"
+        },            
+        {
+            "id": "ctaButtonLink",
+            "name": "Button Target Link",
+            "group": "cta",
+            "type": "text",
+            "defaultValue": "/your/target/page"
+        },
+
+        {
+            "id": "collectEmail",
+            "name": "Collect Email Address",
+            "group": "collectEmail",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "collectEmailInputLabel",
+            "name": "Input Label",
+            "group": "collectEmail",
+            "type": "text",
+            "defaultValue": "Your email"
+        },
+        {
+            "id": "collectEmailSubmitLabel",
+            "name": "Submit Button Text",
+            "group": "collectEmail",
+            "type": "text",
+            "defaultValue": "SUBSCRIBE"
+        },
+        {
+            "id": "collectEmailThankYouMessage",
+            "name": "Thank you message",
+            "group": "collectEmail",
+            "type": "text",
+            "defaultValue": "Thank you for subscription"
+        },
+
+        {
+            "id": "section_position",
+            "name": "Position",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "position",
+            "name": "Position",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Center",
+                    "value": "center"
+                },
+                {
+                    "label": "Bottom Left",
+                    "value": "bottomLeft"
+                },
+                {
+                    "label": "Bottom Right",
+                    "value": "bottomRight"
+                },
+                {
+                    "label": "Left",
+                    "value": "left"
+                },
+                {
+                    "label": "Right",
+                    "value": "right"
+                },
+                {
+                    "label": "Bottom",
+                    "value": "bottom"
+                }
+            ],
+            "defaultValue": "center"
+        },
+            
+        {
+            "id": "section_sizes",
+            "name": "Size",
+            "group": "design",
+            "type": "section"
+        },            
+        {
+            "id": "size",
+            "name": "Size",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Small",
+                    "value": "s"
+                },
+                {
+                    "label": "Medium",
+                    "value": "m"
+                },
+                {
+                    "label": "Large",
+                    "value": "l"
+                },
+                {
+                    "label": "Custom",
+                    "value": "custom"
+                }
+            ],
+            "defaultValue": "m"
+        },
+        {
+            "id": "customWidth",
+            "name": "Custom Width",
+            "group": "design",
+            "type": "number",
+            "defaultValue": 400
+        },
+        {
+            "id": "customHeight",
+            "name": "Custom Height",
+            "group": "design",
+            "type": "number",
+            "defaultValue": 400
+        },
+        {
+            "id": "autoHeight",
+            "name": "Auto Height",
+            "group": "design",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+
+        {
+            "id": "section_animation",
+            "name": "Animation",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "animationEffect",
+            "name": "Effect",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "None",
+                    "value": "none"
+                },
+                {
+                    "label": "Move Down to Up",
+                    "value": "down_to_up"
+                },
+                {
+                    "label": "Move Up to Down",
+                    "value": "up_to_down"
+                },
+                {
+                    "label": " Move Left to Right",
+                    "value": "left_to_right"
+                },
+                {
+                    "label": "Move Right to Left",
+                    "value": "right_to_left"
+                }
+            ],
+            "defaultValue": "none"
+        },
+        {
+            "id": "animationDuration",
+            "name": "Duration",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "0.6s"
+        },
+
+        {
+            "id": "section_closing",
+            "name": "Closing",
+            "group": "design",
+            "type": "section"
+        },                        
+        {
+            "id": "showClosingX",
+            "name": "Show closing X",
+            "group": "design",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "closingXPosition",
+            "name": "Closing X Position",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Inside Box",
+                    "value": "in"
+                },
+                {
+                    "label": "On the Box Border",
+                    "value": "border"
+                },
+                {
+                    "label": "To the Right of Box Corner",
+                    "value": "right"
+                },
+                {
+                    "label": "Page Top Right Corner",
+                    "value": "page"
+                }
+            ],
+            "defaultValue": "in"
+        },            
+        {
+            "id": "closeOnClickOutside",
+            "name": "Close on click outside",
+            "group": "design",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "closingTextInFooter",
+            "name": "Closing text in pop-up footer",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "No thanks"
+        },
+        {
+            "id": "closeXColor",
+            "name": "Close X Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#777"
+        },            
+        
+        {
+            "id": "section_texts",
+            "name": "Texts",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "textColor",
+            "name": "Text Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#404040"
+        },
+        {
+            "id": "textFont",
+            "name": "Text Font",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "normal normal 300 medium Arial, Helvetica, sans-serif"
+        },
+        {
+            "id": "section_buttonsAndForms",
+            "name": "Button & Form",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "ctaStyle",
+            "name": "Button & Form style",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Classic",
+                    "value": "classic"
+                },
+                {
+                    "label": "Outline",
+                    "value": "outline"
+                }
+            ],
+            "defaultValue": "classic"
+        },            
+        {
+            "id": "ctaButtonTextColor",
+            "name": "Button Text Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#ffffff"
+        },
+        {
+            "id": "ctaButtonColor",
+            "name": "Button Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#a28c51"
+        },
+        {
+            "id": "ctaButtonTextFont",
+            "name": "Button Font",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "normal normal 600 large Arial, Helvetica, sans-serif"
+        },
+        
+        {
+            "id": "section_background",
+            "name": "Background",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "backgroundColor",
+            "name": "Background Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#eeeeee"
+        },
+        {
+            "id": "backgroundImageLink",
+            "name": "Background Image Link",
+            "group": "design",
+            "type": "text",
+            "defaultValue": ""
+        },
+
+        {
+            "id": "section_border",
+            "name": "Border",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "borderSize",
+            "name": "Border size",
+            "group": "design",
+            "type": "number",
+            "defaultValue": 1
+        },
+        {
+            "id": "borderColor",
+            "name": "Border Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#ffffff"
+        },
+        {
+            "id": "boxCorners",
+            "name": "Box Corners",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Rectangular",
+                    "value": "0"
+                },
+                {
+                    "label": "Mini Rounded",
+                    "value": "5"
+                },
+                {
+                    "label": "Rounded",
+                    "value": "15"
+                }
+            ],
+            "defaultValue": "0"
+        },
+        {
+            "id": "boxShadow",
+            "name": "Box Shadow",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "None",
+                    "value": "none"
+                },
+                {
+                    "label": "Low",
+                    "value": "low"
+                },
+                {
+                    "label": "High",
+                    "value": "high"
+                }
+            ],
+            "defaultValue": "none"
+        },
+        {
+            "id": "boxShadowColor",
+            "name": "Box Shadow Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#666666"
+        },
+        
+        {
+            "id": "section_overlay",
+            "name": "Overlay",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "useOverlay",
+            "name": "Use overlay",
+            "group": "design",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "overlayColor",
+            "name": "Overlay Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "rgba(36, 39, 41, 0.1)"
+        },
+        {
+            "id": "section_customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "section"
+        },            
+        {
+            "id": "customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "css",
+            "defaultValue": "/* your own css rules */"
+        },           
+        {
+            "id": "section_customJS",
+            "name": "Custom Javascript",
+            "group": "design",
+            "type": "section"
+        },                        
+        {
+            "id": "customJS",
+            "name": "Custom Javascript",
+            "group": "design",
+            "type": "javascript",
+            "defaultValue": "/* your own javascript */"
+        }            
+    ],
+    "groups": [
+        {
+            "id": "main",
+            "name": "Main content"
+        },
+        {
+            "id": "cta",
+            "name": "Call to Action"
+        },
+        {
+            "id": "collectEmail",
+            "name": "Collect Email"
+        },
+        {
+            "id": "design",
+            "name": "Design"
+        }            
+    ],        
+    "template": "@template.html"
+}

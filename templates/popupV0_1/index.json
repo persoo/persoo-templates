@@ -1,0 +1,93 @@
+{
+    "class": "webWidget",
+    "id": "f0e3fe17a48b4a05a27e430cb880d965",
+    "isActive": true,
+    "minScenariosCount": 0,
+    "name": "Pop-up (v0.1)",
+    "fields": [
+        {
+            "defaultValue": "<style></style>",
+            "type": "html",
+            "group": "main",
+            "id": "PersooVarible_wysivygCss",
+            "name": "CSS kód banneru"
+        },
+        {
+            "group": "main",
+            "defaultValue": "<div></div>",
+            "type": "html",
+            "id": "PersooVarible_wysivygHtml",
+            "name": "HTML kód banneru"
+        },
+        {
+            "defaultValue": "out",
+            "type": "select",
+            "id": "PersooVarible_crossPosition",
+            "name": "Pozice křížku pro zavření",
+            "group": "main",
+            "options": [
+                {
+                    "label": "V rohu stránky",
+                    "value": "out"
+                },
+                {
+                    "label": "Na půl mimo banner",
+                    "value": "outHalf"
+                },
+                {
+                    "label": "V rohu banneru",
+                    "value": "in"
+                }
+            ]
+        },
+        {
+            "group": "main",
+            "defaultValue": 15,
+            "type": "number",
+            "id": "PersooVarible_marginIN",
+            "name": "Vnitřní margin (hodnota se na webu promítne v px)"
+        },
+        {
+            "group": "main",
+            "defaultValue": 1,
+            "type": "number",
+            "id": "PersooVarible_border",
+            "name": "Tloušťka rámečku kolem banneru (hodnota se na webu promítne v px)"
+        },
+        {
+            "group": "main",
+            "defaultValue": 30,
+            "type": "number",
+            "id": "PersooVarible_marginOUT",
+            "name": "Vnější margin (hodnota se na webu promítne v px)"
+        },
+        {
+            "group": "main",
+            "defaultValue": true,
+            "type": "checkbox",
+            "id": "PersooVarible_responsiveDektop",
+            "name": "Zobrazit na PC"
+        },
+        {
+            "group": "main",
+            "defaultValue": true,
+            "type": "checkbox",
+            "id": "PersooVarible_responsiveTablet",
+            "name": "Zobrazit na tabletu"
+        },
+        {
+            "group": "main",
+            "defaultValue": true,
+            "type": "checkbox",
+            "id": "PersooVarible_responsiveMobile",
+            "name": "Zobrazit na mobilu"
+        }
+    ],
+    "groups": [
+        {
+            "id": "main",
+            "name": "Main"
+        }
+    ],        
+    "template": "@template.html"
+}

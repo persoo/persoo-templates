@@ -1,6 +1,6 @@
 var utils = require('./utils.js');
 
-var TEMPLATES_FILENAME = '../templates/templates.json'
+var TEMPLATES_FILENAME = '../build/templates.json'
 
 module.exports = {
     templates: {},
