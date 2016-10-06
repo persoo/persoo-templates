@@ -1,0 +1,314 @@
+{
+    "class": "webWidget",
+    "isActive": true,
+    "minScenariosCount": 0,
+    "name": "Side Bar",
+    "fields": [
+        {
+            "id": "headline",
+            "name": "Headline",
+            "group": "main",
+            "type": "text",
+            "defaultValue": "Headline"
+        },
+        {
+            "id": "message",
+            "name": "Main message",
+            "group": "main",
+            "type": "richtext",
+            "defaultValue": "<div>Your Content Here</div>"
+        },
+
+        {
+            "id": "tab",
+            "name": "Tab text",
+            "group": "tab",
+            "type": "text",
+            "defaultValue": "Tab Text"
+        },
+
+        {
+            "id": "section_settings",
+            "name": "Settings",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "openOn",
+            "name": "Open on",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Hover",
+                    "value": "hover"
+                },
+                {
+                    "label": "Tab Click",
+                    "value": "click"
+                }
+            ],
+            "defaultValue": "hover"
+        },
+
+        {
+            "id": "section_sizes",
+            "name": "Size",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "size",
+            "name": "Size",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Small",
+                    "value": "s"
+                },
+                {
+                    "label": "Medium",
+                    "value": "m"
+                },
+                {
+                    "label": "Large",
+                    "value": "l"
+                },
+                {
+                    "label": "Custom",
+                    "value": "custom"
+                }
+            ],
+            "defaultValue": "m"
+        },
+        {
+            "id": "customWidth",
+            "name": "Custom Width",
+            "group": "design",
+            "type": "number",
+            "defaultValue": 400
+        },
+
+        {
+            "id": "section_texts",
+            "name": "Texts",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "textColor",
+            "name": "Text Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#404040"
+        },
+        {
+            "id": "textFont",
+            "name": "Text Font",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "normal normal 300 medium Arial, Helvetica, sans-serif"
+        },
+        {
+            "id": "headlineColor",
+            "name": "Headline Text Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#009688"
+        },
+        {
+            "id": "tabColor",
+            "name": "Tab Text Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#fff"
+        },
+
+        {
+            "id": "section_position",
+            "name": "Position",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "position",
+            "name": "Position",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Left",
+                    "value": "left"
+                },
+                {
+                    "label": "Right",
+                    "value": "right"
+                }
+            ],
+            "defaultValue": "right"
+        },
+        {
+            "id": "positionTop",
+            "name": "Position from Top",
+            "group": "design",
+            "type": "number",
+            "defaultValue": 100
+        },
+
+        {
+            "id": "section_background",
+            "name": "Backgrounds",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "tabBackground",
+            "name": "Tab Background",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#009688"
+        },
+        {
+            "id": "contentBackground",
+            "name": "Content Background",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#FFF"
+        },
+
+        {
+            "id": "section_border",
+            "name": "Border",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "paddingSize",
+            "name": "Content Padding Size",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "None",
+                    "value": "0"
+                },
+                {
+                    "label": "Small",
+                    "value": "5"
+                },
+                {
+                    "label": "Large",
+                    "value": "15"
+                }
+            ],
+            "defaultValue": "5"
+        },
+        {
+            "id": "borderColor",
+            "name": "Content Border Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#eee"
+        },
+        {
+            "id": "borderSize",
+            "name": "Content Border Size",
+            "group": "design",
+            "type": "number",
+            "defaultValue": 1
+        },
+        {
+            "id": "boxCorners",
+            "name": "Box Corners",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Rectangular",
+                    "value": "0"
+                },
+                {
+                    "label": "Mini Rounded",
+                    "value": "5"
+                },
+                {
+                    "label": "Rounded",
+                    "value": "15"
+                }
+            ],
+            "defaultValue": "5"
+        },
+        {
+            "id": "boxShadow",
+            "name": "Box Shadow",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "None",
+                    "value": "none"
+                },
+                {
+                    "label": "Low",
+                    "value": "low"
+                },
+                {
+                    "label": "High",
+                    "value": "high"
+                }
+            ],
+            "defaultValue": "low"
+        },
+        {
+            "id": "boxShadowColor",
+            "name": "Box Shadow Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "rgba(102, 102, 102, 0.3)"
+        },
+
+        {
+            "id": "section_customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "css",
+            "defaultValue": "/* your own css rules */"
+        },
+
+        {
+            "id": "section_customJS",
+            "name": "Custom Javascript",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "customJS",
+            "name": "Custom Javascript",
+            "group": "design",
+            "type": "javascript",
+            "defaultValue": "/* your own javascript */"
+        }
+    ],
+    "groups": [
+        {
+            "id": "main",
+            "name": "Main content"
+        },
+        {
+            "id": "tab",
+            "name": "Tab"
+        },
+        {
+            "id": "design",
+            "name": "Design"
+        }
+    ],
+    "template": "@template.html"
+}

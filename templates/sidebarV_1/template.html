@@ -1,0 +1,224 @@
+<%
+var offerID = offerID || "randomOfferID";
+
+var zIndex = 100000;
+
+var boxShadowSizes = {
+    "none": 0, /* in px */
+    "low": 6,
+    "high": 12
+};
+var boxShadowSize = boxShadowSizes[boxShadow];
+
+var boxWidths = {
+    "s": 120,
+    "m": 230,
+    "l": 460,
+};
+var boxWidth = boxWidths[size];
+if (!boxWidth) { /* custom */
+    boxWidth = customWidth;
+}
+
+var tabHeights = {
+    "0": 30,
+    "5": 36,
+    "15": 42
+};
+var tabHeight = tabHeights[boxCorners];
+
+var tabInnerPaddings = {
+    "0": "0 10px",
+    "5": "0 15px",
+    "15": "0 20px"
+};
+var tabInnerPadding = tabInnerPaddings[boxCorners];
+%>
+
+<div
+    id="persoo--<%= offerID %>"
+    class="persoo--widget"
+    data-inner-location-id="persoo--sidebar__content"
+    <%= openOn === "click" ? " data-visible=false" : "" %>
+>
+    <style type="text/css">
+        .persoo--sidebar,
+        .persoo--sidebar * {
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 150%;
+        }
+
+        #persoo--<%= offerID %> .persoo--sidebar {
+            z-index: <%= zIndex %>;
+            position: fixed;
+            top: <%= positionTop %>px;
+            width: <%= boxWidth %>px;
+            <% if (position === "left") { %>
+                left: 0;
+                margin-left: <%= -boxWidth %>px;
+            <% } else if (position === "right") { %>
+                right: 0;
+                margin-right: <%= -boxWidth %>px;
+            <% } %>
+            transition: all <%= openOn === "hover" ? 0.35 : 0.15 %>s 0.075s cubic-bezier(0.25, 0.25, 0.75, 0.75);
+            font: <%= textFont %>;
+            color: <%= textColor %>;
+        }
+
+        #persoo--<%= offerID %> .persoo--sidebar__tab {
+            position: relative;
+            display: inline-block;
+            height: 0;
+            z-index: <%= zIndex%>;
+
+            <% if (position === "left") { %>
+                left: 100%;
+            <% } else { %>
+                right: 0;
+            <% } %>
+        }
+        #persoo--<%= offerID %> .persoo--sidebar__tab__inner {
+            display: inline-flex;
+            align-items: center;
+            font-weight: bold;
+            height: <%= tabHeight %>px;
+            background: <%= tabBackground %>;
+            color: <%= tabColor %>;
+            border-radius: <%= boxCorners %>px <%= boxCorners %>px 0 0;
+            padding: <%= tabInnerPadding %>;
+            <%= openOn === "click" ? "text-decoration: none;" : "" %>
+            white-space: nowrap;
+            box-shadow: <%= boxShadowColor %> <%= boxShadowSize / -2 %>px 0px <%= boxShadowSize %>px;
+            zoom: 1;
+        }
+
+        #persoo--<%= offerID %> .persoo--sidebar__content {
+            position: relative;
+            z-index: <%= zIndex + 1 %>;
+            width: <%= boxWidth %>px;
+            overflow: hidden;
+            padding: <%= paddingSize %>px;
+            background: <%= contentBackground %>;
+            border-radius: <%= position === "left" ? "0 0 " + boxCorners + "px 0" : "0 0 0 " + boxCorners + "px" %>;
+            border: <%= borderSize %>px solid <%= borderColor %>;
+            box-shadow: <%= boxShadowColor %> 0px <%= boxShadowSize / 2 %>px <%= boxShadowSize %>px;
+            zoom: 1;
+        }
+
+        #persoo--<%= offerID %> .persoo--sidebar__content__headline {
+            color: <%= headlineColor %>;
+            margin-top: 0;
+        }
+
+        <% if (openOn === "hover" || openOn === "click") { %>
+            <%= openOn === "hover" ? "#persoo--" + offerID + " .persoo--sidebar:hover" : "" %>
+            <%= openOn === "click" ? "#persoo--" + offerID + "[data-visible='true'] .persoo--sidebar" : "" %>
+            {
+                <% if (position === "left") { %>
+                    margin-left: 0px;
+                <% } else if (position === "right") { %>
+                    margin-right: 0px;
+                <% } %>
+            }
+        <% } %>
+    </style>
+    <style type="text/css">
+        <%= customCSS %>
+    </style>
+
+    <div class="persoo--sidebar">
+        <div class="persoo--sidebar__tab">
+            <% if (openOn === "click") { %>
+                <a
+                    id="persoo--<%= offerID %>__tab__inner"
+                    class="persoo--sidebar__tab__inner"
+                    href="javascript:persoo_toggle_<%= offerID %>();"
+                >
+                    <%= tab %>
+                </a>
+            <% } else { %>
+                <div
+                    id="persoo--<%= offerID %>__tab__inner"
+                    class="persoo--sidebar__tab__inner"
+                >
+                    <%= tab %>
+                </div>
+            <% } %>
+        </div>
+        <div
+            id="persoo--<%= offerID %>__content"
+            class="persoo--sidebar__content"
+        >
+            <% if (headline) { %>
+                <h2 class="persoo--sidebar__content__headline">
+                    <%= headline %>
+                </h2>
+            <% } %>
+            <div class="persoo--sidebar__content__message">
+                <%= message %>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        window.persoo = window.persoo || function () {}; /* TODO until having persoo in preview */
+        function report_<%= offerID %>_event(persooEventID) {
+            window.persoo("send", persooEventID, {offerID: "<%= offerID %>"});
+        }
+
+        var persooWidget = document.getElementById("persoo--<%= offerID %>");
+
+        <% if (openOn === "click") { %>
+            function is_<%= offerID %>_visible() {
+                return persooWidget.getAttribute("data-visible") === "true";
+            }
+
+            function onClickOutside_<%= offerID %>(e) {
+                if (!persooWidget.contains(e.target)) {
+                    persoo_toggle_<%= offerID %>();
+                }
+            }
+
+            function onScrollDown_<%= offerID %>(e) {
+                persoo_toggle_<%= offerID %>();
+            }
+
+            function persoo_toggle_<%= offerID %>() {
+                var isVisible = is_<%= offerID %>_visible();
+
+                if (isVisible) {
+                    document.removeEventListener("mousedown", onClickOutside_<%= offerID %>);
+                    document.removeEventListener("scroll", onScrollDown_<%= offerID %>);
+                } else {
+                    document.addEventListener("mousedown", onClickOutside_<%= offerID %>);
+                    document.addEventListener("scroll", onScrollDown_<%= offerID %>);
+                }
+
+                persooWidget.setAttribute("data-visible", isVisible ? "false" : "true");
+                report_<%= offerID %>_event(isVisible ? "close" : "open");
+            }
+        <% } %>
+
+        <% if (openOn === "hover") { %>
+            persooWidget.onmouseenter = report_<%= offerID %>_event.bind(null, "open");
+            persooWidget.onmouseleave = report_<%= offerID %>_event.bind(null, "close");
+        <% } %>
+
+        var tabInnerNode = document.getElementById("persoo--<%= offerID %>__tab__inner");
+        var contentNode = document.getElementById("persoo--<%= offerID %>__content");
+        var tabInnerWidth = tabInnerNode.offsetWidth;
+        var tabInnerHeight = tabInnerNode.offsetHeight;
+
+        tabInnerNode.style.marginTop = tabInnerWidth / 2 - (tabInnerHeight / 2) + "px";
+        tabInnerNode.style.marginLeft = tabInnerWidth / -2 <%= position === "left" ? "+" : "-" %> (tabInnerHeight / 2) + "px";
+        tabInnerNode.style.transform = "rotate(<%= position === "left" ? "90deg" : "270deg" %>)";
+
+        contentNode.style.minHeight = tabInnerWidth + <%= boxCorners * 1.5 %> + "px";
+    </script>
+    <script type="text/javascript">
+        <%= customJS %>
+    </script>
+</div>
