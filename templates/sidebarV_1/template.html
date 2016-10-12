@@ -47,10 +47,6 @@ var tabInnerPadding = tabInnerPaddings[boxCorners];
             box-sizing: border-box;
         }
 
-        body {
-            height: 150%;
-        }
-
         #persoo--<%= offerID %> .persoo--sidebar {
             z-index: <%= zIndex %>;
             position: fixed;
@@ -69,15 +65,15 @@ var tabInnerPadding = tabInnerPaddings[boxCorners];
         }
 
         #persoo--<%= offerID %> .persoo--sidebar__tab {
-            position: relative;
-            display: inline-block;
+            position: absolute;
+            display: block;
             height: 0;
             z-index: <%= zIndex%>;
 
             <% if (position === "left") { %>
                 left: 100%;
             <% } else { %>
-                right: 0;
+                left: 0;
             <% } %>
         }
         #persoo--<%= offerID %> .persoo--sidebar__tab__inner {
