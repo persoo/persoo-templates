@@ -15,7 +15,7 @@ var contextStore = require('./contextStore.js');
 
 module.exports = {
     panelFormFields: {}, // list of formFields on each panelID
-    
+
     updatePanelFields: function(panelID) {
         var formFields = this.panelFormFields[panelID];
         if (formFields) {
@@ -28,18 +28,18 @@ module.exports = {
     onTabClick: function (event) {
         var element;
         var tabID = event.currentTarget.id.replace('tab','');
-        
+
         var itemsToClean = document.querySelectorAll('#panelTabs span, #panel div.panel');
         for (var i = 0; i < itemsToClean.length; i++) {
             element = itemsToClean[i];
             element.classList.remove("active");
         }
-        
+
         element = event.currentTarget;
         element.classList.add("active");
         element = document.getElementById('panel' + tabID);
         element.classList.add("active");
-        
+
         this['unmount' + tabID + 'Panel']();
         this['mount' + tabID + 'Panel']();
     },
@@ -54,13 +54,13 @@ module.exports = {
         var myThis = this;
         var button = document.querySelector('#reload');
         button.onclick = templateStore.reloadTemplates.bind(templateStore);
-        
+
         var selectElem = document.getElementById('templateID');
         selectElem.onchange = function() {
             var selectElem = document.getElementById('templateID');
             var templateID = selectElem.value;
             templateStore.setCurrentTemplateID(templateID);
-            
+
             // refresh tabs
             var activeTabElem = document.querySelector('#panelTabs span.active');
             var tabID = activeTabElem.id.replace('tab','');
@@ -74,43 +74,43 @@ module.exports = {
         var panelID = activePanelElement.id.replace('panel','');
         this['mount' + panelID + 'Panel']();
     },
-    
+
     mountDeveloperPanel: function() {
         var panelID = 'Developer';
         this.panelFormFields[panelID] = [];
-               
+
         templateStore.updateCallbacks.push(this.updateDeveloperPanel.bind(this));
         templateStore.updateCallbacks.push(this.updateUserPanel.bind(this));
-        
+
         var parentElement = document.getElementById('panelDeveloper');
         this.panelFormFields[panelID] = [
-                new formFields.TextFormField('Name', 
-                        parentElement,                         
+                new formFields.TextFormField('Name',
+                        parentElement,
                         templateStore.getTemplateFieldFactory(null, 'name'),
                         templateStore.setTemplateFieldFactory(null, 'name')
                 ),
                 new formFields.HtmlFormField('Main Template',
-                        parentElement,                         
+                        parentElement,
                         templateStore.getTemplateFieldFactory(null, 'template'),
                         templateStore.setTemplateFieldFactory(null, 'template')
                 ),
                 new formFields.JsonFormField('Fields',
-                        parentElement,                         
+                        parentElement,
                         templateStore.getTemplateFieldFactory(null, 'fields'),
                         templateStore.setTemplateFieldFactory(null, 'fields')
                 ),
                 new formFields.JsonFormField('Groups',
-                        parentElement,                         
+                        parentElement,
                         templateStore.getTemplateFieldFactory(null, 'groups'),
                         templateStore.setTemplateFieldFactory(null, 'groups')
                 ),
-                new formFields.JsonFormField('Template JSON', 
-                        parentElement,                         
+                new formFields.JsonFormField('Template JSON',
+                        parentElement,
                         templateStore.getTemplateFieldFactory(null, ''),
                         templateStore.setTemplateFieldFactory(null, '')
                 )
         ];
-        
+
         this.updateDeveloperPanel();
     },
     updateDeveloperPanel: function() {
@@ -119,32 +119,32 @@ module.exports = {
     unmountDeveloperPanel: function() {
         var panelID = 'Developer';
         this.panelFormFields[panelID] = [];
-               
+
         // templateStore.updateCallbacks.push(this.updateDeveloperPanel.bind(this));
         // templateStore.updateCallbacks.push(this.updateUserPanel.bind(this));
-        
+
         var parentElement = document.getElementById('panelDeveloper');
         parentElement.innerHTML = "";
     },
-    
-    
+
+
     toggleGroup: function (event) {
         element = event.currentTarget.parentNode;
         element.classList.toggle("active");
         this.updateUserPanel();
     },
     renderMenuGroup: function(parentElement, label) {
-    	var groupElem = document.createElement('div');
-    	var groupTitleElem = document.createElement('h2');
-    	var groupFieldsElem = document.createElement('div');
-    	groupElem.className = 'menuGroup';
-    	groupFieldsElem.className = 'menuGroupFields';
-    	groupTitleElem.innerHTML = label;
-    	groupTitleElem.onclick = this.toggleGroup.bind(this);
-    	groupElem.appendChild(groupTitleElem);
-    	groupElem.appendChild(groupFieldsElem);
+        var groupElem = document.createElement('div');
+        var groupTitleElem = document.createElement('h2');
+        var groupFieldsElem = document.createElement('div');
+        groupElem.className = 'menuGroup';
+        groupFieldsElem.className = 'menuGroupFields';
+        groupTitleElem.innerHTML = label;
+        groupTitleElem.onclick = this.toggleGroup.bind(this);
+        groupElem.appendChild(groupTitleElem);
+        groupElem.appendChild(groupFieldsElem);
         parentElement.appendChild(groupElem);
-        
+
         return groupFieldsElem;
     },
     renderOfferFields: function(template, parentElement) {
@@ -155,67 +155,67 @@ module.exports = {
         var templateGroupIndex = {};
         // split fields to groups
         for (var j = 0;j < templateGroups.length; j++) {
-        	var templateGroup = templateGroups[j];
-        	templateGroup.fields = [];
-        	templateGroupIndex[templateGroup.id] = templateGroup;
+            var templateGroup = templateGroups[j];
+            templateGroup.fields = [];
+            templateGroupIndex[templateGroup.id] = templateGroup;
         }
-    	for (var i = 0; i < templateFields.length; i++) {
+        for (var i = 0; i < templateFields.length; i++) {
             var field = templateFields[i];
             var group = field.group;
             if (templateGroupIndex[group]) {
-            	templateGroupIndex[group].fields.push(field);
+                templateGroupIndex[group].fields.push(field);
             }
-    	}
-        
-    	// render html
+        }
+
+        // render html
         for (var j = 0;j < templateGroups.length; j++) {
-        	var templateGroup = templateGroups[j];
-        	
-        	var label = templateGroups[j].name + ' (' + templateGroups[j].fields.length + ')';
-        	var groupFieldsElem = this.renderMenuGroup(parentElement, label);
-            
-	        for (var i = 0; i < templateGroup.fields.length; i++) {
-	            var field = templateGroup.fields[i];
-	            var type = field.type;
-	            var Type = type[0].toUpperCase() + type.slice(1);
-	            
-	            if (formFields.formFieldTypes[type]) {
-	                list.push(
-	                        new formFields[Type + 'FormField'](field.name || field.id, 
-	                        		groupFieldsElem,                         
-	                                offerStore.getOfferFieldFactory(null, 'variants[0].content.' + field.id),
-	                                offerStore.setOfferFieldFactory(null, 'variants[0].content.' + field.id),
-	                                field.options
-	                        )
-	                );
-	            } else {
-	                var elem = document.createElement('div');
-	                parentElement.appendChild(elem);
-	                elem.innerHTML = 'Unsupported form field type "' + type + '".';
-	            }
-	            
-	        }
+            var templateGroup = templateGroups[j];
+
+            var label = templateGroups[j].name + ' (' + templateGroups[j].fields.length + ')';
+            var groupFieldsElem = this.renderMenuGroup(parentElement, label);
+
+            for (var i = 0; i < templateGroup.fields.length; i++) {
+                var field = templateGroup.fields[i];
+                var type = field.type;
+                var Type = type[0].toUpperCase() + type.slice(1);
+
+                if (formFields.formFieldTypes[type]) {
+                    list.push(
+                            new formFields[Type + 'FormField'](field.name || field.id,
+                                    groupFieldsElem,
+                                    offerStore.getOfferFieldFactory(null, 'variants[0].content.' + field.id),
+                                    offerStore.setOfferFieldFactory(null, 'variants[0].content.' + field.id),
+                                    field.options
+                            )
+                    );
+                } else {
+                    var elem = document.createElement('div');
+                    parentElement.appendChild(elem);
+                    elem.innerHTML = 'Unsupported form field type "' + type + '".';
+                }
+
+            }
         }
         return list;
     },
-    
+
     mountUserPanel: function() {
         var panelID = 'User';
         this.panelFormFields[panelID] = [];
 
         var parentElement = document.getElementById('panelUser');
         var list1 = this.renderOfferFields(templateStore.getTemplate(), parentElement);
-        
+
         var groupFieldsElem = this.renderMenuGroup(parentElement, 'Offer JSON');
         var list2 = [
-                new formFields.JsonFormField('Offer JSON', 
-                		groupFieldsElem,                         
+                new formFields.JsonFormField('Offer JSON',
+                        groupFieldsElem,
                         offerStore.getOfferFieldFactory(null, ''),
                         offerStore.setOfferFieldFactory(null, '')
                 )
-        ];        
+        ];
         this.panelFormFields[panelID] = list1.concat(list2);
-        
+
         offerStore.updateCallbacks.push(this.updateUserPanel.bind(this));
         this.updateUserPanel();
     },
@@ -229,10 +229,10 @@ module.exports = {
     unmountUserPanel: function() {
         var panelID = 'User';
         this.panelFormFields[panelID] = [];
-               
+
         // templateStore.updateCallbacks.push(this.updateDeveloperPanel.bind(this));
         // templateStore.updateCallbacks.push(this.updateUserPanel.bind(this));
-        
+
         var parentElement = document.getElementById('panelUser');
         parentElement.innerHTML = "";
     },
@@ -240,16 +240,16 @@ module.exports = {
     mountContextPanel: function() {
         var panelID = 'Context';
         this.panelFormFields[panelID] = [];
-        
+
         var parentElement = document.getElementById('panelContext');
         this.panelFormFields[panelID] = [
-                new formFields.TextFormField('Persoo AccountID', 
-                        parentElement,                         
+                new formFields.TextFormField('Persoo AccountID',
+                        parentElement,
                         contextStore.getContextFieldFactory(null, 'accountID'),
                         contextStore.setContextFieldFactory(null, 'accountID')
                 ),
                 new formFields.SelectFormField('Preview Product Mode',
-                        parentElement,                         
+                        parentElement,
                         contextStore.getContextFieldFactory(null, 'productPreviewMode'),
                         contextStore.setContextFieldFactory(null, 'productPreviewMode'),
                         [
@@ -259,12 +259,12 @@ module.exports = {
                         ]
                 ),
                 new formFields.TextFormField('Preview Product ID (only for 2nd option)',
-                        parentElement,                         
+                        parentElement,
                         contextStore.getContextFieldFactory(null, 'productPreviewProductID'),
                         contextStore.setContextFieldFactory(null, 'productPreviewProductID')
                 ),
                 new formFields.SelectFormField('Preview on Device',
-                        parentElement,                         
+                        parentElement,
                         contextStore.getContextFieldFactory(null, 'previewDevice'),
                         contextStore.setContextFieldFactory(null, 'previewDevice'),
                         [
@@ -273,31 +273,31 @@ module.exports = {
                             {value: 'mobile', label: 'Mobile'}
                         ]
                 ),
-                new formFields.JsonFormField('Context JSON', 
-                        parentElement,                         
+                new formFields.JsonFormField('Context JSON',
+                        parentElement,
                         contextStore.getContextFieldFactory(null, ''),
                         contextStore.setContextFieldFactory(null, '')
-                )                
+                )
         ];
         contextStore.updateCallbacks.push(this.updateContextPanel.bind(this));
         this.updateContextPanel();
     },
     updateContextPanel: function() {
         this.updatePanelFields('Context');
-    },    
+    },
     unmountContextPanel: function() {
         var panelID = 'Context';
         this.panelFormFields[panelID] = [];
-               
+
         var parentElement = document.getElementById('panelContext');
         parentElement.innerHTML = "";
     },
 
-    
+
     mountPreview: function() {
         var previewIframe = document.getElementById('persooPreview');
         var previewDoc = previewIframe.contentWindow.document;
-        
+
         previewDoc.body.innerHTML = 'Here you will see the preview ...';
     },
     renderPreview: function() {
@@ -310,33 +310,35 @@ module.exports = {
             var currentContext = {};
             this.addProductsToContext(currentContext, currentOffer.variants[0]);
             var previewHTML = persooTemplates.render(currentTemplate, currentOffer.variants[0], currentContext);
-            
+
             // open all link from iFrame in new window
 /*            var baseElem = previewDoc.createElement('base');
             baseElem.target = '_blank';
             previewDoc.head.appendChild(baseElem);
-*/            
+*/
             // add html to preview iFrame
             previewDoc.body.innerHTML = previewHTML ? previewHTML : 'Error: Cannot render template.';
-            
-            // run javascripts contained in the html in iFrame context           
+
+            // run javascripts contained in the html in iFrame context
             var scriptElements = previewDoc.body.getElementsByTagName('script');
             for (var i = 0; i < scriptElements.length; i++) {
-            	previewIframe.contentWindow.eval(scriptElements[i].innerHTML);
+                previewIframe.contentWindow.eval(scriptElements[i].innerHTML);
             }
         }
     },
     addProductsToContext: function(context, offerVariant) {
         var scenarios = offerVariant.scenarios;
         for (var i = 0; i < scenarios.length; i++) {
-            var scenarioConfig = scenarios[i];        
+            var scenarioConfig = scenarios[i];
             context[scenarioConfig.id] = [];
             var list = context[scenarioConfig.id];
             // TODO add support for other Preview product options
             var sampleProduct = contextStore.getContextField(null, 'productPreviewMockProduct')
             for (var j = 0; j < 20; j++) {
-                list.push(sampleProduct);
+                var product = JSON.parse(JSON.stringify(sampleProduct));
+                product.title += ' ' + i + '.' + j;
+                list.push(product);
             }
-        }        
+        }
     }
 };

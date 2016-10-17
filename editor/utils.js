@@ -1,5 +1,5 @@
 module.exports = {
-    /** 
+    /**
      * Are 2 string represenations of a JSON different?
      * @param {string} oldContent  ... stringified json
      * @param {string} newContent
@@ -18,7 +18,7 @@ module.exports = {
     /**
      * Get value of a field in a json in a path.
      * i.e. getFieldFromJSON({a:{b:1}}, "a.b") returns 1.
-     */    
+     */
     getFieldFromJSON: function(json, path) {
         var result = json;
         if (path) {
@@ -37,7 +37,7 @@ module.exports = {
         var obj = json;
         var parentObj = null;
         var lastSubField = null;
-        
+
         if (path) {
             var subFields = path.split(/]?\.|\[/);
             for (var i = 0; i < subFields.length; i++) {

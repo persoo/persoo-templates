@@ -6,13 +6,13 @@ module.exports = {
     templates: {},
     currentTemplateID: null,
     updateCallbacks: [], // list of callback functions
-    
+
     callUpdateNotifications: function() {
         for (var i = 0; i < this.updateCallbacks.length; i++) {
             this.updateCallbacks[i]();
         }
     },
-    
+
     readTemplatesFromURL: function(url, callback) {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
@@ -21,11 +21,11 @@ module.exports = {
             callback(data);
             }
         };
-        
+
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
     },
-    
+
     updateTemplateIDOptions: function(templates, currentTemplateID) {
         var templateIDs = Object.keys(templates);
         var html = '';
@@ -38,7 +38,7 @@ module.exports = {
         var selectElem = document.getElementById('templateID');
         selectElem.innerHTML = html;
     },
-    
+
     setCurrentTemplateID: function(templateID) {
         this.currentTemplateID = templateID;
         console.log('Change template to id: ' + templateID);
@@ -53,10 +53,10 @@ module.exports = {
         this.templates[templateID] = templateJSON;
         this.callUpdateNotifications();
     },
-    
+
     getTemplateField(templateID, path) {
         var template = this.getTemplate(templateID);
-        
+
         return utils.getFieldFromJSON(template, path);
     },
     setTemplateField(templateID, path, value) {
@@ -64,7 +64,7 @@ module.exports = {
         template = utils.updateFieldInJSON(template, path, value);
         this.setTemplate(templateID, template);
     },
-    
+
     // return getTemplateField function, which appends pathPrefix to path
     getTemplateFieldFactory(templateID, pathPrefix) {
         var getterFunc = this.getTemplateField.bind(this, templateID);
@@ -78,10 +78,10 @@ module.exports = {
         var setterFunc = this.setTemplateField.bind(this, templateID);
         return function (path, value) {
             path = path ? pathPrefix + '.' + path : pathPrefix;
-            return setterFunc(path, value);    
+            return setterFunc(path, value);
         };
     },
-    
+
     reloadTemplates: function() {
         var myThis = this;
         this.readTemplatesFromURL(TEMPLATES_FILENAME, function(data){
@@ -96,22 +96,22 @@ module.exports = {
         });
         console.log('Reloading templates from URL.');
     },
-        
+
     createDefaultContent: function(templateID) {
         var template = this.templates[templateID]
-        if (!template) 
+        if (!template)
             return null;
-        
+
         var offer = {
                 variants:[{
                     templateID: templateID,
                     content: {},
                     scenarios: []
-                }]            
+                }]
         };
         var offerContent = offer.variants[0].content;
         var offerScenarios = offer.variants[0].scenarios;
-        
+
         if (template.fields) {
             for (var i = 0; i < template.fields.length; i++) {
                 var field = template.fields[i];
@@ -126,7 +126,7 @@ module.exports = {
         } else {
             this.notifyTemplateError(templateID, 'has no fields.')
         }
-        
+
         if (template.minScenariosCount && template.minScenariosCount > 0) {
             for (var i = 0; i < template.minScenariosCount; i++) {
                 offerScenarios.push({id: 'products' + (i + 1), scenarioID: 'MockScnearioID'});
@@ -134,8 +134,8 @@ module.exports = {
         }
 
         return offer;
-    },    
-    
+    },
+
     notifyTemplateError: function(templateID, message) {
         // TODO ui notifications
         console.warn('Template with id "' + templateID + '": ' + message);

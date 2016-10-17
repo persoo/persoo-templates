@@ -9,24 +9,24 @@ module.exports = {
     // currentOfferID: null, // use templates.currentTemplateID instead
     // Note: templateID == offerID.
     updateCallbacks: [], // list of callback functions
-    
+
     callUpdateNotifications: function() {
         for (var i = 0; i < this.updateCallbacks.length; i++) {
             this.updateCallbacks[i]();
         }
     },
-    
+
     getOffer: function(offerID) {
         if (!offerID) offerID = templates.currentTemplateID;
         return this.offers[offerID];
-    },    
+    },
     setOffer: function(offerID, offerJSON) {
         if (!offerID) offerID = templates.currentTemplateID;
         this.offers[offerID] = offerJSON;
         this.callUpdateNotifications();
     },
     getOfferField(offerID, path) {
-        var offer = this.getOffer(offerID);        
+        var offer = this.getOffer(offerID);
         return utils.getFieldFromJSON(offer, path);
     },
     setOfferField(offerID, path, value) {
@@ -47,13 +47,13 @@ module.exports = {
         var setterFunc = this.setOfferField.bind(this, offerID);
         return function (path, value) {
             path = path ? pathPrefix + '.' + path : pathPrefix;
-            return setterFunc(path, value);    
+            return setterFunc(path, value);
         };
     },
-    
+
     // Fix fields in case, the default offer fields has changed
     mergeContentWithDefault: function(templateID) {
-        var offer = templates.createDefaultContent(templateID)        
+        var offer = templates.createDefaultContent(templateID)
         var oldOffer = this.offers[templateID];
         if (oldOffer) {
             // merge old fields to new offer
@@ -63,10 +63,10 @@ module.exports = {
                 if (typeof oldOfferContent[fieldID] != 'undefined') {
                     offerContent[fieldID] = oldOfferContent[fieldID];
                 }
-            } 
-        }     
+            }
+        }
         this.offers[templateID] = offer;
-        
+
         // notify all
     }
 };

@@ -22,18 +22,18 @@ function FormField(formFieldType, label, parentElement, dataGetter, dataSetter) 
     this.parentElement = parentElement;
     this.dataGetter = dataGetter;
     this.dataSetter = dataSetter;
-    
+
     this.element = null;
     this.value = null;
-    
+
     // create wrapper
     this.element = document.createElement("div");
     this.element.className = 'formField ' + formFieldType ;
-    this.element.innerHTML = '<span class="label">' + this.label + ':</span>' + 
+    this.element.innerHTML = '<span class="label">' + this.label + ':</span>' +
                              '<span class="field"></span>';
     this.formElement = null;
     this.formElementParent = this.element.children[1];
-    
+
     this.parentElement.appendChild(this.element);
 
     return this;
@@ -55,8 +55,8 @@ FormField.prototype.onChange = function (value){
         this.parentOnChange(this.formElement.value);
     }
 };
-/** 
- * Save data using dataSetter 
+/**
+ * Save data using dataSetter
  * if they are valid and different to data in store.
  */
 FormField.prototype.parentOnChange = function (value){
@@ -94,7 +94,7 @@ SectionFormField.prototype.constructor = SectionFormField;
 
 function TextFormField(label, parentElement, dataGetter, dataSetter) {
     FormField.call(this, formFieldTypes.text, label, parentElement, dataGetter, dataSetter);
-    
+
     var value = this.dataGetter("");
     this.formElementParent.innerHTML = '<input type="text" value="' + value + '">';
     this.formElement = this.formElementParent.children[0];
@@ -106,7 +106,7 @@ TextFormField.prototype.constructor = TextFormField;
 
 function NumberFormField(label, parentElement, dataGetter, dataSetter) {
     FormField.call(this, formFieldTypes.number, label, parentElement, dataGetter, dataSetter);
-    
+
     var value = this.dataGetter("");
     this.formElementParent.innerHTML = '<input type="number" value="' + value + '">';
     this.formElement = this.formElementParent.children[0];
@@ -129,7 +129,7 @@ NumberFormField.prototype.onChange = function (value){
 
 function ColorFormField(label, parentElement, dataGetter, dataSetter) {
     FormField.call(this, formFieldTypes.color, label, parentElement, dataGetter, dataSetter);
-    
+
     var value = this.dataGetter("");
     var color = tinycolor(value);
     this.formElementParent.innerHTML = '<span class="colorPreview" style="background-color:' + value + ';"> ' +
@@ -146,7 +146,7 @@ ColorFormField.prototype.constructor = ColorFormField;
 ColorFormField.prototype.update = function (){
     var value = this.dataGetter("")
     var color = tinycolor(value);
-    
+
     if (this.formElement && this.formElement2 && color.isValid()) {
         this.formElement.value = color.toHexString();
         this.formElement2.value = color.getAlpha();
@@ -159,7 +159,7 @@ ColorFormField.prototype.onChange = function (value){
         var alpha = parseFloat(this.formElement2.value);
         color.setAlpha(alpha);
         this.parentOnChange(color.toRgbString());
-        
+
         this.colorPreviewElement.style.backgroundColor = color.toRgbString();
     }
 };
@@ -167,7 +167,7 @@ ColorFormField.prototype.onChange = function (value){
 
 function CheckboxFormField(label, parentElement, dataGetter, dataSetter) {
     FormField.call(this, formFieldTypes.checkbox, label, parentElement, dataGetter, dataSetter);
-    
+
     var value = this.dataGetter("");
     this.formElementParent.innerHTML = '<input type="checkbox"' + (value ? ' checked' : '' ) + '>';
     this.formElement = this.formElementParent.children[0];
@@ -190,7 +190,7 @@ CheckboxFormField.prototype.onChange = function (value){
 
 function SelectFormField(label, parentElement, dataGetter, dataSetter, options) {
     FormField.call(this, formFieldTypes.select, label, parentElement, dataGetter, dataSetter);
-    
+
     var value = this.dataGetter("");
     var html = '<select>';
     for (var i = 0; i < options.length; i++) {
@@ -209,17 +209,17 @@ SelectFormField.prototype.constructor = SelectFormField;
 
 function JsonFormField(label, parentElement, dataGetter, dataSetter) {
     FormField.call(this, formFieldTypes.input, label, parentElement, dataGetter, dataSetter);
-    
+
     var value = this.dataGetter("");
     var jsonContent = JSON.stringify(value, false, 4) || "";
     this.formElementParent.innerHTML = '<textarea>' + jsonContent + '</textarea>';
     this.formElement = this.formElementParent.children[0];
-        
+
     this.editor = CodeMirror.fromTextArea(this.formElement, {
       mode: 'javascript',
       lineWrapping: true,
       extraKeys: {
-        'Ctrl-Space': 'autocomplete',            
+        'Ctrl-Space': 'autocomplete',
         'F11': function(cm) {
                    cm.setOption("fullScreen", !cm.getOption("fullScreen"));
         },
@@ -229,7 +229,7 @@ function JsonFormField(label, parentElement, dataGetter, dataSetter) {
       },
       lineNumbers: true
     });
-    this.editor.on('changes', this.onChange.bind(this));    
+    this.editor.on('changes', this.onChange.bind(this));
 }
 JsonFormField.prototype = Object.create(FormField.prototype);
 JsonFormField.prototype.constructor = JsonFormField;
@@ -262,17 +262,17 @@ JsonFormField.prototype.onChange = function() {
 
 function HtmlFormField(label, parentElement, dataGetter, dataSetter) {
     FormField.call(this, formFieldTypes.input, label, parentElement, dataGetter, dataSetter);
-    
+
     var value = this.dataGetter("");
     if (typeof value !== 'string') value = '[Error: value is not a string.]';
     this.formElementParent.innerHTML = '<textarea>' + value + '</textarea>';
     this.formElement = this.formElementParent.children[0];
-        
+
     this.editor = CodeMirror.fromTextArea(this.formElement, {
       mode: 'htmlmixed',
       lineWrapping: true,
       extraKeys: {
-        'Ctrl-Space': 'autocomplete',            
+        'Ctrl-Space': 'autocomplete',
         'F11': function(cm) {
                    cm.setOption("fullScreen", !cm.getOption("fullScreen"));
         },
@@ -282,16 +282,16 @@ function HtmlFormField(label, parentElement, dataGetter, dataSetter) {
       },
       lineNumbers: true
     });
-    this.editor.on('changes', this.onChange.bind(this));    
+    this.editor.on('changes', this.onChange.bind(this));
 }
 HtmlFormField.prototype = Object.create(FormField.prototype);
 HtmlFormField.prototype.constructor = HtmlFormField;
 HtmlFormField.prototype.update = function() {
-    var value = this.dataGetter("");    
+    var value = this.dataGetter("");
     if (typeof value != 'undefined') {
         if (typeof value !== 'string') value = '[Error: value is not a string.]';
         // update only if values are different
-        var editorValue = this.editor.getDoc().getValue();        
+        var editorValue = this.editor.getDoc().getValue();
         if (editorValue != value) {
             this.editor.getDoc().setValue(value);
         }
@@ -306,17 +306,17 @@ HtmlFormField.prototype.onChange = function() {
 
 function CssFormField(label, parentElement, dataGetter, dataSetter) {
     FormField.call(this, formFieldTypes.input, label, parentElement, dataGetter, dataSetter);
-    
+
     var value = this.dataGetter("");
     if (typeof value !== 'string') value = '[Error: value is not a string.]';
     this.formElementParent.innerHTML = '<textarea>' + value + '</textarea>';
     this.formElement = this.formElementParent.children[0];
-        
+
     this.editor = CodeMirror.fromTextArea(this.formElement, {
       mode: 'css',
       lineWrapping: true,
       extraKeys: {
-        'Ctrl-Space': 'autocomplete',            
+        'Ctrl-Space': 'autocomplete',
         'F11': function(cm) {
                    cm.setOption("fullScreen", !cm.getOption("fullScreen"));
         },
@@ -326,16 +326,16 @@ function CssFormField(label, parentElement, dataGetter, dataSetter) {
       },
       lineNumbers: true
     });
-    this.editor.on('changes', this.onChange.bind(this));    
+    this.editor.on('changes', this.onChange.bind(this));
 }
 CssFormField.prototype = Object.create(FormField.prototype);
 CssFormField.prototype.constructor = CssFormField;
 CssFormField.prototype.update = function() {
-    var value = this.dataGetter("");    
+    var value = this.dataGetter("");
     if (typeof value != 'undefined') {
         if (typeof value !== 'string') value = '[Error: value is not a string.]';
         // update only if values are different
-        var editorValue = this.editor.getDoc().getValue();        
+        var editorValue = this.editor.getDoc().getValue();
         if (editorValue != value) {
             this.editor.getDoc().setValue(value);
         }

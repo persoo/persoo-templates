@@ -4,13 +4,13 @@ module.exports = {
     contexts: {},
     currentContextID: 'theOne',
     updateCallbacks: [], // list of callback functions
-    
+
     callUpdateNotifications: function() {
         for (var i = 0; i < this.updateCallbacks.length; i++) {
             this.updateCallbacks[i]();
         }
     },
-       
+
     getContext: function(contextID) {
         if (!contextID) contextID = this.currentContextID;
         return this.contexts[contextID];
@@ -20,10 +20,10 @@ module.exports = {
         this.contexts[contextID] = contextJSON;
         this.callUpdateNotifications();
     },
-    
+
     getContextField(contextID, path) {
         var context = this.getContext(contextID);
-        
+
         return utils.getFieldFromJSON(context, path);
     },
     setContextField(contextID, path, value) {
@@ -31,7 +31,7 @@ module.exports = {
         context = utils.updateFieldInJSON(context, path, value);
         this.setContext(contextID, context);
     },
-    
+
     // return getContextField function, which appends pathPrefix to path
     getContextFieldFactory(contextID, pathPrefix) {
         var getterFunc = this.getContextField.bind(this, contextID);
@@ -45,10 +45,10 @@ module.exports = {
         var setterFunc = this.setContextField.bind(this, contextID);
         return function (path, value) {
             path = path ? pathPrefix + '.' + path : pathPrefix;
-            return setterFunc(path, value);    
+            return setterFunc(path, value);
         };
     },
-      
+
     createDefaultContext: function(contextID) {
         var context = {
                 accountID: 'qhql07k7dh5h9l7oarrp9tlt',
@@ -60,7 +60,7 @@ module.exports = {
                     price: 1990,
                     priceOriginal: 2990,
                     link: '#',
-                    imageLink: 'http://lorempixel.com/300/300/food'                    
+                    imageLink: 'http://lorempixel.com/300/300/food'
                 },
                 previewDevice: 'desktop'
         };
