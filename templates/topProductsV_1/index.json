@@ -1,0 +1,280 @@
+{
+    "class": "webWidget",
+    "fields": [
+        {
+            "defaultValue": "Nejprodávanější",
+            "group": "main",
+            "id": "tabName1",
+            "name": "Tab Name 1",
+            "type": "text"
+        },
+        {
+            "defaultValue": "Co právě frčí",
+            "group": "main",
+            "id": "tabName2",
+            "name": "Tab Name 2",
+            "type": "text"
+        },
+        {
+            "group": "design",
+            "id": "section_tabs",
+            "name": "Tabs",
+            "type": "section"
+        },
+        {
+            "defaultValue": 18,
+            "group": "design",
+            "id": "tabsFontSize",
+            "name": "Font Size (in px)",
+            "type": "number"
+        },
+        {
+            "defaultValue": 5,
+            "group": "design",
+            "id": "tabsSpace",
+            "name": "Space Between Tabs (in px)",
+            "type": "number"
+        },
+        {
+            "defaultValue": "15px 6px 15px 6px",
+            "group": "design",
+            "id": "tabsPaddingSize",
+            "name": "Padding (with px)",
+            "type": "text"
+        },
+        {
+            "defaultValue": 1,
+            "group": "design",
+            "id": "tabsBorderWidth",
+            "name": "Border Width (in px)",
+            "type": "number"
+        },
+        {
+            "defaultValue": "#dfdfdf",
+            "group": "design",
+            "id": "tabsBorderColor",
+            "name": "Border Color",
+            "type": "color"
+        },
+        {
+            "defaultValue": "#EEEEEE",
+            "group": "design",
+            "id": "tabsBackgroundColorNormal",
+            "name": "Background Color",
+            "type": "color"
+        },
+        {
+            "defaultValue": "#f7f7f7",
+            "group": "design",
+            "id": "tabsBackgroundColorHover",
+            "name": "Background Color Hover",
+            "type": "color"
+        },
+        {
+            "defaultValue": "#FFFFFF",
+            "group": "design",
+            "id": "tabsBackgroundColorActive",
+            "name": "Background Color Active",
+            "type": "color"
+        },
+        {
+            "defaultValue": "#000000",
+            "group": "design",
+            "id": "tabsTextColor",
+            "name": "Text Color",
+            "type": "color"
+        },
+        {
+            "defaultValue": "#860929",
+            "group": "design",
+            "id": "tabsTextColorHover",
+            "name": "Text Color Hover",
+            "type": "color"
+        },
+        {
+            "defaultValue": "#cb1040",
+            "group": "design",
+            "id": "tabsTextColorActive",
+            "name": "Text Color Active",
+            "type": "color"
+        },
+        {
+            "group": "design",
+            "id": "section_items",
+            "name": "Items",
+            "type": "section"
+        },
+        {
+            "defaultValue": 8,
+            "group": "design",
+            "id": "itemBoxSpace",
+            "name": "Space Between Items (in px)",
+            "type": "text"
+        },
+        {
+            "defaultValue": 1,
+            "group": "design",
+            "id": "itemBoxBorderWidth",
+            "name": "Item Border Width (in px)",
+            "type": "number"
+        },
+        {
+            "defaultValue": "#dfdfdf",
+            "group": "design",
+            "id": "itemBoxBorderColor",
+            "name": "Item Border Color",
+            "type": "color"
+        },
+        {
+            "defaultValue": "#FFFFFF",
+            "group": "design",
+            "id": "itemBoxBackgroundColor",
+            "name": "Item Background Color",
+            "type": "color"
+        },
+        {
+            "defaultValue": "#dfdfdf",
+            "group": "design",
+            "id": "itemsNumberBackgroundColorNormal",
+            "name": "Medal Background Color",
+            "type": "color"
+        },
+        {
+            "defaultValue": "#000000",
+            "group": "design",
+            "id": "itemsNumberTextColorNormal",
+            "name": "Medal Text Color",
+            "type": "color"
+        },
+        {
+            "defaultValue": 54,
+            "group": "design",
+            "id": "itemsImageSize",
+            "name": "Image Size (in px)",
+            "type": "number"
+        },
+        {
+            "defaultValue": 15,
+            "group": "design",
+            "id": "itemsTitleFontSize",
+            "name": "Title Font Size (in px)",
+            "type": "number"
+        },
+        {
+            "defaultValue": "#cb1040",
+            "group": "design",
+            "id": "itemsTitleTextColor",
+            "name": "Title Text Color",
+            "type": "color"
+        },
+        {
+            "defaultValue": "#860929",
+            "group": "design",
+            "id": "itemsTitleTextColorHover",
+            "name": "Title Text Color Hover",
+            "type": "color"
+        },
+        {
+            "defaultValue": true,
+            "group": "design",
+            "id": "showDescription",
+            "name": "Show Description in Items",
+            "type": "checkbox"
+        },
+        {
+            "defaultValue": 12,
+            "group": "design",
+            "id": "itemsDescFontSize",
+            "name": "Description Font Size (in px)",
+            "type": "number"
+        },
+        {
+            "defaultValue": 2,
+            "group": "design",
+            "id": "itemsDescLines",
+            "name": "Description How Much Lines?",
+            "type": "number"
+        },
+        {
+            "defaultValue": "#000000",
+            "group": "design",
+            "id": "itemsDescTextColor",
+            "name": "Description Text Color",
+            "type": "color"
+        },
+        {
+            "defaultValue": true,
+            "group": "design",
+            "id": "showOriginalPrice",
+            "name": "Show Original Price",
+            "type": "checkbox"
+        },
+        {
+            "defaultValue": 13,
+            "group": "design",
+            "id": "itemsPriceFontSizeOriginal",
+            "name": "Price Font Size Before Sale (in px)",
+            "type": "number"
+        },
+        {
+            "defaultValue": 16,
+            "group": "design",
+            "id": "itemsPriceFontSize",
+            "name": "Price Font Size After Sale(in px)",
+            "type": "number"
+        },
+        {
+            "defaultValue": "#cb1040",
+            "group": "design",
+            "id": "itemsPriceTextColor",
+            "name": "Price Text Color",
+            "type": "color"
+        },
+        {
+            "group": "design",
+            "id": "section_buttons",
+            "name": "Buttons",
+            "type": "section"
+        },
+        {
+            "defaultValue": "#cb1040",
+            "group": "design",
+            "id": "buttonsBackgroundColor",
+            "name": "Button Background Color",
+            "type": "color"
+        },
+        {
+            "defaultValue": "#860929",
+            "group": "design",
+            "id": "buttonsBackgroundColorHover",
+            "name": "Button Background Color Hover",
+            "type": "color"
+        },
+        {
+            "defaultValue": "#FFFFFF",
+            "group": "design",
+            "id": "buttonsArrowColor",
+            "name": "Button Arrow Color",
+            "type": "color"
+        },
+        {
+            "defaultValue": "#FFFFFF",
+            "group": "design",
+            "id": "buttonsArrowColorHover",
+            "name": "Button Arrow Color Hover",
+            "type": "color"
+        }
+    ],
+    "groups": [
+        {
+            "id": "main",
+            "name": "Content"
+        },
+        {
+            "id": "design",
+            "name": "Design"
+        }
+    ],
+    "minScenariosCount": 2,
+    "name": "TopProducts (beta)"
+}
