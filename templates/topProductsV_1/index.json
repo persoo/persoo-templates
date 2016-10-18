@@ -140,7 +140,7 @@
         {
             "defaultValue": 54,
             "group": "design",
-            "id": "itemsImageSize",
+            "id": "itemImageSize",
             "name": "Image Size (in px)",
             "type": "number"
         },
@@ -160,7 +160,7 @@
         {
             "defaultValue": "#cb1040",
             "group": "design",
-            "id": "itemsTitleTextColor",
+            "id": "itemTitleTextColor",
             "name": "Title Text Color",
             "type": "color"
         },
@@ -194,7 +194,7 @@
         {
             "defaultValue": "#333333",
             "group": "design",
-            "id": "itemsDescTextColor",
+            "id": "itemDescriptionTextColor",
             "name": "Description Text Color",
             "type": "color"
         },
@@ -248,7 +248,7 @@
         {
             "defaultValue": "#FFFFFF",
             "group": "design",
-            "id": "buttonsArrowColor",
+            "id": "buttonsTextColor",
             "name": "Button Icon/Text Color",
             "type": "color"
         },

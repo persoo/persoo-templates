@@ -85,7 +85,7 @@ function printPrice(p){
     #persoo--<%= offerID %> .persoo--topProducts__list__item {
             margin: <%= itemBoxSpace %>px 0 0 0;
             border: <%= itemBoxBorderWidth %>px solid <%= itemBoxBorderColor %>;
-            min-height: <%= itemsImageSize+6 %>px;
+            min-height: <%= itemImageSize+6 %>px;
             background-color: <%= itemBoxBackgroundColor %>;
     }
     .persoo--topProducts__list__item__number {
@@ -117,15 +117,15 @@ function printPrice(p){
             text-align: center;
     }
     #persoo--<%= offerID %> .persoo--topProducts__list__item__image {
-            width: <%= itemsImageSize %>px;
+            width: <%= itemImageSize %>px;
     }
     .persoo--topProducts__list__item__image img {
             width: auto;
             height: auto;
     }
     #persoo--<%= offerID %> .persoo--topProducts__list__item__image img {
-            max-width: <%= itemsImageSize %>px;
-            max-height: <%= itemsImageSize %>px;
+            max-width: <%= itemImageSize %>px;
+            max-height: <%= itemImageSize %>px;
     }
     .persoo--topProducts__list__item__textWrapper {
             display: table-cell;
@@ -160,7 +160,7 @@ function printPrice(p){
             text-overflow: ellipsis;
     }
     #persoo--<%= offerID %> .persoo--topProducts__list__item__text__title a {
-            color: <%= itemsTitleTextColor %>;
+            color: <%= itemTitleTextColor %>;
     }
     .persoo--topProducts__list__item__text__title a:hover {
             text-decoration: underline;
@@ -180,7 +180,7 @@ function printPrice(p){
     #persoo--<%= offerID %> .persoo--topProducts__list__item__text__description {
             font: <%= itemDescriptionFont %>;
             height: <%= 1.1*itemDescriptionLinesCount %>em;
-            color:<%= itemsDescTextColor %>;
+            color:<%= itemDescriptionTextColor %>;
     }
     .persoo--topProducts__list__item__text__price {
             position: absolute;
@@ -221,7 +221,7 @@ function printPrice(p){
     }
 
     #persoo--<%= offerID %> .persoo--topProducts__list__item:hover .persoo--topProducts__list__item__text__description a {
-            color:<%= itemsTitleTextColor %>;
+            color:<%= itemTitleTextColor %>;
     }
 
     .persoo--topProducts__showMore {
@@ -266,7 +266,7 @@ function printPrice(p){
             transform:rotate(45deg);
     }
     #persoo--<%= offerID %> .persoo--topProducts__showMore__toggle__ring__square__white {
-            border: 5px solid <%= buttonsArrowColor %>;
+            border: 5px solid <%= buttonsTextColor %>;
     }
     .persoo--topProducts__showMore__toggle:hover .persoo--topProducts__showMore__toggle__ring {
             opacity: 0.8;
