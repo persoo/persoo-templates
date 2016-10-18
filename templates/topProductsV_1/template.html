@@ -1,103 +1,316 @@
 <%
-    var offerID = offerID || 'randomOfferID';
-    var postPriceCurrency = 'K&#269;';
+/* TODO use flex to display divs inside "item" */
+var offerID = offerID || (typeof _offerID !== 'undefined' ? _offerID : 'randomOfferID');
+var postPriceCurrency = 'K&#269;';
 
-    var productListNames = [tabName1, tabName2];
-    var productLists = [products1, products2];
+var productListNames = [tabName1, tabName2];
+var productLists = [products1, products2];
 
-    /* height and top price box for mobile version < 964 */
-    var itemsPriceHeight=itemsPriceFontSizeOriginal*1.2;
-    if (itemsPriceFontSize>=itemsPriceFontSizeOriginal) {
-        itemsPriceHeight=itemsPriceFontSize*1.2;
-    }
-    var itemsPriceTop=11+10+itemsTitleFontSize*1.1;
-    if (showDescription == true) {
-        itemsPriceTop=11+10+itemsTitleFontSize*1.1+3+itemsDescFontSize*1.1*itemsDescLines;
-    }
-    /* border bottom showDescription */
-    var itemBoxBorderWidthBottom = 0;
-    if (itemBoxSpace > 0) {
-        itemBoxBorderWidthBottom = itemBoxBorderWidth;
-    }
-
-    function printPrice(p){
-      return String(Math.round(p)).replace(/(.*)([0-9]{3})/,'$1 $2');
-    }
+function printPrice(p){
+  return String(Math.round(p)).replace(/(.*)([0-9]{3})/,'$1 $2');
+}
 %>
 <div id="persoo--<%= offerID %>"
      class="persoo persoo--topProdcts"
 >
 <% if (productLists[0].length >= 3 || productLists[1].length >= 3) { %>
     <style>
-    .persoo--topProducts {margin:-28px 0 30px 0;padding-top:28px;}
-    .persoo--topProducts * {-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;}
+    .persoo--topProducts__tabs {
+            width:100%;
+            display:inline-block;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__tabs {
+            border-bottom:<%= tabsBorderWidth %>px solid <%= tabsBorderColor %>;
+    }
+    .persoo--topProducts__tabs a {
+            float:left;
+            margin-right:5px;
+            display:inline-block;
+            cursor: pointer;
+            padding:10px;
+            line-height:1em;
+            text-decoration:none;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__tabs a {
+            margin-top: <%= tabsBorderWidth %>px;
+            color:<%= tabsTextColor %>;
+            font:<%= tabsFont %>;
+            background:<%= tabsBackgroundColorNormal %>;
+    }
+    .persoo--topProducts__tabs a[data-active="true"] {
+            font-weight:bold;
+            margin-top: 0;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__tabs a[data-active="true"] {
+            color:<%= tabsTextColorActive %>;
+            background:<%= tabsBackgroundColorActive %>;
+            margin-bottom:-<%= tabsBorderWidth %>px;
+            border: <%= tabsBorderWidth %>px solid <%= tabsBorderColor %>;
+            border-bottom-color: <%= tabsBackgroundColorNormal %>;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__tabs a:hover {
+            background:<%= tabsBackgroundColorHover %>;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__tabs a[data-active="true"]:hover {
+            background:<%= tabsBackgroundColorActive %>;
+    }
+    .persoo--topProducts__tabs a:last-of-type {
+            margin-right:0;
+    }
+    .persoo--topProducts__list {
+            display:none;
+    }
+    .persoo--topProducts__list[data-active="true"] {
+            display:block;
+    }
+    .persoo--topProducts__list__moreProducts {
+            display: block;
+            height: 0px;
+            width: 100%;
+            overflow: hidden;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            transition: all 0.3s;
+    }
+    .persoo--topProducts__list__moreProducts__inner {
+            width:100%;
+    }
+    .persoo--topProducts__list__item {
+            position: relative;
+            padding: 5px 0;
+            width: 100%;
+            clear:both;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__list__item {
+            margin: <%= itemBoxSpace %>px 0 0 0;
+            border: <%= itemBoxBorderWidth %>px solid <%= itemBoxBorderColor %>;
+            min-height: <%= itemsImageSize+6 %>px;
+            background-color: <%= itemBoxBackgroundColor %>;
+    }
+    .persoo--topProducts__list__item__number {
+            display: table-cell;
+            vertical-align: middle;
+            width: 35px;
+            padding: 19px 0;
+    }
+    .persoo--topProducts__list__item__number div {
+            float: left;
+            width: 2em;
+            height: 1.8em;
+            font-size: 0.85em;
+            line-height: 1.8em;
+            letter-spacing: 0;
+            text-align: center;
+            -webkit-border-radius: 0 4px 4px 0;
+            -moz-border-radius: 0 4px 4px 0;
+            border-radius: 0 4px 4px 0;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__list__item__number div {
+            color: <%= itemNumberingTextColor %>;
+            background-color: <%= itemNumberingBackgroundColor %>;
+    }
+    .persoo--topProducts__list__item__image {
+            display: table-cell;
+            vertical-align: middle;
+            padding: 3px 5px;
+            text-align: center;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__list__item__image {
+            width: <%= itemsImageSize %>px;
+    }
+    .persoo--topProducts__list__item__image img {
+            width: auto;
+            height: auto;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__list__item__image img {
+            max-width: <%= itemsImageSize %>px;
+            max-height: <%= itemsImageSize %>px;
+    }
+    .persoo--topProducts__list__item__textWrapper {
+            display: table-cell;
+            vertical-align: middle;
+            margin: 0 0;
+            padding: 3px 0;
+            text-align: left;
+    }
+    .persoo--topProducts__list__item__text {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+    }
+    .persoo--topProducts__list__item__text__title {
+            margin-right: 120px;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__list__item__text__title {
+            font: <%= itemTitleFont %>;
+    }
+    .persoo--topProducts__list__item__text__title a {
+            font-weight: bold;
+            max-width: 100%;
+            height: 1.1em;
+            line-height: 1.1em;
+            overflow: hidden;
+            white-space: nowrap;
+            display: inline-block;
+            text-decoration: none;
+            -ms-text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__list__item__text__title a {
+            color: <%= itemsTitleTextColor %>;
+    }
+    .persoo--topProducts__list__item__text__title a:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+            filter: brightness(50%);
+    }
+    .persoo--topProducts__list__item__text__description {
+            line-height: 1.1em;
+            overflow: hidden;
+            margin: 0 120px 0 0;
+            padding: 0;
+            display: inline-block;
+            -ms-text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__list__item__text__description {
+            font: <%= itemDescriptionFont %>;
+            height: <%= 1.1*itemDescriptionLinesCount %>em;
+            color:<%= itemsDescTextColor %>;
+    }
+    .persoo--topProducts__list__item__text__price {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            text-align: right;
+            padding: 3px 8px 3px 0;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__list__item__text__price {
+            font: <%= itemPriceFont %>;
+    }
+    .persoo--topProducts__list__item__text__price small {
+            font-size:0.8em;
+    }
+    .persoo--topProducts__list__item__text__price > del {
+            font-size: smaller;
+            float: left;
+            width: 100%;
+            font-weight: bold;
+            vertical-align: sub;
+            line-height: 1.1em;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__list__item__text__price > del {
+            color: <%= itemPriceOriginalTextColor %>;
+    }
+    .persoo--topProducts__list__item__text__price > div {
+            float:left;
+            width:100%;
+            vertical-align:sub;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__list__item__text__price > div {
+            color:<%= itemPriceTextColor %>;
+    }
+    .persoo--topProducts__list__item__text__price > .persoo-clear {
+            float: none;
+            clear: both;
+    }
 
-    .persoo--topProducts__tabs {border-bottom:<%= tabsBorderWidth %>px solid <%= tabsBorderColor %>;width:100%;display:inline-block;}
-    .persoo--topProducts__tabs a {float:left;margin-right:<%= tabsSpace %>px;color:<%= tabsTextColor %>;display:inline-block;cursor: pointer;font-size:<%= tabsFontSize %>px;background:<%= tabsBackgroundColorNormal %>;padding:<%= tabsPaddingSize %>;font-weight:normal;line-height:1em;}
-    .persoo--topProducts__tabs a[data-active="true"] {color:<%= tabsTextColorActive %>;background:<%= tabsBackgroundColorActive %>;margin-bottom:-<%= tabsBorderWidth %>px;border-top:<%= tabsBorderWidth %>px solid <%= tabsBorderColor %>;border-left:<%= tabsBorderWidth %>px solid <%= tabsBorderColor %>;border-right:<%= tabsBorderWidth %>px solid <%= tabsBorderColor %>;border-bottom:<%= tabsBorderWidth %>px solid <%= tabsBackgroundColorNormal %>;text-decoration:none;font-weight:bold;}
-    .persoo--topProducts__tabs a:hover {color:<%= tabsTextColorHover %>;background:<%= tabsBackgroundColorHover %>;text-decoration:none;}
-    .persoo--topProducts__tabs a[data-active="true"]:hover {text-decoration:none;background:<%= tabsBackgroundColorActive %>;}
-    .persoo--topProducts__tabs a:last-of-type {margin-right:0;}
+    #persoo--<%= offerID %> .persoo--topProducts__list__item:hover .persoo--topProducts__list__item__text__description a {
+            color:<%= itemsTitleTextColor %>;
+    }
 
-    .persoo--topProducts__list {display:none;}
-    .persoo--topProducts__list[data-active="true"] {display:block;}
-    .persoo--topProducts__list__moreProducts {display:block;height:0px;width:100%;overflow:hidden;-webkit-transition: all 0.3s;-moz-transition: all 0.3s;-o-transition: all 0.3s;transition: all 0.3s;}
-    .persoo--topProducts__list__moreProducts__inner {display:inline-block;width:100%;}
+    .persoo--topProducts__showMore {
+            width:100%;
+            display:block!important;
+            text-align:center;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__showMore {
+            margin:<%= itemBoxSpace %>px 0 0 0;
+            border-top:<%= itemBoxBorderWidth %>px solid <%= tabsBorderColor %>;
+    }
+    .persoo--topProducts__showMore__toggle {
+            width:90px;
+            height:30px;
+            overflow:hidden;
+            display:inline-block;
+    }
+    .persoo--topProducts__showMore__toggle__ring {
+            cursor: pointer;
+            display:block;
+            width:90px;
+            height:60px;
+            margin-top:-30px;
+            -webkit-border-radius:7px;
+            -moz-border-radius:7px;
+            border-radius:7px;
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__showMore__toggle__ring {
+            background-color:<%= buttonsBackgroundColor %>;
+    }
+    .persoo--topProducts__showMore__toggle__ring__square {
+            width:20px;
+            height:20px;
+            display:inline-block;
+            overflow:hidden;
+    }
+    .persoo--topProducts__showMore__toggle__ring__square__white {
+            width:10px;
+            height:10px;
+            -ms-transform:rotate(45deg);
+            -webkit-transform:rotate(45deg);
+            transform:rotate(45deg);
+    }
+    #persoo--<%= offerID %> .persoo--topProducts__showMore__toggle__ring__square__white {
+            border: 5px solid <%= buttonsArrowColor %>;
+    }
+    .persoo--topProducts__showMore__toggle:hover .persoo--topProducts__showMore__toggle__ring {
+            opacity: 0.8;
+            filter: brightness(85%);
+    }
+    .persoo--topProducts__showMore__toggle[data-open="false"] .persoo--topProducts__showMore__toggle__ring__square        { margin-top:38px; }
+    .persoo--topProducts__showMore__toggle[data-open="false"] .persoo--topProducts__showMore__toggle__ring__square__white { margin-top:-11px;}
+    .persoo--topProducts__showMore__toggle[data-open="true"]  .persoo--topProducts__showMore__toggle__ring__square        { margin-top:31px; }
+    .persoo--topProducts__showMore__toggle[data-open="true"]  .persoo--topProducts__showMore__toggle__ring__square__white { margin-top:11px; }
 
-    .persoo--topProducts__list__item {background-color:<%= itemBoxBackgroundColor %>;border-top-width:<%= itemBoxBorderWidth %>px;border-right-width:<%= itemBoxBorderWidth %>px;border-bottom-width:<%= itemBoxBorderWidthBottom %>px;border-left-width:<%= itemBoxBorderWidth %>px;border-style:solid;border-color:<%= itemBoxBorderColor %>;margin:<%= itemBoxSpace %>px 0 0 0;height:<%= 11+10+itemsTitleFontSize*1.1+3+itemsDescFontSize*1.1*itemsDescLines+itemBoxBorderWidth+itemBoxBorderWidthBottom %>px;min-height:<%= itemsImageSize+6+10+itemBoxBorderWidth+itemBoxBorderWidthBottom  %>px;position:relative;width:100%;padding:5px 0;font-size:0;display:block;clear:both;}
-    .persoo--topProducts__list__item__number {float:left;position:relative;z-index:2;width:29px;padding:19px 4.5px 19px 0;display:inline-block;text-align:right;}
-    .persoo--topProducts__list__item__number div {background-color:<%= itemsNumberBackgroundColorNormal %>;color:<%= itemsNumberTextColorNormal %>;float:left;position:relative;z-index:2;width:24.5px;height:22px;font-size:bold;text-align:center;-webkit-border-radius:0 4px 4px 0;-moz-border-radius:0 4px 4px 0;border-radius:0 4px 4px 0;}
-    .persoo--topProducts__list__item__number div span {font-size:11px;line-height:22px;letter-spacing:0;}
-    .persoo--topProducts__list__item__image {float:left;position:relative;z-index:2;width:<%= itemsImageSize+10 %>px;height:<%= itemsImageSize+6 %>px;padding:3px 5px;display:inline-block;text-align:center;}
-    .persoo--topProducts__list__item__image img {width:auto;height:auto;max-width:<%= itemsImageSize %>px;max-height:<%= itemsImageSize %>px;}
-    .persoo--topProducts__list__item__text {height:<%= itemsTitleFontSize*1.1+3+itemsDescFontSize*1.1*itemsDescLines+8 %>px;min-height:60px;position:absolute;float:left;width:100%;display:inline-block;padding:3px 120px 0 <%= 29+itemsImageSize+10+5 %>px;left:0;}
-    .persoo--topProducts__list__item__text {display:block;text-align:left;width:100%;height:56px;}
-    .persoo--topProducts__list__item__text__title {width:100%;overflow:hidden;}
-    .persoo--topProducts__list__item__text__title a {color:<%= itemsTitleTextColor %>;font-size:<%= itemsTitleFontSize %>px;font-weight:bold;max-width:100%;line-height:1.1em;overflow:hidden;white-space:nowrap;display:inline-block;text-decoration:none;-ms-text-overflow:ellipsis;-o-text-overflow:ellipsis;text-overflow:ellipsis;}
-    .persoo--topProducts__list__item__text__description {width:100%;height:<%= itemsDescFontSize*1.1*itemsDescLines %>px;margin-top:3px;overflow:hidden;display:inline-block;-ms-text-overflow:ellipsis;-o-text-overflow:ellipsis;text-overflow:ellipsis;}
-    .persoo--topProducts__list__item__text__description p {font-size:<%= itemsDescFontSize %>px;font-weight:bold;color:<%= itemsDescTextColor %>;margin:0;line-height:1.1em;}
-    .persoo--topProducts__list__item__text__description p a {font-size:<%= itemsDescFontSize %>px;font-weight:bold;color:<%= itemsDescTextColor %>;line-height:1.1em;}
-    .persoo--topProducts__list__item__price {float:right;position:relative;z-index:2;width:100px;height:60px;display:inline-block;text-align:right;padding:3px 8px 3px 0;}
-    .persoo--topProducts__list__item__price > del{font-size:<%= itemsPriceFontSizeOriginal %>px;color:<%= itemsPriceTextColor %>;float:left;width:100%;font-weight:bold;vertical-align:sub;line-height:1.1em;}
-    .persoo--topProducts__list__item__price > del > small {font-size:0.8em;}
-    .persoo--topProducts__list__item__price > div {float:left;width:100%;font-size:<%= itemsPriceFontSize %>px;color:<%= itemsPriceTextColor %>;vertical-align:sub;line-height:1.1em;}
-    .persoo--topProducts__list__item__price > div > small {font-size:0.8em;}
-    /* hover over item */
-    .persoo--topProducts__list__item:hover .persoo--topProducts__list__item__text__description a{color:<%= itemsTitleTextColorHover %>;}
 
-    .persoo--topProducts__showMore {margin:<%= itemBoxSpace %>px 0 0 0;border-top:<%= itemBoxBorderWidth %>px solid <%= tabsBorderColor %>;}
-    .persoo--topProducts__showMore__toggle {width:100%;display:block!important;text-align:center;}
-    .persoo--topProducts__showMore__toggle .persoo_angi {width:90px;height:30px;overflow:hidden;display:inline-block;}
-    .persoo--topProducts__showMore__toggle .persoo_angi .persoo_ring {background-color:<%= buttonsBackgroundColor %>;cursor: pointer;display:block;width:90px;height:60px;margin-top:-30px;-webkit-border-radius:7px;-moz-border-radius:7px;border-radius:7px;}
-    .persoo--topProducts__showMore__toggle .persoo_angi .persoo_ring .persoo_square {width:20px;height:20px;display:inline-block;overflow:hidden;}
-    .persoo--topProducts__showMore__toggle .persoo_angi .persoo_ring .persoo_square .persoo_white {background-color:<%= buttonsArrowColor %>;width:20px;height:20px;-ms-transform:rotate(45deg);-webkit-transform:rotate(45deg);transform:rotate(45deg);}
-    .persoo--topProducts__showMore__toggle .persoo_angi .persoo_ring .persoo_square .persoo_white .persoo_color {background-color:<%= buttonsBackgroundColor %>;width:12px;height:12px;display:inline-block;margin-top:4px;}
-    .persoo--topProducts__showMore__toggle .persoo_angi:hover .persoo_ring {background-color:<%= buttonsBackgroundColorHover %>;}
-    .persoo--topProducts__showMore__toggle .persoo_angi:hover .persoo_ring .persoo_square .persoo_white {background-color:<%= buttonsArrowColorHover %>;width:20px;height:20px;-ms-transform:rotate(45deg);-webkit-transform:rotate(45deg);transform:rotate(45deg);}
-    .persoo--topProducts__showMore__toggle .persoo_angi:hover .persoo_ring .persoo_square .persoo_white .persoo_color {background-color:<%= buttonsBackgroundColorHover %>;}
-    .persoo--topProducts__showMore__toggle[data-open="false"] .persoo_angi .persoo_ring .persoo_square{margin-top:38px;}
-    .persoo--topProducts__showMore__toggle[data-open="false"] .persoo_angi .persoo_ring .persoo_square .persoo_white{margin-top:-11px;}
-    .persoo--topProducts__showMore__toggle[data-open="true"] .persoo_angi .persoo_ring .persoo_square{margin-top:31px;}
-    .persoo--topProducts__showMore__toggle[data-open="true"] .persoo_angi .persoo_ring .persoo_square .persoo_white{margin-top:11px;}
-
+    /* move priceBox from the top right corner to below content */
     @media (max-width:964px){
-      .persoo--topProducts {margin:0 0 30px 0;padding-top:28px;}
-      .persoo--topProducts__list__item {height:<%= 11+10+itemsTitleFontSize*1.1+3+itemsDescFontSize*1.1*itemsDescLines+itemsPriceHeight+itemBoxBorderWidth+itemBoxBorderWidthBottom %>px;}
-      .persoo--topProducts__list__item__text {float:left;width:100%;left:0;padding:3px 29px 0 <%= 29+itemsImageSize+10+5 %>px;display:inline-block;position:absolute;}
-      .persoo--topProducts__list__item__price {top:<%= itemsPriceTop %>px;float:left;height:<%= itemsPriceHeight %>px;width:100%;left:0;padding:0 29px 0 <%= 29+itemsImageSize+10+5 %>px;margin-top:-5px;display:inline-block;text-align:left;position:absolute;}
-      .persoo--topProducts__list__item__price del {width:auto;float:left;padding-right:5px;}
-      .persoo--topProducts__list__item__price div {width:auto;float:left;}
+        .persoo--topProducts__list__item__text__title,
+        .persoo--topProducts__list__item__text__description {
+                margin-right: 5px;
+        }
+        .persoo--topProducts__list__item__text__price {
+                position: relative;
+                top: auto;
+                right: auto;
+                width: auto;
+                margin: 0 5px 0 0;
+                padding: 0 0;
+                text-align:left;
+        }
+        .persoo--topProducts__list__item__text__price del {
+                width:auto;
+                padding-right:5px;
+        }
+        .persoo--topProducts__list__item__text__price div {
+                width:auto;
+        }
     }
-    @media (max-width:767px){
-      .persoo--topProducts__tabs {text-align:center;}
-    }
+    </style>
+    <style>
+        <%= customCSS %>
     </style>
 
     <!--Tabs to switch between product lists -->
     <div class="persoo--topProducts__tabs">
         <% for(var listIndex = 0; listIndex < productListNames.length; listIndex++) { %>
             <a id="persoo--<%= offerID %>__tab--<%= listIndex %>"
-               class="persoo--topProducts__tab"
+               class="persoo--topProducts__tab persooAction"
                data-active="<%= listIndex==0 %>"
                onclick="persoo_<%= offerID %>_switchTabs(<%= listIndex %>)">
                    <%= productListNames[listIndex] %>
@@ -119,34 +332,35 @@
                      <div class="persoo--topProducts__list__moreProducts__inner">
                 <% } %>
                 <div class="persoo--topProducts__list__item">
-                  <div class="persoo--topProducts__list__item__number">
-                      <div>
-                          <span><%= i + 1 %></span>
-                      </div>
-                  </div>
-                  <div class="persoo--topProducts__list__item__image">
-                      <a title="<%= currentProduct.title %>" href="<%= currentProduct.link %>">
-                          <img alt="<%= currentProduct.title %>" title="<%= currentProduct.title %>" src="<%= currentProduct.imageLink %>" />
-                      </a>
-                  </div>
-                  <div class="persoo--topProducts__list__item__text">
-                      <div class="persoo--topProducts__list__item__text__title">
-                          <a title="<%= currentProduct.title %>" href="<%= currentProduct.link %>"><%= currentProduct.title %></a>
-                      </div>
-                      <% if (showDescription) { %>
-                          <div class="persoo--topProducts__list__item__text__description">
-                              <p><%= currentProduct.description %></p>
-                          </div>
-                      <% } %>
-                  </div>
-                  <div class="persoo--topProducts__list__item__price">
-                      <% if (showOriginalPrice && currentProduct.priceOriginal && currentProduct.priceOriginal >= currentProduct.price) { %>
-                          <del><%= printPrice(currentProduct.priceOriginal) %> <small><%= postPriceCurrency %></small></del>
-                      <% } %>
-                      <div>
-                          <%= printPrice(currentProduct.price) %> <small><%= postPriceCurrency %></small>
-                      </div>
-                  </div>
+                   <div class="persoo--topProducts__list__item__number">
+                       <div><%= i + 1 %></div>
+                   </div>
+                   <div class="persoo--topProducts__list__item__image">
+                       <a title="<%= currentProduct.title %>" href="<%= currentProduct.link %>">
+                           <img alt="<%= currentProduct.title %>" title="<%= currentProduct.title %>" src="<%= currentProduct.imageLink %>" />
+                       </a>
+                   </div>
+                   <div class="persoo--topProducts__list__item__textWrapper">
+                       <div class="persoo--topProducts__list__item__text">
+                           <div class="persoo--topProducts__list__item__text__title">
+                               <a title="<%= currentProduct.title %>" href="<%= currentProduct.link %>"><%= currentProduct.title %></a>
+                           </div>
+                           <% if (showDescription) { %>
+                               <div class="persoo--topProducts__list__item__text__description">
+                                   <%= currentProduct.description %>
+                               </div>
+                           <% } %>
+                           <div class="persoo--topProducts__list__item__text__price">
+                               <% if (showOriginalPrice && currentProduct.priceOriginal && currentProduct.priceOriginal >= currentProduct.price) { %>
+                                   <del><%= printPrice(currentProduct.priceOriginal) %> <small><%= postPriceCurrency %></small></del>
+                               <% } %>
+                               <div>
+                                  <%= printPrice(currentProduct.price) %> <small><%= postPriceCurrency %></small>
+                               </div>
+                               <div class="persoo-clear"></div>
+                           </div>
+                       </div>
+                   </div>
                 </div>
             <% } %>
             <% if (i>2) { %>
@@ -156,27 +370,23 @@
     <% } %>
 
     <!-- Button to show all items -->
-    <div class="persoo--topProducts__showMore">
+    <div id="persoo--<%= offerID %>__showMore" class="persoo--topProducts__showMore">
         <div id="persoo--<%= offerID %>__showMore__toggle"
-             class="persoo--topProducts__showMore__toggle"
+             class="persoo--topProducts__showMore__toggle persooAction"
+             onclick="persoo_<%= offerID %>_toggleShowMore()"
              data-open="false"
         >
-            <div class="persoo_angi" onclick="persoo_<%= offerID %>_toggleShowMore()">
-                <div class="persoo_ring">
-                    <div class="persoo_square">
-                        <div class="persoo_white">
-                            <div class="persoo_color"></div>
-                        </div>
-                    </div>
+            <div class="persoo--topProducts__showMore__toggle__ring">
+                <div class="persoo--topProducts__showMore__toggle__ring__square">
+                    <div class="persoo--topProducts__showMore__toggle__ring__square__white"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script language="javaScript">
+    <script type="text/javascript">
         <% if (productLists[0].length <= 3) { %>
-        //show "showMore" button
-        document.getElementById("persoo--<%= offerID %>__showMore__toggle").style.display = "none";
+            document.getElementById("persoo--<%= offerID %>__showMore").style.display = "none";
         <% } %>
 
         function persoo_<%= offerID %>_scrollToTopOfTheWidget(){
@@ -209,8 +419,10 @@
             var moreProductsContainerInner = moreProductsContainer.firstElementChild;
             moreProductsContainer.style.height = (newIsOpenStatus ? moreProductsContainerInner.scrollHeight : 0);
 
-            if (!forceRefreshOnly)
+            if (!forceRefreshOnly) {
+                window.persoo('send', isOpen ? 'close' : 'open', {offerID: "<%= offerID %>"});
                 persoo_<%= offerID %>_scrollToTopOfTheWidget();
+            }
         };
 
         function persoo_<%= offerID %>_switchTabs(listIndex){
@@ -226,14 +438,19 @@
             elem = document.getElementById('persoo--<%= offerID %>__list--' + listIndex);
             elem.setAttribute("data-active", true);
 
+            window.persoo('send', 'switchTab', {offerID: "<%= offerID %>", tabIndex: listIndex});
+
             /* keep the same "showMore" status on the new tab */
             persoo_<%= offerID %>_toggleShowMore(true);
 
             /* show/hide "showMore" button according to available products count */
             var productListLengths = <%= JSON.stringify(productLists.map(function (obj){ return obj.length;})) %>;
             var displayValue = (productListLengths[listIndex] <= 3 ? "none" : "block");
-            document.getElementById("persoo--<%= offerID %>__showMore__toggle").style.display = displayValue;
+            document.getElementById("persoo--<%= offerID %>__showMore").style.display = displayValue;
         };
+    </script>
+    <script type="text/javascript">
+        <%= customJS %>
     </script>
 <% } %>
 </div>

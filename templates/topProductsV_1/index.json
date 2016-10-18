@@ -22,27 +22,6 @@
             "type": "section"
         },
         {
-            "defaultValue": 18,
-            "group": "design",
-            "id": "tabsFontSize",
-            "name": "Font Size (in px)",
-            "type": "number"
-        },
-        {
-            "defaultValue": 5,
-            "group": "design",
-            "id": "tabsSpace",
-            "name": "Space Between Tabs (in px)",
-            "type": "number"
-        },
-        {
-            "defaultValue": "15px 6px 15px 6px",
-            "group": "design",
-            "id": "tabsPaddingSize",
-            "name": "Padding (with px)",
-            "type": "text"
-        },
-        {
             "defaultValue": 1,
             "group": "design",
             "id": "tabsBorderWidth",
@@ -78,17 +57,17 @@
             "type": "color"
         },
         {
+            "id": "tabsFont",
+            "name": "Tabs Font",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "normal normal 300 medium Arial, Helvetica, sans-serif"
+        },
+        {
             "defaultValue": "#000000",
             "group": "design",
             "id": "tabsTextColor",
             "name": "Text Color",
-            "type": "color"
-        },
-        {
-            "defaultValue": "#860929",
-            "group": "design",
-            "id": "tabsTextColorHover",
-            "name": "Text Color Hover",
             "type": "color"
         },
         {
@@ -101,7 +80,7 @@
         {
             "group": "design",
             "id": "section_items",
-            "name": "Items",
+            "name": "List Items",
             "type": "section"
         },
         {
@@ -133,18 +112,30 @@
             "type": "color"
         },
         {
+            "group": "design",
+            "id": "section_numbering",
+            "name": "List Item Numbering",
+            "type": "section"
+        },
+        {
             "defaultValue": "#dfdfdf",
             "group": "design",
-            "id": "itemsNumberBackgroundColorNormal",
-            "name": "Medal Background Color",
+            "id": "itemNumberingBackgroundColor",
+            "name": "Numbering Background Color",
             "type": "color"
         },
         {
             "defaultValue": "#000000",
             "group": "design",
-            "id": "itemsNumberTextColorNormal",
-            "name": "Medal Text Color",
+            "id": "itemNumberingTextColor",
+            "name": "Numbering Text Color",
             "type": "color"
+        },
+        {
+            "group": "design",
+            "id": "section_image",
+            "name": "List Item Image",
+            "type": "section"
         },
         {
             "defaultValue": 54,
@@ -154,11 +145,17 @@
             "type": "number"
         },
         {
-            "defaultValue": 15,
             "group": "design",
-            "id": "itemsTitleFontSize",
-            "name": "Title Font Size (in px)",
-            "type": "number"
+            "id": "section_title",
+            "name": "List Item Title",
+            "type": "section"
+        },
+        {
+            "id": "itemTitleFont",
+            "name": "Title Font",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "normal normal 300 medium Arial, Helvetica, sans-serif"
         },
         {
             "defaultValue": "#cb1040",
@@ -168,39 +165,44 @@
             "type": "color"
         },
         {
-            "defaultValue": "#860929",
             "group": "design",
-            "id": "itemsTitleTextColorHover",
-            "name": "Title Text Color Hover",
-            "type": "color"
+            "id": "section_description",
+            "name": "List Item Description",
+            "type": "section"
         },
         {
             "defaultValue": true,
             "group": "design",
             "id": "showDescription",
-            "name": "Show Description in Items",
+            "name": "Show Description",
             "type": "checkbox"
-        },
-        {
-            "defaultValue": 12,
-            "group": "design",
-            "id": "itemsDescFontSize",
-            "name": "Description Font Size (in px)",
-            "type": "number"
         },
         {
             "defaultValue": 2,
             "group": "design",
-            "id": "itemsDescLines",
-            "name": "Description How Much Lines?",
+            "id": "itemDescriptionLinesCount",
+            "name": "Description Lines Count",
             "type": "number"
         },
         {
-            "defaultValue": "#000000",
+            "id": "itemDescriptionFont",
+            "name": "Description Font",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "normal normal 300 smaller Arial, Helvetica, sans-serif"
+        },
+        {
+            "defaultValue": "#333333",
             "group": "design",
             "id": "itemsDescTextColor",
             "name": "Description Text Color",
             "type": "color"
+        },
+        {
+            "group": "design",
+            "id": "section_price",
+            "name": "List Item Price",
+            "type": "section"
         },
         {
             "defaultValue": true,
@@ -210,30 +212,30 @@
             "type": "checkbox"
         },
         {
-            "defaultValue": 13,
+            "id": "itemPriceFont",
+            "name": "Price Font",
             "group": "design",
-            "id": "itemsPriceFontSizeOriginal",
-            "name": "Price Font Size Before Sale (in px)",
-            "type": "number"
-        },
-        {
-            "defaultValue": 16,
-            "group": "design",
-            "id": "itemsPriceFontSize",
-            "name": "Price Font Size After Sale(in px)",
-            "type": "number"
+            "type": "text",
+            "defaultValue": "normal normal 300 medium Arial, Helvetica, sans-serif"
         },
         {
             "defaultValue": "#cb1040",
             "group": "design",
-            "id": "itemsPriceTextColor",
+            "id": "itemPriceTextColor",
             "name": "Price Text Color",
             "type": "color"
         },
         {
+            "defaultValue": "#cccccc",
             "group": "design",
-            "id": "section_buttons",
-            "name": "Buttons",
+            "id": "itemPriceOriginalTextColor",
+            "name": "Price Original Text Color",
+            "type": "color"
+        },
+        {
+            "group": "design",
+            "id": "section_buttonShowMore",
+            "name": "Show More Button",
             "type": "section"
         },
         {
@@ -244,25 +246,37 @@
             "type": "color"
         },
         {
-            "defaultValue": "#860929",
-            "group": "design",
-            "id": "buttonsBackgroundColorHover",
-            "name": "Button Background Color Hover",
-            "type": "color"
-        },
-        {
             "defaultValue": "#FFFFFF",
             "group": "design",
             "id": "buttonsArrowColor",
-            "name": "Button Arrow Color",
+            "name": "Button Icon/Text Color",
             "type": "color"
         },
         {
-            "defaultValue": "#FFFFFF",
+            "id": "section_customCSS",
+            "name": "Custom CSS",
             "group": "design",
-            "id": "buttonsArrowColorHover",
-            "name": "Button Arrow Color Hover",
-            "type": "color"
+            "type": "section"
+        },
+        {
+            "id": "customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "css",
+            "defaultValue": "/* your own css rules */"
+        },
+        {
+            "id": "section_customJS",
+            "name": "Custom Javascript",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "customJS",
+            "name": "Custom Javascript",
+            "group": "design",
+            "type": "javascript",
+            "defaultValue": "/* your own javascript */"
         }
     ],
     "groups": [
