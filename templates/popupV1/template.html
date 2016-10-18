@@ -1,11 +1,5 @@
 <%
-
-/**
- * TODO:
- *  - closePopup funkce animovat pri zavirani
- */
-
-var offerID = offerID || 'randomOfferID';
+var offerID = offerID || (typeof _offerID !== 'undefined' ? _offerID : 'randomOfferID');
 
 const baseZIndex = 1000000;
 
@@ -101,13 +95,13 @@ var getButtonAndFormInlineStyle = {
     classic: "text-decoration: none; " +
              "border: 0px solid; zoom: 1; border-radius:2px; " +
              "min-height: 22px; line-height: 22px;padding: 6px 12px; " +
-	         "color: " + ctaButtonTextColor +"; background-color: " + ctaButtonColor + "; " +
-	         "font: " + ctaButtonTextFont + ";",
+             "color: " + ctaButtonTextColor +"; background-color: " + ctaButtonColor + "; " +
+             "font: " + ctaButtonTextFont + ";",
     outline: "text-decoration: none; " +
              "border: 1px solid " + ctaButtonColor + "; zoom: 1; border-radius:2px; " +
              "min-height: 22px; line-height: 22px;padding: 6px 12px; " +
-	         "color: " + ctaButtonTextColor +"; background-color: transparent; " +
-	         "font: " + ctaButtonTextFont + ";"
+             "color: " + ctaButtonTextColor +"; background-color: transparent; " +
+             "font: " + ctaButtonTextFont + ";"
 }
 
 %>
@@ -116,6 +110,7 @@ var getButtonAndFormInlineStyle = {
     id="persoo--<%= offerID %>"
     class="persoo--popup"
     data-closing="false"
+    data-inner-location-id="persoo--<% offerID %>__content"
 >
     <style type="text/css">
 
@@ -375,7 +370,7 @@ var getButtonAndFormInlineStyle = {
         var animationProps = getAnimationProps[animationEffect];
     %>
 
-	@keyframes persoo--<%= offerID %>__animation {
+    @keyframes persoo--<%= offerID %>__animation {
         0% {
             <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
             <%= animationProps.start.right ? 'right: ' + animationProps.start.right + ';' : '' %>
@@ -390,8 +385,8 @@ var getButtonAndFormInlineStyle = {
             <%= animationProps.stop.bottom ? 'bottom: ' + animationProps.stop.bottom + ';' : '' %>
             <%= animationProps.stop.opacity ? 'opacity: ' + animationProps.stop.opacity + ';' : '' %>
         }
-	}
-	@-webkit-keyframes persoo--<%= offerID %>__animation {
+    }
+    @-webkit-keyframes persoo--<%= offerID %>__animation {
         0% {
             <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
             <%= animationProps.start.right ? 'right: ' + animationProps.start.right + ';' : '' %>
@@ -406,11 +401,11 @@ var getButtonAndFormInlineStyle = {
             <%= animationProps.stop.bottom ? 'bottom: ' + animationProps.stop.bottom + ';' : '' %>
             <%= animationProps.stop.opacity ? 'opacity: ' + animationProps.stop.opacity + ';' : '' %>
         }
-	}
-	#persoo--<%= offerID %> .persoo--popup__wrapper {
-	    animation: persoo--<%= offerID %>__animation <%= animationDuration %> ease 0s 1 normal;
-	    -webkit-animation: persoo--<%= offerID %>__animation <%= animationDuration %> ease 0s 1 normal;
-	}
+    }
+    #persoo--<%= offerID %> .persoo--popup__wrapper {
+        animation: persoo--<%= offerID %>__animation <%= animationDuration %> ease 0s 1 normal;
+        -webkit-animation: persoo--<%= offerID %>__animation <%= animationDuration %> ease 0s 1 normal;
+    }
 
     #persoo--<%= offerID %>[data-closing="true"] .persoo--popup__wrapper {
         <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
@@ -419,7 +414,7 @@ var getButtonAndFormInlineStyle = {
         <%= animationProps.start.bottom ? 'bottom: ' + animationProps.start.bottom + ';' : '' %>
         opacity: 0;
         transition: all <%= animationDuration %> ease;
-	}
+    }
 <% } %>
     </style>
     <style type="text/css">
@@ -450,7 +445,7 @@ var getButtonAndFormInlineStyle = {
                 <span class="persoo--popup__icon"></span>
             </a>
         <% } %>
-        <div class="persoo--popup__content">
+        <div id="persoo--<% offerID %>__content" class="persoo--popup__content">
             <% if (backgroundImageLink) { %>
                 <img
                     class="persoo--popup__background--image"
@@ -484,13 +479,13 @@ var getButtonAndFormInlineStyle = {
                         id="persoo--<%= offerID %>__form"
                         onsubmit="return persoo_submit_email_<%= offerID %>()"
                     >
-	                    <input
+                        <input
                             id="persoo--<%= offerID %>__form__email"
                             class="persoo--popup__content__collect-email__form__email"
                             type="text"
                             value="<%= collectEmailInputLabel %>"
                         >
-	                    <input
+                        <input
                             class="persooAction persoo--popup__content__collect-email__form__submit"
                             type="submit"
                             value="<%= collectEmailSubmitLabel %>"
@@ -500,8 +495,8 @@ var getButtonAndFormInlineStyle = {
                         id="persoo--<%= offerID %>__thank-you"
                         class="persoo--popup__content__collect-email__form__thank-you"
                     >
-	                    <%= collectEmailThankYouMessage %>
-	                </div>
+                        <%= collectEmailThankYouMessage %>
+                    </div>
                 </div>
             <% } %>
 
@@ -540,17 +535,17 @@ var getButtonAndFormInlineStyle = {
             var elem = document.getElementById("persoo--<%= offerID %>__form__email");
             var email = elem.value.replace(/^\s*/,'').replace(/\s*$/,'');
             try {
-	            if (!email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
-	                // invalid email address
-	                elem.style.border = "3px solid red";
-	            } else {
-	                // submit
-	                console.log('Persoo: submitting email ' + email);
-	                window.persoo('send','submit', {offerID: "<%= offerID %>", email: email});  // TODO use callback for confirmation?
+                if (!email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+                    // invalid email address
+                    elem.style.border = "3px solid red";
+                } else {
+                    // submit
+                    console.log('Persoo: submitting email ' + email);
+                    window.persoo('send','submit', {offerID: "<%= offerID %>", email: email});  // TODO use callback for confirmation?
 
-	                document.getElementById("persoo--<%= offerID %>__form").style.display = "none";
-	                document.getElementById("persoo--<%= offerID %>__thank-you").style.display = "inline-block";
-	            }
+                    document.getElementById("persoo--<%= offerID %>__form").style.display = "none";
+                    document.getElementById("persoo--<%= offerID %>__thank-you").style.display = "inline-block";
+                }
             } catch(err) {}
 
             return false;
