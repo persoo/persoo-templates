@@ -305,6 +305,10 @@ module.exports = {
             var previewIframe = document.getElementById('persooPreview');
             var previewDoc = previewIframe.contentWindow.document;
 
+            previewIframe.contentWindow.persoo = function(){
+                console.log('calling persoo(' + (JSON.stringify(Array.prototype.slice.call(arguments))).slice(1,-1) + ')');
+            };
+
             var currentTemplate = templateStore.templates[templateStore.currentTemplateID];
             var currentOffer = offerStore.offers[templateStore.currentTemplateID];
             var currentContext = {};
