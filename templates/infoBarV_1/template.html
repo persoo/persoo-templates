@@ -1,0 +1,223 @@
+<%
+
+var offerID = offerID || 'randomOfferID';
+
+var baseZIndex = 10000000;
+
+var getBoxShadowSize = {
+    "none": 0, /* in px */
+    "low": 11,
+    "high": 22
+};
+
+var getPaddingSize = {
+    "0" : "10px 15px",
+    "5" : "10px 15px",
+    "15" : "15px 20px",
+};
+
+var ctaActionHref = ctaButtonAction === 'redirect' ? ctaButtonLink : 'javascript:persoo_close_' + offerID + '()';
+
+%>
+
+<div
+    id="persoo--<%= offerID %>"
+    class="persoo--infobar"
+    data-visible="true"
+>
+    <style type="text/css">
+        .persoo--infobar{
+            line-height: normal;
+            visibility: visible;
+        }
+        .persoo--infobar[data-visible="false"] {
+            display: none;
+        }
+
+        .persoo--infobar,
+        .persoo--infobar * {
+            box-sizing: border-box;
+        }
+
+        #persoo--<%= offerID %> .persoo--infobar__wrapper {
+            border: <%= borderSize %>px solid <%= borderColor %>;
+            height: <%= autoHeight ? "auto" : customHeight + "px" %>;
+            box-shadow: <%= boxShadowColor %> 0px 0px <%= getBoxShadowSize[boxShadow] %>px;
+            color: <%= textColor %>;
+            background-color: <%= backgroundColor %>;
+            padding: <%= getPaddingSize[boxCorners] %>;
+            font: <%= textFont %>;
+            z-index: <%= baseZIndex %>;
+            overflow: hidden;
+            <% if (position !== 'inLocation') { %>
+                <%= position %>: 0;
+                position: fixed;
+                left: 0;
+                right: 0;
+                width: 100%;
+            <% } %>
+            <% if (position === 'top') { %>
+                border-radius: 0 0 <%= boxCorners %>px <%= boxCorners %>px;
+            <% } else if (position === 'bottom') { %>
+                border-radius:<%= boxCorners %>px <%= boxCorners %>px 0 0;
+            <% } else { %>
+                border-radius:<%= boxCorners %>px;
+            <% } %>
+        }
+        .persoo--infobar__wrapper {
+            zoom: 1;
+            background-clip: padding-box;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            align-items: center;
+        }
+
+        .persoo--infobar__background-image {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .persoo--infobar__content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .persoo--infobar__content .persoo--infobar__content__message {
+            text-align: center;
+        }
+
+        <% if (showCtaButton) { %>
+            .persoo--infobar__content .persoo--infobar__content__cta {
+                text-align: center;
+                margin-left: 15px;
+            }
+            #persoo--<%= offerID %> .persoo--infobar__content__cta__action {
+                color: <%= ctaTextColor %>;
+                background-color: <%= ctaButtonColor %>;
+            }
+            .persoo--infobar__content .persoo--infobar__content__cta__action {
+                display: inline-block;
+                text-decoration: none;
+                zoom: 1;
+                border-radius:2px;
+                min-height: 22px;
+                line-height: 22px;
+                padding: 6px 12px;
+                font-size: 14px;
+                white-space: nowrap;
+            }
+        <% } %>
+
+        <% if (showClosingX) { %>
+            .persoo--infobar__close-x {
+                opacity: 0.8;
+                cursor: pointer;
+                color: inherit;
+                margin-left: 15px;
+            }
+            .persoo--infobar__close-x__icon {
+                display: inline-block;
+                background: transparent;
+                font-style: normal;
+            }
+            .persoo--infobar__close-x > span.persoo--infobar__close-x__icon:before{
+                font-weight: normal;
+                font-style: normal;
+                text-align: center;
+                -webkit-font-smoothing: antialiased;
+                content:"\2716";
+            }
+            .persoo--infobar__close-x:hover {
+                opacity: 1;
+            }
+        <% } %>
+
+        /* reset css inside */
+        .persoo--infobar__content * {
+            margin: 0;
+            padding: 0;
+            font-family: inherit;
+            color: inherit;
+        }
+        .persoo--infobar__content__message p:last-child {
+            margin-bottom: 0;
+        }
+        .persoo--infobar__content img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+    <style type="text/css">
+        <%= customCSS %>
+    </style>
+
+    <div
+        id="persoo--<%= offerID %>__wrapper"
+        class="persoo--infobar__wrapper"
+    >
+        <% if (backgroundImageLink){ %>
+            <img
+                class="persoo--infobar__background-image"
+                src="<%= backgroundImageLink %>"
+                alt="background"
+            >
+        <% } %>
+        <div class="persoo--infobar__content">
+            <div class="persoo--infobar__content__message">
+                <%= message %>
+            </div>
+            <% if (showCtaButton) { %>
+                <div class="persoo--infobar__content__cta<%= ctaButtonAction === 'close' ? ' persooAction' : '' %>">
+                    <a
+                        class="persoo--infobar__content__cta__action"
+                        href="<%= ctaActionHref %>"
+                        target="_blank"
+                    >
+                        <%= ctaButtonLabel %>
+                    </a>
+                </div>
+            <% } %>
+        </div>
+        <% if (showClosingX){ %>
+            <a
+                class="persoo--infobar__close-x persooAction"
+                href="javascript:persoo_close_<%= offerID %>();"
+            >
+                <span class="persoo--infobar__close-x__icon"></span>
+            </a>
+        <% } %>
+    </div>
+    <script type="text/javascript">
+        window.persoo = window.persoo || function () {}; /* TODO until having persoo in preview */
+        function report_<%= offerID %>_event(persooEventID) {
+            window.persoo("send", persooEventID, {offerID: "<%= offerID %>"});
+        }
+
+        function persoo_close_<%= offerID %>() {
+            var persooWidget = document.getElementById("persoo--<%= offerID %>");
+            persooWidget.setAttribute("data-visible", "false");
+            report_<%= offerID %>_event("close");
+        }
+
+        <% if (position !== "inLocation") { %>
+            function push_html_by_<%= offerID %>_height() {
+                var html = document.querySelector("html");
+                var infobarWrapper = document.getElementById("persoo--<%= offerID %>__wrapper");
+                var marginProperty = "margin<%= position[0].toUpperCase() + position.slice(1) %>";
+
+                html.style[marginProperty] = infobarWrapper.offsetHeight + "px";
+            }
+
+            push_html_by_<%= offerID %>_height();
+            window.addEventListener("resize", push_html_by_<%= offerID %>_height);
+        <% } %>
+    </script>
+    <script type="text/javascript">
+        <%= customJS %>
+    </script>
+</div>
