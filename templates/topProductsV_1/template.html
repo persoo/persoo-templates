@@ -351,7 +351,7 @@ function printPrice(p){
                                </div>
                            <% } %>
                            <div class="persoo--topProducts__list__item__text__price">
-                               <% if (showOriginalPrice && currentProduct.priceOriginal && currentProduct.priceOriginal >= currentProduct.price) { %>
+                               <% if (showOriginalPrice && currentProduct.priceOriginal && currentProduct.priceOriginal > currentProduct.price) { %>
                                    <del><%= printPrice(currentProduct.priceOriginal) %> <small><%= postPriceCurrency %></small></del>
                                <% } %>
                                <div>
@@ -417,7 +417,7 @@ function printPrice(p){
 
             var moreProductsContainer = document.querySelector("#persoo--<%= offerID %> [data-active=\"true\"] .persoo--topProducts__list__moreProducts");
             var moreProductsContainerInner = moreProductsContainer.firstElementChild;
-            moreProductsContainer.style.height = (newIsOpenStatus ? moreProductsContainerInner.scrollHeight : 0);
+            moreProductsContainer.style.height = (newIsOpenStatus ? moreProductsContainerInner.scrollHeight : 0) + 'px';
 
             if (!forceRefreshOnly) {
                 window.persoo('send', isOpen ? 'close' : 'open', {offerID: "<%= offerID %>"});

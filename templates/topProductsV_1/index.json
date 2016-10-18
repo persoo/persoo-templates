@@ -2,14 +2,14 @@
     "class": "webWidget",
     "fields": [
         {
-            "defaultValue": "Nejprodávanější",
+            "defaultValue": "Best selling",
             "group": "main",
             "id": "tabName1",
             "name": "Tab Name 1",
             "type": "text"
         },
         {
-            "defaultValue": "Co právě frčí",
+            "defaultValue": "Most trendy",
             "group": "main",
             "id": "tabName2",
             "name": "Tab Name 2",
