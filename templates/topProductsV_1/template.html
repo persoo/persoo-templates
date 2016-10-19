@@ -77,7 +77,7 @@ function printPrice(p){
             width:100%;
     }
     .persoo--topProducts__list__item {
-            position: relative;
+            display: table;
             padding: 5px 0;
             width: 100%;
             clear:both;
@@ -134,14 +134,17 @@ function printPrice(p){
             padding: 3px 0;
             text-align: left;
     }
+    .persoo--topProducts__list__item__textWrapper2 {
+            display: table;
+            width: 100%;
+    }
     .persoo--topProducts__list__item__text {
-            position: relative;
+            display: table-cell;
+            vertical-align: middle;
             margin: 0;
+            margin-right: 120px;
             padding: 0;
             text-align: left;
-    }
-    .persoo--topProducts__list__item__text__title {
-            margin-right: 120px;
     }
     #persoo--<%= offerID %> .persoo--topProducts__list__item__text__title {
             font: <%= itemTitleFont %>;
@@ -170,7 +173,7 @@ function printPrice(p){
     .persoo--topProducts__list__item__text__description {
             line-height: 1.1em;
             overflow: hidden;
-            margin: 0 120px 0 0;
+            margin: 0;
             padding: 0;
             display: inline-block;
             -ms-text-overflow: ellipsis;
@@ -182,21 +185,20 @@ function printPrice(p){
             height: <%= 1.1*itemDescriptionLinesCount %>em;
             color:<%= itemDescriptionTextColor %>;
     }
-    .persoo--topProducts__list__item__text__price {
-            position: absolute;
-            top: 0;
-            right: 0;
+    .persoo--topProducts__list__item__price {
+            display: table-cell;
+            vertical-align: middle;
             width: 100px;
             text-align: right;
             padding: 3px 8px 3px 0;
     }
-    #persoo--<%= offerID %> .persoo--topProducts__list__item__text__price {
+    #persoo--<%= offerID %> .persoo--topProducts__list__item__price {
             font: <%= itemPriceFont %>;
     }
-    .persoo--topProducts__list__item__text__price small {
+    .persoo--topProducts__list__item__price small {
             font-size:0.8em;
     }
-    .persoo--topProducts__list__item__text__price > del {
+    .persoo--topProducts__list__item__price > del {
             font-size: smaller;
             float: left;
             width: 100%;
@@ -204,15 +206,15 @@ function printPrice(p){
             vertical-align: sub;
             line-height: 1.1em;
     }
-    #persoo--<%= offerID %> .persoo--topProducts__list__item__text__price > del {
+    #persoo--<%= offerID %> .persoo--topProducts__list__item__price > del {
             color: <%= itemPriceOriginalTextColor %>;
     }
-    .persoo--topProducts__list__item__text__price > div {
+    .persoo--topProducts__list__item__price > div {
             float:left;
             width:100%;
             vertical-align:sub;
     }
-    #persoo--<%= offerID %> .persoo--topProducts__list__item__text__price > div {
+    #persoo--<%= offerID %> .persoo--topProducts__list__item__price > div {
             color:<%= itemPriceTextColor %>;
     }
     .persoo--topProducts__list__item__text__price > .persoo-clear {
@@ -280,24 +282,23 @@ function printPrice(p){
 
     /* move priceBox from the top right corner to below content */
     @media (max-width:964px){
-        .persoo--topProducts__list__item__text__title,
-        .persoo--topProducts__list__item__text__description {
+        .persoo--topProducts__list__item__text {
+                display: block;
                 margin-right: 5px;
         }
-        .persoo--topProducts__list__item__text__price {
-                position: relative;
-                top: auto;
+        .persoo--topProducts__list__item__price {
+                display: block;
                 right: auto;
                 width: auto;
                 margin: 0 5px 0 0;
                 padding: 0 0;
                 text-align:left;
         }
-        .persoo--topProducts__list__item__text__price del {
+        .persoo--topProducts__list__item__price del {
                 width:auto;
                 padding-right:5px;
         }
-        .persoo--topProducts__list__item__text__price div {
+        .persoo--topProducts__list__item__price div {
                 width:auto;
         }
     }
@@ -341,16 +342,18 @@ function printPrice(p){
                        </a>
                    </div>
                    <div class="persoo--topProducts__list__item__textWrapper">
-                       <div class="persoo--topProducts__list__item__text">
-                           <div class="persoo--topProducts__list__item__text__title">
-                               <a title="<%= currentProduct.title %>" href="<%= currentProduct.link %>"><%= currentProduct.title %></a>
-                           </div>
-                           <% if (showDescription) { %>
-                               <div class="persoo--topProducts__list__item__text__description">
-                                   <%= currentProduct.description %>
+                       <div class="persoo--topProducts__list__item__textWrapper2">
+                           <div class="persoo--topProducts__list__item__text">
+                               <div class="persoo--topProducts__list__item__text__title">
+                                   <a title="<%= currentProduct.title %>" href="<%= currentProduct.link %>"><%= currentProduct.title %></a>
                                </div>
-                           <% } %>
-                           <div class="persoo--topProducts__list__item__text__price">
+                               <% if (showDescription) { %>
+                                   <div class="persoo--topProducts__list__item__text__description">
+                                       <%= currentProduct.description %>
+                                   </div>
+                               <% } %>
+                           </div>
+                           <div class="persoo--topProducts__list__item__price">
                                <% if (showOriginalPrice && currentProduct.priceOriginal && currentProduct.priceOriginal > currentProduct.price) { %>
                                    <del><%= printPrice(currentProduct.priceOriginal) %> <small><%= postPriceCurrency %></small></del>
                                <% } %>

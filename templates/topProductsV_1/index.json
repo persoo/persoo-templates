@@ -178,7 +178,7 @@
             "type": "checkbox"
         },
         {
-            "defaultValue": 2,
+            "defaultValue": 1,
             "group": "design",
             "id": "itemDescriptionLinesCount",
             "name": "Description Lines Count",
