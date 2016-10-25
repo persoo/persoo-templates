@@ -87,7 +87,12 @@
             "name": "Custom Width",
             "group": "design",
             "type": "number",
-            "defaultValue": 400
+            "defaultValue": 400,
+            "condition": {
+                "operator": "==",
+                "fieldID": "size",
+                "fieldValue": "custom"
+            }
         },
 
         {
@@ -265,7 +270,12 @@
             "name": "Box Shadow Color",
             "group": "design",
             "type": "color",
-            "defaultValue": "rgba(102, 102, 102, 0.3)"
+            "defaultValue": "rgba(102, 102, 102, 0.3)",
+            "condition": {
+                "operator": "!=",
+                "fieldID": "boxShadow",
+                "fieldValue": "none"
+            }
         },
 
         {
