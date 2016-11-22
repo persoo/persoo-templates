@@ -163,10 +163,7 @@ var getButtonAndFormInlineStyle = {
             margin-bottom: 15px;
         }
 
-        .persoo--popup__wrapper .persoo--popup__content__cta {
-            text-align: center;
-            margin-bottom: 15px;
-        }
+        @@include templateParts/callToActionButton/template.css
 
         .persoo--popup__wrapper a.persoo--popup__content__building-block--action {
             display: inline-block;
@@ -185,23 +182,7 @@ var getButtonAndFormInlineStyle = {
             font: <%= ctaButtonTextFont %>;
         }
 
-        .persoo--popup__wrapper .persoo--popup__content__collect-email {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        #persoo--<%= offerID %> .persoo--popup__content__collect-email__form__email,
-        #persoo--<%= offerID %> .persoo--popup__content__collect-email__form__submit,
-        #persoo--<%= offerID %> .persoo--popup__content__collect-email__form__thank-you,
-        #persoo--<%= offerID %> a.persoo--popup__content__building-block--action{
-            <%= getButtonAndFormInlineStyle[ctaStyle] %>
-        }
-        .persoo--popup__wrapper .persoo--popup__content__collect-email__form__email,
-        .persoo--popup__wrapper .persoo--popup__content__collect-email__form__submit {
-            display: inline-block;
-        }
-        .persoo--popup__wrapper .persoo--popup__content__collect-email__form__thank-you {
-            display: none;
-        }
+        @@include templateParts/collectEmailForm/template.css
 
         .persoo--popup__wrapper .persoo--popup__content__dismiss-links {
             text-align:center;
@@ -453,52 +434,11 @@ var getButtonAndFormInlineStyle = {
                     alt="background"
                 >
             <% } %>
-            <div class="persoo--popup__content__message">
-                <%= message %>
-            </div>
 
-            <% if (showCtaButton) { %>
-                <div class="persoo--popup__content__cta">
-                    <a
-                        class="persoo--popup__content__building-block--action"
-                        href="<%=
-                            ctaButtonAction == 'redirect' ?
-                            ctaButtonLink :
-                            'javascript:persoo_close_' + offerID + '()'
-                        %>"
-                        target="_blank"
-                    >
-                        <%= ctaButtonLabel %>
-                    </a>
-                </div>
-            <% } %>
-
-            <% if (collectEmail) { %>
-                <div class="persoo--popup__content__collect-email">
-                    <form
-                        id="persoo--<%= offerID %>__form"
-                        onsubmit="return persoo_submit_email_<%= offerID %>()"
-                    >
-                        <input
-                            id="persoo--<%= offerID %>__form__email"
-                            class="persoo--popup__content__collect-email__form__email"
-                            type="text"
-                            value="<%= collectEmailInputLabel %>"
-                        >
-                        <input
-                            class="persooAction persoo--popup__content__collect-email__form__submit"
-                            type="submit"
-                            value="<%= collectEmailSubmitLabel %>"
-                        >
-                    </form>
-                    <div
-                        id="persoo--<%= offerID %>__thank-you"
-                        class="persoo--popup__content__collect-email__form__thank-you"
-                    >
-                        <%= collectEmailThankYouMessage %>
-                    </div>
-                </div>
-            <% } %>
+            @@include templateParts/richTextBlock/template.html
+            @@include templateParts/customHTML/template.html
+            @@include templateParts/callToActionButton/template.html
+            @@include templateParts/collectEmailForm/template.html
 
             <div class="persoo--popup__content__building-block--separator"></div>
 
@@ -529,26 +469,6 @@ var getButtonAndFormInlineStyle = {
                 elem.style.display = "none";
                 elem.setAttribute("data-closing", "false");
             }, <%= animationEffect === "none" ? 0 : animationDuration.replace("s", "") %> * 1000);
-        }
-
-        function persoo_submit_email_<%= offerID %>() {
-            var elem = document.getElementById("persoo--<%= offerID %>__form__email");
-            var email = elem.value.replace(/^\s*/,'').replace(/\s*$/,'');
-            try {
-                if (!email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
-                    // invalid email address
-                    elem.style.border = "3px solid red";
-                } else {
-                    // submit
-                    console.log('Persoo: submitting email ' + email);
-                    window.persoo('send','submit', {offerID: "<%= offerID %>", email: email});  // TODO use callback for confirmation?
-
-                    document.getElementById("persoo--<%= offerID %>__form").style.display = "none";
-                    document.getElementById("persoo--<%= offerID %>__thank-you").style.display = "inline-block";
-                }
-            } catch(err) {}
-
-            return false;
         }
     </script>
     <script type="text/javascript">

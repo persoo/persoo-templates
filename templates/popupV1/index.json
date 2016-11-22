@@ -4,81 +4,11 @@
     "minScenariosCount": 0,
     "name": "Pop-up",
     "fields": [
-        {
-            "id": "message",
-            "name": "Main message",
-            "group": "main",
-            "type": "richtext",
-            "defaultValue": "                <div style=\"margin-bottom: 15px;\">\n                    <div>\n                        <img src=\n                        \"//s3-eu-west-1.amazonaws.com/cz.persoo.images/sample-popup-image-shoes.png\"\n                        style=\n                        \"display: block; margin: auto; margin-bottom:10px;max-width:100%;\">\n                        <div style=\n                        \"display: block;height: 0;clear: both;visibility: hidden;\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"\" style=\n                \"line-height: 20px;min-height: 30px;margin-bottom: 15px;\">\n                    <span style=\"font-size:12px;\"></span>\n                    <p style=\"text-align:center;margin-top:30px;\"><span style=\n                    \"font-size:12px;\"><span style=\n                    \"font-size:16px;line-height:1.4;\"><span style=\n                    \"font-family:vollkorn;\">We\n                    just received our new product.<br>\n                    There is a limited amount, go take a look\n                    now!</span></span></span></p>\n                </div>"
-        },
 
-        {
-            "id": "showCtaButton",
-            "name": "Show Button",
-            "group": "cta",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "ctaButtonLabel",
-            "name": "Button Text",
-            "group": "cta",
-            "type": "text",
-            "defaultValue": "SHOW ME"
-        },
-        {
-            "id": "ctaButtonAction",
-            "name": "Button Action",
-            "group": "cta",
-            "type": "select",
-            "options": [
-                {
-                    "label": "Redirect to link",
-                    "value": "redirect"
-                },
-                {
-                    "label": "Close pop-up",
-                    "value": "close"
-                }
-            ],
-            "defaultValue": "redirect"
-        },
-        {
-            "id": "ctaButtonLink",
-            "name": "Button Target Link",
-            "group": "cta",
-            "type": "text",
-            "defaultValue": "/your/target/page"
-        },
-
-        {
-            "id": "collectEmail",
-            "name": "Collect Email Address",
-            "group": "collectEmail",
-            "type": "checkbox",
-            "defaultValue": false
-        },
-        {
-            "id": "collectEmailInputLabel",
-            "name": "Input Label",
-            "group": "collectEmail",
-            "type": "text",
-            "defaultValue": "Your email"
-        },
-        {
-            "id": "collectEmailSubmitLabel",
-            "name": "Submit Button Text",
-            "group": "collectEmail",
-            "type": "text",
-            "defaultValue": "SUBSCRIBE"
-        },
-        {
-            "id": "collectEmailThankYouMessage",
-            "name": "Thank you message",
-            "group": "collectEmail",
-            "type": "text",
-            "defaultValue": "Thank you for subscription"
-        },
+        @@include templateParts/customHTML/fields.json
+        @@include templateParts/richTextBlock/fields.json
+        @@include templateParts/callToActionButton/fields.json
+        @@include templateParts/collectEmailForm/fields.json
 
         {
             "id": "section_position",
@@ -484,22 +414,16 @@
         }
     ],
     "groups": [
-        {
-            "id": "main",
-            "name": "Main content"
-        },
-        {
-            "id": "cta",
-            "name": "Call to Action"
-        },
-        {
-            "id": "collectEmail",
-            "name": "Collect Email"
-        },
+
+        @@include templateParts/customHTML/groups.json
+        @@include templateParts/richTextBlock/groups.json
+        @@include templateParts/callToActionButton/groups.json
+        @@include templateParts/collectEmailForm/groups.json
+
         {
             "id": "design",
             "name": "Design"
         }
     ],
-    "template": "@template.html"
+    "template": "@@includeAsString template.html"
 }

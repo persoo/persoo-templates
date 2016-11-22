@@ -1,0 +1,17 @@
+.persoo--popup__wrapper .persoo--popup__content__collect-email {
+    text-align: center;
+    margin-bottom: 15px;
+}
+#persoo--<%= offerID %> .persoo--popup__content__collect-email__form__email,
+#persoo--<%= offerID %> .persoo--popup__content__collect-email__form__submit,
+#persoo--<%= offerID %> .persoo--popup__content__collect-email__form__thank-you,
+#persoo--<%= offerID %> a.persoo--popup__content__building-block--action{
+    <%= getButtonAndFormInlineStyle[ctaStyle] %>
+}
+.persoo--popup__wrapper .persoo--popup__content__collect-email__form__email,
+.persoo--popup__wrapper .persoo--popup__content__collect-email__form__submit {
+    display: inline-block;
+}
+.persoo--popup__wrapper .persoo--popup__content__collect-email__form__thank-you {
+    display: none;
+}

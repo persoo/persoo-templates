@@ -1,0 +1,47 @@
+<% if (collectEmail) { %>
+    <div class="persoo--popup__content__collect-email">
+        <form
+            id="persoo--<%= offerID %>__form"
+            onsubmit="return persoo_submit_email_<%= offerID %>()"
+        >
+            <input
+                id="persoo--<%= offerID %>__form__email"
+                class="persoo--popup__content__collect-email__form__email"
+                type="text"
+                value="<%= collectEmailInputLabel %>"
+            >
+            <input
+                class="persooAction persoo--popup__content__collect-email__form__submit"
+                type="submit"
+                value="<%= collectEmailSubmitLabel %>"
+            >
+        </form>
+        <div
+            id="persoo--<%= offerID %>__thank-you"
+            class="persoo--popup__content__collect-email__form__thank-you"
+        >
+            <%= collectEmailThankYouMessage %>
+        </div>
+    </div>
+    <script>
+        function persoo_submit_email_<%= offerID %>() {
+            var elem = document.getElementById("persoo--<%= offerID %>__form__email");
+            var email = elem.value.replace(/^\s*/,'').replace(/\s*$/,'');
+            try {
+                if (!email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+                    // invalid email address
+                    elem.style.border = "3px solid red";
+                } else {
+                    // submit
+                    console.log('Persoo: submitting email ' + email);
+                    window.persoo('send','submit', {offerID: "<%= offerID %>", email: email});  // TODO use callback for confirmation?
+
+                    document.getElementById("persoo--<%= offerID %>__form").style.display = "none";
+                    document.getElementById("persoo--<%= offerID %>__thank-you").style.display = "inline-block";
+                }
+            } catch(err) {}
+
+            return false;
+        }
+    </script>
+<% } %>

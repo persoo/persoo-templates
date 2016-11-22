@@ -1,0 +1,53 @@
+{
+    "id": "showCtaButton",
+    "name": "Show Button",
+    "group": "cta",
+    "type": "checkbox",
+    "defaultValue": true
+},
+{
+    "id": "ctaButtonLabel",
+    "name": "Button Text",
+    "group": "cta",
+    "type": "text",
+    "defaultValue": "SHOW ME",
+    "condition": {
+        "fieldID": "showCtaButton",
+        "operator": "==",
+        "fieldValue": true
+    }
+},
+{
+    "id": "ctaButtonAction",
+    "name": "Button Action",
+    "group": "cta",
+    "type": "select",
+    "options": [
+        {
+            "label": "Redirect to link",
+            "value": "redirect"
+        },
+        {
+            "label": "Close pop-up",
+            "value": "close"
+        }
+    ],
+    "defaultValue": "redirect",
+    "condition": {
+        "fieldID": "showCtaButton",
+        "operator": "==",
+        "fieldValue": true
+    }
+},
+{
+    "id": "ctaButtonLink",
+    "name": "Button Target Link",
+    "group": "cta",
+    "type": "text",
+    "defaultValue": "/your/target/page",
+    "condition": {
+        "fieldID": "showCtaButton",
+        "operator": "==",
+        "fieldValue": true
+    }
+},

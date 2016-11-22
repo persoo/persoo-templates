@@ -1,0 +1,7 @@
+{
+    "id": "customHTML",
+    "name": "Custom HTML",
+    "group": "customHTML",
+    "type": "html",
+    "defaultValue": "<div>Your HTML code...</div>"
+},
