@@ -1,7 +1,14 @@
 # Persoo Templates Developer Guide
 Here we present coding standards, best practices and guides for creating Persoo templates.
 
-[TOC]
+ * [Introduction](#introduction)
+   * [HTML template](#html-template)
+   * [Styles](#styles)
+   * [Scripts](#scripts)
+ * [Best practices](#best-practices)
+ * [Templates project structure - basic widgets](#templates-project-structure---basic-widgets)
+   * [Template source files](#template-source-files)
+   * [Using template parts (widget templates preprocessor)](#using-template-parts-widget-templates-preprocessor)
 
 See [TEMPLATE RENDERING] to learn more about persoo templates format and rendering.
 
@@ -18,7 +25,7 @@ To have templates, which simply "works", you should follow basic rules. Otherwis
 * Do not render unnecessary elements with display none.
   Handle them with condition written in [EJS] instead.
 
-**Example:** In the following examples, we create template for widget with widgetID `mywidget`.
+> **Example:** In the following examples, we create template for widget with widgetID `mywidget`.
 ```html
     <div
         id="persoo--<%= offerID %>"
@@ -42,7 +49,7 @@ To have templates, which simply "works", you should follow basic rules. Otherwis
 * Avoid using global selectors (without offerID), when the CSS property comes from user fields.
     Otherwise your "public" CSS rule in the page may redefine style also for other widgets of the same template.
 
-**example:**
+> **example:**
 ```html
 ...
 <style>
@@ -71,7 +78,7 @@ To have templates, which simply "works", you should follow basic rules. Otherwis
 * Avoid using of global functions and selectors (without offerID)
   Otherwise your scripts will affect (or be triggered by) other widgets with same template.
 
-**example:**
+> **example:**
 ```html
 <div id="persoo--<%= offerID %>">
     ...

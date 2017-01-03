@@ -1,8 +1,14 @@
 # persoo-templates
----------
+
 Templates for Persoo widgets (in page web parts, emails,...)
 
-[TOC]
+ * [Installation](#installation)
+ * [Usage](#usage)
+ * [Tests](#tests)
+ * [Preview Editor for debugging](#preview-editor-for-debugging)
+ * [Basic Persoo templates](#basic-persoo-templates)
+ * [Contributing](#contributing)
+
 
 ## Installation
 
