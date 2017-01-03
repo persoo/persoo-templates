@@ -1,5 +1,7 @@
 {
     "class": "webWidget",
+    "name": "TopProducts (beta)",
+    "minScenariosCount": 2,
     "fields": [
         {
             "defaultValue": "Best selling",
@@ -289,6 +291,5 @@
             "name": "Design"
         }
     ],
-    "minScenariosCount": 2,
-    "name": "TopProducts (beta)"
+    "template": "Note: this will be replaced by content of template.html"
 }

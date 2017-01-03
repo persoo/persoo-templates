@@ -1,24 +1,24 @@
 <% if (collectEmail) { %>
-    <div class="persoo--popup__content__collect-email">
+    <div class="persoo-block--collect-email">
         <form
             id="persoo--<%= offerID %>__form"
             onsubmit="return persoo_submit_email_<%= offerID %>()"
         >
             <input
                 id="persoo--<%= offerID %>__form__email"
-                class="persoo--popup__content__collect-email__form__email"
+                class="persoo-block--collect-email__form__email"
                 type="text"
                 value="<%= collectEmailInputLabel %>"
             >
             <input
-                class="persooAction persoo--popup__content__collect-email__form__submit"
+                class="persooAction persoo-block--collect-email__form__submit"
                 type="submit"
                 value="<%= collectEmailSubmitLabel %>"
             >
         </form>
         <div
             id="persoo--<%= offerID %>__thank-you"
-            class="persoo--popup__content__collect-email__form__thank-you"
+            class="persoo-block--collect-email__form__thank-you"
         >
             <%= collectEmailThankYouMessage %>
         </div>

@@ -27,6 +27,12 @@ function getBoxHeight(boxSize, height, autoHeight) {
     }
     return h;
 }
+function getBoxHeightWithPx(boxSize, height, autoHeight) {
+    var h = getBoxHeight(boxSize, height, autoHeight);
+
+    if (typeof h == 'number') return h + 'px';
+    else return h;
+}
 
 var boxWidth = getBoxWidth(size, customWidth);
 var boxHeight = getBoxHeight(size, customHeight, autoHeight);
@@ -35,6 +41,7 @@ var getPosition = { /* FIXME use boxHeight instead of boxWidth */
     center: {top: "50%", left: "50%", margin_left: -boxWidth/2, margin_top: -boxWidth/2 },
     left: {top: "50%", left: "0", margin_top: -boxWidth/2},
     right: {top: "50%", right: "0", margin_top: -boxWidth/2},
+    top: {left: "50%", top: "0", margin_left: -boxWidth/2, margin_top: 15},
     bottom: {left: "50%", bottom: "0", margin_left: -boxWidth/2, margin_bottom: 15},
     bottomLeft: {bottom: "0", left: "0"},
     bottomRight: {bottom: "0", right: "0"}
@@ -90,29 +97,71 @@ var getAnimationProps = {
         }
     }
 };
-
-var getButtonAndFormInlineStyle = {
-    classic: "text-decoration: none; " +
-             "border: 0px solid; zoom: 1; border-radius:2px; " +
-             "min-height: 22px; line-height: 22px;padding: 6px 12px; " +
-             "color: " + ctaButtonTextColor +"; background-color: " + ctaButtonColor + "; " +
-             "font: " + ctaButtonTextFont + ";",
-    outline: "text-decoration: none; " +
-             "border: 1px solid " + ctaButtonColor + "; zoom: 1; border-radius:2px; " +
-             "min-height: 22px; line-height: 22px;padding: 6px 12px; " +
-             "color: " + ctaButtonTextColor +"; background-color: transparent; " +
-             "font: " + ctaButtonTextFont + ";"
-}
-
 %>
 
 <div
     id="persoo--<%= offerID %>"
-    class="persoo--popup"
-    data-closing="false"
-    data-inner-location-id="persoo--<% offerID %>__content"
+    class="persoo--popup persoo--widget"
+    data-animate-closing="false"
+    data-inner-location-id="persoo--<%= offerID %>__content"
 >
+
+    <% if (useOverlay) { %>
+        <div
+            class="persooAction persoo--popup__overlay"
+            <%= closeOnClickOutside ? 'onclick="persoo_close_' + offerID + '()"' : '' %>
+        >
+        </div>
+            <% if (showClosingX && closingXPosition === 'page'){ %>
+                <a
+                    class="persooAction persoo--popup__close--x"
+                    href="javascript:persoo_close_<%= offerID %>();"
+                >
+                    <span class="persoo--popup__icon"></span>
+                </a>
+            <% } %>
+    <% } %>
+
+    <div class="persoo--popup__wrapper">
+        <% if (showClosingX && closingXPosition !== 'page'){ %>
+            <a
+                class="persooAction persoo--popup__close--x"
+                href="javascript:persoo_close_<%= offerID %>();"
+            >
+                <span class="persoo--popup__icon"></span>
+            </a>
+        <% } %>
+        <div id="persoo--<%= offerID %>__content" class="persoo--popup__content">
+            <% if (backgroundImageLink) { %>
+                <img
+                    class="persoo--popup__background--image"
+                    src="<%= backgroundImageLink %>"
+                    alt="background"
+                >
+            <% } %>
+
+            @@include templateParts/innerContentBlock/template.html
+
+            <div class="persoo-block--separator"></div>
+
+            <div
+                class="persoo--popup__content__dismiss-links"
+                data-type="dismiss-links"
+            >
+                <a
+                    class="persooAction persoo--popup__content__dismiss-links--close"
+                    data-action="close"
+                    href="javascript:persoo_close_<%= offerID %>()"
+                >
+                    <%= closingTextInFooter %>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <style type="text/css">
+
+         @@include templateParts/innerContentBlock/template.css
 
         .persoo--popup {
             line-height: normal;
@@ -137,17 +186,16 @@ var getButtonAndFormInlineStyle = {
             <%= getPosition[position].margin_left ? 'margin-left: '+ getPosition[position].margin_left +'px;' : '' %>
             <%= getPosition[position].margin_right ? 'margin-right: '+ getPosition[position].margin_right +'px;' : '' %>
             width: <%= getBoxWidth(size, customWidth) %>px;
-            height: <%= getBoxHeight(size, customHeight, autoHeight) %>px;
+            height: <%= getBoxHeightWithPx(size, customHeight, autoHeight) %>;
             color: <%= textColor %>;
         }
         .persoo--popup__wrapper > div:last-child,
         .persoo--popup__content > div:last-child {
             margin-bottom: 0 !important;
         }
-        .persoo--popup__wrapper > .persoo--popup__content {
+        .persoo--popup__content {
             position: relative;
             padding: 20px;
-            padding-bottom: 40px;
             overflow: hidden;
             background-clip: padding-box;
             zoom: 1;
@@ -158,37 +206,12 @@ var getButtonAndFormInlineStyle = {
             border: <%= borderSize %>px solid <%= borderColor %>;
             box-shadow: <%= boxShadowColor %> 0px 0px <%= getBoxShadowSize[boxShadow] %>px;
         }
-        .persoo--popup__wrapper .persoo--popup__content__message {
-            text-align: center;
-            margin-bottom: 15px;
-        }
 
-        @@include templateParts/callToActionButton/template.css
-
-        .persoo--popup__wrapper a.persoo--popup__content__building-block--action {
-            display: inline-block;
-        }
-        .persoo--popup__wrapper .persoo--popup__content__building-block--separator {
-            position: relative;
-            margin-bottom: 15px;
-        }
-        .persoo--popup__wrapper input[type="submit"],
-        .persoo--popup__wrapper a.persoo--popup__content__building-block--action {
-            float: none;
-            vertical-align: middle;
-        }
-        #persoo--<%= offerID %> .persoo--popup__wrapper input[type="submit"],
-        #persoo--<%= offerID %> a.persoo--popup__content__building-block--action {
-            font: <%= ctaButtonTextFont %>;
-        }
-
-        @@include templateParts/collectEmailForm/template.css
-
-        .persoo--popup__wrapper .persoo--popup__content__dismiss-links {
+        .persoo--popup__content__dismiss-links {
             text-align:center;
             margin-bottom: 15px;
         }
-        .persoo--popup__wrapper .persoo--popup__content__dismiss-links--close {
+        .persoo--popup__content__dismiss-links--close {
             font-size: 12px;
             text-decoration: underline;
             margin-left: 10px;
@@ -262,70 +285,6 @@ var getButtonAndFormInlineStyle = {
             background-color: <%= overlayColor %>;
         }
 
-        /* reset css inside */
-        .persoo--popup__wrapper *,
-        .persoo--popup__wrapper p,
-        .persoo--popup__wrapper a,
-        .persoo--popup__wrapper strong,
-        .persoo--popup__wrapper em,
-        .persoo--popup__wrapper span,
-        .persoo--popup__wrapper ul,
-        .persoo--popup__wrapper li,
-        .persoo--popup__wrapper input,
-        .persoo--popup__wrapper button {
-            margin: 0;
-            padding: 0;
-            font-family: inherit;
-        }
-        .persoo--popup__wrapper h1 {
-            font-weight: 700;
-            font-size: 28px;
-            line-height: 41.59375px;
-        }
-        #persoo--<%= offerID %> .persoo--popup__wrapper h1 {
-            font: <%= textFont %>;
-            color: <%= textColor %>;
-        }
-        .persoo--popup__wrapper hr {
-            border: 0;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #fff;
-        }
-        .persoo--popup__wrapper input {
-            padding: 4px 6px;
-            margin-right: 0px;
-        }
-        .persoo--popup__wrapper p {
-            margin-bottom: 10px;
-        }
-
-        #persoo--<%= offerID %> .persoo--popup__wrapper p {
-            font: <%= textFont %>;
-            color: <%= textColor %>;
-        }
-        .persoo--popup__wrapper strong {
-            font-weight: bold;
-        }
-        .persoo--popup__wrapper em {
-            font-style: italic;
-            font-family: inherit;
-        }
-        .persoo--popup__wrapper input {
-            margin-right: 0;
-        }
-        .persoo--popup__wrapper input[type="text"] {
-            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-               -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-                    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-            -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-               -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-                 -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-                    transition: border linear 0.2s, box-shadow linear 0.2s;
-            display: inline-block;
-            float: none;
-            vertical-align: middle;
-        }
-
         /* utility classes */
         .persoo--popup__background--image {
             width: 100%;
@@ -347,115 +306,67 @@ var getButtonAndFormInlineStyle = {
             max-height: 100%;
         }
 
-    <% if (animationEffect && animationEffect != 'none') {
-        var animationProps = getAnimationProps[animationEffect];
-    %>
+        <% if (animationEffect && animationEffect != 'none') {
+            var animationProps = getAnimationProps[animationEffect];
+        %>
+            @keyframes persoo--<%= offerID %>__animation {
+                0% {
+                    <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
+                    <%= animationProps.start.right ? 'right: ' + animationProps.start.right + ';' : '' %>
+                    <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %>
+                    <%= animationProps.start.bottom ? 'bottom: ' + animationProps.start.bottom + ';' : '' %>
+                    <%= animationProps.start.opacity ? 'opacity: ' + animationProps.start.opacity + ';' : '' %>
+                }
+                100% {
+                    <%= animationProps.stop.left ? 'left: ' + animationProps.stop.left + ';' : '' %>
+                    <%= animationProps.stop.right ? 'right: ' + animationProps.stop.right + ';' : '' %>
+                    <%= animationProps.stop.top ? 'top: ' + animationProps.stop.top + ';' : '' %>
+                    <%= animationProps.stop.bottom ? 'bottom: ' + animationProps.stop.bottom + ';' : '' %>
+                    <%= animationProps.stop.opacity ? 'opacity: ' + animationProps.stop.opacity + ';' : '' %>
+                }
+            }
+            @-webkit-keyframes persoo--<%= offerID %>__animation {
+                0% {
+                    <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
+                    <%= animationProps.start.right ? 'right: ' + animationProps.start.right + ';' : '' %>
+                    <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %>
+                    <%= animationProps.start.bottom ? 'bottom: ' + animationProps.start.bottom + ';' : '' %>
+                    <%= animationProps.start.opacity ? 'opacity: ' + animationProps.start.opacity + ';' : '' %>
+                }
+                100% {
+                    <%= animationProps.stop.left ? 'left: ' + animationProps.stop.left + ';' : '' %>
+                    <%= animationProps.stop.right ? 'right: ' + animationProps.stop.right + ';' : '' %>
+                    <%= animationProps.stop.top ? 'top: ' + animationProps.stop.top + ';' : '' %>
+                    <%= animationProps.stop.bottom ? 'bottom: ' + animationProps.stop.bottom + ';' : '' %>
+                    <%= animationProps.stop.opacity ? 'opacity: ' + animationProps.stop.opacity + ';' : '' %>
+                }
+            }
+            #persoo--<%= offerID %> .persoo--popup__wrapper {
+                animation: persoo--<%= offerID %>__animation <%= animationDuration %> ease 0s 1 normal;
+                -webkit-animation: persoo--<%= offerID %>__animation <%= animationDuration %> ease 0s 1 normal;
+            }
 
-    @keyframes persoo--<%= offerID %>__animation {
-        0% {
-            <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
-            <%= animationProps.start.right ? 'right: ' + animationProps.start.right + ';' : '' %>
-            <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %>
-            <%= animationProps.start.bottom ? 'bottom: ' + animationProps.start.bottom + ';' : '' %>
-            <%= animationProps.start.opacity ? 'opacity: ' + animationProps.start.opacity + ';' : '' %>
-        }
-        100% {
-            <%= animationProps.stop.left ? 'left: ' + animationProps.stop.left + ';' : '' %>
-            <%= animationProps.stop.right ? 'right: ' + animationProps.stop.right + ';' : '' %>
-            <%= animationProps.stop.top ? 'top: ' + animationProps.stop.top + ';' : '' %>
-            <%= animationProps.stop.bottom ? 'bottom: ' + animationProps.stop.bottom + ';' : '' %>
-            <%= animationProps.stop.opacity ? 'opacity: ' + animationProps.stop.opacity + ';' : '' %>
-        }
-    }
-    @-webkit-keyframes persoo--<%= offerID %>__animation {
-        0% {
-            <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
-            <%= animationProps.start.right ? 'right: ' + animationProps.start.right + ';' : '' %>
-            <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %>
-            <%= animationProps.start.bottom ? 'bottom: ' + animationProps.start.bottom + ';' : '' %>
-            <%= animationProps.start.opacity ? 'opacity: ' + animationProps.start.opacity + ';' : '' %>
-        }
-        100% {
-            <%= animationProps.stop.left ? 'left: ' + animationProps.stop.left + ';' : '' %>
-            <%= animationProps.stop.right ? 'right: ' + animationProps.stop.right + ';' : '' %>
-            <%= animationProps.stop.top ? 'top: ' + animationProps.stop.top + ';' : '' %>
-            <%= animationProps.stop.bottom ? 'bottom: ' + animationProps.stop.bottom + ';' : '' %>
-            <%= animationProps.stop.opacity ? 'opacity: ' + animationProps.stop.opacity + ';' : '' %>
-        }
-    }
-    #persoo--<%= offerID %> .persoo--popup__wrapper {
-        animation: persoo--<%= offerID %>__animation <%= animationDuration %> ease 0s 1 normal;
-        -webkit-animation: persoo--<%= offerID %>__animation <%= animationDuration %> ease 0s 1 normal;
-    }
+            #persoo--<%= offerID %>[data-animate-closing="true"] .persoo--popup__wrapper {
+                <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
+                <%= animationProps.start.right ? 'right: ' + animationProps.start.right + ';' : '' %>
+                <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %>
+                <%= animationProps.start.bottom ? 'bottom: ' + animationProps.start.bottom + ';' : '' %>
+                opacity: 0;
+                transition: all <%= animationDuration %> ease;
+            }
+        <% } %>
 
-    #persoo--<%= offerID %>[data-closing="true"] .persoo--popup__wrapper {
-        <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
-        <%= animationProps.start.right ? 'right: ' + animationProps.start.right + ';' : '' %>
-        <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %>
-        <%= animationProps.start.bottom ? 'bottom: ' + animationProps.start.bottom + ';' : '' %>
-        opacity: 0;
-        transition: all <%= animationDuration %> ease;
-    }
-<% } %>
+        /* reset css inside content */
+        #persoo--<%= offerID %>__content h1,
+        #persoo--<%= offerID %>__content p {
+            font: <%= textFont %>;
+            color: <%= textColor %>;
+        }
+
     </style>
     <style type="text/css">
         <%= customCSS %>
     </style>
-    <% if (useOverlay) { %>
-        <div
-            class="persooAction persoo--popup__overlay"
-            <%= closeOnClickOutside ? 'onclick="persoo_close_' + offerID + '()"' : '' %>
-        >
-        </div>
-            <% if (showClosingX && closingXPosition === 'page'){ %>
-                <a
-                    class="persooAction persoo--popup__close--x"
-                    href="javascript:persoo_close_<%= offerID %>();"
-                >
-                    <span class="persoo--popup__icon"></span>
-                </a>
-            <% } %>
-    <% } %>
-
-    <div class="persoo--popup__wrapper">
-        <% if (showClosingX && closingXPosition !== 'page'){ %>
-            <a
-                class="persooAction persoo--popup__close--x"
-                href="javascript:persoo_close_<%= offerID %>();"
-            >
-                <span class="persoo--popup__icon"></span>
-            </a>
-        <% } %>
-        <div id="persoo--<% offerID %>__content" class="persoo--popup__content">
-            <% if (backgroundImageLink) { %>
-                <img
-                    class="persoo--popup__background--image"
-                    src="<%= backgroundImageLink %>"
-                    alt="background"
-                >
-            <% } %>
-
-            @@include templateParts/richTextBlock/template.html
-            @@include templateParts/customHTML/template.html
-            @@include templateParts/callToActionButton/template.html
-            @@include templateParts/collectEmailForm/template.html
-
-            <div class="persoo--popup__content__building-block--separator"></div>
-
-            <div
-                class="persoo--popup__content__dismiss-links"
-                data-type="dismiss-links"
-            >
-                <a
-                    class="persooAction persoo--popup__content__dismiss-links--close"
-                    data-action="close"
-                    href="javascript:persoo_close_<%= offerID %>()"
-                >
-                    <%= closingTextInFooter %>
-                </a>
-            </div>
-        </div>
-    </div>
 
     <script type="text/javascript">
         window.persoo = window.persoo || function () {}; /* TODO until having persoo in preview */
@@ -464,10 +375,10 @@ var getButtonAndFormInlineStyle = {
             var elem = document.getElementById("persoo--<%= offerID %>");
             window.persoo('send', 'close', {offerID: "<%= offerID %>"});
 
-            elem.setAttribute("data-closing", "true");
+            elem.setAttribute("data-animate-closing", "true");
             window.setTimeout(function () {
                 elem.style.display = "none";
-                elem.setAttribute("data-closing", "false");
+                elem.setAttribute("data-animate-closing", "false");
             }, <%= animationEffect === "none" ? 0 : animationDuration.replace("s", "") %> * 1000);
         }
     </script>

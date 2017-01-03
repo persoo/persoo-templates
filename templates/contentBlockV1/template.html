@@ -1,0 +1,39 @@
+<% var offerID = offerID || (typeof _offerID !== 'undefined' ? _offerID : 'randomOfferID'); %>
+
+<div
+    id="persoo--<%= offerID %>"
+    class="persoo--contentBlock persoo--widget"
+    data-inner-location-id="persoo--<%= offerID %>__content"
+>
+    <div id="persoo--<%= offerID %>__content" class="persoo--contentBlock__content">
+
+            @@include templateParts/innerContentBlock/template.html
+
+    </div>
+
+    <style type="text/css">
+
+        @@include templateParts/innerContentBlock/template.css
+
+        .persoo--contentBlock__content {
+            padding: 20px;
+        }
+
+    </style>
+    <style type="text/css">
+
+        <%= customCSS %>
+
+    </style>
+
+    <script type="text/javascript">
+
+        window.persoo = window.persoo || function () {}; /* TODO until having persoo in preview */
+
+    </script>
+    <script type="text/javascript">
+
+        <%= customJS %>
+
+    </script>
+</div>

@@ -16,6 +16,6 @@
             "name": "Main Content"
         }
     ],
-    "template": "@template",
+    "template": "Note: this will be replaced by content of template.html",
     "minScenariosCount": 0
 }

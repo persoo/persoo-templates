@@ -282,5 +282,5 @@
         }
     ],
     "minScenariosCount": 0,
-    "template": "@template.html"
+    "template": "Note: this will be replaced by content of template.html"
 }

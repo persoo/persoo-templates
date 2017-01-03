@@ -1,0 +1,47 @@
+{
+    "class": "webWidget",
+    "isActive": true,
+    "minScenariosCount": 0,
+    "name": "Content Block",
+    "fields": [
+
+        @@include templateParts/innerContentBlock/fields.json
+
+        {
+            "id": "section_customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "css",
+            "defaultValue": "/* your own css rules */"
+        },
+        {
+            "id": "section_customJS",
+            "name": "Custom Javascript",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "customJS",
+            "name": "Custom Javascript",
+            "group": "design",
+            "type": "javascript",
+            "defaultValue": "/* your own javascript */"
+        }
+    ],
+    "groups": [
+
+        @@include templateParts/innerContentBlock/groups.json
+
+        {
+            "id": "design",
+            "name": "Design"
+        }
+    ],
+    "template": "Note: this will be replaced by content of template.html"
+}

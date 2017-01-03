@@ -1,0 +1,44 @@
+{
+    "id": "section_buttonsAndForms",
+    "name": "Button & Form",
+    "group": "design",
+    "type": "section"
+},
+{
+    "id": "ctaStyle",
+    "name": "Button & Form style",
+    "group": "design",
+    "type": "select",
+    "options": [
+        {
+            "label": "Classic",
+            "value": "classic"
+        },
+        {
+            "label": "Outline",
+            "value": "outline"
+        }
+    ],
+    "defaultValue": "classic"
+},
+{
+    "id": "ctaButtonTextColor",
+    "name": "Button Text Color",
+    "group": "design",
+    "type": "color",
+    "defaultValue": "#ffffff"
+},
+{
+    "id": "ctaButtonColor",
+    "name": "Button Color",
+    "group": "design",
+    "type": "color",
+    "defaultValue": "#a28c51"
+},
+{
+    "id": "ctaButtonTextFont",
+    "name": "Button Font",
+    "group": "design",
+    "type": "text",
+    "defaultValue": "normal normal 600 large Arial, Helvetica, sans-serif"
+},

@@ -41,10 +41,50 @@ var tabInnerPadding = tabInnerPaddings[boxCorners];
     data-inner-location-id="persoo--sidebar__content"
     <%= openOn === "click" ? " data-visible=false" : "" %>
 >
+    <div class="persoo--sidebar">
+        <div class="persoo--sidebar__tab">
+            <% if (openOn === "click") { %>
+                <a
+                    id="persoo--<%= offerID %>__tab__inner"
+                    class="persoo--sidebar__tab__inner"
+                    href="javascript:persoo_toggle_<%= offerID %>();"
+                >
+                    <%= tab %>
+                </a>
+            <% } else { %>
+                <div
+                    id="persoo--<%= offerID %>__tab__inner"
+                    class="persoo--sidebar__tab__inner"
+                >
+                    <%= tab %>
+                </div>
+            <% } %>
+        </div>
+        <div
+            id="persoo--<%= offerID %>__content"
+            class="persoo--sidebar__content"
+        >
+
+            @@include templateParts/innerContentBlock/template.html
+
+        </div>
+    </div>
+
     <style type="text/css">
+
+        @@include templateParts/innerContentBlock/template.css
+
         .persoo--sidebar,
         .persoo--sidebar * {
             box-sizing: border-box;
+        }
+
+        .persoo--sidebar__content {
+            padding: 20px;
+        }
+        .persoo--sidebar__content > :first-child,
+        .persoo--sidebar__content > :first-child > :first-child {
+            margin-top: 0px;
         }
 
         #persoo--<%= offerID %> .persoo--sidebar {
@@ -99,17 +139,11 @@ var tabInnerPadding = tabInnerPaddings[boxCorners];
             z-index: <%= zIndex + 1 %>;
             width: <%= boxWidth %>px;
             overflow: hidden;
-            padding: <%= paddingSize %>px;
             background: <%= contentBackground %>;
             border-radius: <%= position === "left" ? "0 0 " + boxCorners + "px 0" : "0 0 0 " + boxCorners + "px" %>;
             border: <%= borderSize %>px solid <%= borderColor %>;
             box-shadow: <%= boxShadowColor %> 0px <%= boxShadowSize / 2 %>px <%= boxShadowSize %>px;
             zoom: 1;
-        }
-
-        #persoo--<%= offerID %> .persoo--sidebar__content__headline {
-            color: <%= headlineColor %>;
-            margin-top: 0;
         }
 
         <% if (openOn === "hover" || openOn === "click") { %>
@@ -127,40 +161,6 @@ var tabInnerPadding = tabInnerPaddings[boxCorners];
     <style type="text/css">
         <%= customCSS %>
     </style>
-
-    <div class="persoo--sidebar">
-        <div class="persoo--sidebar__tab">
-            <% if (openOn === "click") { %>
-                <a
-                    id="persoo--<%= offerID %>__tab__inner"
-                    class="persoo--sidebar__tab__inner"
-                    href="javascript:persoo_toggle_<%= offerID %>();"
-                >
-                    <%= tab %>
-                </a>
-            <% } else { %>
-                <div
-                    id="persoo--<%= offerID %>__tab__inner"
-                    class="persoo--sidebar__tab__inner"
-                >
-                    <%= tab %>
-                </div>
-            <% } %>
-        </div>
-        <div
-            id="persoo--<%= offerID %>__content"
-            class="persoo--sidebar__content"
-        >
-            <% if (headline) { %>
-                <h2 class="persoo--sidebar__content__headline">
-                    <%= headline %>
-                </h2>
-            <% } %>
-            <div class="persoo--sidebar__content__message">
-                <%= message %>
-            </div>
-        </div>
-    </div>
 
     <script type="text/javascript">
         window.persoo = window.persoo || function () {}; /* TODO until having persoo in preview */

@@ -5,10 +5,7 @@
     "name": "Pop-up",
     "fields": [
 
-        @@include templateParts/customHTML/fields.json
-        @@include templateParts/richTextBlock/fields.json
-        @@include templateParts/callToActionButton/fields.json
-        @@include templateParts/collectEmailForm/fields.json
+        @@include templateParts/innerContentBlock/fields.json
 
         {
             "id": "section_position",
@@ -41,6 +38,10 @@
                 {
                     "label": "Right",
                     "value": "right"
+                },
+                {
+                    "label": "Top",
+                    "value": "top"
                 },
                 {
                     "label": "Bottom",
@@ -230,50 +231,6 @@
             "type": "text",
             "defaultValue": "normal normal 300 medium Arial, Helvetica, sans-serif"
         },
-        {
-            "id": "section_buttonsAndForms",
-            "name": "Button & Form",
-            "group": "design",
-            "type": "section"
-        },
-        {
-            "id": "ctaStyle",
-            "name": "Button & Form style",
-            "group": "design",
-            "type": "select",
-            "options": [
-                {
-                    "label": "Classic",
-                    "value": "classic"
-                },
-                {
-                    "label": "Outline",
-                    "value": "outline"
-                }
-            ],
-            "defaultValue": "classic"
-        },
-        {
-            "id": "ctaButtonTextColor",
-            "name": "Button Text Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#ffffff"
-        },
-        {
-            "id": "ctaButtonColor",
-            "name": "Button Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#a28c51"
-        },
-        {
-            "id": "ctaButtonTextFont",
-            "name": "Button Font",
-            "group": "design",
-            "type": "text",
-            "defaultValue": "normal normal 600 large Arial, Helvetica, sans-serif"
-        },
 
         {
             "id": "section_background",
@@ -386,6 +343,7 @@
             "type": "color",
             "defaultValue": "rgba(36, 39, 41, 0.1)"
         },
+
         {
             "id": "section_customCSS",
             "name": "Custom CSS",
@@ -415,15 +373,12 @@
     ],
     "groups": [
 
-        @@include templateParts/customHTML/groups.json
-        @@include templateParts/richTextBlock/groups.json
-        @@include templateParts/callToActionButton/groups.json
-        @@include templateParts/collectEmailForm/groups.json
+        @@include templateParts/innerContentBlock/groups.json
 
         {
             "id": "design",
             "name": "Design"
         }
     ],
-    "template": "@@includeAsString template.html"
+    "template": "Note: this will be replaced by content of template.html"
 }

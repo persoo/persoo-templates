@@ -1,0 +1,5 @@
+@@include templateParts/customHTML/groups.json
+@@include templateParts/richTextBlock/groups.json
+@@include templateParts/callToActionButton/groups.json
+@@include templateParts/collectEmailForm/groups.json
+@@include templateParts/persooBlocksStyles/groups.json

@@ -1,0 +1,71 @@
+#persoo--<%= offerID %> .persoo-block--separator {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+/* TODO style all posible form fields */
+#persoo--<%= offerID %> input[type="submit"],
+#persoo--<%= offerID %> .persoo-block--collect-email__form__email,
+#persoo--<%= offerID %> .persoo-block--collect-email__form__submit,
+#persoo--<%= offerID %> .persoo-block--collect-email__form__thank-you,
+#persoo--<%= offerID %> .persoo-block--cta__link {
+    <%= getButtonAndFormStyle[ctaStyle] %>
+    float: none;
+    vertical-align: middle;
+    font: <%= ctaButtonTextFont %>;
+}
+
+/* reset css inside */
+#persoo--<%= offerID %>__content *,
+#persoo--<%= offerID %>__content p,
+#persoo--<%= offerID %>__content a,
+#persoo--<%= offerID %>__content strong,
+#persoo--<%= offerID %>__content em,
+#persoo--<%= offerID %>__content span,
+#persoo--<%= offerID %>__content ul,
+#persoo--<%= offerID %>__content li,
+#persoo--<%= offerID %>__content input,
+#persoo--<%= offerID %>__content button {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+}
+#persoo--<%= offerID %>__content h1 {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 41.59375px;
+}
+#persoo--<%= offerID %>__content hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #fff;
+}
+#persoo--<%= offerID %>__content input {
+    padding: 4px 6px;
+    margin-right: 0px;
+}
+#persoo--<%= offerID %>__content p {
+    margin-bottom: 10px;
+}
+#persoo--<%= offerID %>__content strong {
+    font-weight: bold;
+}
+#persoo--<%= offerID %>__content em {
+    font-style: italic;
+    font-family: inherit;
+}
+#persoo--<%= offerID %>__content input {
+    margin-right: 0;
+}
+#persoo--<%= offerID %>__content input[type="text"] {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+       -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+       -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+         -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+            transition: border linear 0.2s, box-shadow linear 0.2s;
+    display: inline-block;
+    float: none;
+    vertical-align: middle;
+}

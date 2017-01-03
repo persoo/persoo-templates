@@ -1,0 +1,5 @@
+@@include templateParts/customHTML/fields.json
+@@include templateParts/richTextBlock/fields.json
+@@include templateParts/callToActionButton/fields.json
+@@include templateParts/collectEmailForm/fields.json
+@@include templateParts/persooBlocksStyles/fields.json

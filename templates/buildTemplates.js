@@ -12,8 +12,10 @@ function addTemplate(id, json, templateHTML) {
 
 /** Read the file as string a replace
  * "@@include templateParts/path" with the file.
+ * @param {string} content which may contain include directive
+ * @param {string} parentFileName for debug messages
  */
-function resolveIncludesInFile(fileAsString) {
+function resolveIncludesInFile(fileAsString, parentFileName) {
     var lines = fileAsString.split("\n");
     for (var i = 0; i < lines.length; i++) {
         var matchResult = lines[i].match(/^(\s*)@@include\s+(\S+)/);
@@ -23,9 +25,13 @@ function resolveIncludesInFile(fileAsString) {
             try {
                 var content = fs.readFileSync(currentDir + '/../' + filePath).toString();
             } catch(err) {
-                console.error("@@include [on line " + i + "]:  Error when reading file from path '" + filePath + "'.");
+                console.error("@@include [on line " + i + " in file " + parentFileName + "]: " +
+                        "Error when reading file from path '" + filePath + "'.");
                 break;
             };
+            // resolve includes recursively
+            content = resolveIncludesInFile(content, filePath);
+
             var indentedContent = content.replace(/^/gm, indent);
             lines[i] = indentedContent;
         }
@@ -51,8 +57,8 @@ function processAllTemplatesInDir(addTemplate) {
             };
 
             // resolve included files (@@include)
-            jsonString = resolveIncludesInFile(jsonString);
-            html = resolveIncludesInFile(html);
+            jsonString = resolveIncludesInFile(jsonString, "index.json");
+            html = resolveIncludesInFile(html, "template.html");
 
             // parse JSON
             try {

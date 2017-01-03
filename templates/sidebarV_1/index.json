@@ -4,20 +4,8 @@
     "minScenariosCount": 0,
     "name": "Side Bar",
     "fields": [
-        {
-            "id": "headline",
-            "name": "Headline",
-            "group": "main",
-            "type": "text",
-            "defaultValue": "Headline"
-        },
-        {
-            "id": "message",
-            "name": "Main message",
-            "group": "main",
-            "type": "richtext",
-            "defaultValue": "<div>Your Content Here</div>"
-        },
+
+        @@include templateParts/innerContentBlock/fields.json
 
         {
             "id": "tab",
@@ -116,13 +104,6 @@
             "defaultValue": "normal normal 300 medium Arial, Helvetica, sans-serif"
         },
         {
-            "id": "headlineColor",
-            "name": "Headline Text Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#009688"
-        },
-        {
             "id": "tabColor",
             "name": "Tab Text Color",
             "group": "design",
@@ -187,27 +168,6 @@
             "name": "Border",
             "group": "design",
             "type": "section"
-        },
-        {
-            "id": "paddingSize",
-            "name": "Content Padding Size",
-            "group": "design",
-            "type": "select",
-            "options": [
-                {
-                    "label": "None",
-                    "value": "0"
-                },
-                {
-                    "label": "Small",
-                    "value": "5"
-                },
-                {
-                    "label": "Large",
-                    "value": "15"
-                }
-            ],
-            "defaultValue": "5"
         },
         {
             "id": "borderColor",
@@ -307,10 +267,9 @@
         }
     ],
     "groups": [
-        {
-            "id": "main",
-            "name": "Main content"
-        },
+
+        @@include templateParts/innerContentBlock/groups.json
+
         {
             "id": "tab",
             "name": "Tab"
@@ -320,5 +279,5 @@
             "name": "Design"
         }
     ],
-    "template": "@template.html"
+    "template": "Note: this will be replaced by content of template.html"
 }
