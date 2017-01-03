@@ -2,6 +2,7 @@
 Here we present coding standards, best practices and guides for creating Persoo templates.
 
  * [Introduction](#introduction)
+   * [Template fields](#template-fields)
    * [HTML template](#html-template)
    * [Styles](#styles)
    * [Scripts](#scripts)
@@ -15,11 +16,40 @@ See [TEMPLATE RENDERING] to learn more about persoo templates format and renderi
 ## Introduction
 Let us look, how to create simple template. Template consist of
 
-* HTML code, which includes Styles and Scripts
-* Fields definition (what you allow to be modifiable by your users)
+ * Fields definition (what you allow to be modifiable by your users)
+ * HTML code template, which includes Styles and Scripts
 
-To have templates, which simply "works", you should follow basic rules. Otherwise there may be collision with other CSS rules in page or there cannot be 2 instances of the same widget in the page with different styles, etc.
+To have templates, which simply "working" and without bugs, you should follow basic rules. Otherwise there may be collision with other CSS rules in page or there cannot be 2 instances of the same widget in the page with different styles, etc.
+
+### Template fields
+
+For each template, you can define fields to be configured by final user. Template + content for these fields can be rendered to final HTML code, which can be placed to a web page.
+
+**Example:** (simple template with 1 field)
+
+```json
+{
+    "class": "webWidget",
+    "name": "Custom HTML",
+    "fields": [
+        {
+            "id": "fieldID",
+            "label": "My field",
+            "formFieldType": "html",
+            "defaultValue": "<div>...your html code with EJS...</div>"
+        }
+    ],
+    "template": "Master template using predefined field as EJS variables, i.e. <%= fieldID %>",
+    "minScenariosCount": 0
+};
+```
+
+HTML templates are using [EJS] for rendering (which is basically javascript). During rendering of your HTML templates, there exists javascript variables with the same names, as is your field ids, and they contained values of the fields provided by final user.
+
+> Note: template JSON often also contains field `groups`, which just organize fields into logic groups, to improve UX for final user. It's not necessary for the template rendering.
+
 ### HTML template
+
 * Wrap your widget into `#persoo--<%= offerID %>.persoo--widget` container
   Just one element is needed for Persoo working.
 * Do not render unnecessary elements with display none.
@@ -119,7 +149,10 @@ Building blocks are having classes like `persoo-block`, `persoo-block--cta`, `pe
 In this project, we also provide a few basic templates for Persoo offers. You can use them as inspiration for creating your own persoo templates. Just fork this repository, add new templates and keep them in your git repository.
 
 ### Template source files
-All widgets are located at `template` directory. For each widget, there is subdirectory whose name is templateID. Directory contains two files
+All widgets are located at `template` directory. For each widget, there is sub-directory whose name is templateID. Directory contains two files
+
+    templates/<templateID>/index.json
+    templates/<templateID>/template.html
 
    * **index.json** -- json with widget configuration, only main template field is empty (this field is added during build, because we keep widget's html source code in natural form in file template.html, not in JSON, on one line with escaped new lines and quotes)
    * **template.html** -- main template as html string with EJS
@@ -141,14 +174,14 @@ Often, you want to define content blocks/template parts which can be used in mul
 
 All widget template files, i.e.
 
-    templates/<yourWidget>/template.html
-    templates/<yourWidget>/index.json
+    templates/<templateID>/template.html
+    templates/<templateID>/index.json
 
-are preprocessed during build, so you call
+are preprocessed during build, so inside these files you can call
 
     @@include templateParts/button/template.html
 
-to include file in give path.
+to include file from given path.
 
 > Note 1: included file will have the same indent as your `@@include` directive.
 
