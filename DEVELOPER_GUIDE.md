@@ -25,21 +25,22 @@ To have templates, which simply "works", you should follow basic rules. Otherwis
 * Do not render unnecessary elements with display none.
   Handle them with condition written in [EJS] instead.
 
-> **Example:** In the following examples, we create template for widget with widgetID `mywidget`.
-```html
-    <div
-        id="persoo--<%= offerID %>"
-        class="persoo--widget persoo--mywidget"
-    >
-        <div class="persoo--mywidget__content">
-            <% if (headline) { %>
-                <h2><%= headline %></h2>
-            <% } %>
-        </div>
+**Example:** In the following examples, we create template for widget with widgetID `mywidget`.
 
-        <style></style>
-        <script></script>
+```html
+<div
+    id="persoo--<%= offerID %>"
+    class="persoo--widget persoo--mywidget"
+>
+    <div class="persoo--mywidget__content">
+        <% if (headline) { %>
+            <h2><%= headline %></h2>
+        <% } %>
     </div>
+
+    <style></style>
+    <script></script>
+</div>
 ```
 
 > _**Note** (for advanced users):_ Content from templateParts may define some style variables, which are used in `<style>` section. That is the reason, we place content first, followed by style and scripts.
@@ -49,7 +50,8 @@ To have templates, which simply "works", you should follow basic rules. Otherwis
 * Avoid using global selectors (without offerID), when the CSS property comes from user fields.
     Otherwise your "public" CSS rule in the page may redefine style also for other widgets of the same template.
 
-> **example:**
+**example:**
+
 ```html
 ...
 <style>
@@ -75,10 +77,12 @@ To have templates, which simply "works", you should follow basic rules. Otherwis
 ```
 
 ### Scripts
+
 * Avoid using of global functions and selectors (without offerID)
   Otherwise your scripts will affect (or be triggered by) other widgets with same template.
 
-> **example:**
+**example:**
+
 ```html
 <div id="persoo--<%= offerID %>">
     ...
