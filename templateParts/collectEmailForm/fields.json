@@ -1,20 +1,13 @@
 {
-    "id": "collectEmail",
-    "name": "Collect Email Address",
-    "group": "collectEmail",
-    "type": "checkbox",
-    "defaultValue": false
-},
-{
     "id": "collectEmailInputLabel",
     "name": "Input Label",
     "group": "collectEmail",
     "type": "text",
     "defaultValue": "Your email",
     "condition": {
-        "fieldID": "collectEmail",
-        "operator": "==",
-        "fieldValue": true
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CollectEmail"
     }
 },
 {
@@ -24,9 +17,9 @@
     "type": "text",
     "defaultValue": "SUBSCRIBE",
     "condition": {
-        "fieldID": "collectEmail",
-        "operator": "==",
-        "fieldValue": true
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CollectEmail"
     }
 },
 {
@@ -36,8 +29,8 @@
     "type": "text",
     "defaultValue": "Thank you for subscription",
     "condition": {
-        "fieldID": "collectEmail",
-        "operator": "==",
-        "fieldValue": true
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CollectEmail"
     }
 },

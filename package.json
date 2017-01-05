@@ -12,7 +12,7 @@
     "build:tests": "mkdir -p build && node_modules/browserify/bin/cmd.js test/test.js > build/test.js",
     "build:templates": "node templates/buildTemplates.js",
     "watch:tests": "watch 'npm run build:tests' ./test ./lib",
-    "watch:templates": "watch 'npm run build:templates' ./templates",
+    "watch:templates": "watch 'npm run build:templates' ./templates ./templateParts",
     "watch:editor": "watch 'npm run build:editor' ./editor ./lib"
   },
   "repository": {

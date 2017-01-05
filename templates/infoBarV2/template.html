@@ -16,8 +16,6 @@ var getPaddingSize = {
     "15" : "15px 20px",
 };
 
-var ctaActionHref = ctaButtonAction === 'redirect' ? ctaButtonLink : 'javascript:persoo_close_' + offerID + '()';
-
 %>
 
 <div
@@ -25,7 +23,36 @@ var ctaActionHref = ctaButtonAction === 'redirect' ? ctaButtonLink : 'javascript
     class="persoo--infobar persoo--widget"
     data-visible="true"
 >
+    <div
+        id="persoo--<%= offerID %>__wrapper"
+        class="persoo--infobar__wrapper"
+    >
+        <% if (backgroundImageLink){ %>
+            <img
+                class="persoo--infobar__background-image"
+                src="<%= backgroundImageLink %>"
+                alt="background"
+            >
+        <% } %>
+        <div class="persoo--infobar__content">
+
+            @@include templateParts/innerContentBlock/template.html
+
+        </div>
+        <% if (showClosingX){ %>
+            <a
+                class="persoo--infobar__close-x persooAction"
+                href="javascript:persoo_close_<%= offerID %>();"
+            >
+                <span class="persoo--infobar__close-x__icon"></span>
+            </a>
+        <% } %>
+    </div>
+
     <style type="text/css">
+
+        @@include templateParts/innerContentBlock/template.css
+
         .persoo--infobar{
             line-height: normal;
             visibility: visible;
@@ -65,6 +92,7 @@ var ctaActionHref = ctaButtonAction === 'redirect' ? ctaButtonLink : 'javascript
             <% } %>
         }
         .persoo--infobar__wrapper {
+            position: relative;
             zoom: 1;
             background-clip: padding-box;
             -webkit-font-smoothing: antialiased;
@@ -73,12 +101,19 @@ var ctaActionHref = ctaButtonAction === 'redirect' ? ctaButtonLink : 'javascript
         }
 
         .persoo--infobar__background-image {
-            width: 100%;
-            height: 100%;
             position: absolute;
-            top: 0;
-            left: 0;
             z-index: -1;
+            <% if (backgroundImagePosition == "fillContainer") { %>
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+            <% } else { %>
+                top: 50%;
+                left: 50%;
+                margin-right: -50%;
+                transform: translate(-50%, -50%)
+            <% } %>
         }
 
         .persoo--infobar__content {
@@ -87,37 +122,16 @@ var ctaActionHref = ctaButtonAction === 'redirect' ? ctaButtonLink : 'javascript
             justify-content: center;
             align-items: center;
         }
-        .persoo--infobar__content .persoo--infobar__content__message {
-            text-align: center;
+        .persoo--infobar__content .persoo-block {
+            display: inline-block;
+            margin-right: 20px;
         }
-
-        <% if (showCtaButton) { %>
-            .persoo--infobar__content .persoo--infobar__content__cta {
-                text-align: center;
-                margin-left: 15px;
-            }
-            #persoo--<%= offerID %> .persoo--infobar__content__cta__action {
-                color: <%= ctaTextColor %>;
-                background-color: <%= ctaButtonColor %>;
-            }
-            .persoo--infobar__content .persoo--infobar__content__cta__action {
-                display: inline-block;
-                text-decoration: none;
-                zoom: 1;
-                border-radius:2px;
-                min-height: 22px;
-                line-height: 22px;
-                padding: 6px 12px;
-                font-size: 14px;
-                white-space: nowrap;
-            }
-        <% } %>
 
         <% if (showClosingX) { %>
             .persoo--infobar__close-x {
                 opacity: 0.8;
                 cursor: pointer;
-                color: inherit;
+                color: <%= closeXColor %>;<% /* FIXME inherit vs closeXColor??? */ %>
                 margin-left: 15px;
             }
             .persoo--infobar__close-x__icon {
@@ -144,7 +158,7 @@ var ctaActionHref = ctaButtonAction === 'redirect' ? ctaButtonLink : 'javascript
             font-family: inherit;
             color: inherit;
         }
-        .persoo--infobar__content__message p:last-child {
+        .persoo--infobar__content p:last-child {
             margin-bottom: 0;
         }
         .persoo--infobar__content img {
@@ -156,52 +170,16 @@ var ctaActionHref = ctaButtonAction === 'redirect' ? ctaButtonLink : 'javascript
         <%= customCSS %>
     </style>
 
-    <div
-        id="persoo--<%= offerID %>__wrapper"
-        class="persoo--infobar__wrapper"
-    >
-        <% if (backgroundImageLink){ %>
-            <img
-                class="persoo--infobar__background-image"
-                src="<%= backgroundImageLink %>"
-                alt="background"
-            >
-        <% } %>
-        <div class="persoo--infobar__content">
-            <div class="persoo--infobar__content__message">
-                <%= message %>
-            </div>
-            <% if (showCtaButton) { %>
-                <div class="persoo--infobar__content__cta<%= ctaButtonAction === 'close' ? ' persooAction' : '' %>">
-                    <a
-                        class="persoo--infobar__content__cta__action"
-                        href="<%= ctaActionHref %>"
-                        target="_blank"
-                    >
-                        <%= ctaButtonLabel %>
-                    </a>
-                </div>
-            <% } %>
-        </div>
-        <% if (showClosingX){ %>
-            <a
-                class="persoo--infobar__close-x persooAction"
-                href="javascript:persoo_close_<%= offerID %>();"
-            >
-                <span class="persoo--infobar__close-x__icon"></span>
-            </a>
-        <% } %>
-    </div>
     <script type="text/javascript">
         window.persoo = window.persoo || function () {}; /* TODO until having persoo in preview */
-        function report_<%= offerID %>_event(persooEventID) {
+        function persoo_report_event_<%= offerID %>(persooEventID) {
             window.persoo("send", persooEventID, {offerID: "<%= offerID %>"});
         }
 
         function persoo_close_<%= offerID %>() {
             var persooWidget = document.getElementById("persoo--<%= offerID %>");
             persooWidget.setAttribute("data-visible", "false");
-            report_<%= offerID %>_event("close");
+            persoo_report_event_<%= offerID %>("close");
         }
 
         <% if (position !== "inLocation") { %>
@@ -210,11 +188,17 @@ var ctaActionHref = ctaButtonAction === 'redirect' ? ctaButtonLink : 'javascript
                 var infobarWrapper = document.getElementById("persoo--<%= offerID %>__wrapper");
                 var marginProperty = "margin<%= position[0].toUpperCase() + position.slice(1) %>";
 
+                // FIXME clean on close
                 html.style[marginProperty] = infobarWrapper.offsetHeight + "px";
             }
 
-            push_html_by_<%= offerID %>_height();
-            window.addEventListener("resize", push_html_by_<%= offerID %>_height);
+            var throttled_push_html_by_<%= offerID %>_height = (window.persoo && window.persoo.throttle ?
+                window.persoo.throttle(push_html_by_<%= offerID %>_height, 100) :
+                push_html_by_<%= offerID %>_height
+            );
+
+            throttled_push_html_by_<%= offerID %>_height();
+            window.addEventListener("resize", throttled_push_html_by_<%= offerID %>_height);
         <% } %>
     </script>
     <script type="text/javascript">

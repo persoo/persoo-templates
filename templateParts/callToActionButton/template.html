@@ -1,15 +1,13 @@
-<% if (showCtaButton) { %>
-    <div class="persoo-block persoo-block--cta">
-        <a
-            class="persoo-block--cta__link"
-            href="<%=
-                ctaButtonAction == 'redirect' ?
-                ctaButtonLink :
-                'javascript:persoo_close_' + offerID + '()'
-            %>"
-            target="_blank"
-        >
-            <%= ctaButtonLabel %>
-        </a>
-    </div>
-<% } %>
+<div class="persoo-block persoo-block--cta">
+    <a
+        class="persoo-block--cta__link"
+        href="<%=
+            ctaButtonAction == 'redirect' ?
+            ctaButtonLink :
+            'javascript:persoo_close_' + offerID + '()'
+        %>"
+        target="_blank"
+    >
+        <%= ctaButtonLabel %>
+    </a>
+</div>

@@ -20,31 +20,19 @@ function getBoxWidth(boxSize, width) {
     }
     return w;
 }
-function getBoxHeight(boxSize, height, autoHeight) {
-    var h = "auto";
-    if (boxSize == 'custom' && !autoHeight) {
-        h = height;
-    }
-    return h;
-}
-function getBoxHeightWithPx(boxSize, height, autoHeight) {
-    var h = getBoxHeight(boxSize, height, autoHeight);
-
-    if (typeof h == 'number') return h + 'px';
-    else return h;
-}
 
 var boxWidth = getBoxWidth(size, customWidth);
-var boxHeight = getBoxHeight(size, customHeight, autoHeight);
+var boxHeight = (size == 'custom' && !autoHeight ? customHeight : "auto");
+var boxHeightWithPx = (size == 'custom' && !autoHeight ? customHeight + "px" : "auto");
 
 var getPosition = { /* FIXME use boxHeight instead of boxWidth */
     center: {top: "50%", left: "50%", margin_left: -boxWidth/2, margin_top: -boxWidth/2 },
-    left: {top: "50%", left: "0", margin_top: -boxWidth/2},
-    right: {top: "50%", right: "0", margin_top: -boxWidth/2},
+    left: {top: "50%", left: "0", margin_top: -boxWidth/2, margin_left: 15},
+    right: {top: "50%", right: "0", margin_top: -boxWidth/2, margin_right: 15},
     top: {left: "50%", top: "0", margin_left: -boxWidth/2, margin_top: 15},
     bottom: {left: "50%", bottom: "0", margin_left: -boxWidth/2, margin_bottom: 15},
-    bottomLeft: {bottom: "0", left: "0"},
-    bottomRight: {bottom: "0", right: "0"}
+    bottomLeft: {bottom: "0", left: "0", margin_bottom: 15, margin_left: 15},
+    bottomRight: {bottom: "0", right: "0", margin_bottom: 15, margin_right: 15}
 };
 
 var getAnimationProps = {
@@ -103,7 +91,7 @@ var getAnimationProps = {
     id="persoo--<%= offerID %>"
     class="persoo--popup persoo--widget"
     data-animate-closing="false"
-    data-inner-location-id="persoo--<%= offerID %>__content"
+    data-inner-location-id="persoo--<%= offerID %>__wrapper"
 >
 
     <% if (useOverlay) { %>
@@ -122,7 +110,7 @@ var getAnimationProps = {
             <% } %>
     <% } %>
 
-    <div class="persoo--popup__wrapper">
+    <div id="persoo--<%= offerID %>__wrapper" class="persoo--popup__wrapper">
         <% if (showClosingX && closingXPosition !== 'page'){ %>
             <a
                 class="persooAction persoo--popup__close--x"
@@ -131,7 +119,7 @@ var getAnimationProps = {
                 <span class="persoo--popup__icon"></span>
             </a>
         <% } %>
-        <div id="persoo--<%= offerID %>__content" class="persoo--popup__content">
+        <div class="persoo--popup__content">
             <% if (backgroundImageLink) { %>
                 <img
                     class="persoo--popup__background--image"
@@ -185,8 +173,6 @@ var getAnimationProps = {
             <%= getPosition[position].margin_bottom ? 'margin-bottom: '+ getPosition[position].margin_bottom +'px;' : '' %>
             <%= getPosition[position].margin_left ? 'margin-left: '+ getPosition[position].margin_left +'px;' : '' %>
             <%= getPosition[position].margin_right ? 'margin-right: '+ getPosition[position].margin_right +'px;' : '' %>
-            width: <%= getBoxWidth(size, customWidth) %>px;
-            height: <%= getBoxHeightWithPx(size, customHeight, autoHeight) %>;
             color: <%= textColor %>;
         }
         .persoo--popup__wrapper > div:last-child,
@@ -195,10 +181,12 @@ var getAnimationProps = {
         }
         .persoo--popup__content {
             position: relative;
-            padding: 20px;
+            width: <%= getBoxWidth(size, customWidth) %>px;
+            height: <%= boxHeightWithPx %>;
             overflow: hidden;
             background-clip: padding-box;
             zoom: 1;
+            padding: 20px;
         }
         #persoo--<%= offerID %> .persoo--popup__content {
             <%= !backgroundImageLink ? "background-color: " + backgroundColor + ";" : "" %>
@@ -242,8 +230,14 @@ var getAnimationProps = {
                 top:3px;
             <% } else if (closingXPosition === 'right') { %>
                 background-color: transparent;
-                right:<%= -24 - borderSize %>px;
-                top:<%= 0 - borderSize %>px;
+                right:-24px;
+                top:0px;
+                font-size:20px;
+                line-height: 20px;
+            <% } else if (closingXPosition === 'top') { %>
+                background-color: transparent;
+                right:0px;
+                top:-24px;
                 font-size:20px;
                 line-height: 20px;
             <% } else if (closingXPosition === 'border') { %>
@@ -287,12 +281,19 @@ var getAnimationProps = {
 
         /* utility classes */
         .persoo--popup__background--image {
-            width: 100%;
-            height: 100%;
             position: absolute;
-            top: 0;
-            left: 0;
             z-index: -1;
+            <% if (backgroundImagePosition == "fillContainer") { %>
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+            <% } else { %>
+                top: 50%;
+                left: 50%;
+                margin-right: -50%;
+                transform: translate(-50%, -50%)
+            <% } %>
         }
         .persoo--popup__icon {
             background: transparent;
@@ -301,7 +302,7 @@ var getAnimationProps = {
             vertical-align: baseline;
             position: relative;
         }
-        .persoo--popup__content img {
+        .persoo--popup__content img:not(.persoo--popup__background--image) {
             max-width: 100%;
             max-height: 100%;
         }

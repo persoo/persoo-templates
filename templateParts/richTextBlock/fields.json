@@ -3,5 +3,10 @@
     "name": "Message (Rich Text)",
     "group": "richTextBlock",
     "type": "richtext",
-    "defaultValue": "                <div style=\"margin-bottom: 15px;\">\n                    <div>\n                        <img src=\n                        \"//s3-eu-west-1.amazonaws.com/cz.persoo.images/sample-popup-image-shoes.png\"\n                        style=\n                        \"display: block; margin: auto; margin-bottom:10px;max-width:100%;\">\n                        <div style=\n                        \"display: block;height: 0;clear: both;visibility: hidden;\">\n                        </div>\n                    </div>\n                </div>\n                <div class=\"\" style=\n                \"line-height: 20px;min-height: 30px;margin-bottom: 15px;\">\n                    <span style=\"font-size:12px;\"></span>\n                    <p style=\"text-align:center;margin-top:30px;\"><span style=\n                    \"font-size:12px;\"><span style=\n                    \"font-size:16px;line-height:1.4;\"><span style=\n                    \"font-family:vollkorn;\">We\n                    just received our new product.<br>\n                    There is a limited amount, go take a look\n                    now!</span></span></span></p>\n                </div>"
+    "defaultValue": "<div style=\"margin-bottom: 15px;\">\n    <img src=\"//s3-eu-west-1.amazonaws.com/cz.persoo.images/sample-popup-image-shoes.png\"\n         style=\"display: block; margin: auto; margin-bottom:10px;max-width:100%;\">\n</div>\n<div style=\"line-height: 20px;min-height: 30px;margin-bottom: 15px;\">\n  <p style=\"text-align:center;margin-top:30px;font-size: large\">\n   We just received our new product.<br>\n   There is a limited amount, go take a look  now!</p>\n</div>",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "richText"
+    }
 },

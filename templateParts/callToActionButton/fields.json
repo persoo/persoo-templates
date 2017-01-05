@@ -1,20 +1,13 @@
 {
-    "id": "showCtaButton",
-    "name": "Show Button",
-    "group": "cta",
-    "type": "checkbox",
-    "defaultValue": true
-},
-{
     "id": "ctaButtonLabel",
     "name": "Button Text",
     "group": "cta",
     "type": "text",
     "defaultValue": "SHOW ME",
     "condition": {
-        "fieldID": "showCtaButton",
-        "operator": "==",
-        "fieldValue": true
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CTA"
     }
 },
 {
@@ -34,9 +27,9 @@
     ],
     "defaultValue": "redirect",
     "condition": {
-        "fieldID": "showCtaButton",
-        "operator": "==",
-        "fieldValue": true
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CTA"
     }
 },
 {
@@ -46,8 +39,8 @@
     "type": "text",
     "defaultValue": "/your/target/page",
     "condition": {
-        "fieldID": "showCtaButton",
-        "operator": "==",
-        "fieldValue": true
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CTA"
     }
 },

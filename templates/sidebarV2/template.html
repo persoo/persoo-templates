@@ -20,6 +20,8 @@ if (!boxWidth) { /* custom */
     boxWidth = customWidth;
 }
 
+var boxHeightWithPx = (size == 'custom' && !autoHeight ? customHeight + "px" : "auto");
+
 var tabHeights = {
     "0": 30,
     "5": 36,
@@ -138,6 +140,7 @@ var tabInnerPadding = tabInnerPaddings[boxCorners];
             position: relative;
             z-index: <%= zIndex + 1 %>;
             width: <%= boxWidth %>px;
+            height: <%= boxHeightWithPx %>;
             overflow: hidden;
             background: <%= contentBackground %>;
             border-radius: <%= position === "left" ? "0 0 " + boxCorners + "px 0" : "0 0 0 " + boxCorners + "px" %>;

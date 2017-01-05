@@ -5,8 +5,6 @@
     "name": "Side Bar",
     "fields": [
 
-        @@include templateParts/innerContentBlock/fields.json
-
         {
             "id": "tab",
             "name": "Tab text",
@@ -37,6 +35,37 @@
                 }
             ],
             "defaultValue": "hover"
+        },
+        {
+            "id": "section_position",
+            "name": "Position",
+            "group": "design",
+            "type": "section"
+        },
+
+        {
+            "id": "position",
+            "name": "Position",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Left",
+                    "value": "left"
+                },
+                {
+                    "label": "Right",
+                    "value": "right"
+                }
+            ],
+            "defaultValue": "right"
+        },
+        {
+            "id": "positionTop",
+            "name": "Position from Top",
+            "group": "design",
+            "type": "number",
+            "defaultValue": 100
         },
 
         {
@@ -82,64 +111,24 @@
                 "fieldValue": "custom"
             }
         },
-
         {
-            "id": "section_texts",
-            "name": "Texts",
-            "group": "design",
-            "type": "section"
-        },
-        {
-            "id": "textColor",
-            "name": "Text Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#404040"
-        },
-        {
-            "id": "textFont",
-            "name": "Text Font",
-            "group": "design",
-            "type": "text",
-            "defaultValue": "normal normal 300 medium Arial, Helvetica, sans-serif"
-        },
-        {
-            "id": "tabColor",
-            "name": "Tab Text Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#fff"
-        },
-
-        {
-            "id": "section_position",
-            "name": "Position",
-            "group": "design",
-            "type": "section"
-        },
-        {
-            "id": "position",
-            "name": "Position",
-            "group": "design",
-            "type": "select",
-            "options": [
-                {
-                    "label": "Left",
-                    "value": "left"
-                },
-                {
-                    "label": "Right",
-                    "value": "right"
-                }
-            ],
-            "defaultValue": "right"
-        },
-        {
-            "id": "positionTop",
-            "name": "Position from Top",
+            "id": "customHeight",
+            "name": "Custom Height",
             "group": "design",
             "type": "number",
-            "defaultValue": 100
+            "defaultValue": 400,
+            "condition": {
+                "operator": "==",
+                "fieldID": "autoHeight",
+                "fieldValue": false
+            }
+        },
+        {
+            "id": "autoHeight",
+            "name": "Auto Height",
+            "group": "design",
+            "type": "checkbox",
+            "defaultValue": true
         },
 
         {
@@ -155,6 +144,7 @@
             "type": "color",
             "defaultValue": "#009688"
         },
+
         {
             "id": "contentBackground",
             "name": "Content Background",
@@ -237,6 +227,37 @@
                 "fieldValue": "none"
             }
         },
+
+        {
+            "id": "section_texts",
+            "name": "Texts",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "textColor",
+            "name": "Text Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#404040"
+        },
+        {
+            "id": "textFont",
+            "name": "Text Font",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "normal normal 300 medium Arial, Helvetica, sans-serif"
+        },
+        {
+            "id": "tabColor",
+            "name": "Tab Text Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#fff"
+        },
+
+
+        @@include templateParts/innerContentBlock/fields.json
 
         {
             "id": "section_customCSS",

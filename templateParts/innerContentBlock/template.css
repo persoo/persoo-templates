@@ -1,5 +1,12 @@
-@@include templateParts/customHTML/template.css
-@@include templateParts/richTextBlock/template.css
-@@include templateParts/callToActionButton/template.css
-@@include templateParts/collectEmailForm/template.css
+<% if (innerContentType == "customHTML") { %>
+    @@include templateParts/customHTML/template.css
+<% } %>
+<% if (innerContentType.indexOf("richText") == 0) { %>
+    @@include templateParts/richTextBlock/template.css
+    <% if (innerContentType == "richTextAndCTA") { %>
+        @@include templateParts/callToActionButton/template.css
+    <% } else if (innerContentType == "richTextAndCollectEmail") { %>
+        @@include templateParts/collectEmailForm/template.css
+    <% } %>
+<% } %>
 @@include templateParts/persooBlocksStyles/template.css

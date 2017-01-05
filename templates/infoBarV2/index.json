@@ -3,52 +3,6 @@
     "isActive": true,
     "name": "Info bar",
     "fields": [
-        {
-            "id": "message",
-            "name": "Main message",
-            "group": "main",
-            "type": "richtext",
-            "defaultValue": "We have secret offer just for you."
-        },
-
-        {
-            "id": "showCtaButton",
-            "name": "Show Button",
-            "group": "cta",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "ctaButtonLabel",
-            "name": "Button Text",
-            "group": "cta",
-            "type": "text",
-            "defaultValue": "SHOW ME"
-        },
-        {
-            "id": "ctaButtonAction",
-            "name": "Button Action",
-            "group": "cta",
-            "type": "select",
-            "options": [
-                {
-                    "label": "Redirect to link",
-                    "value": "redirect"
-                },
-                {
-                    "label": "Close pop-up",
-                    "value": "close"
-                }
-            ],
-            "defaultValue": "redirect"
-        },
-        {
-            "id": "ctaButtonLink",
-            "name": "Button Target Link",
-            "group": "cta",
-            "type": "text",
-            "defaultValue": "/your/target/page"
-        },
 
         {
             "id": "section_position",
@@ -91,6 +45,18 @@
             "type": "checkbox",
             "defaultValue": true
         },
+        {
+            "id": "closeXColor",
+            "name": "Close X Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#777",
+            "condition": {
+                "operator": "==",
+                "fieldID": "showClosingX",
+                "fieldValue": true
+            }
+        },
 
         {
             "id": "section_size",
@@ -110,7 +76,12 @@
             "name": "Custom Height",
             "group": "design",
             "type": "number",
-            "defaultValue": 50
+            "defaultValue": 50,
+            "condition": {
+                "operator": "==",
+                "fieldID": "autoHeight",
+                "fieldValue": false
+            }
         },
 
         {
@@ -133,20 +104,6 @@
             "type": "text",
             "defaultValue": "normal normal 300 medium Arial, Helvetica, sans-serif"
         },
-        {
-            "id": "ctaTextColor",
-            "name": "Button Text Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "white"
-        },
-        {
-            "id": "ctaButtonColor",
-            "name": "Button Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "rgba(51, 51, 51, 0.34)"
-        },
 
         {
             "id": "section_background",
@@ -167,6 +124,28 @@
             "group": "design",
             "type": "text",
             "defaultValue": ""
+        },
+        {
+            "group": "design",
+            "id": "backgroundImagePosition",
+            "name": "Background Image Position",
+            "options": [
+                {
+                    "label": "fill container",
+                    "value": "fillContainer"
+                },
+                {
+                    "label": "centered in container",
+                    "value": "centeredInContainer"
+                }
+            ],
+            "type": "select",
+            "defaultValue": "fillContainer",
+            "condition": {
+                "operator": "!=",
+                "fieldID": "backgroundImageLink",
+                "fieldValue": ""
+            }
         },
 
         {
@@ -239,6 +218,8 @@
             "defaultValue": "#666666"
         },
 
+        @@include templateParts/innerContentBlock/fields.json
+
         {
             "id": "section_customCSS",
             "name": "Custom CSS",
@@ -268,14 +249,9 @@
         }
     ],
     "groups": [
-        {
-            "id": "main",
-            "name": "Main content"
-        },
-        {
-            "id": "cta",
-            "name": "Call to Action"
-        },
+
+        @@include templateParts/innerContentBlock/groups.json
+
         {
             "id": "design",
             "name": "Design"

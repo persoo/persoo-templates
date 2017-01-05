@@ -5,8 +5,6 @@
     "name": "Pop-up",
     "fields": [
 
-        @@include templateParts/innerContentBlock/fields.json
-
         {
             "id": "section_position",
             "name": "Position",
@@ -87,14 +85,24 @@
             "name": "Custom Width",
             "group": "design",
             "type": "number",
-            "defaultValue": 400
+            "defaultValue": 400,
+            "condition": {
+                "operator": "==",
+                "fieldID": "size",
+                "fieldValue": "custom"
+            }
         },
         {
             "id": "customHeight",
             "name": "Custom Height",
             "group": "design",
             "type": "number",
-            "defaultValue": 400
+            "defaultValue": 400,
+            "condition": {
+                "operator": "==",
+                "fieldID": "autoHeight",
+                "fieldValue": false
+            }
         },
         {
             "id": "autoHeight",
@@ -148,7 +156,12 @@
             "name": "Duration",
             "group": "design",
             "type": "text",
-            "defaultValue": "0.6s"
+            "defaultValue": "0.6s",
+            "condition": {
+                "operator": "!=",
+                "fieldID": "animationEffect",
+                "fieldValue": "none"
+            }
         },
 
         {
@@ -183,11 +196,32 @@
                     "value": "right"
                 },
                 {
+                    "label": "Above Box Corner",
+                    "value": "top"
+                },
+                {
                     "label": "Page Top Right Corner",
                     "value": "page"
                 }
             ],
-            "defaultValue": "in"
+            "defaultValue": "in",
+            "condition": {
+                "operator": "==",
+                "fieldID": "showClosingX",
+                "fieldValue": true
+            }
+        },
+        {
+            "id": "closeXColor",
+            "name": "Close X Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#777",
+            "condition": {
+                "operator": "==",
+                "fieldID": "showClosingX",
+                "fieldValue": true
+            }
         },
         {
             "id": "closeOnClickOutside",
@@ -202,34 +236,6 @@
             "group": "design",
             "type": "text",
             "defaultValue": "No thanks"
-        },
-        {
-            "id": "closeXColor",
-            "name": "Close X Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#777"
-        },
-
-        {
-            "id": "section_texts",
-            "name": "Texts",
-            "group": "design",
-            "type": "section"
-        },
-        {
-            "id": "textColor",
-            "name": "Text Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#404040"
-        },
-        {
-            "id": "textFont",
-            "name": "Text Font",
-            "group": "design",
-            "type": "text",
-            "defaultValue": "normal normal 300 medium Arial, Helvetica, sans-serif"
         },
 
         {
@@ -251,6 +257,28 @@
             "group": "design",
             "type": "text",
             "defaultValue": ""
+        },
+        {
+            "group": "design",
+            "id": "backgroundImagePosition",
+            "name": "Background Image Position",
+            "options": [
+                {
+                    "label": "fill container",
+                    "value": "fillContainer"
+                },
+                {
+                    "label": "centered in container",
+                    "value": "centeredInContainer"
+                }
+            ],
+            "type": "select",
+            "defaultValue": "fillContainer",
+            "condition": {
+                "operator": "!=",
+                "fieldID": "backgroundImageLink",
+                "fieldValue": ""
+            }
         },
 
         {
@@ -320,7 +348,12 @@
             "name": "Box Shadow Color",
             "group": "design",
             "type": "color",
-            "defaultValue": "#666666"
+            "defaultValue": "#666666",
+            "condition": {
+                "operator": "!=",
+                "fieldID": "boxShadow",
+                "fieldValue": "none"
+            }
         },
 
         {
@@ -341,8 +374,36 @@
             "name": "Overlay Color",
             "group": "design",
             "type": "color",
-            "defaultValue": "rgba(36, 39, 41, 0.1)"
+            "defaultValue": "rgba(36, 39, 41, 0.1)",
+            "condition": {
+                "operator": "==",
+                "fieldID": "useOverlay",
+                "fieldValue": true
+            }
         },
+
+        {
+            "id": "section_texts",
+            "name": "Texts",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "textColor",
+            "name": "Text Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#404040"
+        },
+        {
+            "id": "textFont",
+            "name": "Text Font",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "normal normal 300 medium Arial, Helvetica, sans-serif"
+        },
+
+        @@include templateParts/innerContentBlock/fields.json
 
         {
             "id": "section_customCSS",
