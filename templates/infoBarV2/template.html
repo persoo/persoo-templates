@@ -1,5 +1,4 @@
 <%
-
 var offerID = offerID || 'randomOfferID';
 
 var baseZIndex = 10000000;
@@ -192,8 +191,8 @@ var getPaddingSize = {
                 html.style[marginProperty] = infobarWrapper.offsetHeight + "px";
             }
 
-            var throttled_push_html_by_<%= offerID %>_height = (window.persoo && window.persoo.throttle ?
-                window.persoo.throttle(push_html_by_<%= offerID %>_height, 100) :
+            var throttled_push_html_by_<%= offerID %>_height = (window.persoo && window.persoo.utils && window.persoo.utils.throttle ?
+                window.persoo.utils.throttle(push_html_by_<%= offerID %>_height, 100) :
                 push_html_by_<%= offerID %>_height
             );
 
