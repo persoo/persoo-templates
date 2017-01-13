@@ -63,17 +63,26 @@ var tabInnerPadding = tabInnerPaddings[boxCorners];
             <% } %>
         </div>
         <div
-            id="persoo--<%= offerID %>__content"
-            class="persoo--sidebar__content"
+            id="persoo--<%= offerID %>__wrapper"
+            class="persoo--sidebar__wrapper"
         >
 
-            @@include templateParts/innerContentBlock/template.html
+            @@include templateParts/backgroundImageBlock/template.html
 
+            <div
+                id="persoo--<%= offerID %>__content"
+                class="persoo--sidebar__content"
+            >
+
+                @@include templateParts/innerContentBlock/template.html
+
+            </div>
         </div>
     </div>
 
     <style type="text/css">
 
+        @@include templateParts/backgroundImageBlock/template.css
         @@include templateParts/innerContentBlock/template.css
 
         .persoo--sidebar,
@@ -81,7 +90,7 @@ var tabInnerPadding = tabInnerPaddings[boxCorners];
             box-sizing: border-box;
         }
 
-        .persoo--sidebar__content {
+        .persoo--sidebar__wrapper {
             padding: 20px;
         }
         .persoo--sidebar__content > :first-child,
@@ -136,13 +145,12 @@ var tabInnerPadding = tabInnerPaddings[boxCorners];
             zoom: 1;
         }
 
-        #persoo--<%= offerID %> .persoo--sidebar__content {
+        #persoo--<%= offerID %> .persoo--sidebar__wrapper {
             position: relative;
             z-index: <%= zIndex + 1 %>;
             width: <%= boxWidth %>px;
             height: <%= boxHeightWithPx %>;
             overflow: hidden;
-            background: <%= contentBackground %>;
             border-radius: <%= position === "left" ? "0 0 " + boxCorners + "px 0" : "0 0 0 " + boxCorners + "px" %>;
             border: <%= borderSize %>px solid <%= borderColor %>;
             box-shadow: <%= boxShadowColor %> 0px <%= boxShadowSize / 2 %>px <%= boxShadowSize %>px;
@@ -160,6 +168,11 @@ var tabInnerPadding = tabInnerPaddings[boxCorners];
                 <% } %>
             }
         <% } %>
+
+        #persoo--<%= offerID %> .persoo--sidebar__content {
+            position: relative;
+            height: 100%;
+        }
     </style>
     <style type="text/css">
         <%= customCSS %>
@@ -210,10 +223,10 @@ var tabInnerPadding = tabInnerPaddings[boxCorners];
         <% } %>
 
         var tabInnerNode = document.getElementById("persoo--<%= offerID %>__tab__inner");
-        var contentNode = document.getElementById("persoo--<%= offerID %>__content");
+        var wrapperNode = document.getElementById("persoo--<%= offerID %>__wrapper");
         var tabInnerWidth = tabInnerNode.offsetWidth;
 
-        contentNode.style.minHeight = tabInnerWidth + <%= boxCorners * 1.5 %> + "px";
+        wrapperNode.style.minHeight = tabInnerWidth + <%= boxCorners * 1.5 %> + "px";
     </script>
     <script type="text/javascript">
         <%= customJS %>

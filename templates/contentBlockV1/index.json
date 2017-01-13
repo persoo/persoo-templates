@@ -7,6 +7,82 @@
 
         @@include templateParts/innerContentBlock/fields.json
 
+        @@include templateParts/backgroundImageBlock/fields.json
+        {
+            "id": "section_border",
+            "name": "Border",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "borderSize",
+            "name": "Border size",
+            "group": "design",
+            "type": "number",
+            "defaultValue": 1
+        },
+        {
+            "id": "borderColor",
+            "name": "Border Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#ffffff"
+        },
+        {
+            "id": "boxCorners",
+            "name": "Box Corners",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Rectangular",
+                    "value": "0"
+                },
+                {
+                    "label": "Mini Rounded",
+                    "value": "5"
+                },
+                {
+                    "label": "Rounded",
+                    "value": "15"
+                }
+            ],
+            "defaultValue": "0"
+        },
+        {
+            "id": "boxShadow",
+            "name": "Box Shadow",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "None",
+                    "value": "none"
+                },
+                {
+                    "label": "Low",
+                    "value": "low"
+                },
+                {
+                    "label": "High",
+                    "value": "high"
+                }
+            ],
+            "defaultValue": "none"
+        },
+        {
+            "id": "boxShadowColor",
+            "name": "Box Shadow Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#666666",
+            "condition": {
+                "operator": "!=",
+                "fieldID": "boxShadow",
+                "fieldValue": "none"
+            }
+        },
+
         {
             "id": "section_customCSS",
             "name": "Custom CSS",

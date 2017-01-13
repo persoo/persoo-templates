@@ -1,4 +1,26 @@
 {
+    "id": "ctaActionType",
+    "name": "Call to Action Type",
+    "group": "cta",
+    "type": "select",
+    "options": [
+        {
+            "label": "Show button",
+            "value": "button"
+        },
+        {
+            "label": "Use background image",
+            "value": "background"
+        }
+    ],
+    "defaultValue": "button",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CTA"
+    }
+},
+{
     "id": "ctaButtonLabel",
     "name": "Button Text",
     "group": "cta",
@@ -11,8 +33,8 @@
     }
 },
 {
-    "id": "ctaButtonAction",
-    "name": "Button Action",
+    "id": "ctaAction",
+    "name": "Action",
     "group": "cta",
     "type": "select",
     "options": [
@@ -21,7 +43,7 @@
             "value": "redirect"
         },
         {
-            "label": "Close pop-up",
+            "label": "Close offer",
             "value": "close"
         }
     ],

@@ -1,22 +1,50 @@
-<% var offerID = offerID || 'randomOfferID'; %>
+<%
+var offerID = offerID || 'randomOfferID';
+
+var boxShadowSizes = {
+    "none": 0, /* in px */
+    "low": 6,
+    "high": 12
+};
+var boxShadowSize = boxShadowSizes[boxShadow];
+%>
 
 <div
     id="persoo--<%= offerID %>"
     class="persoo--contentBlock persoo--widget"
     data-inner-location-id="persoo--<%= offerID %>__content"
 >
-    <div id="persoo--<%= offerID %>__content" class="persoo--contentBlock__content">
+    <div id="persoo--<%= offerID %>__wrapper" class="persoo--contentBlock__wrapper">
 
-            @@include templateParts/innerContentBlock/template.html
+        @@include templateParts/backgroundImageBlock/template.html
 
+        <div id="persoo--<%= offerID %>__content" class="persoo--contentBlock__content">
+
+                @@include templateParts/innerContentBlock/template.html
+
+        </div>
     </div>
 
     <style type="text/css">
 
+        @@include templateParts/backgroundImageBlock/template.css
         @@include templateParts/innerContentBlock/template.css
 
-        .persoo--contentBlock__content {
+        .persoo--contentBlock__wrapper {
+            position: relative;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: <%= boxCorners %>px;
+            border: <%= borderSize %>px solid <%= borderColor %>;
+            box-shadow: <%= boxShadowColor %> 0px <%= boxShadowSize / 2 %>px <%= boxShadowSize %>px;
+            zoom: 1;
             padding: 20px;
+        }
+        .persoo--contentBlock__content {
+            position: relative;
+            height: 100%;
         }
 
     </style>

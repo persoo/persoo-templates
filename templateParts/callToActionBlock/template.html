@@ -1,13 +1,13 @@
 <div class="persoo-block persoo-block--cta">
     <a
-        class="persoo-block--cta__link"
+        class="persoo-block--cta__<%= ctaActionType == 'button' ? 'link' : 'background-link' %>"
         href="<%=
-            ctaButtonAction == 'redirect' ?
+            ctaAction == 'redirect' ?
             ctaButtonLink :
             'javascript:persoo_close_' + offerID + '()'
         %>"
         target="_blank"
     >
-        <%= ctaButtonLabel %>
+        <%= ctaActionType == 'button' ? ctaButtonLabel : '' %>
     </a>
 </div>

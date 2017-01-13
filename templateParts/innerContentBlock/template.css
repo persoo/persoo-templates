@@ -4,9 +4,9 @@
 <% if (innerContentType.indexOf("richText") == 0) { %>
     @@include templateParts/richTextBlock/template.css
     <% if (innerContentType == "richTextAndCTA") { %>
-        @@include templateParts/callToActionButton/template.css
+        @@include templateParts/callToActionBlock/template.css
     <% } else if (innerContentType == "richTextAndCollectEmail") { %>
-        @@include templateParts/collectEmailForm/template.css
+        @@include templateParts/collectEmailBlock/template.css
     <% } %>
 <% } %>
 @@include templateParts/persooBlocksStyles/template.css

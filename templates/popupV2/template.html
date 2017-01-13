@@ -110,7 +110,7 @@ var getAnimationProps = {
             <% } %>
     <% } %>
 
-    <div id="persoo--<%= offerID %>__wrapper" class="persoo--popup__wrapper">
+    <div id="persoo--<%= offerID %>__box" class="persoo--popup__box">
         <% if (showClosingX && closingXPosition !== 'page'){ %>
             <a
                 class="persooAction persoo--popup__close--x"
@@ -119,36 +119,32 @@ var getAnimationProps = {
                 <span class="persoo--popup__icon"></span>
             </a>
         <% } %>
-        <div class="persoo--popup__content">
-            <% if (backgroundImageLink) { %>
-                <img
-                    class="persoo--popup__background--image"
-                    src="<%= backgroundImageLink %>"
-                    alt="background"
-                >
-            <% } %>
 
-            @@include templateParts/innerContentBlock/template.html
+        <div class="persoo--popup__wrapper">
 
+            @@include templateParts/backgroundImageBlock/template.html
+
+            <div class="persoo--popup__content">
+
+                @@include templateParts/innerContentBlock/template.html
+
+            </div>
             <div class="persoo-block persoo-block--separator"></div>
-
-            <div
-                class="persoo--popup__content__dismiss-links"
-                data-type="dismiss-links"
-            >
+            <div class="persoo--popup__dismiss-links">
                 <a
-                    class="persooAction persoo--popup__content__dismiss-links--close"
+                    class="persooAction persoo--popup__dismiss-links--close"
                     data-action="close"
                     href="javascript:persoo_close_<%= offerID %>()"
                 >
                     <%= closingTextInFooter %>
                 </a>
             </div>
-        </div>
+         </div>
     </div>
 
     <style type="text/css">
 
+         @@include templateParts/backgroundImageBlock/template.css
          @@include templateParts/innerContentBlock/template.css
 
         .persoo--popup {
@@ -156,12 +152,12 @@ var getAnimationProps = {
             visibility: visible;
         }
 
-        .persoo--popup__wrapper {
+        .persoo--popup__box {
             -webkit-font-smoothing: antialiased;
             position: fixed;
             opacity: 1;
         }
-        #persoo--<%= offerID %> .persoo--popup__wrapper {
+        #persoo--<%= offerID %> .persoo--popup__box {
             z-index: <%= baseZIndex %>;
             font-family: <%= textFont %>;
             box-sizing: content-box;
@@ -179,32 +175,37 @@ var getAnimationProps = {
         .persoo--popup__content > div:last-child {
             margin-bottom: 0 !important;
         }
-        .persoo--popup__content {
+        .persoo--popup__wrapper {
             position: relative;
             width: <%= getBoxWidth(size, customWidth) %>px;
             height: <%= boxHeightWithPx %>;
             overflow: hidden;
             background-clip: padding-box;
             zoom: 1;
+            display: flex;
+            flex-direction: column;
             padding: 20px;
         }
-        #persoo--<%= offerID %> .persoo--popup__content {
-            <%= !backgroundImageLink ? "background-color: " + backgroundColor + ";" : "" %>
+        #persoo--<%= offerID %> .persoo--popup__wrapper {
             border-radius: <%= boxCorners %>px;
             border: <%= borderSize %>px solid <%= borderColor %>;
             box-shadow: <%= boxShadowColor %> 0px 0px <%= getBoxShadowSize[boxShadow] %>px;
         }
 
-        .persoo--popup__content__dismiss-links {
-            text-align:center;
-            margin-bottom: 15px;
+        .persoo--popup__content {
+            position: relative;
+            height: 100%;
         }
-        .persoo--popup__content__dismiss-links--close {
+
+        .persoo--popup__dismiss-links {
+            text-align:center;
+        }
+        .persoo--popup__dismiss-links--close {
             font-size: 12px;
             text-decoration: underline;
             margin-left: 10px;
         }
-        #persoo--<%= offerID %> .persoo--popup__content__dismiss-links--close {
+        #persoo--<%= offerID %> .persoo--popup__dismiss-links--close {
             color: <%= textColor %>;
         }
 
@@ -280,21 +281,7 @@ var getAnimationProps = {
         }
 
         /* utility classes */
-        .persoo--popup__background--image {
-            position: absolute;
-            z-index: -1;
-            <% if (backgroundImagePosition == "fillContainer") { %>
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-            <% } else { %>
-                top: 50%;
-                left: 50%;
-                margin-right: -50%;
-                transform: translate(-50%, -50%)
-            <% } %>
-        }
+
         .persoo--popup__icon {
             background: transparent;
             display: inline-block;
@@ -302,7 +289,7 @@ var getAnimationProps = {
             vertical-align: baseline;
             position: relative;
         }
-        .persoo--popup__content img:not(.persoo--popup__background--image) {
+        .persoo--popup__content img:not(.persoo-block) {
             max-width: 100%;
             max-height: 100%;
         }
@@ -342,12 +329,12 @@ var getAnimationProps = {
                     <%= animationProps.stop.opacity ? 'opacity: ' + animationProps.stop.opacity + ';' : '' %>
                 }
             }
-            #persoo--<%= offerID %> .persoo--popup__wrapper {
+            #persoo--<%= offerID %> .persoo--popup__box {
                 animation: persoo--<%= offerID %>__animation <%= animationDuration %> ease 0s 1 normal;
                 -webkit-animation: persoo--<%= offerID %>__animation <%= animationDuration %> ease 0s 1 normal;
             }
 
-            #persoo--<%= offerID %>[data-animate-closing="true"] .persoo--popup__wrapper {
+            #persoo--<%= offerID %>[data-animate-closing="true"] .persoo--popup__box {
                 <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
                 <%= animationProps.start.right ? 'right: ' + animationProps.start.right + ';' : '' %>
                 <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %>

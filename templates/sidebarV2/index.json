@@ -131,26 +131,13 @@
             "defaultValue": true
         },
 
-        {
-            "id": "section_background",
-            "name": "Backgrounds",
-            "group": "design",
-            "type": "section"
-        },
+        @@include templateParts/backgroundImageBlock/fields.json
         {
             "id": "tabBackground",
             "name": "Tab Background",
             "group": "design",
             "type": "color",
             "defaultValue": "#009688"
-        },
-
-        {
-            "id": "contentBackground",
-            "name": "Content Background",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#FFF"
         },
 
         {

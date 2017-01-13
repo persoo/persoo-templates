@@ -238,48 +238,7 @@
             "defaultValue": "No thanks"
         },
 
-        {
-            "id": "section_background",
-            "name": "Background",
-            "group": "design",
-            "type": "section"
-        },
-        {
-            "id": "backgroundColor",
-            "name": "Background Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#eeeeee"
-        },
-        {
-            "id": "backgroundImageLink",
-            "name": "Background Image Link",
-            "group": "design",
-            "type": "text",
-            "defaultValue": ""
-        },
-        {
-            "group": "design",
-            "id": "backgroundImagePosition",
-            "name": "Background Image Position",
-            "options": [
-                {
-                    "label": "fill container",
-                    "value": "fillContainer"
-                },
-                {
-                    "label": "centered in container",
-                    "value": "centeredInContainer"
-                }
-            ],
-            "type": "select",
-            "defaultValue": "fillContainer",
-            "condition": {
-                "operator": "!=",
-                "fieldID": "backgroundImageLink",
-                "fieldValue": ""
-            }
-        },
+        @@include templateParts/backgroundImageBlock/fields.json
 
         {
             "id": "section_border",
