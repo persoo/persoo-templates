@@ -13,6 +13,7 @@
     float: none;
     vertical-align: middle;
     font: <%= ctaButtonTextFont %>;
+    margin: 5px 5px;
 }
 
 /* reset css inside */

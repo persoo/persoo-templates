@@ -25,10 +25,10 @@ var boxWidth = getBoxWidth(size, customWidth);
 var boxHeight = (size == 'custom' && !autoHeight ? customHeight : "auto");
 var boxHeightWithPx = (size == 'custom' && !autoHeight ? customHeight + "px" : "auto");
 
-var getPosition = { /* FIXME use boxHeight instead of boxWidth */
-    center: {top: "50%", left: "50%", margin_left: -boxWidth/2, margin_top: -boxWidth/2 },
-    left: {top: "50%", left: "0", margin_top: -boxWidth/2, margin_left: 15},
-    right: {top: "50%", right: "0", margin_top: -boxWidth/2, margin_right: 15},
+var getPosition = {
+    center: {top: "50%", left: "50%", transform: "translate(-50%, -50%)"},
+    left: {top: "50%", left: "0", margin_left: 15, transform: "translate(0%, -50%)"},
+    right: {top: "50%", right: "0", margin_right: 15, transform: "translate(0%, -50%)"},
     top: {left: "50%", top: "0", margin_left: -boxWidth/2, margin_top: 15},
     bottom: {left: "50%", bottom: "0", margin_left: -boxWidth/2, margin_bottom: 15},
     bottomLeft: {bottom: "0", left: "0", margin_bottom: 15, margin_left: 15},
@@ -169,6 +169,11 @@ var getAnimationProps = {
             <%= getPosition[position].margin_bottom ? 'margin-bottom: '+ getPosition[position].margin_bottom +'px;' : '' %>
             <%= getPosition[position].margin_left ? 'margin-left: '+ getPosition[position].margin_left +'px;' : '' %>
             <%= getPosition[position].margin_right ? 'margin-right: '+ getPosition[position].margin_right +'px;' : '' %>
+            <%= getPosition[position].transform ?
+                    '-ms-transform: '+ getPosition[position].transform +';' +
+                    '-webkit-transform: '+ getPosition[position].transform +';' +
+                    'transform: '+ getPosition[position].transform +';'
+                    : '' %>
             color: <%= textColor %>;
         }
         .persoo--popup__wrapper > div:last-child,
@@ -182,6 +187,8 @@ var getAnimationProps = {
             overflow: hidden;
             background-clip: padding-box;
             zoom: 1;
+            display: -webkit-flex;
+            -webkit-flex-direction: column;
             display: flex;
             flex-direction: column;
             padding: 20px;
