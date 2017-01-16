@@ -165,6 +165,20 @@
         },
 
         {
+            "id": "section_timing",
+            "name": "Timing",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "showAfterMillis",
+            "name": "Wait time before showing (in ms)",
+            "group": "design",
+            "type": "number",
+            "defaultValue": 0
+        },
+
+        {
             "id": "section_closing",
             "name": "Closing",
             "group": "design",

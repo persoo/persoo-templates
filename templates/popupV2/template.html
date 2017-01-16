@@ -142,6 +142,12 @@ var getAnimationProps = {
          @@include templateParts/backgroundImageBlock/template.css
          @@include templateParts/innerContentBlock/template.css
 
+        <% if (showAfterMillis > 0) { %>
+            #persoo--<%= offerID %> {
+                display: none;
+            }
+        <% } %>
+
         .persoo--popup {
             line-height: normal;
             visibility: visible;
@@ -358,6 +364,13 @@ var getAnimationProps = {
 
     <script type="text/javascript">
         window.persoo = window.persoo || function () {}; /* TODO until having persoo in preview */
+
+        <% if (showAfterMillis > 0) { %>
+            setTimeout(function () {
+                var elem = document.getElementById("persoo--<%= offerID %>");
+                elem.style.display = "block";
+            }, <%= showAfterMillis %>);
+        <%} %>
 
         function persoo_close_<%= offerID %>() {
             var elem = document.getElementById("persoo--<%= offerID %>");
