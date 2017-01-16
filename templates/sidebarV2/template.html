@@ -3,13 +3,6 @@ var offerID = offerID || "randomOfferID";
 
 var zIndex = 100000;
 
-var boxShadowSizes = {
-    "none": 0, /* in px */
-    "low": 6,
-    "high": 12
-};
-var boxShadowSize = boxShadowSizes[boxShadow];
-
 var boxWidths = {
     "s": 120,
     "m": 230,
@@ -151,10 +144,17 @@ var tabInnerPadding = tabInnerPaddings[boxCorners];
             width: <%= boxWidth %>px;
             height: <%= boxHeightWithPx %>;
             overflow: hidden;
+            zoom: 1;
+            <% var boxShadowSizesInPx = {
+                "none": 0,
+                "low": 6,
+                "high": 12
+            };
+            var boxShadowSize = boxShadowSizesInPx[boxShadow]; %>
             border-radius: <%= position === "left" ? "0 0 " + boxCorners + "px 0" : "0 0 0 " + boxCorners + "px" %>;
             border: <%= borderSize %>px solid <%= borderColor %>;
             box-shadow: <%= boxShadowColor %> 0px <%= boxShadowSize / 2 %>px <%= boxShadowSize %>px;
-            zoom: 1;
+
         }
 
         <% if (openOn === "hover" || openOn === "click") { %>

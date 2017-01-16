@@ -1,0 +1,10 @@
+<% var getBoxShadowSizeInPx = {
+    "none": 0,
+    "low": 11,
+    "high": 22
+};
+var boxShadowSize = getBoxShadowSizeInPx[boxShadow];
+%>
+border-radius: <%= boxCorners %>px;
+border: <%= borderSize %>px solid <%= borderColor %>;
+box-shadow: <%= boxShadowColor %> 0px <%= boxShadowSize/2 %>px <%= boxShadowSize %>px;

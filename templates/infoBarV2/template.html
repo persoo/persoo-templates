@@ -3,12 +3,6 @@ var offerID = offerID || 'randomOfferID';
 
 var baseZIndex = 10000000;
 
-var getBoxShadowSize = {
-    "none": 0, /* in px */
-    "low": 11,
-    "high": 22
-};
-
 var getPaddingSize = {
     "0" : "10px 15px",
     "5" : "10px 15px",
@@ -62,14 +56,19 @@ var getPaddingSize = {
         }
 
         #persoo--<%= offerID %> .persoo--infobar__wrapper {
-            border: <%= borderSize %>px solid <%= borderColor %>;
             height: <%= autoHeight ? "auto" : customHeight + "px" %>;
-            box-shadow: <%= boxShadowColor %> 0px 0px <%= getBoxShadowSize[boxShadow] %>px;
             color: <%= textColor %>;
             padding: <%= getPaddingSize[boxCorners] %>;
             font: <%= textFont %>;
             z-index: <%= baseZIndex %>;
             overflow: hidden;
+            <% var getBoxShadowSizeInPx = {
+                "none": 0,
+                "low": 11,
+                "high": 22
+            }; %>
+            box-shadow: <%= boxShadowColor %> 0px 0px <%= getBoxShadowSizeInPx[boxShadow] %>px;
+            border: <%= borderSize %>px solid <%= borderColor %>;
             <% if (position !== 'inLocation') { %>
                 <%= position %>: 0;
                 position: fixed;

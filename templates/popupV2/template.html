@@ -3,11 +3,6 @@ var offerID = offerID || 'randomOfferID';
 
 const baseZIndex = 1000000;
 
-var getBoxShadowSize = {
-    "none": 0, /* in px */
-    "low": 11,
-    "high": 22
-};
 function getBoxWidth(boxSize, width) {
     var getWidth = {
         "s": 230,
@@ -194,9 +189,7 @@ var getAnimationProps = {
             padding: 20px;
         }
         #persoo--<%= offerID %> .persoo--popup__wrapper {
-            border-radius: <%= boxCorners %>px;
-            border: <%= borderSize %>px solid <%= borderColor %>;
-            box-shadow: <%= boxShadowColor %> 0px 0px <%= getBoxShadowSize[boxShadow] %>px;
+            @@include templateParts/persooBorderStyles/template.css
         }
 
         .persoo--popup__content {

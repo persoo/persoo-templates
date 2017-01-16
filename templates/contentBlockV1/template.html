@@ -1,12 +1,5 @@
 <%
 var offerID = offerID || 'randomOfferID';
-
-var boxShadowSizes = {
-    "none": 0, /* in px */
-    "low": 6,
-    "high": 12
-};
-var boxShadowSize = boxShadowSizes[boxShadow];
 %>
 
 <div
@@ -36,11 +29,9 @@ var boxShadowSize = boxShadowSizes[boxShadow];
             width: 100%;
             height: 100%;
             overflow: hidden;
-            border-radius: <%= boxCorners %>px;
-            border: <%= borderSize %>px solid <%= borderColor %>;
-            box-shadow: <%= boxShadowColor %> 0px <%= boxShadowSize / 2 %>px <%= boxShadowSize %>px;
             zoom: 1;
             padding: 20px;
+            @@include templateParts/persooBorderStyles/template.css
         }
         .persoo--contentBlock__content {
             position: relative;
