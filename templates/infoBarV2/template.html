@@ -155,6 +155,7 @@ var getPaddingSize = {
 
     <script type="text/javascript">
         window.persoo = window.persoo || function () {}; /* TODO until having persoo in preview */
+
         function persoo_report_event_<%= offerID %>(persooEventID) {
             window.persoo("send", persooEventID, {offerID: "<%= offerID %>"});
         }
@@ -163,25 +164,41 @@ var getPaddingSize = {
             var persooWidget = document.getElementById("persoo--<%= offerID %>");
             persooWidget.setAttribute("data-visible", "false");
             persoo_report_event_<%= offerID %>("close");
+            <% if (position !== "inLocation") { %>
+                persoo<%= offerID %>_recoverHtmlMargins();
+            <% } %>
         }
 
         <% if (position !== "inLocation") { %>
-            function push_html_by_<%= offerID %>_height() {
+            persoo<%= offerID %>_originalHtmlMargins = null;
+
+            function persoo<%= offerID %>_updateHtmlMargins() {
                 var html = document.querySelector("html");
                 var infobarWrapper = document.getElementById("persoo--<%= offerID %>__wrapper");
                 var marginProperty = "margin<%= position[0].toUpperCase() + position.slice(1) %>";
 
-                // FIXME clean on close
+                if (typeof persoo<%= offerID %>_originalHtmlMargins == null) {
+                    persoo<%= offerID %>_originalHtmlMargins = html.style[marginProperty]
+                }
                 html.style[marginProperty] = infobarWrapper.offsetHeight + "px";
             }
 
-            var throttled_push_html_by_<%= offerID %>_height = (window.persoo && window.persoo.utils && window.persoo.utils.throttle ?
-                window.persoo.utils.throttle(push_html_by_<%= offerID %>_height, 100) :
-                push_html_by_<%= offerID %>_height
+            function persoo<%= offerID %>_recoverHtmlMargins() {
+                if (typeof persoo<%= offerID %>_originalHtmlMargins !== 'undefined') {
+                    var html = document.querySelector("html");
+                    var marginProperty = "margin<%= position[0].toUpperCase() + position.slice(1) %>";
+                    html.style[marginProperty] = persoo<%= offerID %>_originalHtmlMargins;
+                    persoo<%= offerID %>_originalHtmlMargins = null;
+                }
+            }
+
+            var persoo<%= offerID %>_updateHtmlMargins_throttled = (window.persoo && window.persoo.utils && window.persoo.utils.throttle ?
+                window.persoo.utils.throttle(persoo<%= offerID %>_updateHtmlMargins, 100) :
+                persoo<%= offerID %>_updateHtmlMargins
             );
 
-            throttled_push_html_by_<%= offerID %>_height();
-            window.addEventListener("resize", throttled_push_html_by_<%= offerID %>_height);
+            persoo<%= offerID %>_updateHtmlMargins_throttled();
+            window.addEventListener("resize", persoo<%= offerID %>_updateHtmlMargins_throttled);
         <% } %>
     </script>
     <script type="text/javascript">
