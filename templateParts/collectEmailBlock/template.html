@@ -1,7 +1,6 @@
 <div class="persoo-block persoo-block--collect-email">
     <form
         id="persoo--<%= offerID %>__form"
-        onsubmit="return persoo_submit_email_<%= offerID %>()"
     >
         <input
             id="persoo--<%= offerID %>__form__email"
@@ -16,12 +15,13 @@
             value="<%= collectEmailSubmitLabel %>"
         >
     </form>
-    <div
+    <a
         id="persoo--<%= offerID %>__thank-you"
         class="persoo-block--collect-email__form__thank-you"
+        href="javascript:typeof persoo_close_<%= offerID %> && persoo_close_<%= offerID %>()"
     >
         <%= collectEmailThankYouMessage %>
-    </div>
+    </a>
 </div>
 <script>
     function persoo_submit_email_<%= offerID %>() {
@@ -29,10 +29,10 @@
         var email = elem.value.replace(/^\s*/,'').replace(/\s*$/,'');
         try {
             if (!email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
-                // invalid email address
+                /* invalid email address */
                 elem.style.border = "3px solid red";
             } else {
-                // submit
+                /* submit */
                 console.log('Persoo: submitting email ' + email);
                 window.persoo('send','submit', {offerID: "<%= offerID %>", email: email});  // TODO use callback for confirmation?
 
@@ -43,5 +43,6 @@
 
         return false;
     }
+    document.getElementById("persoo--<%= offerID %>__form").onsubmit = persoo_submit_email_<%= offerID %>;
 </script>
 
