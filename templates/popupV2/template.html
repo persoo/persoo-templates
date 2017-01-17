@@ -148,11 +148,15 @@ var getAnimationProps = {
             }
         <% } %>
 
+        .persoo--popup,
+        .persoo--popup * {
+            box-sizing: border-box;
+        }
+
         .persoo--popup {
             line-height: normal;
             visibility: visible;
         }
-
         .persoo--popup__box {
             -webkit-font-smoothing: antialiased;
             position: fixed;
@@ -161,7 +165,6 @@ var getAnimationProps = {
         #persoo--<%= offerID %> .persoo--popup__box {
             z-index: <%= baseZIndex %>;
             font-family: <%= textFont %>;
-            box-sizing: content-box;
             <%= getPosition[position].top ? 'top: '+ getPosition[position].top +';' : '' %>
             <%= getPosition[position].bottom ? 'bottom: '+ getPosition[position].bottom +';' : '' %>
             <%= getPosition[position].left ? 'left: '+ getPosition[position].left +';' : '' %>
@@ -208,7 +211,7 @@ var getAnimationProps = {
 
         .persoo--popup__content {
             position: relative;
-            height: 100%;
+            <%= (size == "custom" && autoHeight == false) ? "-webkit-flex: 1;flex: 1;" : "" %>
         }
 
         .persoo--popup__dismiss-links {
@@ -225,6 +228,7 @@ var getAnimationProps = {
 
         .persoo--popup__close--x {
             display: inline-block;
+            box-sizing: content-box;
             position: absolute;
             text-align: center;
             opacity: 1;
@@ -299,8 +303,9 @@ var getAnimationProps = {
         .persoo--popup__icon {
             background: transparent;
             display: inline-block;
+            box-sizing: content-box;
             font-style: normal;
-            vertical-align: baseline;
+            vertical-align: middle;
             position: relative;
         }
         .persoo--popup__content img:not(.persoo-block) {
