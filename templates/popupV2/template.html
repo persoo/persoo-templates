@@ -378,12 +378,20 @@ var getAnimationProps = {
     <script type="text/javascript">
         window.persoo = window.persoo || function () {}; /* TODO until having persoo in preview */
 
-        <% if (showAfterMillis > 0) { %>
-            setTimeout(function () {
-                var elem = document.getElementById("persoo--<%= offerID %>");
-                elem.style.display = "block";
-            }, <%= showAfterMillis %>);
-        <%} %>
+        if (<%= boxWidth %> > Math.max(document.documentElement.clientWidth, window.innerWidth || 0) ||
+           navigator.userAgent.match(/MSIE 8.0/i)
+           ) {
+            var elem = document.getElementById("persoo--<%= offerID %>");
+            elem.style.display = "none";
+            console.log("Persoo: ignoring pop-up because screen is too small or browser too old.");
+        } <% if (showAfterMillis > 0) { %>
+            else {
+                setTimeout(function () {
+                    var elem = document.getElementById("persoo--<%= offerID %>");
+                    elem.style.display = "block";
+                }, <%= showAfterMillis %>);
+            }
+        <% } %>
 
         function persoo_close_<%= offerID %>() {
             var elem = document.getElementById("persoo--<%= offerID %>");
