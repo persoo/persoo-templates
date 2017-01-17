@@ -11,6 +11,27 @@
         @@include templateParts/persooBorderStyles/fields.json
 
         {
+            "id": "section_texts",
+            "name": "Texts",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "textColor",
+            "name": "Text Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "#404040"
+        },
+        {
+            "id": "textFont",
+            "name": "Text Font",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "normal normal 300 medium Arial, Helvetica, sans-serif"
+        },
+
+        {
             "id": "section_customCSS",
             "name": "Custom CSS",
             "group": "design",

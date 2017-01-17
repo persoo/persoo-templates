@@ -175,6 +175,14 @@ var getAnimationProps = {
                     '-webkit-transform: '+ getPosition[position].transform +';' +
                     'transform: '+ getPosition[position].transform +';'
                     : '' %>
+        }
+        #persoo--<%= offerID %> .persoo--popup__box,
+        #persoo--<%= offerID %> .persoo--popup__box h1,
+        #persoo--<%= offerID %> .persoo--popup__box h2,
+        #persoo--<%= offerID %> .persoo--popup__box h3,
+        #persoo--<%= offerID %> .persoo--popup__box h4,
+        #persoo--<%= offerID %> .persoo--popup__box h5,
+        #persoo--<%= offerID %> .persoo--popup__box h6 {
             color: <%= textColor %>;
         }
         .persoo--popup__wrapper > div:last-child,

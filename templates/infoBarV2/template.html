@@ -55,9 +55,18 @@ var getPaddingSize = {
             box-sizing: border-box;
         }
 
+        #persoo--<%= offerID %> .persoo--infobar,
+        #persoo--<%= offerID %> .persoo--infobar h1,
+        #persoo--<%= offerID %> .persoo--infobar h2,
+        #persoo--<%= offerID %> .persoo--infobar h3,
+        #persoo--<%= offerID %> .persoo--infobar h4,
+        #persoo--<%= offerID %> .persoo--infobar h5,
+        #persoo--<%= offerID %> .persoo--infobar h6 {
+            color: <%= textColor %>;
+        }
+
         #persoo--<%= offerID %> .persoo--infobar__wrapper {
             height: <%= autoHeight ? "auto" : customHeight + "px" %>;
-            color: <%= textColor %>;
             padding: <%= getPaddingSize[boxCorners] %>;
             font: <%= textFont %>;
             z-index: <%= baseZIndex %>;

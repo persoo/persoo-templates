@@ -104,7 +104,14 @@ var tabInnerPadding = tabInnerPaddings[boxCorners];
                 margin-right: <%= -boxWidth %>px;
             <% } %>
             transition: all <%= openOn === "hover" ? 0.35 : 0.15 %>s 0.075s cubic-bezier(0.25, 0.25, 0.75, 0.75);
-            font: <%= textFont %>;
+        }
+        #persoo--<%= offerID %> .persoo--sidebar,
+        #persoo--<%= offerID %> .persoo--sidebar h1,
+        #persoo--<%= offerID %> .persoo--sidebar h2,
+        #persoo--<%= offerID %> .persoo--sidebar h3,
+        #persoo--<%= offerID %> .persoo--sidebar h4,
+        #persoo--<%= offerID %> .persoo--sidebar h5,
+        #persoo--<%= offerID %> .persoo--sidebar h6 {
             color: <%= textColor %>;
         }
 
