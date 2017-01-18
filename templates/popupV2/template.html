@@ -379,7 +379,7 @@ var getAnimationProps = {
         window.persoo = window.persoo || function () {}; /* TODO until having persoo in preview */
 
         if (<%= boxWidth %> > Math.max(document.documentElement.clientWidth, window.innerWidth || 0) ||
-           navigator.userAgent.match(/MSIE 8.0/i)
+           navigator.userAgent.match(/MSIE [78]\./i)
            ) {
             var elem = document.getElementById("persoo--<%= offerID %>");
             elem.style.display = "none";
