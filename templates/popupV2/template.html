@@ -98,7 +98,7 @@ var getAnimationProps = {
         </div>
             <% if (showClosingX && closingXPosition === 'page'){ %>
                 <a
-                    class="persooAction persoo--popup__close--x"
+                    class="persooAction persoo--popup__close-x"
                     href="javascript:persoo_close_<%= offerID %>();"
                 >
                     <span class="persoo--popup__icon"></span>
@@ -109,7 +109,7 @@ var getAnimationProps = {
     <div id="persoo--<%= offerID %>__box" class="persoo--popup__box">
         <% if (showClosingX && closingXPosition !== 'page'){ %>
             <a
-                class="persooAction persoo--popup__close--x"
+                class="persooAction persoo--popup__close-x"
                 href="javascript:persoo_close_<%= offerID %>();"
             >
                 <span class="persoo--popup__icon"></span>
@@ -227,7 +227,7 @@ var getAnimationProps = {
             color: <%= textColor %>;
         }
 
-        .persoo--popup__close--x {
+        .persoo--popup__close-x {
             display: inline-block;
             box-sizing: content-box;
             position: absolute;
@@ -235,10 +235,10 @@ var getAnimationProps = {
             opacity: 1;
             cursor: pointer;
         }
-        .persoo--popup__close--x:hover {
+        .persoo--popup__close-x:hover {
             opacity: 0.8;
         }
-        #persoo--<%= offerID %> .persoo--popup__close--x {
+        #persoo--<%= offerID %> .persoo--popup__close-x {
             z-index: <%= baseZIndex + 1 %>;
             color: <%= closeXColor %>;
             <% if (closingXPosition === 'page') { %>
@@ -274,7 +274,7 @@ var getAnimationProps = {
             <% } %>
         }
 
-        .persoo--popup__close--x > span.persoo--popup__icon:before{
+        .persoo--popup__close-x > span.persoo--popup__icon:before{
             content:"\2716";
             display: block;
             font-weight: normal;
@@ -283,7 +283,7 @@ var getAnimationProps = {
             -webkit-font-smoothing: antialiased;
         }
         <% if (closingXPosition === 'page' || closingXPosition === 'right') { %>
-            #persoo--<%= offerID %> persoo--popup__close--x > span.persoo--popup__icon:before{
+            #persoo--<%= offerID %> persoo--popup__close-x > span.persoo--popup__icon:before{
                 content:"\2715";
             }
         <% } %>

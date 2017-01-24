@@ -7,6 +7,7 @@ var getPaddingSize = {
     "0" : "10px 15px",
     "5" : "10px 15px",
     "15" : "15px 20px",
+    "9999" : "15px 20px"
 };
 
 %>
@@ -16,10 +17,12 @@ var getPaddingSize = {
     class="persoo--infobar persoo--widget"
     data-visible="true"
 >
-    <div
-        id="persoo--<%= offerID %>__wrapper"
-        class="persoo--infobar__wrapper"
-    >
+    <% if (showClosingX && closingXPosition == 'outside'){ %>
+        <a class="persoo--infobar__close-x persooAction" href="javascript:persoo_close_<%= offerID %>();">
+            <span class="persoo--infobar__close-x__text"><%= closingText %></span>
+        </a>
+    <% } %>
+    <div id="persoo--<%= offerID %>__wrapper" class="persoo--infobar__wrapper">
         @@include templateParts/backgroundImageBlock/template.html
 
         <div id="persoo--<%= offerID %>__content" class="persoo--infobar__content">
@@ -27,11 +30,8 @@ var getPaddingSize = {
             @@include templateParts/innerContentBlock/template.html
 
         </div>
-        <% if (showClosingX){ %>
-            <a
-                class="persoo--infobar__close-x persooAction"
-                href="javascript:persoo_close_<%= offerID %>();"
-            >
+        <% if (showClosingX && closingXPosition == 'inside'){ %>
+            <a  class="persoo--infobar__close-x persooAction" href="javascript:persoo_close_<%= offerID %>();">
                 <span class="persoo--infobar__close-x__icon"></span>
             </a>
         <% } %>
@@ -45,6 +45,18 @@ var getPaddingSize = {
         .persoo--infobar{
             line-height: normal;
             visibility: visible;
+            position: relative;
+
+            height: <%= autoHeight ? "auto" : customHeight + "px" %>;
+            font: <%= textFont %>;
+            z-index: <%= baseZIndex %>;
+            <% if (position !== 'inLocation') { %>
+                <%= position %>: 0;
+                position: fixed;
+                left: 0;
+                right: 0;
+                width: 100%;
+            <% } %>
         }
         .persoo--infobar[data-visible="false"] {
             display: none;
@@ -66,35 +78,28 @@ var getPaddingSize = {
         }
 
         #persoo--<%= offerID %> .persoo--infobar__wrapper {
-            height: <%= autoHeight ? "auto" : customHeight + "px" %>;
             padding: <%= getPaddingSize[boxCorners] %>;
-            font: <%= textFont %>;
-            z-index: <%= baseZIndex %>;
-            overflow: hidden;
             <% var getBoxShadowSizeInPx = {
                 "none": 0,
                 "low": 11,
                 "high": 22
-            }; %>
+            };
+            var rightBoxCorner = showClosingX && closingXPosition == "outside" ? 0 : boxCorners;
+            %>
             box-shadow: <%= boxShadowColor %> 0px 0px <%= getBoxShadowSizeInPx[boxShadow] %>px;
             border: <%= borderSize %>px solid <%= borderColor %>;
-            <% if (position !== 'inLocation') { %>
-                <%= position %>: 0;
-                position: fixed;
-                left: 0;
-                right: 0;
-                width: 100%;
-            <% } %>
             <% if (position === 'top') { %>
-                border-radius: 0 0 <%= boxCorners %>px <%= boxCorners %>px;
+                border-radius: 0 0 <%= rightBoxCorner %>px <%= boxCorners %>px;
             <% } else if (position === 'bottom') { %>
-                border-radius:<%= boxCorners %>px <%= boxCorners %>px 0 0;
+                border-radius:<%= boxCorners %>px <%= rightBoxCorner %>px 0 0;
             <% } else { %>
                 border-radius:<%= boxCorners %>px;
             <% } %>
         }
         .persoo--infobar__wrapper {
             position: relative;
+            overflow: hidden;
+            height: 100%;
             zoom: 1;
             background-clip: padding-box;
             -webkit-font-smoothing: antialiased;
@@ -120,10 +125,32 @@ var getPaddingSize = {
 
         <% if (showClosingX) { %>
             .persoo--infobar__close-x {
-                opacity: 0.8;
                 cursor: pointer;
                 color: <%= closeXColor %>;<% /* FIXME inherit vs closeXColor??? */ %>
-                margin-left: 15px;
+                <% if (closingXPosition == 'outside') { %>
+                    position: absolute;
+                    z-index: <%= baseZIndex + 1 %>;
+                    background-color: <%= backgroundColor %>;
+                    right: 0px;
+                    width: auto;
+                    text-align: left;
+                    text-decoration: none;
+                    height: 1.8em;
+                    <% if (position === 'top') { %>
+                        bottom: -1.8em;
+                        padding: 0.15em 0.8em 0.55em <%= boxCorners > 100 ? '1.5em;' : '0.8em;' %>
+                        border-radius: 0 0 0 <%= boxCorners %>px;
+                    <% } else if (position === 'bottom') { %>
+                        top: -1.8em;
+                        border-radius:<%= boxCorners %>px 0 0 0;
+                        padding: 0.55em 0.8em 0.15em <%= boxCorners > 100 ? '1.5em;' : '0.8em;' %>
+                    <% } %>
+                <% } else { %>
+                    font-size:20px;
+                    line-height: 20px;
+                    margin-left: 15px;
+                    opacity: 0.8;
+                <% } %>
             }
             .persoo--infobar__close-x__icon {
                 display: inline-block;
@@ -172,41 +199,44 @@ var getPaddingSize = {
             var persooWidget = document.getElementById("persoo--<%= offerID %>");
             persooWidget.setAttribute("data-visible", "false");
             persoo_report_event_<%= offerID %>("close");
-            <% if (position !== "inLocation") { %>
+            <% if (position !== "inLocation" && placement == "push") { %>
                 persoo<%= offerID %>_recoverHtmlMargins();
             <% } %>
         }
 
-        <% if (position !== "inLocation") { %>
-            persoo<%= offerID %>_originalHtmlMargins = null;
-
-            function persoo<%= offerID %>_updateHtmlMargins() {
+        function persoo<%= offerID %>_recoverHtmlMargins() {
+            if (typeof persoo<%= offerID %>_originalHtmlMargins !== 'undefined') {
                 var html = document.querySelector("html");
-                var infobarWrapper = document.getElementById("persoo--<%= offerID %>__wrapper");
                 var marginProperty = "margin<%= position[0].toUpperCase() + position.slice(1) %>";
-
-                if (typeof persoo<%= offerID %>_originalHtmlMargins == null) {
-                    persoo<%= offerID %>_originalHtmlMargins = html.style[marginProperty]
-                }
-                html.style[marginProperty] = infobarWrapper.offsetHeight + "px";
+                html.style[marginProperty] = persoo<%= offerID %>_originalHtmlMargins;
+                persoo<%= offerID %>_originalHtmlMargins = null;
             }
+        }
+        persoo<%= offerID %>_recoverHtmlMargins(); /* because of Persoo live preview in editor */
 
-            function persoo<%= offerID %>_recoverHtmlMargins() {
-                if (typeof persoo<%= offerID %>_originalHtmlMargins !== 'undefined') {
+        <% if (position !== "inLocation") { %>
+            <% if (placement == "push") { %>
+                persoo<%= offerID %>_originalHtmlMargins = null;
+
+                function persoo<%= offerID %>_updateHtmlMargins() {
                     var html = document.querySelector("html");
+                    var infobarWrapper = document.getElementById("persoo--<%= offerID %>__wrapper");
                     var marginProperty = "margin<%= position[0].toUpperCase() + position.slice(1) %>";
-                    html.style[marginProperty] = persoo<%= offerID %>_originalHtmlMargins;
-                    persoo<%= offerID %>_originalHtmlMargins = null;
+
+                    if (typeof persoo<%= offerID %>_originalHtmlMargins == null) {
+                        persoo<%= offerID %>_originalHtmlMargins = html.style[marginProperty]
+                    }
+                    html.style[marginProperty] = infobarWrapper.offsetHeight + "px";
                 }
-            }
 
-            var persoo<%= offerID %>_updateHtmlMargins_throttled = (window.persoo && window.persoo.utils && window.persoo.utils.throttle ?
-                window.persoo.utils.throttle(persoo<%= offerID %>_updateHtmlMargins, 100) :
-                persoo<%= offerID %>_updateHtmlMargins
-            );
+                var persoo<%= offerID %>_updateHtmlMargins_throttled = (window.persoo && window.persoo.utils && window.persoo.utils.throttle ?
+                    window.persoo.utils.throttle(persoo<%= offerID %>_updateHtmlMargins, 100) :
+                    persoo<%= offerID %>_updateHtmlMargins
+                );
 
-            persoo<%= offerID %>_updateHtmlMargins_throttled();
-            window.addEventListener("resize", persoo<%= offerID %>_updateHtmlMargins_throttled);
+                persoo<%= offerID %>_updateHtmlMargins_throttled();
+                window.addEventListener("resize", persoo<%= offerID %>_updateHtmlMargins_throttled);
+            <% } %>
         <% } %>
     </script>
     <script type="text/javascript">

@@ -38,6 +38,23 @@
             "type": "select",
             "defaultValue": "top"
         },
+        {
+            "group": "design",
+            "id": "placement",
+            "name": "Placement",
+            "options": [
+                {
+                    "label": "Push Page Content",
+                    "value": "push"
+                },
+                {
+                    "label": "Ovelay Page Content",
+                    "value": "overlay"
+                }
+            ],
+            "type": "select",
+            "defaultValue": "push"
+        },
 
         {
             "id": "section_closing",
@@ -53,11 +70,45 @@
             "defaultValue": true
         },
         {
+            "id": "closingXPosition",
+            "name": "Closing X Position",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "X Inside Box",
+                    "value": "inside"
+                },
+                {
+                    "label": "Text Above/Below Box",
+                    "value": "outside"
+                }
+            ],
+            "defaultValue": "inside",
+            "condition": {
+                "operator": "==",
+                "fieldID": "showClosingX",
+                "fieldValue": true
+            }
+        },
+        {
             "id": "closeXColor",
             "name": "Close X Color",
             "group": "design",
             "type": "color",
             "defaultValue": "#777",
+            "condition": {
+                "operator": "==",
+                "fieldID": "showClosingX",
+                "fieldValue": true
+            }
+        },
+        {
+            "id": "closingText",
+            "name": "Closing Text",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "Close",
             "condition": {
                 "operator": "==",
                 "fieldID": "showClosingX",
