@@ -3,8 +3,14 @@
     "isActive": true,
     "minScenariosCount": 0,
     "name": "Content Block",
+    "tags": {
+        "imageLink": null,
+        "description": "Content block can be placed in any location in a page."
+    },
+    "location": null,
     "fields": [
 
+        @@include templateParts/innerContentBlock/fields-innerContentType.json
         @@include templateParts/innerContentBlock/fields.json
 
         @@include templateParts/backgroundImageBlock/fields.json

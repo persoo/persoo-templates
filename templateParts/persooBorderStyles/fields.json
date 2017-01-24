@@ -35,6 +35,10 @@
         {
             "label": "Rounded",
             "value": "15"
+        },
+        {
+            "label": "Max Rounded",
+            "value": "9999"
         }
     ],
     "defaultValue": "0"

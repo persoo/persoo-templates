@@ -9,14 +9,26 @@
 #persoo--<%= offerID %> .persoo-block--collect-email__form__submit,
 #persoo--<%= offerID %> .persoo-block--collect-email__form__thank-you,
 #persoo--<%= offerID %> .persoo-block--cta__link {
-    <%= getButtonAndFormStyle[ctaStyle] %>
     float: none;
     vertical-align: middle;
-    font: <%= ctaButtonTextFont %>;
+    <%= getButtonAndFormStyle[ctaStyle] %>
+    min-height: 22px;
+    line-height: 22px;
+    padding: 6px 12px;
     margin: 5px 5px;
+    text-decoration: none;
+    color: <%= ctaButtonTextColor %>;
+    border-radius: <%= buttonCorners %>px;
+    font: <%= ctaButtonTextFont %>;
 }
 
 /* reset css inside */
+#persoo--<%= offerID %>__content {
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
 #persoo--<%= offerID %>__content *,
 #persoo--<%= offerID %>__content p,
 #persoo--<%= offerID %>__content a,

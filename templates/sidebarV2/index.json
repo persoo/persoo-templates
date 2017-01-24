@@ -3,7 +3,14 @@
     "isActive": true,
     "minScenariosCount": 0,
     "name": "Side Bar",
+    "tags": {
+        "imageLink": null,
+        "description": "Displays ear on the page side to slide out content box on hover/click."
+    },
+    "location": "sidebar",
     "fields": [
+
+        @@include templateParts/innerContentBlock/fields-innerContentType.json
 
         {
             "id": "tab",
@@ -119,8 +126,8 @@
             "defaultValue": 400,
             "condition": {
                 "operator": "==",
-                "fieldID": "autoHeight",
-                "fieldValue": false
+                "fieldID": "size",
+                "fieldValue": "custom"
             }
         },
         {
@@ -128,7 +135,12 @@
             "name": "Auto Height",
             "group": "design",
             "type": "checkbox",
-            "defaultValue": true
+            "defaultValue": true,
+            "condition": {
+                "operator": "==",
+                "fieldID": "size",
+                "fieldValue": "custom"
+            }
         },
 
         @@include templateParts/backgroundImageBlock/fields.json

@@ -1,6 +1,11 @@
 {
     "class": "webWidget",
     "name": "TopProducts (beta)",
+    "tags": {
+        "imageLink": null,
+        "description": "Box with vertical lists of best selling and trending products."
+    },
+    "location": null,
     "minScenariosCount": 2,
     "fields": [
         {

@@ -1,0 +1,27 @@
+{
+    "id": "section_innerContentType",
+    "name": "Inner Content Type",
+    "group": "design",
+    "type": "section"
+},
+{
+    "id": "innerContentType",
+    "name": "Inner Content Type",
+    "group": "design",
+    "type": "select",
+    "options": [
+        {
+            "label": "Custom HTML",
+            "value": "customHTML"
+        },
+        {
+            "label": "Rich Text with Call to Action",
+            "value": "richTextAndCTA"
+        },
+        {
+            "label": "Rich Text with Collect Email Form",
+            "value": "richTextAndCollectEmail"
+        }
+    ],
+    "defaultValue": "richTextAndCTA"
+},

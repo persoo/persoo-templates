@@ -11,15 +11,40 @@
     "type": "select",
     "options": [
         {
-            "label": "Classic",
-            "value": "classic"
+            "label": "Solid",
+            "value": "solid"
         },
         {
-            "label": "Outline",
+            "label": "Outlined",
             "value": "outline"
         }
     ],
-    "defaultValue": "classic"
+    "defaultValue": "solid"
+},
+{
+    "id": "buttonCorners",
+    "name": "Button & Form Corners",
+    "group": "design",
+    "type": "select",
+    "options": [
+        {
+            "label": "Rectangular",
+            "value": "0"
+        },
+        {
+            "label": "Mini Rounded",
+            "value": "5"
+        },
+        {
+            "label": "Rounded",
+            "value": "15"
+        },
+        {
+            "label": "Max Rounded",
+            "value": "9999"
+        }
+    ],
+    "defaultValue": "0"
 },
 {
     "id": "ctaButtonTextColor",

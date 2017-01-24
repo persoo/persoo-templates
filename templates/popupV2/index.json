@@ -3,7 +3,14 @@
     "isActive": true,
     "minScenariosCount": 0,
     "name": "Pop-up",
+    "tags": {
+        "imageLink": null,
+        "description": "Basic Pop-up with rich options."
+    },
+    "location": "popup",
     "fields": [
+
+        @@include templateParts/innerContentBlock/fields-innerContentType.json
 
         {
             "id": "section_position",
@@ -109,7 +116,12 @@
             "name": "Auto Height",
             "group": "design",
             "type": "checkbox",
-            "defaultValue": true
+            "defaultValue": true,
+            "condition": {
+                "operator": "==",
+                "fieldID": "size",
+                "fieldValue": "custom"
+            }
         },
 
         {
@@ -153,10 +165,10 @@
         },
         {
             "id": "animationDuration",
-            "name": "Duration",
+            "name": "Duration (in ms)",
             "group": "design",
-            "type": "text",
-            "defaultValue": "0.6s",
+            "type": "number",
+            "defaultValue": 600,
             "condition": {
                 "operator": "!=",
                 "fieldID": "animationEffect",

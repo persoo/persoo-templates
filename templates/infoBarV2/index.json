@@ -2,7 +2,14 @@
     "class": "webWidget",
     "isActive": true,
     "name": "Info bar",
+    "tags": {
+        "imageLink": null,
+        "description": "Short messages on the top/bottom of the page."
+    },
+    "location": "infobar",
     "fields": [
+
+        @@include templateParts/innerContentBlock/fields-innerContentType.json
 
         {
             "id": "section_position",

@@ -30,6 +30,7 @@ var getPosition = {
     bottomRight: {bottom: "0", right: "0", margin_bottom: 15, margin_right: 15}
 };
 
+var animationDurationInSec = (animationDuration || 0)/1000 + "s";
 var getAnimationProps = {
     fade: {
         start: {
@@ -119,7 +120,7 @@ var getAnimationProps = {
 
             @@include templateParts/backgroundImageBlock/template.html
 
-            <div class="persoo--popup__content">
+            <div id="persoo--<%= offerID %>__content" class="persoo--popup__content">
 
                 @@include templateParts/innerContentBlock/template.html
 
@@ -316,6 +317,14 @@ var getAnimationProps = {
         <% if (animationEffect && animationEffect != 'none') {
             var animationProps = getAnimationProps[animationEffect];
         %>
+            @keyframes persoo--<%= offerID %>__overlayAnimation {
+                0% { opacity: 0; }
+                100% { opacity: 1; }
+            }
+            @-webkit-keyframes persoo--<%= offerID %>__overlayAnimation {
+                0% { opacity: 0; }
+                100% { opacity: 1; }
+            }
             @keyframes persoo--<%= offerID %>__animation {
                 0% {
                     <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
@@ -348,9 +357,13 @@ var getAnimationProps = {
                     <%= animationProps.stop.opacity ? 'opacity: ' + animationProps.stop.opacity + ';' : '' %>
                 }
             }
+            #persoo--<%= offerID %> .persoo--popup__overlay {
+                animation: persoo--<%= offerID %>__overlayAnimation <%= animationDurationInSec %> ease 0s 1 normal;
+                -webkit-animation: persoo--<%= offerID %>__overlayAnimation <%= animationDurationInSec %> ease 0s 1 normal;
+            }
             #persoo--<%= offerID %> .persoo--popup__box {
-                animation: persoo--<%= offerID %>__animation <%= animationDuration %> ease 0s 1 normal;
-                -webkit-animation: persoo--<%= offerID %>__animation <%= animationDuration %> ease 0s 1 normal;
+                animation: persoo--<%= offerID %>__animation <%= animationDurationInSec %> ease 0s 1 normal;
+                -webkit-animation: persoo--<%= offerID %>__animation <%= animationDurationInSec %> ease 0s 1 normal;
             }
 
             #persoo--<%= offerID %>[data-animate-closing="true"] .persoo--popup__box {
@@ -359,7 +372,7 @@ var getAnimationProps = {
                 <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %>
                 <%= animationProps.start.bottom ? 'bottom: ' + animationProps.start.bottom + ';' : '' %>
                 opacity: 0;
-                transition: all <%= animationDuration %> ease;
+                transition: all <%= animationDurationInSec %> ease;
             }
         <% } %>
 
@@ -393,15 +406,18 @@ var getAnimationProps = {
             }
         <% } %>
 
-        function persoo_close_<%= offerID %>() {
+        function persoo_close_<%= offerID %>(href) {
             var elem = document.getElementById("persoo--<%= offerID %>");
             window.persoo('send', 'close', {offerID: "<%= offerID %>"});
+            if (href) {
+                window.location.href = href;
+            }
 
             elem.setAttribute("data-animate-closing", "true");
             window.setTimeout(function () {
                 elem.style.display = "none";
                 elem.setAttribute("data-animate-closing", "false");
-            }, <%= animationEffect === "none" ? 0 : animationDuration.replace("s", "") %> * 1000);
+            }, <%= animationEffect === "none" ? 0 : animationDuration %>);
         }
     </script>
     <script type="text/javascript">
