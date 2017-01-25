@@ -87,7 +87,7 @@ var getAnimationProps = {
     id="persoo--<%= offerID %>"
     class="persoo--popup persoo--widget"
     data-animate-closing="false"
-    data-inner-location-id="persoo--<%= offerID %>__wrapper"
+    data-inner-location-id="persoo--<%= offerID %>__box"
 >
 
     <% if (useOverlay) { %>
@@ -308,10 +308,6 @@ var getAnimationProps = {
             font-style: normal;
             vertical-align: middle;
             position: relative;
-        }
-        .persoo--popup__content img:not(.persoo-block) {
-            max-width: 100%;
-            max-height: 100%;
         }
 
         <% if (animationEffect && animationEffect != 'none') {

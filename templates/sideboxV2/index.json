@@ -2,12 +2,12 @@
     "class": "webWidget",
     "isActive": true,
     "minScenariosCount": 0,
-    "name": "Side Bar",
+    "name": "Side Box",
     "tags": {
         "imageLink": null,
         "description": "Displays ear on the page side to slide out content box on hover/click."
     },
-    "location": "sidebar",
+    "location": "sidebox",
     "fields": [
 
         @@include templateParts/innerContentBlock/fields-innerContentType.json
@@ -33,7 +33,7 @@
             "type": "select",
             "options": [
                 {
-                    "label": "Hover",
+                    "label": "Tab Hover",
                     "value": "hover"
                 },
                 {

@@ -67,13 +67,13 @@ var getPaddingSize = {
             box-sizing: border-box;
         }
 
-        #persoo--<%= offerID %> .persoo--infobar,
-        #persoo--<%= offerID %> .persoo--infobar h1,
-        #persoo--<%= offerID %> .persoo--infobar h2,
-        #persoo--<%= offerID %> .persoo--infobar h3,
-        #persoo--<%= offerID %> .persoo--infobar h4,
-        #persoo--<%= offerID %> .persoo--infobar h5,
-        #persoo--<%= offerID %> .persoo--infobar h6 {
+        #persoo--<%= offerID %> .persoo--infobar__content,
+        #persoo--<%= offerID %> .persoo--infobar__content h1,
+        #persoo--<%= offerID %> .persoo--infobar__content h2,
+        #persoo--<%= offerID %> .persoo--infobar__content h3,
+        #persoo--<%= offerID %> .persoo--infobar__content h4,
+        #persoo--<%= offerID %> .persoo--infobar__content h5,
+        #persoo--<%= offerID %> .persoo--infobar__content h6 {
             color: <%= textColor %>;
         }
 
@@ -117,10 +117,6 @@ var getPaddingSize = {
             flex: 1;
             justify-content: center;
             align-items: center;
-        }
-        .persoo--infobar__content .persoo-block {
-            display: inline-block;
-            margin-right: 20px;
         }
 
         <% if (showClosingX) { %>
@@ -182,6 +178,12 @@ var getPaddingSize = {
         .persoo--infobar__content img {
             max-width: 100%;
             max-height: 100%;
+        }
+
+        /* speciality for infobar */
+        #persoo--<%= offerID %>__content .persoo-block {
+            display: inline-block;
+            margin-right: 20px;
         }
     </style>
     <style type="text/css">
