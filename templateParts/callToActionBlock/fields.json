@@ -25,7 +25,7 @@
     "name": "Button Text",
     "group": "cta",
     "type": "text",
-    "defaultValue": "SHOW ME",
+    "defaultValue": "SHOW&nbsp;ME",
     "condition": {
         "fieldID": "innerContentType",
         "operator": "match",
