@@ -1,7 +1,7 @@
 <%
 var offerID = offerID || 'randomOfferID';
 
-var baseZIndex = 10000000;
+var baseZIndex = 1000000;
 
 var getPaddingSize = {
     "0" : "10px 15px",
@@ -118,6 +118,11 @@ var getPaddingSize = {
             justify-content: center;
             align-items: center;
         }
+        @media (max-width: 400px) {
+            .persoo--infobar__content {
+                flex-wrap: wrap;
+            }
+        }
 
         <% if (showClosingX) { %>
             .persoo--infobar__close-x {
@@ -162,6 +167,7 @@ var getPaddingSize = {
             }
             .persoo--infobar__close-x:hover {
                 opacity: 1;
+                color: <%= closeXColor %>;
             }
         <% } %>
 

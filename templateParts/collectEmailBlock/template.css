@@ -1,6 +1,7 @@
 .persoo-block--collect-email {
     text-align: center;
-    margin-bottom: 15px;
+    margin: 0 auto 15px auto;
+    max-width: 50em;
 }
 #persoo--<%= offerID %>__form {
     display: -webkit-flex;

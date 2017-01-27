@@ -1,3 +1,5 @@
+@@include templateParts/persooBlocksStyles/template.css
+
 <% if (innerContentType == "customHTML") { %>
     @@include templateParts/customHTML/template.css
 <% } %>
@@ -9,4 +11,3 @@
         @@include templateParts/collectEmailBlock/template.css
     <% } %>
 <% } %>
-@@include templateParts/persooBlocksStyles/template.css

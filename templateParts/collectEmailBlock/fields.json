@@ -3,7 +3,7 @@
     "name": "Input Label",
     "group": "collectEmail",
     "type": "text",
-    "defaultValue": "Your@email",
+    "defaultValue": "your@email.com",
     "condition": {
         "fieldID": "innerContentType",
         "operator": "match",

@@ -1,7 +1,7 @@
 <%
 var offerID = offerID || 'randomOfferID';
 
-const baseZIndex = 1000000;
+const baseZIndex = 1000200;
 
 function getBoxWidth(boxSize, width) {
     var getWidth = {
@@ -116,25 +116,27 @@ var getAnimationProps = {
             </a>
         <% } %>
 
-        <div class="persoo--popup__wrapper">
+        <div class="persoo--popup__scrollWrapper">
+            <div class="persoo--popup__wrapper">
 
-            @@include templateParts/backgroundImageBlock/template.html
+                @@include templateParts/backgroundImageBlock/template.html
 
-            <div id="persoo--<%= offerID %>__content" class="persoo--popup__content">
+                <div id="persoo--<%= offerID %>__content" class="persoo--popup__content persoo--widget__content">
 
-                @@include templateParts/innerContentBlock/template.html
+                    @@include templateParts/innerContentBlock/template.html
 
-            </div>
-            <div class="persoo-block persoo-block--separator"></div>
-            <div class="persoo--popup__dismiss-links">
-                <a
-                    class="persooAction persoo--popup__dismiss-links--close"
-                    data-action="close"
-                    href="javascript:persoo_close_<%= offerID %>()"
-                >
-                    <%= closingTextInFooter %>
-                </a>
-            </div>
+                </div>
+                <div class="persoo-block persoo-block--separator"></div>
+                <div class="persoo--popup__dismiss-links">
+                    <a
+                        class="persooAction persoo--popup__dismiss-links--close"
+                        data-action="close"
+                        href="javascript:persoo_close_<%= offerID %>()"
+                    >
+                        <%= closingTextInFooter %>
+                    </a>
+                </div>
+             </div>
          </div>
     </div>
 
@@ -206,7 +208,12 @@ var getAnimationProps = {
             flex-direction: column;
             padding: 20px;
         }
-        #persoo--<%= offerID %> .persoo--popup__wrapper {
+        .persoo--popup__scrollWrapper {
+            overflow-y: auto;
+            overflow-x: hidden;
+            max-height: 1000px; /* screen height */
+        }
+        #persoo--<%= offerID %> .persoo--popup__scrollWrapper {
             @@include templateParts/persooBorderStyles/template.css
         }
 
@@ -242,6 +249,7 @@ var getAnimationProps = {
             z-index: <%= baseZIndex + 1 %>;
             color: <%= closeXColor %>;
             <% if (closingXPosition === 'page') { %>
+                position: fixed;
                 font-size:32px;
                 right: 6px;
                 top: 12px;
@@ -387,20 +395,26 @@ var getAnimationProps = {
     <script type="text/javascript">
         window.persoo = window.persoo || function () {}; /* TODO until having persoo in preview */
 
-        if (<%= boxWidth %> > Math.max(document.documentElement.clientWidth, window.innerWidth || 0) ||
-           navigator.userAgent.match(/MSIE [78]\./i)
-           ) {
-            var elem = document.getElementById("persoo--<%= offerID %>");
-            elem.style.display = "none";
-            console.log("Persoo: ignoring pop-up because screen is too small or browser too old.");
-        } <% if (showAfterMillis > 0) { %>
-            else {
-                setTimeout(function () {
-                    var elem = document.getElementById("persoo--<%= offerID %>");
-                    elem.style.display = "block";
-                }, <%= showAfterMillis %>);
-            }
-        <% } %>
+        function persooPopupInit_<%= offerID %>() {
+            var elem = document.querySelector("#persoo--<%= offerID %> .persoo--popup__scrollWrapper");
+            elem.style.maxHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + "px";
+
+            if (<%= boxWidth %> > Math.max(document.documentElement.clientWidth, window.innerWidth || 0) ||
+               navigator.userAgent.match(/MSIE [78]\./i)
+               ) {
+                elem = document.getElementById("persoo--<%= offerID %>");
+                elem.style.display = "none";
+                console.log("Persoo: ignoring pop-up because screen is too small or browser too old.");
+            } <% if (showAfterMillis > 0) { %>
+                else {
+                    setTimeout(function () {
+                        elem = document.getElementById("persoo--<%= offerID %>");
+                        elem.style.display = "block";
+                    }, <%= showAfterMillis %>);
+                }
+            <% } %>
+        }
+        persooPopupInit_<%= offerID %>();
 
         function persoo_close_<%= offerID %>(href) {
             var elem = document.getElementById("persoo--<%= offerID %>");

@@ -6,14 +6,13 @@
             id="persoo--<%= offerID %>__form__email"
             class="persoo-block--collect-email__form__email"
             type="text"
-            size="15"
-            value="<%= collectEmailInputLabel %>"
+            size="10"
+            placeholder="<%= collectEmailInputLabel %>"
+            value=""
         >
-        <input
-            class="persooAction persoo-block--collect-email__form__submit"
-            type="submit"
-            value="<%= collectEmailSubmitLabel %>"
-        >
+        <button class="persooAction persoo-block--collect-email__form__submit">
+            <%= collectEmailSubmitLabel %>
+        </button>
     </form>
     <a
         id="persoo--<%= offerID %>__thank-you"
@@ -45,4 +44,3 @@
     }
     document.getElementById("persoo--<%= offerID %>__form").onsubmit = persoo_submit_email_<%= offerID %>;
 </script>
-
