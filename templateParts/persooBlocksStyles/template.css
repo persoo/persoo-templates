@@ -27,7 +27,25 @@
     border-radius: <%= buttonCorners %>px;
     font: <%= ctaButtonTextFont %>;
 }
-<% var inputPlaceholderStyle = "opacity: 0.9; color: " + ctaButtonTextColor + ";"; %>
+<% if (ctaStyle == "stacked") { %>
+    #persoo--<%= offerID %> .persoo-block--collect-email__form__email {
+        margin-right: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        background-color: #fff;
+        color: <%= textColor %>;
+    }
+    #persoo--<%= offerID %> .persoo-block--collect-email__form__submit {
+        margin-left: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+<% } %>
+
+<%
+    var inputPlaceholderColor = (ctaStyle == "stacked") ? textColor : ctaButtonTextColor;
+    var inputPlaceholderStyle = "opacity: 0.9; color: " + inputPlaceholderColor + ";";
+%>
 #persoo--<%= offerID %> input::-ms-input-placeholder { <%= inputPlaceholderStyle %> }
 #persoo--<%= offerID %> input:-ms-input-placeholder { <%= inputPlaceholderStyle %> }
 #persoo--<%= offerID %> input::-webkit-input-placeholder { <%= inputPlaceholderStyle %> }

@@ -17,6 +17,10 @@
         {
             "label": "Outlined",
             "value": "outline"
+        },
+        {
+            "label": "Solid Stacked with White input",
+            "value": "stacked"
         }
     ],
     "defaultValue": "solid"
