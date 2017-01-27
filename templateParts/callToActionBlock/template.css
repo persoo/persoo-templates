@@ -13,3 +13,6 @@
 .persoo-block--cta__link {
     display: inline-block;
 }
+#persoo--<%= offerID %>__coupon {
+    display: none;
+}

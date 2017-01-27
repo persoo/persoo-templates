@@ -43,11 +43,27 @@
             "value": "redirect"
         },
         {
+            "label": "Show coupon",
+            "value": "coupon"
+        },
+        {
             "label": "Close offer",
             "value": "close"
         }
     ],
     "defaultValue": "redirect",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CTA"
+    }
+},
+{
+    "id": "ctaButtonCoupon",
+    "name": "Coupon or text",
+    "group": "cta",
+    "type": "text",
+    "defaultValue": "Your coupon is AX1Y2A45",
     "condition": {
         "fieldID": "innerContentType",
         "operator": "match",

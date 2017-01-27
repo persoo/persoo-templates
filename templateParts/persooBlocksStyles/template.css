@@ -12,7 +12,8 @@
 #persoo--<%= offerID %> .persoo-block--collect-email__form__email,
 #persoo--<%= offerID %> .persoo-block--collect-email__form__submit,
 #persoo--<%= offerID %> .persoo-block--collect-email__form__thank-you,
-#persoo--<%= offerID %> .persoo-block--cta__link {
+#persoo--<%= offerID %> .persoo-block--cta__link,
+#persoo--<%= offerID %> .persoo-block--cta__coupon {
     float: none;
     vertical-align: middle;
     <%= getButtonAndFormStyle[ctaStyle] %>
