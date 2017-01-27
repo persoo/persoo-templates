@@ -78,7 +78,7 @@ HTML templates are using [EJS] for rendering (which is basically javascript). Du
 ### Styles
 * We are using [BEM naming standarts] in all classNames and IDs, which are used in CSS selectors.
 * Avoid using global selectors (without offerID), when the CSS property comes from user fields.
-    Otherwise your "public" CSS rule in the page may redefine style also for other widgets of the same template.
+  Otherwise your "public" CSS rule in the page may redefine style also for other widgets of the same template.
 
 **example:**
 
@@ -110,26 +110,36 @@ HTML templates are using [EJS] for rendering (which is basically javascript). Du
 
 * Avoid using of global functions and selectors (without offerID)
   Otherwise your scripts will affect (or be triggered by) other widgets with same template.
+* Create one variable with offerID (unique hash), that provides all public methods you
+  need to use in a page. All widget variables should be local variables inside closure of
+  your widget object builder function.
 
 **example:**
 
 ```html
 <div id="persoo--<%= offerID %>">
     ...
-    <button onclick="persoo_<%= offerID %>_close()">
+    <button onclick="persoo_<%= offerID %>.close()">
         Close
     </button>
 </div>
 
 <script>
-    var persoo_<%= offerID %> = document.getElementById("persoo--<%= offerID %>");
-
-    function persoo_<%= offerID %>_close() {
-        persoo_<%= offerID %>.style.display = "none";
-        window.persoo("send", "close", {offerID: "<%= offerID %>"});
-    }
+    /* Create function closure with local variables not to interfere with page js variables
+    *  and export only functions you need to call from a page. */
+    var persoo_<%= offerID %> = (function () {        
+        var elem = document.getElementById("persoo--<%= offerID %>");
+        function close() {
+            elem.style.display = "none";
+            window.persoo("send", "close", {offerID: "<%= offerID %>"});
+        }
+        return {
+            close: close
+        }
+    })();    
 </script>
 ```
+
 
 ## Best practices
 
