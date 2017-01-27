@@ -327,7 +327,7 @@
             "name": "Custom CSS",
             "group": "design",
             "type": "css",
-            "defaultValue": "/* your own css rules */"
+            "defaultValue": "/* your own css rules, i.e\n.persoo--popup__content {\n    margin-left: 50%;\n}\n*/"
         },
         {
             "id": "section_customJS",
