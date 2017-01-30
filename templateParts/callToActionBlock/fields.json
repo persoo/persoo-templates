@@ -27,9 +27,19 @@
     "type": "text",
     "defaultValue": "SHOW&nbsp;ME",
     "condition": {
-        "fieldID": "innerContentType",
-        "operator": "match",
-        "fieldValue": "CTA"
+        "operator": "and",
+        "children": [
+            {
+                "fieldID": "innerContentType",
+                "operator": "match",
+                "fieldValue": "CTA"
+            },
+            {
+                "fieldID": "ctaActionType",
+                "operator": "==",
+                "fieldValue": "button"
+            }
+        ]
     }
 },
 {
@@ -60,14 +70,24 @@
 },
 {
     "id": "ctaButtonCoupon",
-    "name": "Coupon or text",
+    "name": "Coupon text",
     "group": "cta",
     "type": "text",
     "defaultValue": "Your coupon is AX1Y2A45",
     "condition": {
-        "fieldID": "innerContentType",
-        "operator": "match",
-        "fieldValue": "CTA"
+        "operator": "and",
+        "children": [
+            {
+                "fieldID": "innerContentType",
+                "operator": "match",
+                "fieldValue": "CTA"
+            },
+            {
+                "fieldID": "ctaAction",
+                "operator": "==",
+                "fieldValue": "coupon"
+            }
+        ]
     }
 },
 {
@@ -77,8 +97,18 @@
     "type": "text",
     "defaultValue": "/your/target/page",
     "condition": {
-        "fieldID": "innerContentType",
-        "operator": "match",
-        "fieldValue": "CTA"
+        "operator": "and",
+        "children": [
+            {
+                "fieldID": "innerContentType",
+                "operator": "match",
+                "fieldValue": "CTA"
+            },
+            {
+                "fieldID": "ctaAction",
+                "operator": "==",
+                "fieldValue": "redirect"
+            }
+        ]
     }
 },

@@ -81,6 +81,15 @@ var getAnimationProps = {
         }
     }
 };
+function printCSSProps(obj) {
+    var result = "";
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+            result += prop + ': ' + obj[prop] + ';'
+        }
+    }
+    return result;
+}
 %>
 
 <div
@@ -331,34 +340,18 @@ var getAnimationProps = {
             }
             @keyframes persoo--<%= offerID %>__animation {
                 0% {
-                    <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
-                    <%= animationProps.start.right ? 'right: ' + animationProps.start.right + ';' : '' %>
-                    <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %>
-                    <%= animationProps.start.bottom ? 'bottom: ' + animationProps.start.bottom + ';' : '' %>
-                    <%= animationProps.start.opacity ? 'opacity: ' + animationProps.start.opacity + ';' : '' %>
+                    <%= printCSSProps(animationProps.start) %>
                 }
                 100% {
-                    <%= animationProps.stop.left ? 'left: ' + animationProps.stop.left + ';' : '' %>
-                    <%= animationProps.stop.right ? 'right: ' + animationProps.stop.right + ';' : '' %>
-                    <%= animationProps.stop.top ? 'top: ' + animationProps.stop.top + ';' : '' %>
-                    <%= animationProps.stop.bottom ? 'bottom: ' + animationProps.stop.bottom + ';' : '' %>
-                    <%= animationProps.stop.opacity ? 'opacity: ' + animationProps.stop.opacity + ';' : '' %>
+                    <%= printCSSProps(animationProps.stop) %>
                 }
             }
             @-webkit-keyframes persoo--<%= offerID %>__animation {
                 0% {
-                    <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
-                    <%= animationProps.start.right ? 'right: ' + animationProps.start.right + ';' : '' %>
-                    <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %>
-                    <%= animationProps.start.bottom ? 'bottom: ' + animationProps.start.bottom + ';' : '' %>
-                    <%= animationProps.start.opacity ? 'opacity: ' + animationProps.start.opacity + ';' : '' %>
+                    <%= printCSSProps(animationProps.start) %>
                 }
                 100% {
-                    <%= animationProps.stop.left ? 'left: ' + animationProps.stop.left + ';' : '' %>
-                    <%= animationProps.stop.right ? 'right: ' + animationProps.stop.right + ';' : '' %>
-                    <%= animationProps.stop.top ? 'top: ' + animationProps.stop.top + ';' : '' %>
-                    <%= animationProps.stop.bottom ? 'bottom: ' + animationProps.stop.bottom + ';' : '' %>
-                    <%= animationProps.stop.opacity ? 'opacity: ' + animationProps.stop.opacity + ';' : '' %>
+                    <%= printCSSProps(animationProps.stop) %>
                 }
             }
             #persoo--<%= offerID %> .persoo--popup__overlay {
