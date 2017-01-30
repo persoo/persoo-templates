@@ -163,6 +163,7 @@ All widgets are located at `template` directory. For each widget, there is sub-d
 
     templates/<templateID>/index.json
     templates/<templateID>/template.html
+    templates/<templateID>/defaultFieldValues.html
 
    * **index.json** -- json with widget configuration, only main template field is empty (this field is added during build, because we keep widget's html source code in natural form in file template.html, not in JSON, on one line with escaped new lines and quotes)
    * **template.html** -- main template as html string with EJS
