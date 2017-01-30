@@ -15,6 +15,13 @@ if (!boxWidth) { /* custom */
 
 var boxHeightWithPx = (size == 'custom' && !autoHeight ? customHeight + "px" : "auto");
 
+var boxShadowSizesInPx = {
+    "none": 0,
+    "low": 6,
+    "high": 12
+};
+var boxShadowSize = boxShadowSizesInPx[boxShadow];
+
 var tabHeights = {
     "0": 42,
     "5": 42,
@@ -26,7 +33,7 @@ var tabHeight = tabHeights[boxCorners];
 var tabInnerPaddings = {
     "0": "0.3em 1em",
     "5": "0.3em 1em",
-    "15": "0.3 1.2em",
+    "15": "0.3em 1.2em",
     "9999": "0.5em 2em"
 };
 var tabInnerPadding = tabInnerPaddings[boxCorners];
@@ -145,12 +152,6 @@ var tabInnerPadding = tabInnerPaddings[boxCorners];
             max-height: 1000px;
         }
         #persoo--<%= offerID %> .persoo--sidebox__scrollWrapper {
-            <% var boxShadowSizesInPx = {
-                "none": 0,
-                "low": 6,
-                "high": 12
-            };
-            var boxShadowSize = boxShadowSizesInPx[boxShadow]; %>
             border-radius: <%= position === "left" ? "0 0 " + boxCorners + "px 0" : "0 0 0 " + boxCorners + "px" %>;
             border: <%= borderSize %>px solid <%= borderColor %>;
             box-shadow: <%= boxShadowColor %> 0px <%= boxShadowSize / 2 %>px <%= boxShadowSize %>px;
