@@ -166,6 +166,7 @@ All widgets are located at `template` directory. For each widget, there is sub-d
 
    * **index.json** -- json with widget configuration, only main template field is empty (this field is added during build, because we keep widget's html source code in natural form in file template.html, not in JSON, on one line with escaped new lines and quotes)
    * **template.html** -- main template as html string with EJS
+   * **defaultFieldValues.json** -- map with field ids and default values to override default values given in index.json (Note: some templates are generated from templateParts with the same fields, but you want to have different defaults for each content template, i.e. different message text for pop-up and info-bar)
 
 
 To build all templates run

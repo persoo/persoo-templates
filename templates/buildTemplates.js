@@ -5,9 +5,27 @@ var outputDir = currentDir + '/../build/';
 
 var allTemplatesJSON = {};
 
-function addTemplate(id, json, templateHTML) {
+function addTemplate(id, json, templateHTML, defaultValues) {
     allTemplatesJSON[id] = json;
     allTemplatesJSON[id].template = templateHTML.replace(/@@childTemplate/mi, '');
+
+    // override default values in original fields
+    var fields = allTemplatesJSON[id].fields;
+    for (var fieldID in defaultValues) {
+        if (defaultValues.hasOwnProperty(fieldID)) {
+            var found = false;
+            for (var i = 0; i < fields.length; i++ ) {
+                if (fields[i].id == fieldID) {
+                    fields[i].defaultValue = defaultValues[fieldID];
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                console.log("Template \"" + id + "\" contains default value for non-existing field \"" + fieldID + "\"");
+            }
+        }
+    }
 }
 
 /** Read the file as string a replace
@@ -39,8 +57,31 @@ function resolveIncludesInFile(fileAsString, parentFileName) {
     return lines.join('\n');
 }
 
+function parseTemplateJSON(jsonString, templateID, filename) {
+    try {
+        return JSON.parse(jsonString);
+    } catch(err) {
+        console.error("Error when processing template '" + templateID + "': cannot parse JSON: " + filename);
+    };
+    return {};
+}
+
+function readTemplateFile(dirpath, filename, templateID) {
+    try {
+        return fs.readFileSync(dirpath + '/' + filename).toString();
+    } catch(err) {
+        console.error("Error when processing template '" + templateID + "': cannot read " + filename);
+    };
+    return "";
+}
+
+var INDEX_JSON = "index.json";
+var DEFAULT_FIELD_VALUES_JSON = "defaultFieldValues.json";
+var TEMPLATE_JSON = "template.html";
+
 function processAllTemplatesInDir(addTemplate) {
     var fileList = fs.readdirSync(currentDir);
+
     for (var i = 0; i < fileList.length; i++) {
         var dirpath = currentDir + '/' + fileList[i]
         var stats = fs.statSync(dirpath);
@@ -49,26 +90,21 @@ function processAllTemplatesInDir(addTemplate) {
             console.log("Adding template:" + id);
 
             // read template resources from files
-            try {
-                var jsonString = fs.readFileSync(dirpath + '/index.json').toString();
-                var html = fs.readFileSync(dirpath + '/template.html').toString();
-            } catch(err) {
-                console.error("Error when processing template '" + id + "': cannot read index.json or template.html");
-            };
+            var jsonString = readTemplateFile(dirpath, INDEX_JSON, id);
+            var defaultValuesString = readTemplateFile(dirpath, DEFAULT_FIELD_VALUES_JSON, id);
+            var html = readTemplateFile(dirpath, TEMPLATE_JSON, id);
 
             // resolve included files (@@include)
-            jsonString = resolveIncludesInFile(jsonString, "index.json");
-            html = resolveIncludesInFile(html, "template.html");
+            jsonString = resolveIncludesInFile(jsonString, INDEX_JSON);
+            defaultValuesString = resolveIncludesInFile(defaultValuesString, DEFAULT_FIELD_VALUES_JSON);
+            html = resolveIncludesInFile(html, TEMPLATE_JSON);
 
             // parse JSON
-            try {
-                var json = JSON.parse(jsonString);
-            } catch(err) {
-                console.error("Error when processing template '" + id + "': cannot parse JSON");
-            };
+            var json = parseTemplateJSON(jsonString, id, INDEX_JSON);
+            var defaultValues = parseTemplateJSON(defaultValuesString, id, "defaultFieldValues.json");
 
             // add template to output
-            addTemplate(id, json, html);
+            addTemplate(id, json, html, defaultValues);
         }
     }
 }
