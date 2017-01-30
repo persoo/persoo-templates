@@ -159,7 +159,7 @@ Building blocks are having classes like `persoo-block`, `persoo-block--cta`, `pe
 In this project, we also provide a few basic templates for Persoo offers. You can use them as inspiration for creating your own persoo templates. Just fork this repository, add new templates and keep them in your git repository.
 
 ### Template source files
-All widgets are located at `template` directory. For each widget, there is sub-directory whose name is templateID. Directory contains two files
+All widgets are located at `template` directory. For each widget, there is sub-directory whose name is templateID. Directory contains files
 
     templates/<templateID>/index.json
     templates/<templateID>/template.html
