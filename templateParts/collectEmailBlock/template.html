@@ -21,26 +21,26 @@
     >
         <%= collectEmailThankYouMessage %>
     </a>
+    <script>
+        function persoo_submit_email_<%= offerID %>() {
+            var elem = document.getElementById("persoo--<%= offerID %>__form__email");
+            var email = elem.value.replace(/^\s*/,'').replace(/\s*$/,'');
+            try {
+                if (!email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+                    /* invalid email address */
+                    elem.style.border = "3px solid red";
+                } else {
+                    /* submit */
+                    console.log('Persoo: submitting email ' + email);
+                    window.persoo('send','submit', {offerID: "<%= offerID %>", email: email});  // TODO use callback for confirmation?
+
+                    document.getElementById("persoo--<%= offerID %>__form").style.display = "none";
+                    document.getElementById("persoo--<%= offerID %>__thank-you").style.display = "inline-block";
+                }
+            } catch(err) {}
+
+            return false;
+        }
+        document.getElementById("persoo--<%= offerID %>__form").onsubmit = persoo_submit_email_<%= offerID %>;
+    </script>
 </div>
-<script>
-    function persoo_submit_email_<%= offerID %>() {
-        var elem = document.getElementById("persoo--<%= offerID %>__form__email");
-        var email = elem.value.replace(/^\s*/,'').replace(/\s*$/,'');
-        try {
-            if (!email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
-                /* invalid email address */
-                elem.style.border = "3px solid red";
-            } else {
-                /* submit */
-                console.log('Persoo: submitting email ' + email);
-                window.persoo('send','submit', {offerID: "<%= offerID %>", email: email});  // TODO use callback for confirmation?
-
-                document.getElementById("persoo--<%= offerID %>__form").style.display = "none";
-                document.getElementById("persoo--<%= offerID %>__thank-you").style.display = "inline-block";
-            }
-        } catch(err) {}
-
-        return false;
-    }
-    document.getElementById("persoo--<%= offerID %>__form").onsubmit = persoo_submit_email_<%= offerID %>;
-</script>

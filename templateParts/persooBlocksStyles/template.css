@@ -1,13 +1,88 @@
+/* reset css inside */
+.persoo--widget__content {
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+.persoo--widget__content *,
+.persoo--widget__content p,
+.persoo--widget__content a,
+.persoo--widget__content strong,
+.persoo--widget__content em,
+.persoo--widget__content span,
+.persoo--widget__content ul,
+.persoo--widget__content li,
+.persoo--widget__content input,
+.persoo--widget__content button {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+}
+.persoo--widget__content h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+.persoo--widget__content h2 {
+    font-size: 1.5em;
+    margin: 0.83em 0;
+}
+.persoo--widget__content h3 {
+    font-size: 1.17em;
+    margin: 1em 0;
+}
+.persoo--widget__content h4 {
+    font-size: 1em;
+    margin: 1.33em 0;
+}
+.persoo--widget__content hr {
+    border: 0;
+    border-top: 1px solid .eee;
+    border-bottom: 1px solid .fff;
+}
+.persoo--widget__content input {
+    padding: 4px 6px;
+    margin-right: 0px;
+}
+.persoo--widget__content p {
+    margin-bottom: 10px;
+}
+.persoo--widget__content strong {
+    font-weight: bold;
+}
+.persoo--widget__content em {
+    font-style: italic;
+    font-family: inherit;
+}
+.persoo--widget__content input {
+    margin-right: 0;
+}
+.persoo--widget__content input[type="text"] {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+       -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+       -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+         -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+            transition: border linear 0.2s, box-shadow linear 0.2s;
+    display: inline-block;
+    float: none;
+    vertical-align: middle;
+}
+
+/* persoo block styles */
 .persoo-block {
     margin-bottom: 10px;
+}
+.persoo--widget__content > div:last-child {
+    margin-bottom: 0 !important;
 }
 
 .persoo--widget .persoo-block--separator {
     position: relative;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
-/* TODO style all posible form fields */
 #persoo--<%= offerID %> input[type="submit"],
 #persoo--<%= offerID %> .persoo-block--collect-email__form__email,
 #persoo--<%= offerID %> .persoo-block--collect-email__form__submit,
@@ -54,65 +129,4 @@
 .persoo--widget__content img:not(.persoo-block) {
     max-width: 100%;
     max-height: 100%;
-}
-
-/* reset css inside */
-.persoo--widget__content {
-    word-wrap: break-word;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
-}
-.persoo--widget__content *,
-.persoo--widget__content p,
-.persoo--widget__content a,
-.persoo--widget__content strong,
-.persoo--widget__content em,
-.persoo--widget__content span,
-.persoo--widget__content ul,
-.persoo--widget__content li,
-.persoo--widget__content input,
-.persoo--widget__content button {
-    margin: 0;
-    padding: 0;
-    font-family: inherit;
-}
-.persoo--widget__content h1 {
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 41.59375px;
-}
-.persoo--widget__content hr {
-    border: 0;
-    border-top: 1px solid .eee;
-    border-bottom: 1px solid .fff;
-}
-.persoo--widget__content input {
-    padding: 4px 6px;
-    margin-right: 0px;
-}
-.persoo--widget__content p {
-    margin-bottom: 10px;
-}
-.persoo--widget__content strong {
-    font-weight: bold;
-}
-.persoo--widget__content em {
-    font-style: italic;
-    font-family: inherit;
-}
-.persoo--widget__content input {
-    margin-right: 0;
-}
-.persoo--widget__content input[type="text"] {
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-       -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-       -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-         -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-            transition: border linear 0.2s, box-shadow linear 0.2s;
-    display: inline-block;
-    float: none;
-    vertical-align: middle;
 }

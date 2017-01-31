@@ -200,8 +200,7 @@ function printCSSProps(obj) {
         #persoo--<%= offerID %> .persoo--popup__box h6 {
             color: <%= textColor %>;
         }
-        .persoo--popup__wrapper > div:last-child,
-        .persoo--popup__content > div:last-child {
+        .persoo--popup__wrapper > div:last-child {
             margin-bottom: 0 !important;
         }
         .persoo--popup__wrapper {
@@ -372,13 +371,6 @@ function printCSSProps(obj) {
                 transition: all <%= animationDurationInSec %> ease;
             }
         <% } %>
-
-        /* reset css inside content */
-        #persoo--<%= offerID %>__content h1,
-        #persoo--<%= offerID %>__content p {
-            font: <%= textFont %>;
-            color: <%= textColor %>;
-        }
 
     </style>
     <style type="text/css">

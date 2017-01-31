@@ -3,7 +3,7 @@
     "name": "Message (Rich Text)",
     "group": "richTextBlock",
     "type": "richtext",
-    "defaultValue": "<div style=\"margin-bottom: 15px;\">\n    <img src=\"//s3-eu-west-1.amazonaws.com/cz.persoo.images/sample-popup-image-shoes.png\"\n         style=\"display: block; margin: auto; margin-bottom:10px;max-width:100%;\">\n</div>\n<div style=\"line-height: 20px;min-height: 30px;margin-bottom: 15px;\">\n  <p style=\"text-align:center;margin-top:30px;font-size: large\">\n   We just received our new product.<br>\n   There is a limited amount, go take a look  now!</p>\n</div>",
+    "defaultValue": "<div>\n    <img src=\"//s3-eu-west-1.amazonaws.com/cz.persoo.images/sample-popup-image-shoes.png\">\n</div>\n<h1>H1</h1>\n<h2>H2</h2>\n<h3>H3</h3>\n<p>paragraph text paragraph text paragraph text</p>\n<p>paragraph text paragraph text paragraph text</p>",
     "condition": {
         "fieldID": "innerContentType",
         "operator": "match",
