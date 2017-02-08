@@ -1,0 +1,21 @@
+{
+    "datasetsCount": 2,
+
+    "dataset1Algorithm": "f645379a715b4b189eff1c14805e9f6e",
+    "dataset1MaxResultsCount": 6,
+    "dataset1HeaderTemplate": "PRODUCTS matching '$query'",
+    "dataset1HitTemplate": "",
+    "dataset1FooterTemplate": "Found '$count' products matching '$query'",
+    "dataset1EmptyTemplate": "Nothing found for '$query'",
+
+    "dataset2Algorithm": "f645379a715b4b189eff1c14805e9f6e",
+    "dataset2MaxResultsCount": 5,
+    "dataset2HeaderTemplate": "CATEGORIES",
+    "dataset2HitTemplate": "function (data) { return data.hit.title ? data.highlightQuery(data.hit.title) : ''; }",
+    "dataset2FooterTemplate": "",
+    "dataset2EmptyTemplate": "",
+
+    "layout": "nextToEachOther",
+
+    "borderColor": "#aaa"
+}

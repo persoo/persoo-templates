@@ -6,7 +6,7 @@
 },
 {
     "id": "borderSize",
-    "name": "Border size",
+    "name": "Border Size",
     "group": "design",
     "type": "number",
     "defaultValue": 1

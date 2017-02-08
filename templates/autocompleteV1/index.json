@@ -1,0 +1,503 @@
+{
+    "class": "webWidget",
+    "name": "Autocomplete",
+    "tags": {
+        "imageLink": null,
+        "description": "Insert or activate existing INPUT with autocomplete."
+    },
+    "location": "autocomplete",
+    "fields": [
+        {
+            "id": "section_inputSource",
+            "name": "Input Source",
+            "group": "settings",
+            "type": "section"
+        },
+        {
+            "id": "inputSource",
+            "name": "Source Input Element",
+            "group": "settings",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Active existing INPUT",
+                    "value": "activateExisting"
+                },
+                {
+                    "label": "Insert new INPUT",
+                    "value": "insertNew"
+                }
+            ],
+            "defaultValue": "insertNew"
+        },
+        {
+            "id": "inputSelector",
+            "name": "Source Input Selector",
+            "group": "settings",
+            "type": "text",
+            "defaultValue": "#input-id",
+            "condition": {
+                "fieldID": "inputSource",
+                "operator": "==",
+                "fieldValue": "activateExisting"
+            }
+        },
+        {
+            "id": "searchLink",
+            "name": "Search Link (with $query)",
+            "group": "settings",
+            "type": "text",
+            "defaultValue": "/searchResults?q=$query"
+        },
+
+        {
+            "id": "section_layout",
+            "name": "Layout",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "layout",
+            "name": "Layout",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Dataset below each other",
+                    "value": "belowEachOther"
+                },
+                {
+                    "label": "Datasets next to each other",
+                    "value": "nextToEachOther"
+                }
+            ],
+            "defaultValue": "belowEachOther"
+        },
+
+        {
+            "id": "section_autocompleteOptions",
+            "name": "Autocomplete Options",
+            "group": "settings",
+            "type": "section"
+        },
+        {
+            "id": "datasetsCount",
+            "name": "Datasets Count",
+            "group": "settings",
+            "type": "number",
+            "defaultValue": 2
+        },
+        {
+            "id": "minChars",
+            "name": "Minimum Characters in Query to display autocomplete",
+            "group": "settings",
+            "type": "number",
+            "defaultValue": 1
+        },
+        {
+            "id": "requestThrottlingInMs",
+            "name": "Request Throttling in ms",
+            "group": "settings",
+            "type": "number",
+            "defaultValue": 200
+        },
+        {
+            "id": "showEmptyResults",
+            "name": "Show with Empty Results",
+            "group": "settings",
+            "type": "checkbox",
+            "defaultValue": false
+        },
+        {
+            "id": "openOnFocus",
+            "name": "Open On Focus",
+            "group": "settings",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "closeOnBlur",
+            "name": "Close On Blur (false is usefull for debug)",
+            "group": "settings",
+            "type": "checkbox",
+            "defaultValue": false
+        },
+        {
+            "id": "offsetLeft",
+            "name": "Offset Left (relative to source input)",
+            "group": "settings",
+            "type": "number",
+            "defaultValue": 0
+        },
+        {
+            "id": "offsetTop",
+            "name": "Offset Top (relative to source input)",
+            "group": "settings",
+            "type": "number",
+            "defaultValue": 0
+        },
+        {
+            "id": "width",
+            "name": "Width in px or 'input' for source input element width, or 'null' for not inline css",
+            "group": "settings",
+            "type": "text",
+            "defaultValue": "600"
+        },
+        {
+            "id": "autocompleteID",
+            "name": "Autocomplete ID (for CSS classes)",
+            "group": "settings",
+            "type": "text",
+            "defaultValue": "autocomplete1"
+        },
+
+        {
+            "id": "dataset1Algorithm",
+            "name": "Persoo algorithm ID",
+            "group": "dataset1",
+            "type": "text",
+            "defaultValue": "f645379a715b4b189eff1c14805e9f6e",
+            "condition": {
+                "fieldID": "datasetsCount",
+                "operator": ">=",
+                "fieldValue": 1
+            }
+        },
+        {
+            "id": "dataset1MaxResultsCount",
+            "name": "Max Results Count",
+            "group": "dataset1",
+            "type": "number",
+            "defaultValue": 5,
+            "condition": {
+                "fieldID": "datasetsCount",
+                "operator": ">=",
+                "fieldValue": 1
+            }
+        },
+        {
+            "id": "dataset1ShowWhenEmptyResults",
+            "name": "Show Dataset with Empty Results",
+            "group": "dataset1",
+            "type": "checkbox",
+            "defaultValue": false,
+            "condition": {
+                "fieldID": "datasetsCount",
+                "operator": ">=",
+                "fieldValue": 1
+            }
+        },
+        {
+            "id": "section_templates_dataset1",
+            "name": "Templates",
+            "group": "dataset1",
+            "type": "section"
+        },
+        {
+            "id": "dataset1HeaderTemplate",
+            "name": "Header (with $query, $count placeholders)",
+            "group": "dataset1",
+            "type": "text",
+            "defaultValue": "PRODUCTS matching '$query'",
+            "condition": {
+                "fieldID": "datasetsCount",
+                "operator": ">=",
+                "fieldValue": 1
+            }
+        },
+        {
+            "id": "dataset1HitTemplate",
+            "name": "Custom Hit (js function)",
+            "group": "dataset1",
+            "type": "javascript",
+            "defaultValue": "",
+            "condition": {
+                "fieldID": "datasetsCount",
+                "operator": ">=",
+                "fieldValue": 1
+            }
+        },
+        {
+             "id": "dataset1FooterTemplate",
+             "name": "Footer (with $query, $count placeholders)",
+             "group": "dataset1",
+             "type": "text",
+             "defaultValue": "Found '$count' products matching '$query'",
+             "condition": {
+                 "fieldID": "datasetsCount",
+                 "operator": ">=",
+                 "fieldValue": 1
+             }
+        },
+        {
+             "id": "dataset1EmptyTemplate",
+             "name": "Empty (with $query placeholders)",
+             "group": "dataset1",
+             "type": "text",
+             "defaultValue": "Nothing found for '$query'",
+             "condition": {
+                 "operator": "and",
+                 "children": [
+                     {
+                         "fieldID": "datasetsCount",
+                         "operator": ">=",
+                         "fieldValue": 1
+                     },
+                     {
+                         "fieldID": "showEmptyResults",
+                         "operator": "==",
+                         "fieldValue": true
+                     }
+                 ]
+             }
+        },
+        {
+            "id": "dataset2Algorithm",
+            "name": "Persoo algorithm ID",
+            "group": "dataset2",
+            "type": "text",
+            "defaultValue": "f645379a715b4b189eff1c14805e9f6e",
+            "condition": {
+             "fieldID": "datasetsCount",
+             "operator": ">=",
+             "fieldValue": 2
+            }
+        },
+        {
+            "id": "dataset2MaxResultsCount",
+            "name": "Maximum Results Count",
+            "group": "dataset2",
+            "type": "number",
+            "defaultValue": 5,
+            "condition": {
+                "fieldID": "datasetsCount",
+                "operator": ">=",
+                "fieldValue": 2
+            }
+        },
+        {
+            "id": "dataset2ShowWhenEmptyResults",
+            "name": "Show Dataset with Empty Results",
+            "group": "dataset2",
+            "type": "checkbox",
+            "defaultValue": false,
+            "condition": {
+                "fieldID": "datasetsCount",
+                "operator": ">=",
+                "fieldValue": 2
+            }
+        },
+
+        {
+            "id": "section_templates_dataset2",
+            "name": "Templates",
+            "group": "dataset2",
+            "type": "section"
+        },
+        {
+            "id": "dataset2HeaderTemplate",
+            "name": "Header (with $query, $count placeholders)",
+            "group": "dataset2",
+            "type": "text",
+            "defaultValue": "CATEGORIES matching '$query'",
+            "condition": {
+             "fieldID": "datasetsCount",
+             "operator": ">=",
+             "fieldValue": 2
+            }
+        },
+        {
+            "id": "dataset2HitTemplate",
+            "name": "Custom Hit (js function)",
+            "group": "dataset2",
+            "type": "javascript",
+            "defaultValue": "function (data) { return data.hit.title ? data.highlightQuery(data.hit.title) : ''; }",
+            "condition": {
+             "fieldID": "datasetsCount",
+             "operator": ">=",
+             "fieldValue": 2
+            }
+        },
+        {
+            "id": "dataset2FooterTemplate",
+            "name": "Footer (with $query, $count placeholders)",
+            "group": "dataset2",
+            "type": "text",
+            "defaultValue": "",
+            "condition": {
+              "fieldID": "datasetsCount",
+              "operator": ">=",
+              "fieldValue": 2
+            }
+        },
+        {
+             "id": "dataset2EmptyTemplate",
+             "name": "Empty template (with $query placeholders)",
+             "group": "dataset2",
+             "type": "text",
+             "defaultValue": "",
+             "condition": {
+                 "operator": "and",
+                 "children": [
+                     {
+                         "fieldID": "datasetsCount",
+                         "operator": ">=",
+                         "fieldValue": 2
+                     },
+                     {
+                         "fieldID": "showEmptyResults",
+                         "operator": "==",
+                         "fieldValue": true
+                     }
+                 ]
+             }
+        },
+
+        @@include templateParts/persooBorderStyles/fields.json
+
+        {
+            "id": "section_colors_dataset1",
+            "name": "Colors",
+            "group": "dataset1",
+            "type": "section"
+        },
+        {
+            "id": "dataset1BackgroundColor",
+            "name": "Background Color",
+            "group": "dataset1",
+            "type": "color",
+            "defaultValue": "#fff"
+        },
+        {
+            "id": "dataset1TextColor",
+            "name": "Text Color",
+            "group": "dataset1",
+            "type": "color",
+            "defaultValue": "#333"
+        },
+        {
+            "id": "dataset1HighlightTextColor",
+            "name": "Highlighted Text Color",
+            "group": "dataset1",
+            "type": "color",
+            "defaultValue": "#498fdb"
+        },
+        {
+            "id": "dataset1SelectedBackgroundColor",
+            "name": "Selected Item Background Color",
+            "group": "dataset1",
+            "type": "color",
+            "defaultValue": "#f0f0f0"
+        },
+        {
+            "id": "dataset1HeadlineBackgroundColor",
+            "name": "Headline Background Color",
+            "group": "dataset1",
+            "type": "color",
+            "defaultValue": "#f0f0f0"
+        },
+        {
+            "id": "dataset1HeadlineTextColor",
+            "name": "Headline Text Color",
+            "group": "dataset1",
+            "type": "color",
+            "defaultValue": "#333"
+        },
+
+        {
+            "id": "section_colors_dataset2",
+            "name": "Colors",
+            "group": "dataset2",
+            "type": "section"
+        },
+        {
+            "id": "dataset2BackgroundColor",
+            "name": "Background Color",
+            "group": "dataset2",
+            "type": "color",
+            "defaultValue": "#224162"
+        },
+        {
+            "id": "dataset2TextColor",
+            "name": "Text Color",
+            "group": "dataset2",
+            "type": "color",
+            "defaultValue": "#fff"
+        },
+        {
+            "id": "dataset2HighlightTextColor",
+            "name": "Highlighted Text Color",
+            "group": "dataset2",
+            "type": "color",
+            "defaultValue": "#ddd"
+        },
+        {
+            "id": "dataset2SelectedBackgroundColor",
+            "name": "Selected Item Background Color",
+            "group": "dataset2",
+            "type": "color",
+            "defaultValue": "#498fdb"
+        },
+        {
+            "id": "dataset2HeadlineBackgroundColor",
+            "name": "Headline Background Color",
+            "group": "dataset2",
+            "type": "color",
+            "defaultValue": "#224162"
+        },
+        {
+            "id": "dataset2HeadlineTextColor",
+            "name": "Headline Text Color",
+            "group": "dataset2",
+            "type": "color",
+            "defaultValue": "#fff"
+        },
+
+        {
+            "id": "section_customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "css",
+            "defaultValue": "/* your own css rules, i.e\n.persoo-autocompleteDataset__hits__hit__img {\n    display: none;\n}\n*/"
+        },
+        {
+            "id": "section_customJS",
+            "name": "Custom Javascript",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "customJS",
+            "name": "Custom Javascript",
+            "group": "design",
+            "type": "javascript",
+            "defaultValue": "/* your own javascript */"
+        }
+    ],
+    "groups": [
+        {
+            "id": "dataset1",
+            "name": "Dataset 1"
+        },
+        {
+            "id": "dataset2",
+            "name": "Dataset 2"
+        },
+        {
+            "id": "settings",
+            "name": "Settings"
+        },
+        {
+            "id": "design",
+            "name": "Design"
+        }
+    ],
+    "template": "Note: this will be replaced by content of template.html",
+    "minScenariosCount": 0
+}

@@ -1,0 +1,323 @@
+<%
+    var offerID = offerID || 'randomOfferID';
+    var priceSufix = '&nbsp;Kč';
+
+    function printTemplateFunctionsAsJSON(templates) {
+        var html = "{";
+        for (var key in templates) {
+            if (html != "{") {
+                 html += ',';
+            }
+            var templateFunction = templates[key];
+            if (typeof templateFunction == 'function') {
+                templateFunction = templateFunction.toString();
+            }
+            html += key + ": " + templateFunction;
+        }
+        return html + "}";
+    }
+
+    function renderTemplateFunction(pattern) {
+        return (function (data) {
+            return "$pattern".replace(/\$query/g, data.query).replace(/\$count/g, data.count);
+        }).toString().replace(/\$pattern/, pattern);
+    };
+    function renderTemplateFunctionIfNonEmpty(pattern) {
+        return (function (data) {
+            if (data.isEmpty) {
+                return "";
+            } else {
+                return "$pattern".replace(/\$query/g, data.query).replace(/\$count/g, data.count);
+            }
+        }).toString().replace(/\$pattern/, pattern);
+    };
+%>
+<div>
+    <% /* prerequisities to see something in the preview */ %>
+    <%
+       var debug = false;
+       if (debug) {
+    %>
+    <script type="text/javascript">
+          /* delete preview mock and load real persoo.js */
+          delete window.persoo;
+
+          /* Persoo account for testing real requests */
+          dataLayer = [{
+              pageType: 'search'
+          }];
+          var persooConfig = {
+              apikey: '41kifbkoqit4dcr6c7do9h3f',
+              persooName: 'persoo',
+              dataLayerName: 'dataLayer',
+              settings_tolerance: 2000,  // for loading persoo.js
+              personalizations_tolerance: 2500,    // for showing personalizations
+              rtpProtocol: 'http:'
+          };
+          /*! Persoo js client 2015-03-16 */
+          var persooLoader=function(a,b,c,d,e){var f=d.persooName,g="_persoo_hide_body";return{hideBody:
+          function(){var b=a.createElement("style"),c="body{opacity:0 !important;filter:alpha(opacity=0)"
+          +" !important;background:none !important;}",d=a.getElementsByTagName("head")[0];b.setAttribute(
+          "id",g),b.setAttribute("type","text/css"),b.styleSheet?b.styleSheet.cssText=c:b.appendChild(
+          a.createTextNode(c)),d.appendChild(b)},finish:function(){if(!c){c=!0;var b=a.getElementById(g);b&&
+          b.parentNode.removeChild(b)}},loadScript:function(b){var c=a.createElement("script");c.src=b,c.type
+          ="text/javascript",c.onerror=function(){persooLoader.finish()},a.getElementsByTagName("head")[0
+          ].appendChild(c)},init:function(){b[f]=b[f]||function(){(b[f].q=b[f].q||[]).push([].slice.call(
+          arguments))},b[f].l=1*new Date,b[f].apikey=d.apikey,b[f].dataLayerName=d.dataLayerName;var c=
+          a.cookie.match("(^|; )"+e+"=([^;]*)"),g=location.search.match("[?&]"+e+"=([^&]*)"),h=g?g[1]:c?c[2]:
+          "p";d.settings_tolerance>0&&(setTimeout(this.finish,d.settings_tolerance),this.hideBody());var i=(
+          d.scriptsHostname||"//scripts.persoo.cz/")+d.apikey+"/"+h;this.loadScript(i+"/actions.js"),
+          this.loadScript(i+"/persoo.js")}}}(document,window,!1,persooConfig,"persooEnvironment");persooLoader.init();
+    </script>
+
+    <% } %>
+    <% /* real template source code */ %>
+
+    <style>
+        #<%= autocompleteID %>.persoo-autocompleteDropdown__root {
+            overflow-y: auto;
+            max-height: 100%;
+
+            @@include templateParts/persooBorderStyles/template.css
+        }
+
+        .persoo-autocompleteDataset__header,
+        .persoo-autocompleteDataset__footer,
+        .persoo-autocompleteDataset__hits__hit,
+        .persoo-autocompleteDataset__empty {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 10px 3% 10px 3%;
+        }
+        .persoo-autocompleteDataset__header {
+            font-weight: bold;
+        }
+        .persoo-autocompleteDataset__hits__hit {
+            cursor: pointer;
+            line-height: 23px;
+            overflow: hidden;
+            font-size: 1.0em;
+            text-align: left;
+        }
+        #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit,
+        #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit a,
+        #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit a:hover {
+            text-decoration: none;
+        }
+
+
+        /* common hit styles */
+        .persoo-autocompleteDataset__hits__hit__title {
+            padding-left: 5px;
+        }
+        .persoo-autocompleteDataset__hits__hit__price {
+            font-weight: bold;
+        }
+
+        /* colors */
+        #<%= autocompleteID %> .persoo-autocompleteDataset-1__root {
+            background-color: <%= dataset1BackgroundColor %>;
+        }
+        #<%= autocompleteID %> .persoo-autocompleteDataset-1__header {
+            color: <%= dataset1HeadlineTextColor %>;
+            background-color: <%= dataset1HeadlineBackgroundColor %>;
+        }
+        #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits__hit.persoo-selected {
+            background-color: <%= dataset1SelectedBackgroundColor %>;
+        }
+        #<%= autocompleteID %> .persoo-autocompleteDataset-1__root,
+        #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits a,
+        #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits a:hover {
+            color: <%= dataset1TextColor %>;
+        }
+        #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits__hit b {
+            font-weight: bold;
+            color: <%= dataset1HighlightTextColor %>;
+        }
+
+        <% if (datasetsCount > 1) { %>
+
+            #<%= autocompleteID %> .persoo-autocompleteDataset-2__root {
+                background-color: <%= dataset2BackgroundColor %>;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset-2__header {
+                color: <%= dataset2HeadlineTextColor %>;
+                background-color: <%= dataset2HeadlineBackgroundColor %>;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset-2__hits__hit.persoo-selected {
+                background-color: <%= dataset2SelectedBackgroundColor %>;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset-2__root,
+            #<%= autocompleteID %> .persoo-autocompleteDataset-2__hits a,
+            #<%= autocompleteID %> .persoo-autocompleteDataset-2__hits a:hover {
+                color: <%= dataset2TextColor %>;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset-2__hits__hit b {
+                font-weight: bold;
+                color: <%= dataset2HighlightTextColor %>;
+            }
+
+        <% } %>
+
+        /* layouts */
+        <% if (layout == "belowEachOther") { %>
+            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit a {
+                position: relative;
+                display: table;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit__img,
+            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit__title,
+            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit__price {
+                display: table-cell;
+                vertical-align: middle;
+                text-overflow: ellipsis;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit__img {
+                width: 64px;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit img {
+                max-width: 64px;
+                max-height: 64px;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit__price {
+                text-align: right;
+                width: 8ex;
+            }
+
+        <% } else if (layout == "nextToEachOther") { %>
+            #<%= autocompleteID %>.persoo-autocompleteDropdown__root {
+                display: flex;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset-2__root {
+                flex: 1;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset-1__root {
+                flex: 2;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits__hit {
+                box-sizing: content-box;
+                flex: 1;
+                width: auto;
+                min-width: 100px;
+                max-width: 150px;
+                min-height: 160px;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits__hit a {
+                display: flex;
+                flex-direction: column;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits__hit a div {
+                vertical-align: middle;
+                text-align: center;
+            }
+            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit img {
+                max-width: 100px;
+                max-height: 100px;
+            }
+        <% } %>
+    </style>
+    <style type="text/css">
+        <%= customCSS %>
+    </style>
+
+    <% if (inputSource == 'insertNew') {
+        var inputElemID = 'persoo-' + offerID + '__input';
+        var submitElemID = 'persoo-' + offerID + '__submit';
+        inputSelector = '#' + inputElemID;
+    %>
+        <div class="persooAutocomplete__input">
+            <input id="<%= inputElemID %>" type="search">
+            <input id="<%= submitElemID %>" type="submit" value="Search">
+        </div>
+        <script>
+            document.getElementById('<%= submitElemID %>').onsubmit = function() {
+                var query = document.getElementById('<%= inputElemID %>').value;
+                console.log("You searched form query '" + query + "'");
+                document.location.href = '<%= searchLink %>'.replace('$query', query);
+            };
+        </script>
+    <% }  %>
+
+    <script>
+        var persoo_<%= offerID %> = (function () {
+            function initAutocomplete() {
+                var myAutocomplete = new PersooAutocomplete('<%= inputSelector %>', {
+                    autocompleteID: "<%= autocompleteID %>",
+                    datasets: [
+                        <% if (datasetsCount >= 2) { %>
+                            {
+                                id: "2",
+                                source: window.persoo.getSuggestSource('<%= dataset2Algorithm %>', <%= dataset2MaxResultsCount %>),
+                                showWhenEmptyResults: <%= dataset1ShowWhenEmptyResults %>,
+                                <%
+                                   var templates2 = {};
+                                   if (dataset2HeaderTemplate) {
+                                       templates2.header = renderTemplateFunction(dataset2HeaderTemplate);
+                                   }
+                                   if (dataset2HitTemplate) {
+                                       templates2.hit = dataset2HitTemplate;
+                                   }
+                                   if (dataset2FooterTemplate) {
+                                       templates2.footer = renderTemplateFunctionIfNonEmpty(dataset2FooterTemplate);
+                                   }
+                                   if (showEmptyResults && dataset2EmptyTemplate) {
+                                       templates2.empty = renderTemplateFunction(dataset2EmptyTemplate);
+                                   }
+                                %>
+                                templates: <%= printTemplateFunctionsAsJSON(templates2) %>
+                            },
+                        <% } %>
+                        {
+                            id: "1",
+                            source: window.persoo.getSuggestSource('<%= dataset1Algorithm %>', <%= dataset1MaxResultsCount %>),
+                            showWhenEmptyResults: <%= dataset1ShowWhenEmptyResults %>,
+                            <%
+                            var templates1 = {};
+                            if (dataset1HeaderTemplate) {
+                                templates1.header = renderTemplateFunction(dataset1HeaderTemplate);
+                            }
+                            if (dataset1HitTemplate) {
+                                templates1.hit = dataset1HitTemplate;
+                            }
+                            if (dataset1FooterTemplate) {
+                                templates1.footer = renderTemplateFunctionIfNonEmpty(dataset1FooterTemplate);
+                            }
+                            if (showEmptyResults && dataset1EmptyTemplate) {
+                                templates1.empty = renderTemplateFunction(dataset1EmptyTemplate);
+                            }
+                            %>
+                            templates: <%= printTemplateFunctionsAsJSON(templates1) %>
+                        },
+                    ],
+                    minChars: <%= minChars %>,
+                    requestThrottlingInMs: <%= requestThrottlingInMs %>,
+                    showEmptyResults: <%= showEmptyResults %>,
+                    openOnFocus: <%= openOnFocus %>,
+                    closeOnBlur: <%= closeOnBlur %>,
+                    offsetLeft: <%= offsetLeft %>,
+                    offsetTop: <%= offsetTop %>,
+                    width: <%= width == 'input' ? '"input"' : parseInt(width) %>,
+                    priceSuffix: "<%= priceSufix.replace("&nbsp;", "\u00A0") %>",
+                    onSelect: function(selectedHit){ // function onSelect(selectedHit) {}
+                        console.log('persooAutocomplete: selected hit is ' + JSON.stringify(selectedHit));
+                    }
+                });
+            }
+            function loadScript(url, onloadFn, errorFn) {var d = document; var s=d.createElement("script");
+                s.src=url,s.type="text/javascript",s.async=true,s.onerror=errorFn,s.onload=onloadFn;
+                d.getElementsByTagName("head")[0].appendChild(s)};
+
+            var acLibLink = "https://scripts.persoo.cz/shared/autocompleteV2/persooAutocomplete.js";
+            loadScript(acLibLink, initAutocomplete, function (){});
+        })();
+    </script>
+    <script type="text/javascript">
+        <%= customJS %>
+    </script>
+</div>

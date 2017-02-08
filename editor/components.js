@@ -304,9 +304,11 @@ module.exports = {
         if (templateStore.currentTemplateID) {
             var previewIframe = document.getElementById('persooPreview');
             var previewDoc = previewIframe.contentWindow.document;
+            var myThis = this;
 
-            previewIframe.contentWindow.persoo = function(){
+            previewIframe.contentWindow.persoo = previewIframe.contentWindow.persoo || function(){
                 console.log('calling persoo(' + (JSON.stringify(Array.prototype.slice.call(arguments))).slice(1,-1) + ')');
+                myThis.handleCallbacksInPersooMock(arguments);
             };
 
             var currentTemplate = templateStore.templates[templateStore.currentTemplateID];
@@ -342,6 +344,33 @@ module.exports = {
                 var product = JSON.parse(JSON.stringify(sampleProduct));
                 product.title += ' ' + i + '.' + j;
                 list.push(product);
+            }
+        }
+    },
+    getSampleProducts: function(count) {
+        var list = [];
+        var sampleProduct = contextStore.getContextField(null, 'productPreviewMockProduct')
+        for (var i = 0; i < count; i++) {
+            var productClone = JSON.parse(JSON.stringify(sampleProduct));
+            productClone.title += ' ' + i;
+            list.push(productClone);
+        }
+        return list;
+    },
+    handleCallbacksInPersooMock: function(persooArgs) {
+        // Return sample products for 'suggest' and 'getAlgorithm' calls
+        if (persooArgs[0] == 'send') {
+            for (var i = 0; i < persooArgs.length; i++) {
+                if (typeof persooArgs[i] == 'function') {
+                    var getSampleProducts = this.getSampleProducts;
+                    setTimeout( function(callback) {
+                        var mockResponse = {
+                            items: getSampleProducts(20)
+                        };
+                        callback(mockResponse);
+                    }, 1, persooArgs[i]);
+                    break;
+                }
             }
         }
     }
