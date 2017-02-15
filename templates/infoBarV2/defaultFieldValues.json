@@ -1,5 +1,5 @@
 {
-    "innerContentType": "richTextAndCollectEmail",
+    "innerContentType": "richTextAndCTA",
     "position": "top",
     "placement": "overlay",
     "showClosingX": true,
@@ -19,7 +19,7 @@
     "boxShadow": "low",
     "boxShadowColor": "#666666",
     "customHTML": "<div>Your HTML code...</div>",
-    "richTextMessage": "  <p style=\"text-align:center;font-size: large\">\n   Get our secret offers as the first one!</p>",
+    "richTextMessage": "New  models 2018 are comming soon. Be the first one to get them! &rangle;",
     "ctaActionType": "button",
     "ctaButtonLabel": "SHOW&nbsp;ME",
     "ctaAction": "redirect",

@@ -1,5 +1,5 @@
 {
-    "innerContentType": "richTextAndCollectEmail",
+    "innerContentType": "richTextAndCTA",
     "tab": "Tab Text",
     "openOn": "hover",
     "position": "right",
@@ -21,7 +21,7 @@
     "textFont": "normal normal 300 medium Arial, Helvetica, sans-serif",
     "tabColor": "#fff",
     "customHTML": "<div>Your HTML code...</div>",
-    "richTextMessage": "<div style=\"margin-bottom: 15px;\">\n    <img src=\"//s3-eu-west-1.amazonaws.com/cz.persoo.images/sample-popup-image-shoes.png\"\n         style=\"display: block; margin: auto; margin-bottom:10px;max-width:100%;\">\n</div>\n<div style=\"line-height: 20px;min-height: 30px;margin-bottom: 15px;\">\n  <p style=\"text-align:center;margin-top:30px;font-size: large\">\n   We just received our new product.<br>\n   There is a limited amount, go take a look  now!</p>\n</div>",
+    "richTextMessage": "We just received new models of your favourite brands!",
     "ctaActionType": "button",
     "ctaButtonLabel": "SHOW&nbsp;ME",
     "ctaAction": "redirect",
