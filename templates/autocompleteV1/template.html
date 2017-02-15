@@ -188,20 +188,26 @@
 
         <% } else if (layout == "nextToEachOther") { %>
             #<%= autocompleteID %>.persoo-autocompleteDropdown__root {
+                display: -webkit-flex;
                 display: flex;
             }
             #<%= autocompleteID %> .persoo-autocompleteDataset-2__root {
+                -webkit-flex: 1;
                 flex: 1;
             }
             #<%= autocompleteID %> .persoo-autocompleteDataset-1__root {
+                -webkit-flex: 2;
                 flex: 2;
             }
             #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits {
+                display: -webkit-flex;
                 display: flex;
+                -webkit-flex-wrap: wrap;
                 flex-wrap: wrap;
             }
             #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits__hit {
                 box-sizing: content-box;
+                -webkit-flex: 1;
                 flex: 1;
                 width: auto;
                 min-width: 100px;
@@ -209,7 +215,9 @@
                 min-height: 160px;
             }
             #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits__hit a {
+                display: -webkit-flex;
                 display: flex;
+                -webkit-flex-direction: column;
                 flex-direction: column;
             }
             #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits__hit a div {
@@ -227,18 +235,19 @@
     </style>
 
     <% if (inputSource == 'insertNew') {
+        var formElemID = 'persoo-' + offerID + '__form';
         var inputElemID = 'persoo-' + offerID + '__input';
         var submitElemID = 'persoo-' + offerID + '__submit';
         inputSelector = '#' + inputElemID;
     %>
-        <div class="persooAutocomplete__input">
-            <input id="<%= inputElemID %>" type="search">
+        <form id="<%= formElemID %>" class="persooAutocomplete_form">
+            <input id="<%= inputElemID %>" type="search" autocomplete="off">
             <input id="<%= submitElemID %>" type="submit" value="Search">
-        </div>
+        </form>
         <script>
-            document.getElementById('<%= submitElemID %>').onsubmit = function() {
+            document.getElementById('<%= formElemID %>').onsubmit = function() {
                 var query = document.getElementById('<%= inputElemID %>').value;
-                console.log("You searched form query '" + query + "'");
+                console.log("You searched for query '" + query + "'");
                 document.location.href = '<%= searchLink %>'.replace('$query', query);
             };
         </script>

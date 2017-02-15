@@ -1,3 +1,20 @@
+<%
+var OPACITY_STEP = 0.25;
+function hoverColor(colorStr) {
+    if (colorStr.indexOf('rgba(') == 0) {
+        var parts = colorStr.split(',');
+        var alpha = parseFloat(parts[3]);
+        alpha = (alpha > 0.5) ? alpha - OPACITY_STEP : alpha + OPACITY_STEP;
+        parts[3] = alpha + ')';
+        return parts.join(',');
+    } else if (colorStr.indexOf('rgb(') == 0) {
+        return colorStr.replace(/^rgb/, 'rgba').replace(/\)$/, ', ' + (1 - OPACITY_STEP) +')');
+    } else {
+        return colorStr + '; opacity:' + (1 - OPACITY_STEP);
+    }
+}
+%>
+
 /* reset css inside */
 .persoo--widget__content {
     word-wrap: break-word;
@@ -83,32 +100,59 @@
     margin-bottom: 10px;
 }
 
-#persoo--<%= offerID %> input[type="submit"],
-#persoo--<%= offerID %> .persoo-block--collect-email__form__email,
-#persoo--<%= offerID %> .persoo-block--collect-email__form__submit,
-#persoo--<%= offerID %> .persoo-block--collect-email__form__thank-you,
-#persoo--<%= offerID %> .persoo-block--cta__link,
-#persoo--<%= offerID %> .persoo-block--cta__coupon {
+.persoo--widget__content input[type="submit"],
+.persoo--widget__content .persoo-block--collect-email__form__email,
+.persoo--widget__content .persoo-block--collect-email__form__submit,
+.persoo--widget__content .persoo-block--collect-email__form__thank-you,
+.persoo--widget__content .persoo-block--cta__link,
+.persoo--widget__content .persoo-block--cta__coupon {
     float: none;
     vertical-align: middle;
-    <%= getButtonAndFormStyle[ctaStyle] %>
     min-height: 22px;
     line-height: 22px;
     padding: 6px 12px;
     margin: 5px 5px;
     word-wrap: normal;
     text-decoration: none;
-    color: <%= ctaButtonTextColor %>;
+    zoom: 1;
+}
+#persoo--<%= offerID %> input[type="submit"],
+#persoo--<%= offerID %> .persoo-block--collect-email__form__submit,
+#persoo--<%= offerID %> .persoo-block--collect-email__form__thank-you,
+#persoo--<%= offerID %> .persoo-block--cta__link,
+#persoo--<%= offerID %> .persoo-block--cta__coupon {
     border-radius: <%= buttonCorners %>px;
     font: <%= ctaButtonTextFont %>;
+    border:  <%= ctaBorderSize %>px solid <%= ctaBorderColor %>;
+    background-color: <%=  (ctaStyle == 'outline') ? "transparent" : ctaButtonColor %>;
+    color: <%= ctaButtonTextColor %>;
+}
+#persoo--<%= offerID %> input[type="submit"]:hover,
+#persoo--<%= offerID %> .persoo-block--collect-email__form__submit:hover,
+#persoo--<%= offerID %> .persoo-block--collect-email__form__thank-you:hover,
+#persoo--<%= offerID %> .persoo-block--cta__link:hover,
+#persoo--<%= offerID %> .persoo-block--cta__coupon:hover {
+    border-color:  <%= hoverColor(ctaBorderColor) %>;
+    background-color: <%=  (ctaStyle == 'outline') ? "transparent" : hoverColor(ctaButtonColor) %>;
+    color: <%= hoverColor(ctaButtonTextColor) %>;
+    -webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+}
+#persoo--<%= offerID %> input[type="text"],
+#persoo--<%= offerID %> .persoo-block--collect-email__form__email {
+    border-radius: <%= buttonCorners %>px;
+    font: <%= ctaButtonTextFont %>;
+    border:  <%= ctaBorderSize %>px solid <%= ctaBorderColor %>;
+    background-color: <%= ctaInputColor %>;
+    color: <%= ctaInputTextColor %>;
 }
 <% if (ctaStyle == "stacked") { %>
+    #persoo--<%= offerID %> input[type="text"],
     #persoo--<%= offerID %> .persoo-block--collect-email__form__email {
         margin-right: 0;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
-        background-color: #fff;
-        color: <%= textColor %>;
     }
     #persoo--<%= offerID %> .persoo-block--collect-email__form__submit {
         margin-left: 0;
@@ -118,7 +162,7 @@
 <% } %>
 
 <%
-    var inputPlaceholderColor = (ctaStyle == "stacked") ? textColor : ctaButtonTextColor;
+    var inputPlaceholderColor = ctaInputTextColor;
     var inputPlaceholderStyle = "opacity: 0.9; color: " + inputPlaceholderColor + ";";
 %>
 #persoo--<%= offerID %> input::-ms-input-placeholder { <%= inputPlaceholderStyle %> }

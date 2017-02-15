@@ -1,6 +1,6 @@
 {
     "id": "section_buttonsAndForms",
-    "name": "Button & Form",
+    "name": "Buttons & Forms",
     "group": "design",
     "type": "section"
 },
@@ -19,11 +19,39 @@
             "value": "outline"
         },
         {
-            "label": "Solid Stacked with White input",
+            "label": "Solid Stacked",
             "value": "stacked"
         }
     ],
     "defaultValue": "solid"
+},
+{
+    "id": "ctaButtonTextColor",
+    "name": "Button Text Color",
+    "group": "design",
+    "type": "color",
+    "defaultValue": "#ffffff"
+},
+{
+    "id": "ctaButtonColor",
+    "name": "Button Background Color",
+    "group": "design",
+    "type": "color",
+    "defaultValue": "#a28c51"
+},
+{
+    "id": "ctaInputTextColor",
+    "name": "Input Text Color",
+    "group": "design",
+    "type": "color",
+    "defaultValue": "#404040"
+},
+{
+    "id": "ctaInputColor",
+    "name": "Input Background Color",
+    "group": "design",
+    "type": "color",
+    "defaultValue": "#ffffff"
 },
 {
     "id": "buttonCorners",
@@ -51,22 +79,22 @@
     "defaultValue": "0"
 },
 {
-    "id": "ctaButtonTextColor",
-    "name": "Button Text Color",
-    "group": "design",
-    "type": "color",
-    "defaultValue": "#ffffff"
-},
-{
-    "id": "ctaButtonColor",
-    "name": "Button Color",
+    "id": "ctaBorderColor",
+    "name": "Border Color",
     "group": "design",
     "type": "color",
     "defaultValue": "#a28c51"
 },
 {
+    "id": "ctaBorderSize",
+    "name": "Border Size",
+    "group": "design",
+    "type": "number",
+    "defaultValue": 1
+},
+{
     "id": "ctaButtonTextFont",
-    "name": "Button Font",
+    "name": "Button & Form Font",
     "group": "design",
     "type": "text",
     "defaultValue": "normal normal 600 large Arial, Helvetica, sans-serif"
