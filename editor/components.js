@@ -307,7 +307,11 @@ module.exports = {
             var myThis = this;
 
             previewIframe.contentWindow.persoo = previewIframe.contentWindow.persoo || function(){
-                console.log('calling persoo(' + (JSON.stringify(Array.prototype.slice.call(arguments))).slice(1,-1) + ')');
+                var argsToPrint = Array.prototype.slice.call(arguments)
+                        .map(function(x){
+                            return typeof x == 'function' ? 'callback ' + x.toString().replace(/\s*\{.+$/, '{...}') : x;
+                        });
+                console.log('calling persoo(' + JSON.stringify(argsToPrint).slice(1,-1) + ')');
                 myThis.handleCallbacksInPersooMock(arguments);
             };
 

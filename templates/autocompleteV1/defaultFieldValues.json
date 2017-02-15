@@ -11,7 +11,7 @@
     "dataset2Algorithm": "f645379a715b4b189eff1c14805e9f6e",
     "dataset2MaxResultsCount": 5,
     "dataset2HeaderTemplate": "CATEGORIES",
-    "dataset2HitTemplate": "function (data) { return data.hit.title ? data.highlightQuery(data.hit.title) : ''; }",
+    "dataset2HitTemplate": "function (data) {\n    return data.hit.title ? data.highlightQuery(data.hit.title) : '';\n}",
     "dataset2FooterTemplate": "",
     "dataset2EmptyTemplate": "",
 

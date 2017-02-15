@@ -195,7 +195,7 @@
         },
         {
             "id": "dataset1HeaderTemplate",
-            "name": "Header (with $query, $count placeholders)",
+            "name": "Header (string with $query, $count placeholders)",
             "group": "dataset1",
             "type": "text",
             "defaultValue": "PRODUCTS matching '$query'",
@@ -207,7 +207,7 @@
         },
         {
             "id": "dataset1HitTemplate",
-            "name": "Custom Hit (js function)",
+            "name": "Custom Hit (javascript function)",
             "group": "dataset1",
             "type": "javascript",
             "defaultValue": "",
@@ -219,7 +219,7 @@
         },
         {
              "id": "dataset1FooterTemplate",
-             "name": "Footer (with $query, $count placeholders)",
+             "name": "Footer (string with $query, $count placeholders)",
              "group": "dataset1",
              "type": "text",
              "defaultValue": "Found '$count' products matching '$query'",
@@ -231,7 +231,7 @@
         },
         {
              "id": "dataset1EmptyTemplate",
-             "name": "Empty (with $query placeholders)",
+             "name": "Empty (string with $query placeholders)",
              "group": "dataset1",
              "type": "text",
              "defaultValue": "Nothing found for '$query'",
@@ -296,7 +296,7 @@
         },
         {
             "id": "dataset2HeaderTemplate",
-            "name": "Header (with $query, $count placeholders)",
+            "name": "Header (string with $query, $count placeholders)",
             "group": "dataset2",
             "type": "text",
             "defaultValue": "CATEGORIES matching '$query'",
@@ -308,10 +308,10 @@
         },
         {
             "id": "dataset2HitTemplate",
-            "name": "Custom Hit (js function)",
+            "name": "Custom Hit (javascript function)",
             "group": "dataset2",
             "type": "javascript",
-            "defaultValue": "function (data) { return data.hit.title ? data.highlightQuery(data.hit.title) : ''; }",
+            "defaultValue": "function (data) {\n    return data.hit.title ? data.highlightQuery(data.hit.title) : '';\n}",
             "condition": {
              "fieldID": "datasetsCount",
              "operator": ">=",
@@ -320,7 +320,7 @@
         },
         {
             "id": "dataset2FooterTemplate",
-            "name": "Footer (with $query, $count placeholders)",
+            "name": "Footer (string with $query, $count placeholders)",
             "group": "dataset2",
             "type": "text",
             "defaultValue": "",
@@ -332,7 +332,7 @@
         },
         {
              "id": "dataset2EmptyTemplate",
-             "name": "Empty template (with $query placeholders)",
+             "name": "Empty template (string with $query placeholders)",
              "group": "dataset2",
              "type": "text",
              "defaultValue": "",
