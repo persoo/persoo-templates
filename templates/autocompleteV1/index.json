@@ -43,6 +43,18 @@
             }
         },
         {
+            "id": "inputPlaceholder",
+            "name": "Source Input Placeholder Text",
+            "group": "settings",
+            "type": "text",
+            "defaultValue": "Search for ...",
+            "condition": {
+                "fieldID": "inputSource",
+                "operator": "==",
+                "fieldValue": "insertNew"
+            }
+        },
+        {
             "id": "searchLink",
             "name": "Search Link (with $query)",
             "group": "settings",
