@@ -364,12 +364,22 @@ module.exports = {
     handleCallbacksInPersooMock: function(persooArgs) {
         // Return sample products for 'suggest' and 'getAlgorithm' calls
         if (persooArgs[0] == 'send') {
+            // find itemsPerPage
+            var itemsPerPage = 20;
+            for (var i = 0; i < persooArgs.length; i++) {
+                var arg = persooArgs[i];
+                if (typeof arg == 'object' || arg.itemsPerPage) {
+                    itemsPerPage = arg.itemsPerPage;
+                }
+            }
+            // return items
             for (var i = 0; i < persooArgs.length; i++) {
                 if (typeof persooArgs[i] == 'function') {
                     var getSampleProducts = this.getSampleProducts;
                     setTimeout( function(callback) {
                         var mockResponse = {
-                            items: getSampleProducts(20)
+                            items: getSampleProducts(itemsPerPage),
+                            itemsCount: itemsPerPage * 2
                         };
                         callback(mockResponse);
                     }, 1, persooArgs[i]);

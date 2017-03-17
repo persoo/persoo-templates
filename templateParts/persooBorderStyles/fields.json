@@ -2,21 +2,36 @@
     "id": "section_border",
     "name": "Border",
     "group": "design",
-    "type": "section"
+    "type": "section",
+    "condition": {
+        "fieldID": "customCSSOnly",
+        "operator": "!=",
+        "fieldValue": true
+    }
 },
 {
     "id": "borderSize",
     "name": "Border Size",
     "group": "design",
     "type": "number",
-    "defaultValue": 1
+    "defaultValue": 1,
+    "condition": {
+        "fieldID": "customCSSOnly",
+        "operator": "!=",
+        "fieldValue": true
+    }
 },
 {
     "id": "borderColor",
     "name": "Border Color",
     "group": "design",
     "type": "color",
-    "defaultValue": "#ffffff"
+    "defaultValue": "#ffffff",
+    "condition": {
+        "fieldID": "customCSSOnly",
+        "operator": "!=",
+        "fieldValue": true
+    }
 },
 {
     "id": "boxCorners",
@@ -41,7 +56,12 @@
             "value": "9999"
         }
     ],
-    "defaultValue": "0"
+    "defaultValue": "0",
+    "condition": {
+        "fieldID": "customCSSOnly",
+        "operator": "!=",
+        "fieldValue": true
+    }
 },
 {
     "id": "boxShadow",
@@ -62,7 +82,12 @@
             "value": "high"
         }
     ],
-    "defaultValue": "none"
+    "defaultValue": "none",
+    "condition": {
+        "fieldID": "customCSSOnly",
+        "operator": "!=",
+        "fieldValue": true
+    }
 },
 {
     "id": "boxShadowColor",
@@ -74,5 +99,10 @@
         "operator": "!=",
         "fieldID": "boxShadow",
         "fieldValue": "none"
+    },
+    "condition": {
+        "fieldID": "customCSSOnly",
+        "operator": "!=",
+        "fieldValue": true
     }
 },

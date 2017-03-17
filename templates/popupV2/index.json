@@ -1,13 +1,13 @@
 {
     "class": "webWidget",
-    "isActive": true,
     "minScenariosCount": 0,
     "name": "Pop-up",
-    "tags": {
-        "imageLink": null,
-        "description": "Basic Pop-up with rich options."
+    "defaultsForOfferTemplate": {
+        "description": "Basic Pop-up with rich options.",
+        "data": {
+            "location": "popup"
+        }
     },
-    "location": "popup",
     "fields": [
 
         @@include templateParts/innerContentBlock/fields-innerContentType.json

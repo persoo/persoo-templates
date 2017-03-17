@@ -1,11 +1,10 @@
 {
     "class": "webWidget",
     "name": "Custom HTML",
-    "tags": {
-        "imageLink": null,
-        "description": "Custom HTML template code to be placed in any location in a page."
+    "defaultsForOfferTemplate": {
+        "description": "Custom HTML template code to be placed in any location in a page.",
+        "data": {}
     },
-    "location": null,
     "fields": [
         {
             "id": "template",

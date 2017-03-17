@@ -1,30 +1,25 @@
 {
     "class": "webWidget",
     "name": "Autocomplete",
-    "tags": {
-        "imageLink": null,
-        "description": "Insert or activate existing INPUT with autocomplete."
+    "defaultsForOfferTemplate": {
+        "description": "Insert or activate existing INPUT with autocomplete.",
+        "data": {
+            "location": "autocomplete"
+        }
     },
-    "location": "autocomplete",
     "fields": [
-        {
-            "id": "section_inputSource",
-            "name": "Input Source",
-            "group": "settings",
-            "type": "section"
-        },
         {
             "id": "inputSource",
             "name": "Source Input Element",
-            "group": "settings",
+            "group": "sourceInput",
             "type": "select",
             "options": [
                 {
-                    "label": "Active existing INPUT",
+                    "label": "Activate Existing INPUT",
                     "value": "activateExisting"
                 },
                 {
-                    "label": "Insert new INPUT",
+                    "label": "Insert New INPUT",
                     "value": "insertNew"
                 }
             ],
@@ -33,7 +28,7 @@
         {
             "id": "inputSelector",
             "name": "Source Input Selector",
-            "group": "settings",
+            "group": "sourceInput",
             "type": "text",
             "defaultValue": "#input-id",
             "condition": {
@@ -45,7 +40,7 @@
         {
             "id": "inputPlaceholder",
             "name": "Source Input Placeholder Text",
-            "group": "settings",
+            "group": "sourceInput",
             "type": "text",
             "defaultValue": "Search for ...",
             "condition": {
@@ -57,111 +52,57 @@
         {
             "id": "searchLink",
             "name": "Search Link (with $query)",
-            "group": "settings",
+            "group": "sourceInput",
             "type": "text",
             "defaultValue": "/searchResults?q=$query"
         },
 
         {
-            "id": "section_layout",
-            "name": "Layout",
-            "group": "design",
-            "type": "section"
-        },
-        {
-            "id": "layout",
-            "name": "Layout",
-            "group": "design",
-            "type": "select",
-            "options": [
-                {
-                    "label": "Dataset below each other",
-                    "value": "belowEachOther"
-                },
-                {
-                    "label": "Datasets next to each other",
-                    "value": "nextToEachOther"
-                }
-            ],
-            "defaultValue": "belowEachOther"
-        },
-
-        {
-            "id": "section_autocompleteOptions",
-            "name": "Autocomplete Options",
-            "group": "settings",
-            "type": "section"
-        },
-        {
             "id": "datasetsCount",
             "name": "Datasets Count",
-            "group": "settings",
+            "group": "options",
             "type": "number",
             "defaultValue": 2
         },
         {
             "id": "minChars",
             "name": "Minimum Characters in Query to display autocomplete",
-            "group": "settings",
+            "group": "options",
             "type": "number",
-            "defaultValue": 1
+            "defaultValue": 1,
+            "condition": {
+                "fieldID": "hidden",
+                "operator": "==",
+                "fieldValue": "true"
+            }
         },
         {
             "id": "requestThrottlingInMs",
             "name": "Request Throttling in ms",
-            "group": "settings",
+            "group": "options",
             "type": "number",
-            "defaultValue": 200
-        },
-        {
-            "id": "showEmptyResults",
-            "name": "Show with Empty Results",
-            "group": "settings",
-            "type": "checkbox",
-            "defaultValue": false
+            "defaultValue": 200,
+            "condition": {
+                "fieldID": "hidden",
+                "operator": "==",
+                "fieldValue": "true"
+            }
         },
         {
             "id": "openOnFocus",
             "name": "Open On Focus",
-            "group": "settings",
+            "group": "options",
             "type": "checkbox",
             "defaultValue": true
         },
         {
             "id": "closeOnBlur",
             "name": "Close On Blur (false is usefull for debug)",
-            "group": "settings",
+            "group": "options",
             "type": "checkbox",
             "defaultValue": false
         },
-        {
-            "id": "offsetLeft",
-            "name": "Offset Left (relative to source input)",
-            "group": "settings",
-            "type": "number",
-            "defaultValue": 0
-        },
-        {
-            "id": "offsetTop",
-            "name": "Offset Top (relative to source input)",
-            "group": "settings",
-            "type": "number",
-            "defaultValue": 0
-        },
-        {
-            "id": "width",
-            "name": "Width in px or 'input' for source input element width, or 'null' for not inline css",
-            "group": "settings",
-            "type": "text",
-            "defaultValue": "600"
-        },
-        {
-            "id": "autocompleteID",
-            "name": "Autocomplete ID (for CSS classes)",
-            "group": "settings",
-            "type": "text",
-            "defaultValue": "autocomplete1"
-        },
+
 
         {
             "id": "dataset1Algorithm",
@@ -234,7 +175,7 @@
              "name": "Footer (string with $query, $count placeholders)",
              "group": "dataset1",
              "type": "text",
-             "defaultValue": "Found '$count' products matching '$query'",
+             "defaultValue": "Found $count products matching '$query'",
              "condition": {
                  "fieldID": "datasetsCount",
                  "operator": ">=",
@@ -304,7 +245,12 @@
             "id": "section_templates_dataset2",
             "name": "Templates",
             "group": "dataset2",
-            "type": "section"
+            "type": "section",
+            "condition": {
+             "fieldID": "datasetsCount",
+             "operator": ">=",
+             "fieldValue": 2
+            }
         },
         {
             "id": "dataset2HeaderTemplate",
@@ -365,104 +311,268 @@
              }
         },
 
+        {
+            "id": "customCSSOnly",
+            "name": "Custom CSS Only (do not use any design fields overriding CustomCSS rules)",
+            "group": "design",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "autocompleteID",
+            "name": "Autocomplete Element ID (usefull for CSS rules)",
+            "group": "design",
+            "type": "text",
+            "defaultValue": "autocomplete1"
+        },
+        {
+            "id": "section_layout",
+            "name": "Layout",
+            "group": "design",
+            "type": "section",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
+        },
+        {
+            "id": "layout",
+            "name": "Layout",
+            "group": "design",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Dataset below each other",
+                    "value": "belowEachOther"
+                },
+                {
+                    "label": "Datasets next to each other",
+                    "value": "nextToEachOther"
+                }
+            ],
+            "defaultValue": "belowEachOther",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
+        },
+
+        {
+            "id": "offsetLeft",
+            "name": "Dropdown Offset Left (relative to source input)",
+            "group": "dropdownPosition",
+            "type": "number",
+            "defaultValue": 0
+        },
+        {
+            "id": "offsetTop",
+            "name": "Dropdown Offset Top (relative to source input)",
+            "group": "dropdownPosition",
+            "type": "number",
+            "defaultValue": 0
+        },
+        {
+            "id": "useInputWidth",
+            "name": "Set Dropdown Width to Input Width by inline CSS (use custom CSS to change Dropdown Width)",
+            "group": "dropdownPosition",
+            "type": "checkbox",
+            "defaultValue": false
+        },
+
+        {
+            "id": "section_dropdown",
+            "name": "Dropdown box",
+            "group": "design",
+            "type": "section",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
+        },
+        {
+            "id": "width",
+            "name": "Dropdown Width in px",
+            "group": "design",
+            "type": "number",
+            "defaultValue": 600,
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
+        },
+
         @@include templateParts/persooBorderStyles/fields.json
 
         {
             "id": "section_colors_dataset1",
-            "name": "Colors",
-            "group": "dataset1",
-            "type": "section"
+            "name": "Colors for Products Dataset",
+            "group": "design",
+            "type": "section",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
         },
         {
             "id": "dataset1BackgroundColor",
             "name": "Background Color",
-            "group": "dataset1",
+            "group": "design",
             "type": "color",
-            "defaultValue": "#fff"
+            "defaultValue": "#fff",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
         },
         {
             "id": "dataset1TextColor",
             "name": "Text Color",
-            "group": "dataset1",
+            "group": "design",
             "type": "color",
-            "defaultValue": "#333"
+            "defaultValue": "#333",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
         },
         {
             "id": "dataset1HighlightTextColor",
             "name": "Highlighted Text Color",
-            "group": "dataset1",
+            "group": "design",
             "type": "color",
-            "defaultValue": "#498fdb"
+            "defaultValue": "#498fdb",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
         },
         {
             "id": "dataset1SelectedBackgroundColor",
             "name": "Selected Item Background Color",
-            "group": "dataset1",
+            "group": "design",
             "type": "color",
-            "defaultValue": "#f0f0f0"
+            "defaultValue": "#f0f0f0",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
         },
         {
             "id": "dataset1HeadlineBackgroundColor",
             "name": "Headline Background Color",
-            "group": "dataset1",
+            "group": "design",
             "type": "color",
-            "defaultValue": "#f0f0f0"
+            "defaultValue": "#f0f0f0",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
         },
         {
             "id": "dataset1HeadlineTextColor",
             "name": "Headline Text Color",
-            "group": "dataset1",
+            "group": "design",
             "type": "color",
-            "defaultValue": "#333"
+            "defaultValue": "#333",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
         },
 
         {
             "id": "section_colors_dataset2",
-            "name": "Colors",
-            "group": "dataset2",
-            "type": "section"
+            "name": "Colors for Categories Dataset",
+            "group": "design",
+            "type": "section",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
         },
         {
             "id": "dataset2BackgroundColor",
             "name": "Background Color",
-            "group": "dataset2",
+            "group": "design",
             "type": "color",
-            "defaultValue": "#224162"
+            "defaultValue": "#224162",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
         },
         {
             "id": "dataset2TextColor",
             "name": "Text Color",
-            "group": "dataset2",
+            "group": "design",
             "type": "color",
-            "defaultValue": "#fff"
+            "defaultValue": "#fff",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
         },
         {
             "id": "dataset2HighlightTextColor",
             "name": "Highlighted Text Color",
-            "group": "dataset2",
+            "group": "design",
             "type": "color",
-            "defaultValue": "#ddd"
+            "defaultValue": "#ddd",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
         },
         {
             "id": "dataset2SelectedBackgroundColor",
             "name": "Selected Item Background Color",
-            "group": "dataset2",
+            "group": "design",
             "type": "color",
-            "defaultValue": "#498fdb"
+            "defaultValue": "#498fdb",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
         },
         {
             "id": "dataset2HeadlineBackgroundColor",
             "name": "Headline Background Color",
-            "group": "dataset2",
+            "group": "design",
             "type": "color",
-            "defaultValue": "#224162"
+            "defaultValue": "#224162",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
         },
         {
             "id": "dataset2HeadlineTextColor",
             "name": "Headline Text Color",
-            "group": "dataset2",
+            "group": "design",
             "type": "color",
-            "defaultValue": "#fff"
+            "defaultValue": "#fff",
+            "condition": {
+                "fieldID": "customCSSOnly",
+                "operator": "!=",
+                "fieldValue": true
+            }
         },
 
         {
@@ -494,20 +604,28 @@
     ],
     "groups": [
         {
+            "id": "sourceInput",
+            "name": "Source Input Field"
+        },
+        {
             "id": "dataset1",
-            "name": "Dataset 1"
+            "name": "Products (Dataset 1)"
         },
         {
             "id": "dataset2",
-            "name": "Dataset 2"
+            "name": "Categories or Brands (Dataset 2)"
         },
         {
-            "id": "settings",
-            "name": "Settings"
+            "id": "dropdownPosition",
+            "name": "Dropdown Position & Width"
+        },
+        {
+            "id": "options",
+            "name": "Autocomplete Options"
         },
         {
             "id": "design",
-            "name": "Design"
+            "name": "Design & CSS Styles"
         }
     ],
     "template": "Note: this will be replaced by content of template.html",

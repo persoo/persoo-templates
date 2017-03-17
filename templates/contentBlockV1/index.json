@@ -1,13 +1,11 @@
 {
     "class": "webWidget",
-    "isActive": true,
     "minScenariosCount": 0,
     "name": "Content Block",
-    "tags": {
-        "imageLink": null,
-        "description": "Content block can be placed in any location in a page."
+    "defaultsForOfferTemplate": {
+        "description": "Content block can be placed in any location in a page.",
+        "data": {}
     },
-    "location": null,
     "fields": [
 
         @@include templateParts/innerContentBlock/fields-innerContentType.json

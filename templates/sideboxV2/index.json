@@ -1,13 +1,13 @@
 {
     "class": "webWidget",
-    "isActive": true,
     "minScenariosCount": 0,
     "name": "Side Box",
-    "tags": {
-        "imageLink": null,
-        "description": "Displays ear on the page side to slide out content box on hover/click."
+    "defaultsForOfferTemplate": {
+        "description": "Displays ear on the page side to slide out content box on hover/click.",
+        "data": {
+            "location": "sidebox"
+        }
     },
-    "location": "sidebox",
     "fields": [
 
         @@include templateParts/innerContentBlock/fields-innerContentType.json

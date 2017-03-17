@@ -1,3 +1,4 @@
+
 <%
     var offerID = offerID || 'randomOfferID';
     var priceSufix = '&nbsp;Kč';
@@ -73,10 +74,12 @@
     <% } %>
     <% /* real template source code */ %>
 
+    <% if (!customCSSOnly) { %>
     <style>
         #<%= autocompleteID %>.persoo-autocompleteDropdown__root {
             overflow-y: auto;
             max-height: 100%;
+            width: <%= width %>px;
 
             @@include templateParts/persooBorderStyles/template.css
         }
@@ -230,6 +233,7 @@
             }
         <% } %>
     </style>
+    <% } %>
     <style type="text/css">
         <%= customCSS %>
     </style>
@@ -262,7 +266,7 @@
                         <% if (datasetsCount >= 2) { %>
                             {
                                 id: "2",
-                                source: window.persoo.getSuggestSource('<%= dataset2Algorithm %>', <%= dataset2MaxResultsCount %>),
+                                source: window.persoo.getAlgorithmSource('<%= dataset2Algorithm %>', <%= dataset2MaxResultsCount %>),
                                 showWhenEmptyResults: <%= dataset1ShowWhenEmptyResults %>,
                                 <%
                                    var templates2 = {};
@@ -275,7 +279,7 @@
                                    if (dataset2FooterTemplate) {
                                        templates2.footer = renderTemplateFunctionIfNonEmpty(dataset2FooterTemplate);
                                    }
-                                   if (showEmptyResults && dataset2EmptyTemplate) {
+                                   if (dataset2EmptyTemplate) {
                                        templates2.empty = renderTemplateFunction(dataset2EmptyTemplate);
                                    }
                                 %>
@@ -284,7 +288,7 @@
                         <% } %>
                         {
                             id: "1",
-                            source: window.persoo.getSuggestSource('<%= dataset1Algorithm %>', <%= dataset1MaxResultsCount %>),
+                            source: window.persoo.getAlgorithmSource('<%= dataset1Algorithm %>', <%= dataset1MaxResultsCount %>),
                             showWhenEmptyResults: <%= dataset1ShowWhenEmptyResults %>,
                             <%
                             var templates1 = {};
@@ -297,7 +301,7 @@
                             if (dataset1FooterTemplate) {
                                 templates1.footer = renderTemplateFunctionIfNonEmpty(dataset1FooterTemplate);
                             }
-                            if (showEmptyResults && dataset1EmptyTemplate) {
+                            if (dataset1EmptyTemplate) {
                                 templates1.empty = renderTemplateFunction(dataset1EmptyTemplate);
                             }
                             %>
@@ -306,23 +310,19 @@
                     ],
                     minChars: <%= minChars %>,
                     requestThrottlingInMs: <%= requestThrottlingInMs %>,
-                    showEmptyResults: <%= showEmptyResults %>,
                     openOnFocus: <%= openOnFocus %>,
                     closeOnBlur: <%= closeOnBlur %>,
                     offsetLeft: <%= offsetLeft %>,
                     offsetTop: <%= offsetTop %>,
-                    width: <%= width == 'input' ? '"input"' : parseInt(width) %>,
-                    priceSuffix: "<%= priceSufix.replace("&nbsp;", "\u00A0") %>",
-                    onSelect: function(selectedHit){ // function onSelect(selectedHit) {}
-                        console.log('persooAutocomplete: selected hit is ' + JSON.stringify(selectedHit));
-                    }
+                    width: <%= useInputWidth == true ? '"input"' : 'null' %>,
+                    priceSuffix: "<%= priceSufix.replace("&nbsp;", "\u00A0") %>"
                 });
             }
             function loadScript(url, onloadFn, errorFn) {var d = document; var s=d.createElement("script");
                 s.src=url,s.type="text/javascript",s.async=true,s.onerror=errorFn,s.onload=onloadFn;
                 d.getElementsByTagName("head")[0].appendChild(s)};
 
-            var acLibLink = "https://scripts.persoo.cz/shared/autocompleteV2/persooAutocomplete.js";
+            var acLibLink = "https://scripts.persoo.cz/shared/autocompleteV2.1/persooAutocomplete.js";
             loadScript(acLibLink, initAutocomplete, function (){});
         })();
     </script>
