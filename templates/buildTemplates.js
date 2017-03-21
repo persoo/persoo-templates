@@ -66,11 +66,13 @@ function parseTemplateJSON(jsonString, templateID, filename) {
     return {};
 }
 
-function readTemplateFile(dirpath, filename, templateID) {
+function readTemplateFile(dirpath, filename, templateID, throwError) {
     try {
         return fs.readFileSync(dirpath + '/' + filename).toString();
     } catch(err) {
-        console.error("Error when processing template '" + templateID + "': cannot read " + filename);
+        if (throwError) {
+            console.error("Error when processing template '" + templateID + "': cannot read " + filename);
+        }
     };
     return "";
 }
@@ -78,6 +80,7 @@ function readTemplateFile(dirpath, filename, templateID) {
 var INDEX_JSON = "index.json";
 var DEFAULT_FIELD_VALUES_JSON = "defaultFieldValues.json";
 var TEMPLATE_JSON = "template.html";
+var TEMPLATE_CUSTOM_CSS = "custom.css";
 
 function processAllTemplatesInDir(addTemplate) {
     var fileList = fs.readdirSync(currentDir);
@@ -90,9 +93,10 @@ function processAllTemplatesInDir(addTemplate) {
             console.log("Adding template:" + id);
 
             // read template resources from files
-            var jsonString = readTemplateFile(dirpath, INDEX_JSON, id);
-            var defaultValuesString = readTemplateFile(dirpath, DEFAULT_FIELD_VALUES_JSON, id);
-            var html = readTemplateFile(dirpath, TEMPLATE_JSON, id);
+            var jsonString = readTemplateFile(dirpath, INDEX_JSON, id, true);
+            var defaultValuesString = readTemplateFile(dirpath, DEFAULT_FIELD_VALUES_JSON, id, true);
+            var html = readTemplateFile(dirpath, TEMPLATE_JSON, id, true);
+            var customCSS = readTemplateFile(dirpath, TEMPLATE_CUSTOM_CSS, id, false);
 
             // resolve included files (@@include)
             jsonString = resolveIncludesInFile(jsonString, INDEX_JSON);
@@ -102,6 +106,9 @@ function processAllTemplatesInDir(addTemplate) {
             // parse JSON
             var json = parseTemplateJSON(jsonString, id, INDEX_JSON);
             var defaultValues = parseTemplateJSON(defaultValuesString, id, "defaultFieldValues.json");
+            if (customCSS) {
+                defaultValues.customCSS = customCSS;
+            }
 
             // add template to output
             addTemplate(id, json, html, defaultValues);

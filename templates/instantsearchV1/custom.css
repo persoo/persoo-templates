@@ -1,0 +1,337 @@
+/* Layout
+ * Create your own layout, you can event use elements
+ * with correct IDs inserted by your webserver. */
+
+#persoo-search-results__root {
+  display: flex;
+}
+#persoo-search-results__root * {
+  box-sizing: border-box;
+}
+#persoo-search-results__root a {
+  text-decoration: none;
+  color: #636363;
+}
+#persoo-search-results__filters {
+  flex: 1;
+  min-width: 250px;
+  margin-right: 25px;
+}
+#persoo-search-results__items {
+  flex: 4;
+}
+#persoo-pagination {
+  text-align: center;
+}
+#persoo-items-per-page {
+  float: right;
+}
+
+/* Search bar above products */
+#persoo-search-bar-container {
+  padding-top: 0px;
+  margin-bottom: 15px;
+  width: 100%;
+  position: relative;
+}
+
+#persoo-search-bar-container:after {
+  clear: both;
+  content: "";
+  display: block;
+}
+#persoo-search-bar-container * {
+  box-sizing: border-box;
+}
+#persoo-search-bar:focus {
+    outline: 0;
+    box-shadow: none;
+}
+.persoo-search-bar-label {
+  background-color: #54A5CD;
+  height: 40px;
+  line-height: 24px;
+  padding: 8px 12px;
+  color: white;
+  float: left;
+  width: 140px;
+  text-align: right;
+  position: relative;
+}
+#persoo-search-bar-container .icon {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+  transform: translateY(-50%);
+  background: url("data:image/svg+xml;utf8,<svg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'  xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M15.553 31.107c8.59 0 15.554-6.964 15.554-15.554S24.143 0 15.553 0 0 6.964 0 15.553c0 8.59 6.964 15.554 15.553 15.554zm0-3.888c6.443 0 11.666-5.225 11.666-11.668 0-6.442-5.225-11.665-11.668-11.665-6.442 0-11.665 5.223-11.665 11.665 0 6.443 5.223 11.666 11.665 11.666zm12.21 3.84a2.005 2.005 0 0 1 .002-2.833l.463-.463a2.008 2.008 0 0 1 2.833-.003l8.17 8.168c.78.78.78 2.05-.004 2.833l-.462.463a2.008 2.008 0 0 1-2.834.004l-8.168-8.17z\' fill=\'#fff\' fill-rule=\'evenodd\'/></svg>") no-repeat center center / contain;
+}
+#persoo-search-bar-container label {
+  display: none;
+}
+.persoo-clear-cross {
+  position: absolute;
+  display: none;
+  background: url("data:image/svg+xml;utf8,<svg width=\'12\' height=\'12\' viewBox=\'0 0 12 12\' xmlns=\'http://www.w3.org/2000/svg\' opacity=\'0.6\'><path d=\'M.566 1.698L0 1.13 1.132 0l.565.566L6 4.868 10.302.566 10.868 0 12 1.132l-.566.565L7.132 6l4.302 4.3.566.568L10.868 12l-.565-.566L6 7.132l-4.3 4.302L1.13 12 0 10.868l.566-.565L4.868 6 .566 1.698z\'></path></svg>") no-repeat center center / contain;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+#persoo-search-bar-container .persoo-clear-query {
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#persoo-search-box.ais-search-box--input {
+    float: left;
+    width: calc(100% - 140px);
+    height: 40px;
+    border: solid 2px #54A5CD;
+    border-left: none;
+    padding-left: 6px;
+    padding-top: 2px;
+}
+#persoo-search-box.ais-search-box--input:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+/* Found Results Count */
+#persoo-stats {
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 6px 10px;
+    color: #888;
+    text-align: left;
+    background: #F4F4F4;
+    font-size: 12px;
+    clear: both;
+}
+
+/* Product Items (hits) */
+.ais-hits {
+  display: flex;
+  flex-wrap: wrap;
+}
+.ais-hits__empty {
+}
+
+.persoo-result-item {
+  display: block;
+  box-sizing: border-box;
+  width: 33.333333%;
+  margin: 0;
+  padding: 16px 24px;
+  border: solid 2px #EDEDED;
+  background-color: white;
+
+  text-align: center;
+}
+.persoo-result-item > a > img {
+  max-width: 150px;
+  max-height: 150px;
+}
+.persoo-result-item__title {
+  color: #666;
+  font-weight: bold;
+}
+.persoo-result-item__price {
+  color: #54A5CD;
+}
+
+/* Facets */
+#persoo-search-results__filters .ais-current-refined-values.facet .ais-current-refined-values--body {
+    padding-left: 8px;
+}
+#persoo-search-results__filters .facet {
+    margin-bottom: 15px;
+    padding-bottom: 6px;
+    background-color: white;
+    color: #111;
+    border: solid 1px #efefef;
+}
+#persoo-search-results__filters .facet:not(:first-child) {
+    margin-top: 10px;
+}
+#persoo-search-results__filters .ais-header {
+    margin-bottom: 7px;
+}
+#persoo-search-results__filters .ais-header.ais-current-refined-values--header {
+    margin-bottom: 13px;
+}
+#persoo-search-results__filters .facet .ais-header {
+    padding: 4px 8px;
+    font-weight: 500;
+    background-color: #f4f4f4;
+    color: #757575;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+/* Facet counts */
+#persoo-search-results__filters .facet-count {
+  margin-left: 4px;
+  color: #888;
+  text-decoration: none;
+}
+#persoo-search-results__filters .facet-count:before {
+  content: "("
+}
+#persoo-search-results__filters .facet-count:after {
+  content: ")"
+}
+
+.ais-current-refined-values--item > a > div:before {
+  content: "\d7";
+  margin-right: 5px;
+}
+
+/* "Clear all" button,
+ * "show more" buttons in refinement filters */
+.persoo-button,
+.ais-show-more,
+#persoo-clear-all > .ais-root {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.ais-show-more,
+#persoo-clear-all > .ais-root {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.ais-show-more:hover,
+#persoo-clear-all > .ais-root:hover {
+    color: #222;
+    background-color: #ccc;
+}
+#persoo-clear-all > .ais-root {
+    margin-bottom: 10px;
+}
+.ais-show-more {
+    border-color: transparent;
+}
+.ais-show-more:hover {
+    border-color: #ccc;
+}
+.ais-show-more__inactive:before {
+    content: "+ "
+}
+.ais-show-more__active:before {
+    content: "- "
+}
+
+/* Current Refinements */
+#persoo-search-results__filters .ais-current-refined-values {
+  position: relative;
+}
+.ais-current-refined-values--link {
+  cursor: pointer;
+  color: #636363;
+  border-radius: 2px;
+  border: solid 1px #DDDDDD;
+  background-color: #f4f4f4;
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  padding: 0 8px 0 0;
+  overflow: hidden;
+}
+.ais-current-refined-values--clear-all {
+  position: absolute;
+  right: 6px;
+  top: 3px;
+  color: #666666;
+  font-weight: 500;
+}
+a.ais-current-refined-values--link:hover {
+  text-decoration: none;
+}
+.ais-current-refined-values--item {
+  margin-top: 8px;
+}
+.ais-current-refined-values--item:after {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+/* Hierarchical Menu Filter */
+.ais-hierarchical-menu--list__lvl1 {
+    margin-left: 20px
+}
+.ais-hierarchical-menu--list__lvl2 {
+    margin-left: 20px
+}
+.ais-hierarchical-menu--item a {
+    padding: 0 7px;
+    color: #111;
+}
+.ais-hierarchical-menu--item__active > div > a {
+    color: #000;
+    font-weight: 700;
+}
+.ais-hierarchical-menu--list__lvl0 > div > div > .ais-hierarchical-menu--link:before {
+    content: "\f105  ";
+}
+
+/* Pagination */
+.ais-pagination--item {
+  display: inline-block;
+  padding: 3px;
+}
+.ais-pagination--item a {
+  color: #666;
+}
+.ais-pagination--item__disabled {
+  visibility: hidden;
+}
+.ais-pagination--item__active {
+  font-weight: bold;
+}
+.ais-pagination--item__first {
+}
+.ais-pagination--item__previous {
+}
+.ais-pagination--item__page {
+}
+.ais-pagination--item__next {
+}
+.ais-pagination--item__last {
+}
+.ais-pagination--link {
+}
+
+/* Collapsible boxes when you click on box header */
+.ais-root__collapsible .ais-header {
+    cursor: pointer;
+}
+.ais-root__collapsible .ais-header:after {
+    content: "\f107";
+    float: right;
+}
+.ais-root__collapsible.ais-root__collapsed .ais-header:after {
+    content: "\f104";
+}
+.ais-root__collapsed .ais-body, .ais-root__collapsed .ais-footer {
+  display: none;
+}

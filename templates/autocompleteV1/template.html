@@ -34,8 +34,8 @@
     };
 %>
 <div>
-    <% /* prerequisities to see something in the preview */ %>
     <%
+       /* prerequisities to see something in the preview */
        var debug = false;
        if (debug) {
     %>
@@ -74,188 +74,20 @@
     <% } %>
     <% /* real template source code */ %>
 
-    <% if (!customCSSOnly) { %>
-    <style>
-        #<%= autocompleteID %>.persoo-autocompleteDropdown__root {
-            overflow-y: auto;
-            max-height: 100%;
-            width: <%= width %>px;
-
-            @@include templateParts/persooBorderStyles/template.css
-        }
-
-        .persoo-autocompleteDataset__header,
-        .persoo-autocompleteDataset__footer,
-        .persoo-autocompleteDataset__hits__hit,
-        .persoo-autocompleteDataset__empty {
-            box-sizing: border-box;
-            width: 100%;
-            padding: 10px 3% 10px 3%;
-        }
-        .persoo-autocompleteDataset__header {
-            font-weight: bold;
-        }
-        .persoo-autocompleteDataset__hits__hit {
-            cursor: pointer;
-            line-height: 23px;
-            overflow: hidden;
-            font-size: 1.0em;
-            text-align: left;
-        }
-        #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit,
-        #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit a,
-        #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit a:hover {
-            text-decoration: none;
-        }
-
-
-        /* common hit styles */
-        .persoo-autocompleteDataset__hits__hit__title {
-            padding-left: 5px;
-        }
-        .persoo-autocompleteDataset__hits__hit__price {
-            font-weight: bold;
-        }
-
-        /* colors */
-        #<%= autocompleteID %> .persoo-autocompleteDataset-1__root {
-            background-color: <%= dataset1BackgroundColor %>;
-        }
-        #<%= autocompleteID %> .persoo-autocompleteDataset-1__header {
-            color: <%= dataset1HeadlineTextColor %>;
-            background-color: <%= dataset1HeadlineBackgroundColor %>;
-        }
-        #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits__hit.persoo-selected {
-            background-color: <%= dataset1SelectedBackgroundColor %>;
-        }
-        #<%= autocompleteID %> .persoo-autocompleteDataset-1__root,
-        #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits a,
-        #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits a:hover {
-            color: <%= dataset1TextColor %>;
-        }
-        #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits__hit b {
-            font-weight: bold;
-            color: <%= dataset1HighlightTextColor %>;
-        }
-
-        <% if (datasetsCount > 1) { %>
-
-            #<%= autocompleteID %> .persoo-autocompleteDataset-2__root {
-                background-color: <%= dataset2BackgroundColor %>;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset-2__header {
-                color: <%= dataset2HeadlineTextColor %>;
-                background-color: <%= dataset2HeadlineBackgroundColor %>;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset-2__hits__hit.persoo-selected {
-                background-color: <%= dataset2SelectedBackgroundColor %>;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset-2__root,
-            #<%= autocompleteID %> .persoo-autocompleteDataset-2__hits a,
-            #<%= autocompleteID %> .persoo-autocompleteDataset-2__hits a:hover {
-                color: <%= dataset2TextColor %>;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset-2__hits__hit b {
-                font-weight: bold;
-                color: <%= dataset2HighlightTextColor %>;
-            }
-
-        <% } %>
-
-        /* layouts */
-        <% if (layout == "belowEachOther") { %>
-            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit a {
-                position: relative;
-                display: table;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit__img,
-            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit__title,
-            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit__price {
-                display: table-cell;
-                vertical-align: middle;
-                text-overflow: ellipsis;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit__img {
-                width: 64px;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit img {
-                max-width: 64px;
-                max-height: 64px;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit__price {
-                text-align: right;
-                width: 8ex;
-            }
-
-        <% } else if (layout == "nextToEachOther") { %>
-            #<%= autocompleteID %>.persoo-autocompleteDropdown__root {
-                display: -webkit-flex;
-                display: flex;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset-2__root {
-                -webkit-flex: 1;
-                flex: 1;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset-1__root {
-                -webkit-flex: 2;
-                flex: 2;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits {
-                display: -webkit-flex;
-                display: flex;
-                -webkit-flex-wrap: wrap;
-                flex-wrap: wrap;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits__hit {
-                box-sizing: content-box;
-                -webkit-flex: 1;
-                flex: 1;
-                width: auto;
-                min-width: 100px;
-                max-width: 150px;
-                min-height: 160px;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits__hit a {
-                display: -webkit-flex;
-                display: flex;
-                -webkit-flex-direction: column;
-                flex-direction: column;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset-1__hits__hit a div {
-                vertical-align: middle;
-                text-align: center;
-            }
-            #<%= autocompleteID %> .persoo-autocompleteDataset__hits__hit img {
-                max-width: 100px;
-                max-height: 100px;
-            }
-        <% } %>
-    </style>
-    <% } %>
     <style type="text/css">
         <%= customCSS %>
     </style>
 
-    <% if (inputSource == 'insertNew') {
-        var formElemID = 'persoo-' + offerID + '__form';
-        var inputElemID = 'persoo-' + offerID + '__input';
-        var submitElemID = 'persoo-' + offerID + '__submit';
-        inputSelector = '#' + inputElemID;
-    %>
-        <form id="<%= formElemID %>" class="persooAutocomplete_form">
-            <input id="<%= inputElemID %>" type="search" autocomplete="off" placeholder="<%= inputPlaceholder %>">
-            <input id="<%= submitElemID %>" type="submit" value="Search">
-        </form>
+    <%= searchBarTemplate %>
+    <% if (inputSelector && formSelector) { %>
         <script>
-            document.getElementById('<%= formElemID %>').onsubmit = function() {
-                var query = document.getElementById('<%= inputElemID %>').value;
+            document.querySelector('<%= formSelector %>').onsubmit = function() {
+                var query = document.querySelector('<%= inputSelector %>').value;
                 console.log("You searched for query '" + query + "'");
                 document.location.href = '<%= searchLink %>'.replace('$query', query);
             };
         </script>
-    <% }  %>
+    <% } %>
 
     <script>
         var persoo_<%= offerID %> = (function () {

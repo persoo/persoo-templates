@@ -1,0 +1,533 @@
+{
+    "class": "webWidget",
+    "name": "Instant Search",
+    "defaultsForOfferTemplate": {
+        "description": "Persoo instant search - fulltext search as you type with real-time filters and facets.",
+        "data": {
+            "location": "autocomplete"
+        }
+    },
+    "fields": [
+        {
+            "id": "searchAlgorithm",
+            "name": "Persoo algorithm ID",
+            "group": "algorithm",
+            "type": "text",
+            "defaultValue": "f645379a715b4b189eff1c14805e9f6e"
+        },
+        {
+            "id": "urlSync",
+            "name": "Write chosen filters to URL params",
+            "group": "options",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+
+        {
+            "id": "itemsContainerSelector",
+            "name": "Container Selector",
+            "group": "items",
+            "type": "text",
+            "defaultValue": "#persoo-items"
+        },
+        {
+            "id": "itemTemplate",
+            "name": "Item Template (HTML with {{fieldName}} placeholders)",
+            "group": "items",
+            "type": "html",
+            "defaultValue": "<a href={{link}}>\\n    <img src={{imageLink}}>\\n    <div class=\"persoo-result-item__title\" title={{description}}>{{title}}</div>\\n    <div class=\"persoo-result-item__price\">{{price}} Kč</div>\\n</a>"
+        },
+
+        {
+            "id": "showPagination",
+            "name": "show Pagination",
+            "group": "pagination",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "paginationContainerSelector",
+            "name": "Pagination Container Selector",
+            "group": "pagination",
+            "type": "text",
+            "defaultValue": "#persoo-pagination"
+        },
+
+        {
+            "id": "showItemsPerPage",
+            "name": "show \"Items Per Page\" Selector",
+            "group": "pagination",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "itemsPerPageContainerSelector",
+            "name": "Items Per Page Container Selector",
+            "group": "pagination",
+            "type": "text",
+            "defaultValue": "#persoo-items-per-page"
+        },
+        {
+            "id": "itemsPerPageValues",
+            "name": "Items Per Page Values (comma separated values)",
+            "group": "pagination",
+            "type": "text",
+            "defaultValue": "6, 12, 24"
+        },
+        {
+            "id": "itemsPerPage",
+            "name": "Items Per Page (default value)",
+            "group": "pagination",
+            "type": "number",
+            "defaultValue": 6
+        },
+        {
+            "id": "itemsPerPageSuffixTemplate",
+            "name": "Suffix Template ",
+            "group": "pagination",
+            "type": "text",
+            "defaultValue": " per page"
+        },
+
+        {
+            "id": "showStats",
+            "name": "show Results Count",
+            "group": "statistics",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "statsContainerSelector",
+            "name": "Container Selector",
+            "group": "statistics",
+            "type": "text",
+            "defaultValue": "#persoo-stats"
+        },
+        {
+            "id": "statsTemplate",
+            "name": "Container Selector",
+            "group": "statistics",
+            "type": "text",
+            "defaultValue": "{{nbHits}} results found"
+        },
+
+        {
+            "id": "showClearAll",
+            "name": "show Clear All Button",
+            "group": "clearAll",
+            "type": "checkbox",
+            "defaultValue": false
+        },
+        {
+            "id": "clearAllContainerSelector",
+            "name": "Container Selector",
+            "group": "clearAll",
+            "type": "text",
+            "defaultValue": "#persoo-clear-all"
+        },
+
+        {
+            "id": "showCurrentRefinedValues",
+            "name": "show Current Refined Values",
+            "group": "currentRefinedValues",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "currentRefinedValuesContainerSelector",
+            "name": "Container Selector",
+            "group": "currentRefinedValues",
+            "type": "text",
+            "defaultValue": "#persoo-current-refined-values"
+        },
+        {
+            "id": "currentRefinedValuesHeader",
+            "name": "Header",
+            "group": "currentRefinedValues",
+            "type": "text",
+            "defaultValue": "Selected Filters"
+        },
+
+        {
+            "id": "showFulltextFilter",
+            "name": "show Fulltext Filter",
+            "group": "fulltextFilter",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "fulltextFilterContainerSelector",
+            "name": "Container Selector",
+            "group": "fulltextFilter",
+            "type": "text",
+            "defaultValue": "#persoo-search-box"
+        },
+        {
+            "id": "fulltextFilterPlaceholder",
+            "name": "Placeholder text",
+            "group": "fulltextFilter",
+            "type": "text",
+            "defaultValue": "Search for products..."
+        },
+
+        {
+            "id": "showMenu",
+            "name": "show Menu",
+            "group": "menu",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "menuContainerSelector",
+            "name": "Container Selector",
+            "group": "menu",
+            "type": "text",
+            "defaultValue": "#persoo-productTypes"
+        },
+        {
+            "id": "menuHeader",
+            "name": "Header",
+            "group": "menu",
+            "type": "text",
+            "defaultValue": "Categories"
+        },
+        {
+            "id": "menuAttributeName",
+            "name": "AttributeName",
+            "group": "menu",
+            "type": "text",
+            "defaultValue": "productType"
+        },
+        {
+            "id": "menuLimit",
+            "name": "Limit",
+            "group": "menu",
+            "type": "number",
+            "defaultValue": 10
+        },
+        {
+            "id": "menuCollapsible",
+            "name": "collapsible by click on box header",
+            "group": "menu",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "menuCollapsed",
+            "name": "collapsed by default",
+            "group": "menu",
+            "type": "checkbox",
+            "defaultValue": false,
+            "condition": {
+                "fieldID": "menuCollapsible",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+
+        {
+            "id": "showHierarchicalMenu",
+            "name": "show Hierarchical Menu",
+            "group": "hierarchicalMenu",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "hierarchicalMenuContainerSelector",
+            "name": "Container Selector",
+            "group": "hierarchicalMenu",
+            "type": "text",
+            "defaultValue": "#persoo-categories"
+        },
+        {
+            "id": "hierarchicalMenuHeader",
+            "name": "Header",
+            "group": "hierarchicalMenu",
+            "type": "text",
+            "defaultValue": "Show results for"
+        },
+        {
+            "id": "hierarchicalMenuAttributeNames",
+            "name": "AttributeNames (comma separated)",
+            "group": "hierarchicalMenu",
+            "type": "text",
+            "defaultValue": "category_level0, category_level1, category_level2"
+        },
+        {
+            "id": "hierarchicalMenuLimit",
+            "name": "Limit",
+            "group": "hierarchicalMenu",
+            "type": "number",
+            "defaultValue": 10
+        },
+        {
+            "id": "hierarchicalMenuCollapsible",
+            "name": "collapsible by click on box header",
+            "group": "hierarchicalMenu",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "hierarchicalMenuCollapsed",
+            "name": "collapsed by default",
+            "group": "hierarchicalMenu",
+            "type": "checkbox",
+            "defaultValue": false,
+            "condition": {
+                "fieldID": "hierarchicalMenuCollapsible",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+
+
+        {
+            "id": "showRefinementLilst1",
+            "name": "show Refinement List",
+            "group": "refinementList1",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "refinementList1ContainerSelector",
+            "name": "Container Selector",
+            "group": "refinementList1",
+            "type": "text",
+            "defaultValue": "#persoo-brands--refinementList"
+        },
+        {
+            "id": "refinementList1Header",
+            "name": "Header",
+            "group": "refinementList1",
+            "type": "text",
+            "defaultValue": "Brands"
+        },
+        {
+            "id": "refinementList1AttributeName",
+            "name": "AttributeName",
+            "group": "refinementList1",
+            "type": "text",
+            "defaultValue": "brand"
+        },
+        {
+            "id": "refinementList1Limit",
+            "name": "Limit",
+            "group": "refinementList1",
+            "type": "number",
+            "defaultValue": 10
+        },
+        {
+            "id": "refinementList1ShowMore",
+            "name": "Show More",
+            "group": "refinementList1",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "refinementList1ShowMoreLimit",
+            "name": "Limit with Show more",
+            "group": "refinementList1",
+            "type": "number",
+            "defaultValue": 20,
+            "condition": {
+                "fieldID": "refinementList1ShowMore",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+        {
+            "id": "refinementList1Collapsible",
+            "name": "collapsible by click on box header",
+            "group": "refinementList1",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "refinementList1Collapsed",
+            "name": "collapsed by default",
+            "group": "refinementList1",
+            "type": "checkbox",
+            "defaultValue": false,
+            "condition": {
+                "fieldID": "refinementList1Collapsible",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+
+
+        {
+            "id": "showRefinementLilst2",
+            "name": "show Refinement List",
+            "group": "refinementList2",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "refinementList2ContainerSelector",
+            "name": "Container Selector",
+            "group": "refinementList2",
+            "type": "text",
+            "defaultValue": "#persoo-gender--refinementList"
+        },
+        {
+            "id": "refinementList2Header",
+            "name": "Header",
+            "group": "refinementList2",
+            "type": "text",
+            "defaultValue": "Gender"
+        },
+        {
+            "id": "refinementList2AttributeName",
+            "name": "AttributeName",
+            "group": "refinementList2",
+            "type": "text",
+            "defaultValue": "gender"
+        },
+        {
+            "id": "refinementList2Limit",
+            "name": "Limit",
+            "group": "refinementList2",
+            "type": "number",
+            "defaultValue": 5
+        },
+        {
+            "id": "refinementList2ShowMore",
+            "name": "Show More",
+            "group": "refinementList2",
+            "type": "checkbox",
+            "defaultValue": false
+        },
+        {
+            "id": "refinementList2ShowMoreLimit",
+            "name": "Limit with Show more",
+            "group": "refinementList2",
+            "type": "number",
+            "defaultValue": 10,
+            "condition": {
+                "fieldID": "refinementList2ShowMore",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+        {
+            "id": "refinementList2Collapsible",
+            "name": "collapsible by click on box header",
+            "group": "refinementList2",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "refinementList2Collapsed",
+            "name": "collapsed by default",
+            "group": "refinementList2",
+            "type": "checkbox",
+            "defaultValue": false,
+            "condition": {
+                "fieldID": "refinementList2Collapsible",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+
+        {
+            "id": "section_htmlLayout",
+            "name": "Layout HTML",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "layoutTemplate",
+            "name": "Layout Template as HTML",
+            "group": "design",
+            "type": "html",
+            "defaultValue": "To be filled from default values."
+        },
+        {
+            "id": "section_customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "css",
+            "defaultValue": "/* your own css rules */"
+        },
+        {
+            "id": "section_customJS",
+            "name": "Custom Javascript",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "customJS",
+            "name": "Custom Javascript",
+            "group": "design",
+            "type": "javascript",
+            "defaultValue": "/* your own javascript */"
+        }
+    ],
+    "groups": [
+        {
+            "id": "items",
+            "name": "Search Results (Product Items)"
+        },
+        {
+            "id": "fulltextFilter",
+            "name": "Fulltext Filter"
+        },
+        {
+            "id": "currentRefinedValues",
+            "name": "Current Refined Values"
+        },
+        {
+            "id": "hierarchicalMenu",
+            "name": "Hierarchical Menu Filter (Categories)"
+        },
+        {
+            "id": "menu",
+            "name": "Menu Filter (Categories)"
+        },
+        {
+            "id": "refinementList1",
+            "name": "Refinement List Filter 1 (Brands)"
+        },
+        {
+            "id": "refinementList2",
+            "name": "Refinement List Filter 2 (Gender)"
+        },
+        {
+            "id": "refinementList3",
+            "name": "Refinement List Filter 3 (Colors)"
+        },
+        {
+            "id": "clearAll",
+            "name": "Clear All Button"
+        },
+        {
+            "id": "statistics",
+            "name": "Found Results Count"
+        },
+        {
+            "id": "pagination",
+            "name": "Pagination & Page Size"
+        },
+        {
+            "id": "algorithm",
+            "name": "Search Algorithm"
+        },
+        {
+            "id": "options",
+            "name": "Search Widget Options"
+        },
+        {
+            "id": "design",
+            "name": "Layout HTML & CSS Styles"
+        }
+    ],
+    "template": "Note: this will be replaced by content of template.html",
+    "minScenariosCount": 0
+}

@@ -9,45 +9,18 @@
     },
     "fields": [
         {
-            "id": "inputSource",
-            "name": "Source Input Element",
-            "group": "sourceInput",
-            "type": "select",
-            "options": [
-                {
-                    "label": "Activate Existing INPUT",
-                    "value": "activateExisting"
-                },
-                {
-                    "label": "Insert New INPUT",
-                    "value": "insertNew"
-                }
-            ],
-            "defaultValue": "insertNew"
-        },
-        {
             "id": "inputSelector",
             "name": "Source Input Selector",
             "group": "sourceInput",
             "type": "text",
-            "defaultValue": "#input-id",
-            "condition": {
-                "fieldID": "inputSource",
-                "operator": "==",
-                "fieldValue": "activateExisting"
-            }
+            "defaultValue": "#persoo-autocomplele-1__input"
         },
         {
-            "id": "inputPlaceholder",
-            "name": "Source Input Placeholder Text",
+            "id": "formSelector",
+            "name": "Form Selector (form containing Input)",
             "group": "sourceInput",
             "type": "text",
-            "defaultValue": "Search for ...",
-            "condition": {
-                "fieldID": "inputSource",
-                "operator": "==",
-                "fieldValue": "insertNew"
-            }
+            "defaultValue": "#persoo-autocomplele-1__form"
         },
         {
             "id": "searchLink",
@@ -312,269 +285,53 @@
         },
 
         {
-            "id": "customCSSOnly",
-            "name": "Custom CSS Only (do not use any design fields overriding CustomCSS rules)",
-            "group": "design",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
             "id": "autocompleteID",
-            "name": "Autocomplete Element ID (usefull for CSS rules)",
+            "name": "Autocomplete Dropdown Element ID (usefull for CSS rules)",
             "group": "design",
             "type": "text",
             "defaultValue": "autocomplete1"
         },
         {
-            "id": "section_layout",
-            "name": "Layout",
+            "id": "section_dropdowpPositionAndWidth",
+            "name": "Dropdown Position and Width",
             "group": "design",
-            "type": "section",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
+            "type": "section"
         },
-        {
-            "id": "layout",
-            "name": "Layout",
-            "group": "design",
-            "type": "select",
-            "options": [
-                {
-                    "label": "Dataset below each other",
-                    "value": "belowEachOther"
-                },
-                {
-                    "label": "Datasets next to each other",
-                    "value": "nextToEachOther"
-                }
-            ],
-            "defaultValue": "belowEachOther",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-
         {
             "id": "offsetLeft",
-            "name": "Dropdown Offset Left (relative to source input)",
-            "group": "dropdownPosition",
+            "name": "Dropdown Offset Left (in px relative to source input)",
+            "group": "design",
             "type": "number",
             "defaultValue": 0
         },
         {
             "id": "offsetTop",
-            "name": "Dropdown Offset Top (relative to source input)",
-            "group": "dropdownPosition",
+            "name": "Dropdown Offset Top (in px relative to source input)",
+            "group": "design",
             "type": "number",
-            "defaultValue": 0
+            "defaultValue": 4
         },
         {
             "id": "useInputWidth",
             "name": "Set Dropdown Width to Input Width by inline CSS (use custom CSS to change Dropdown Width)",
-            "group": "dropdownPosition",
+            "group": "design",
             "type": "checkbox",
             "defaultValue": false
         },
 
         {
-            "id": "section_dropdown",
-            "name": "Dropdown box",
+            "id": "section_htmlLayout",
+            "name": "Search Bar Template",
             "group": "design",
-            "type": "section",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
+            "type": "section"
         },
         {
-            "id": "width",
-            "name": "Dropdown Width in px",
+            "id": "searchBarTemplate",
+            "name": "Search Bar Template as HTML",
             "group": "design",
-            "type": "number",
-            "defaultValue": 600,
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
+            "type": "html",
+            "defaultValue": "To be filled from default values."
         },
-
-        @@include templateParts/persooBorderStyles/fields.json
-
-        {
-            "id": "section_colors_dataset1",
-            "name": "Colors for Products Dataset",
-            "group": "design",
-            "type": "section",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "dataset1BackgroundColor",
-            "name": "Background Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#fff",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "dataset1TextColor",
-            "name": "Text Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#333",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "dataset1HighlightTextColor",
-            "name": "Highlighted Text Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#498fdb",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "dataset1SelectedBackgroundColor",
-            "name": "Selected Item Background Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#f0f0f0",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "dataset1HeadlineBackgroundColor",
-            "name": "Headline Background Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#f0f0f0",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "dataset1HeadlineTextColor",
-            "name": "Headline Text Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#333",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-
-        {
-            "id": "section_colors_dataset2",
-            "name": "Colors for Categories Dataset",
-            "group": "design",
-            "type": "section",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "dataset2BackgroundColor",
-            "name": "Background Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#224162",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "dataset2TextColor",
-            "name": "Text Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#fff",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "dataset2HighlightTextColor",
-            "name": "Highlighted Text Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#ddd",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "dataset2SelectedBackgroundColor",
-            "name": "Selected Item Background Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#498fdb",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "dataset2HeadlineBackgroundColor",
-            "name": "Headline Background Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#224162",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "dataset2HeadlineTextColor",
-            "name": "Headline Text Color",
-            "group": "design",
-            "type": "color",
-            "defaultValue": "#fff",
-            "condition": {
-                "fieldID": "customCSSOnly",
-                "operator": "!=",
-                "fieldValue": true
-            }
-        },
-
         {
             "id": "section_customCSS",
             "name": "Custom CSS",
@@ -586,7 +343,7 @@
             "name": "Custom CSS",
             "group": "design",
             "type": "css",
-            "defaultValue": "/* your own css rules, i.e\n.persoo-autocompleteDataset__hits__hit__img {\n    display: none;\n}\n*/"
+            "defaultValue": "/* your own css rules */"
         },
         {
             "id": "section_customJS",
@@ -613,11 +370,7 @@
         },
         {
             "id": "dataset2",
-            "name": "Categories or Brands (Dataset 2)"
-        },
-        {
-            "id": "dropdownPosition",
-            "name": "Dropdown Position & Width"
+            "name": "Categories, Brands (Dataset 2)"
         },
         {
             "id": "options",
@@ -625,7 +378,7 @@
         },
         {
             "id": "design",
-            "name": "Design & CSS Styles"
+            "name": "Layout HTML & CSS Styles"
         }
     ],
     "template": "Note: this will be replaced by content of template.html",

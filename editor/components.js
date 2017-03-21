@@ -15,6 +15,7 @@ var contextStore = require('./contextStore.js');
 
 module.exports = {
     panelFormFields: {}, // list of formFields on each panelID
+    isPreviewIframeLoaded: false,
 
     updatePanelFields: function(panelID) {
         var formFields = this.panelFormFields[panelID];
@@ -299,6 +300,14 @@ module.exports = {
         var previewDoc = previewIframe.contentWindow.document;
 
         previewDoc.body.innerHTML = 'Here you will see the preview ...';
+
+        if (!this.isPreviewIframeLoaded) {
+            var that = this;
+            previewIframe.onload = function() {
+                that.isPreviewIframeLoaded = true;
+                that.renderPreview();
+            }
+        }
     },
     renderPreview: function() {
         if (templateStore.currentTemplateID) {
@@ -326,13 +335,16 @@ module.exports = {
             baseElem.target = '_blank';
             previewDoc.head.appendChild(baseElem);
 */
-            // add html to preview iFrame
-            previewDoc.body.innerHTML = previewHTML ? previewHTML : 'Error: Cannot render template.';
 
-            // run javascripts contained in the html in iFrame context
-            var scriptElements = previewDoc.body.getElementsByTagName('script');
-            for (var i = 0; i < scriptElements.length; i++) {
-                previewIframe.contentWindow.eval(scriptElements[i].innerHTML);
+           if (this.isPreviewIframeLoaded && previewDoc.body) {
+                // add html to preview iFrame
+                previewDoc.body.innerHTML = previewHTML ? previewHTML : 'Error: Cannot render template.';
+
+                // run javascripts contained in the html in iFrame context
+                var scriptElements = previewDoc.body.getElementsByTagName('script');
+                for (var i = 0; i < scriptElements.length; i++) {
+                    previewIframe.contentWindow.eval(scriptElements[i].innerHTML);
+                }
             }
         }
     },

@@ -1,0 +1,214 @@
+/* Customize default CSS rules to get what you need
+   or delete them all and add them to your global CSS */
+
+/* Input Search Bar */
+.persoo-ac-search-bar {
+    display: block;
+    position: relative;
+    width: 300px; /* set width you need */
+}
+.persoo-ac-search-bar * {
+    box-sizing: border-box;
+}
+.persoo-ac-search-bar--field-wrapper {
+    position: relative;
+    height: 35px;
+    margin-right: 42px;
+    border: none;
+    -webkit-border-radius: 4px 0 0 4px;
+    -moz-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+    background: #fff;
+    zoom: 1;
+    overflow: hidden;
+}
+.persoo-ac-search-bar--field-wrapper input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    line-height: 15px;
+    padding: 6px 10px 6px 0;
+    margin: 0;
+    border: 0;
+    height: 33px;
+    font-family: arial,sans-serif;
+    font-size: 15px;
+    background: 0 0;
+    color: #111;
+    outline: 0;
+    -webkit-appearance: none;
+    box-shadow: none;
+    text-indent: 8px;
+}
+.persoo-ac-search-bar--submit-wrapper {
+    position: relative;
+    float: right;
+    top: 0;
+    right: 0;
+    height: 35px;
+    width: 42px;
+    overflow: hidden;
+    cursor: pointer;
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+    border: none;
+    background-color: #498fdb;
+    background-image: none;
+}
+.persoo-ac-search-bar--submit-wrapper input {
+    position: relative;
+    display: block;
+    height: 100%;
+    width: 100%;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    outline: 0;
+    color: #fff;
+    background: 0 0;
+    border: none;
+    text-indent: -1000px;
+    line-height: 1px;
+}
+.persoo-ac-search-bar--submit-wrapper .persoo-search-icon {
+    display: block;
+    position: absolute;
+    text-indent: -500px;
+    top: 50%;
+    left: 12px;
+    width: 16px;
+    height: 16px;
+    transform: translateY(-50%);
+    background: url("data:image/svg+xml;utf8,<svg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'  xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M15.553 31.107c8.59 0 15.554-6.964 15.554-15.554S24.143 0 15.553 0 0 6.964 0 15.553c0 8.59 6.964 15.554 15.553 15.554zm0-3.888c6.443 0 11.666-5.225 11.666-11.668 0-6.442-5.225-11.665-11.668-11.665-6.442 0-11.665 5.223-11.665 11.665 0 6.443 5.223 11.666 11.665 11.666zm12.21 3.84a2.005 2.005 0 0 1 .002-2.833l.463-.463a2.008 2.008 0 0 1 2.833-.003l8.17 8.168c.78.78.78 2.05-.004 2.833l-.462.463a2.008 2.008 0 0 1-2.834.004l-8.168-8.17z\' fill=\'#fff\' fill-rule=\'evenodd\'/></svg>") no-repeat center center / contain;
+}
+
+
+/* Autocomplete Dropdown */
+.persoo-autocompleteDropdown__root {
+  overflow-y: auto;
+  max-height: 100%;
+  width: 600px;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+  box-shadow: #666666 0px 0px 0px;
+}
+.persoo-autocompleteDataset__header,
+.persoo-autocompleteDataset__footer,
+.persoo-autocompleteDataset__hits__hit,
+.persoo-autocompleteDataset__empty {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 3% 10px 3%;
+}
+.persoo-autocompleteDataset__header {
+  font-weight: bold;
+}
+.persoo-autocompleteDataset__hits__hit {
+  cursor: pointer;
+  line-height: 23px;
+  overflow: hidden;
+  font-size: 1.0em;
+  text-align: left;
+}
+.persoo-autocompleteDataset__hits__hit,
+.persoo-autocompleteDataset__hits__hit a,
+.persoo-autocompleteDataset__hits__hit a:hover {
+  text-decoration: none;
+}
+
+/* common hit styles */
+.persoo-autocompleteDataset__hits__hit__title {
+  padding-left: 5px;
+}
+.persoo-autocompleteDataset__hits__hit__price {
+  font-weight: bold;
+}
+
+/* colors for dataset 1 */
+.persoo-autocompleteDataset-1__root {
+  background-color: #fff;
+}
+.persoo-autocompleteDataset-1__header {
+  color: #333;
+  background-color: #f0f0f0;
+}
+.persoo-autocompleteDataset-1__hits__hit.persoo-selected {
+  background-color: #f0f0f0;
+}
+.persoo-autocompleteDataset-1__root,
+.persoo-autocompleteDataset-1__hits a,
+.persoo-autocompleteDataset-1__hits a:hover {
+  color: #333;
+}
+.persoo-autocompleteDataset-1__hits__hit b {
+  font-weight: bold;
+  color: #498fdb;
+}
+
+/* colors for dataset 2 */
+.persoo-autocompleteDataset-2__root {
+  background-color: #224162;
+}
+.persoo-autocompleteDataset-2__header {
+  color: #fff;
+  background-color: #224162;
+}
+.persoo-autocompleteDataset-2__hits__hit.persoo-selected {
+  background-color: #498fdb;
+}
+.persoo-autocompleteDataset-2__root,
+.persoo-autocompleteDataset-2__hits a,
+.persoo-autocompleteDataset-2__hits a:hover {
+  color: #fff;
+}
+.persoo-autocompleteDataset-2__hits__hit b {
+  font-weight: bold;
+  color: #ddd;
+}
+
+/* layouts */
+.persoo-autocompleteDropdown__root {
+  display: -webkit-flex;
+  display: flex;
+}
+.persoo-autocompleteDataset-2__root {
+  -webkit-flex: 1;
+  flex: 1;
+}
+.persoo-autocompleteDataset-1__root {
+  -webkit-flex: 2;
+  flex: 2;
+}
+.persoo-autocompleteDataset-1__hits {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.persoo-autocompleteDataset-1__hits__hit {
+  box-sizing: content-box;
+  -webkit-flex: 1;
+  flex: 1;
+  width: auto;
+  min-width: 100px;
+  max-width: 150px;
+  min-height: 160px;
+}
+.persoo-autocompleteDataset-1__hits__hit a {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+.persoo-autocompleteDataset-1__hits__hit a div {
+  vertical-align: middle;
+  text-align: center;
+}
+.persoo-autocompleteDataset__hits__hit img {
+  max-width: 100px;
+  max-height: 100px;
+}
