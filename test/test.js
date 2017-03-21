@@ -5,10 +5,7 @@ var embeddedJS = require('../lib/embeddedjs');
 
 describe('persooTemplates.render(template, offerVariant, context)', function() {
     it('template rendering with no fields', function() {
-        var template = {
-                fields: [],
-                template: 'Rendered HTML Content'
-        };
+        var template = 'Rendered HTML Content';
         var offer = {
                 variants: [{
                     templateID: 'template1',
@@ -20,10 +17,7 @@ describe('persooTemplates.render(template, offerVariant, context)', function() {
         expect(resultHTML).to.equal('Rendered HTML Content');
     });
     it('template rendering with profile context', function() {
-        var template = {
-                fields: [],
-                template: 'userName: <%= profile.userName %> and userAge: <%= profile.age %>.'
-        };
+        var template = 'userName: <%= profile.userName %> and userAge: <%= profile.age %>.';
         var offer = {
                 variants: [{
                     templateID: 'template1',
@@ -38,15 +32,9 @@ describe('persooTemplates.render(template, offerVariant, context)', function() {
         };
         var resultHTML = persooTemplates.render(template, offer.variants[0], context);
         expect(resultHTML).to.equal('userName: Kuba and userAge: 18.');
-    });    
+    });
     it('template rendering with fields and profile context', function() {
-        var template = {
-                fields: [
-                    {id: 'userNameField', type: 'text'},
-                    {id: 'ageField', type: 'number'},
-                ],
-                template: 'userName: <%= userNameField %> and userAge: <%= ageField %>.'
-        };
+        var template = 'userName: <%= userNameField %> and userAge: <%= ageField %>.';
         var offer = {
                 variants: [{
                     templateID: 'template1',
@@ -64,7 +52,7 @@ describe('persooTemplates.render(template, offerVariant, context)', function() {
         };
         var resultHTML = persooTemplates.render(template, offer.variants[0], context);
         expect(resultHTML).to.equal('userName: Kuba and userAge: 18.');
-    });    
+    });
 });
 
 describe('embeddedJS.compile(str, options)', function () {
@@ -179,7 +167,7 @@ describe('embeddedJS.compile(str, options)', function () {
     	// Unspecified execution context should be `undefined` in strict mode
     	var strictModeTemplate = "<% var isReallyStrict = !((function () { return this; })()) -%>" +
                                  "<%= isReallyStrict -%>";
-    	
+
         assert.equal(embeddedJS.render(strictModeTemplate, {}, {strict: true}), 'true');
     });
 

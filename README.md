@@ -21,20 +21,7 @@ Include js library in your code. Then you can render "persoo templates" by calli
 ```javascript
     var persooTemplates = require('persoo-templates');
 
-    var offerContentTemplate = {
-        "class": "webWidget",
-        "name": "Custom HTML",
-        "fields": [
-            {
-                "id": "fieldID",
-                "label": "My field",
-                "formFieldType": "html",
-                "defaultValue": "<div>...your html code with EJS...</div>"
-            }
-        ],
-        "template": "Master template using predefined field as EJS variables, i.e. <%= fieldID %>",
-        "minScenariosCount": 0
-    };
+    var templateString = "Master template using predefined field as EJS variables, i.e. <%= fieldID %>";    
     var offerContentInstance = {
         templateID: 'templateID1',
         content: {
@@ -46,7 +33,7 @@ Include js library in your code. Then you can render "persoo templates" by calli
     };
     var context = {};
 
-    var renderedHTML = persooTemplates.render(offerContentTemplate, offerContentInstance, context);
+    var renderedHTML = persooTemplates.render(templateString, offerContentInstance, context);
 ```
 Output for the example above should be `Master template using predefined field as EJS variables, i.e. myFieldValue`
 
@@ -63,7 +50,7 @@ var offer = {
 ```
 thus Persoo developers calls
 ```
-var renderedHTML = persooTemplates.render(offerContentTemplate, offer.variants[0], context);
+var renderedHTML = persooTemplates.render(templateString, offer.variants[0], context);
 ```
 
 
