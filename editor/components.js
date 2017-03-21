@@ -325,10 +325,11 @@ module.exports = {
             };
 
             var currentTemplate = templateStore.templates[templateStore.currentTemplateID];
+            var templateString = currentTemplate.htmlBody || currentTemplate.template;
             var currentOffer = offerStore.offers[templateStore.currentTemplateID];
             var currentContext = {};
             this.addProductsToContext(currentContext, currentOffer.variants[0]);
-            var previewHTML = persooTemplates.render(currentTemplate, currentOffer.variants[0], currentContext);
+            var previewHTML = persooTemplates.render(templateString, currentOffer.variants[0], currentContext);
 
             // open all link from iFrame in new window
 /*            var baseElem = previewDoc.createElement('base');

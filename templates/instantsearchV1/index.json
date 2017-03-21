@@ -37,6 +37,13 @@
             "type": "html",
             "defaultValue": "<a href={{link}}>\\n    <img src={{imageLink}}>\\n    <div class=\"persoo-result-item__title\" title={{description}}>{{title}}</div>\\n    <div class=\"persoo-result-item__price\">{{price}} Kč</div>\\n</a>"
         },
+        {
+            "id": "emptyResultsTemplate",
+            "name": "Empty Results Template",
+            "group": "items",
+            "type": "html",
+            "defaultValue": "<h2>No results. Your query did not match any products.</h2><p>Try somethink like - more general terms, check you spelling, ...</p>"
+        },
 
         {
             "id": "showPagination",
@@ -431,6 +438,26 @@
         },
 
         {
+            "id": "section_filterTemplates",
+            "name": "General Filter Templates",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "showMoreInactiveTemplate",
+            "name": "Show More Template (inactive)",
+            "group": "design",
+            "type": "html",
+            "defaultValue": "show more"
+        },
+        {
+            "id": "showMoreActiveTemplate",
+            "name": "Show More Template (active)",
+            "group": "design",
+            "type": "html",
+            "defaultValue": "show less"
+        },
+        {
             "id": "section_htmlLayout",
             "name": "Layout HTML",
             "group": "design",
@@ -438,7 +465,7 @@
         },
         {
             "id": "layoutTemplate",
-            "name": "Layout Template as HTML",
+            "name": "Layout Template as HTML (elements marked as 'persoo-container' will be replaced by dynamic widgets)",
             "group": "design",
             "type": "html",
             "defaultValue": "To be filled from default values."

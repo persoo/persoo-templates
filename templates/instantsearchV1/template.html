@@ -90,16 +90,20 @@
                 <%
                 function addCollapsibleOption(collapsible, collapsed) {
                     if (collapsible) {
-                        return 'collapsible: { collapsed: ' + !!collapsed + '}'
+                        return 'collapsible: { collapsed: ' + !!collapsed + '}';
                     } else {
-                        return 'collapsible: false'
+                        return 'collapsible: false';
                     }
                 }
                 function addShowMoreOption(showMore, limit) {
                     if (showMore) {
-                        return 'showMore: { limit: ' + limit + '}'
+                        return 'showMore: { limit: ' + limit + '}';
+                        /* FIXME custom templates do not have classNames
+                        /*    ', ' +
+                        /*    'templates: { active: "' + showMoreActiveTemplate + '", ' +
+                        /*    'inactive: "' + showMoreInactiveTemplate + '"}}'; */
                     } else {
-                        return 'showMore: false'
+                        return 'showMore: false';
                     }
                 }
                 %>
@@ -109,7 +113,8 @@
                         container: '<%= itemsContainerSelector %>',
                         hitsPerPage: <%= itemsPerPage %>,
                         templates: {
-                            item: '<%= itemTemplate %>'
+                            item: '<%= itemTemplate %>',
+                            empty: '<%= emptyResultsTemplate %>'
                         },
                         cssClasses: {
                             item: "persoo-result-item"
@@ -136,6 +141,7 @@
                                     };
                                 }))
                             %>
+                            autoHideContainer: true,
                             options: <%= itemsPersPageOptions %>
                             // default is defined in hits widget
                         })
