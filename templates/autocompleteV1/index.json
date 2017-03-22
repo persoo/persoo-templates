@@ -170,7 +170,7 @@
                          "fieldValue": 1
                      },
                      {
-                         "fieldID": "showEmptyResults",
+                         "fieldID": "dataset1ShowWhenEmptyResults",
                          "operator": "==",
                          "fieldValue": true
                      }
@@ -276,7 +276,7 @@
                          "fieldValue": 2
                      },
                      {
-                         "fieldID": "showEmptyResults",
+                         "fieldID": "dataset2ShowWhenEmptyResults",
                          "operator": "==",
                          "fieldValue": true
                      }
