@@ -84,7 +84,8 @@
             document.querySelector('<%= formSelector %>').onsubmit = function() {
                 var query = document.querySelector('<%= inputSelector %>').value;
                 console.log("You searched for query '" + query + "'");
-                document.location.href = '<%= searchLink %>'.replace('$query', query);
+                document.location.href = '<%= searchLink %>'.replace(/\$query/g, query);
+                return false;
             };
         </script>
     <% } %>

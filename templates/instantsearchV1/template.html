@@ -113,8 +113,8 @@
                         container: '<%= itemsContainerSelector %>',
                         hitsPerPage: <%= itemsPerPage %>,
                         templates: {
-                            item: '<%= itemTemplate %>',
-                            empty: '<%= emptyResultsTemplate %>'
+                            item: <%= JSON.stringify(itemTemplate) %>,
+                            empty: <%= JSON.stringify(emptyResultsTemplate) %>
                         },
                         cssClasses: {
                             item: "persoo-result-item"
@@ -152,7 +152,7 @@
                         persooInstantSearch.widgets.stats({
                             container: '<%= statsContainerSelector %>',
                             templates: {
-                                body: '<%= statsTemplate %>'
+                                body: <%= JSON.stringify(statsTemplate) %>
                             }
                         })
                     );
@@ -175,7 +175,7 @@
                             container: '<%= currentRefinedValuesContainerSelector %>',
                             clearAll: 'after',
                             templates: {
-                                header: '<%= currentRefinedValuesHeader %>'
+                                header: <%= JSON.stringify(currentRefinedValuesHeader) %>
                             },
                             cssClasses: {
                                 root: "facet",
@@ -202,7 +202,7 @@
                             limit: '<%= menuLimit %>',
                             <%= addCollapsibleOption(menuCollapsible, menuCollapsed) %>,
                             templates: {
-                                header: '<%= menuHeader %>'
+                                header: <%= JSON.stringify(menuHeader) %>
                             },
                             cssClasses: {
                                 root: "facet",
@@ -220,7 +220,7 @@
                             limit: '<%= hierarchicalMenuLimit %>',
                             <%= addCollapsibleOption(hierarchicalMenuCollapsible, hierarchicalMenuCollapsed) %>,
                             templates: {
-                                header: '<%= hierarchicalMenuHeader %>'
+                                header: <%= JSON.stringify(hierarchicalMenuHeader) %>
                             },
                             cssClasses: {
                                 root: "facet",
@@ -237,7 +237,7 @@
                             attributeName: '<%= refinementList1AttributeName %>',
                             operator: 'or',
                             templates: {
-                                header: '<%= refinementList1Header %>'
+                                header: <%= JSON.stringify(refinementList1Header) %>
                             },
                             limit: <%= refinementList1Limit %>,
                             <%= addShowMoreOption(refinementList1ShowMore, refinementList1ShowMoreLimit) %>,
@@ -257,7 +257,7 @@
                             attributeName: '<%= refinementList2AttributeName %>',
                             operator: 'or',
                             templates: {
-                                header: '<%= refinementList2Header %>'
+                                header: <%= JSON.stringify(refinementList2Header) %>
                             },
                             limit: <%= refinementList2Limit %>,
                             <%= addShowMoreOption(refinementList2ShowMore, refinementList2ShowMoreLimit) %>,
