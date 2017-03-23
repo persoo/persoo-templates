@@ -4,7 +4,9 @@
     "name": "Side Box",
     "defaultsForOfferTemplate": {
         "description": "Displays ear on the page side to slide out content box on hover/click.",
+        "releaseStage": "beta",
         "data": {
+            "name": "Side Box",
             "location": "sidebox"
         }
     },

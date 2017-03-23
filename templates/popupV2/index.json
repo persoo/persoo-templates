@@ -4,7 +4,9 @@
     "name": "Pop-up",
     "defaultsForOfferTemplate": {
         "description": "Basic Pop-up with rich options.",
+        "releaseStage": "beta",
         "data": {
+            "name": "Pop-up",
             "location": "popup"
         }
     },

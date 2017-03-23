@@ -1,9 +1,12 @@
 {
     "class": "webWidget",
-    "name": "TopProducts (beta)",
+    "name": "Top Products",
     "defaultsForOfferTemplate": {
         "description": "Box with vertical lists of best selling and trending products.",
-        "data": {}
+        "releaseStage": "beta",
+        "data": {
+            "name": "Top Products"
+        }
     },
     "minScenariosCount": 2,
     "fields": [

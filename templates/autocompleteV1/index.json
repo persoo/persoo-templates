@@ -2,8 +2,10 @@
     "class": "webWidget",
     "name": "Autocomplete",
     "defaultsForOfferTemplate": {
-        "description": "Insert or activate existing INPUT with autocomplete.",
+        "description": "Insert Search Box with Autocomplete and Product Suggestions.",
+        "releaseStage": "beta",
         "data": {
+            "name": "Autocomplete",
             "location": "autocomplete"
         }
     },

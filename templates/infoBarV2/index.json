@@ -1,10 +1,12 @@
 {
     "class": "webWidget",
     "isActive": true,
-    "name": "Info bar",
+    "name": "Info Bar",
     "defaultsForOfferTemplate": {
         "description": "Short messages on the top/bottom of the page.",
+        "releaseStage": "beta",
         "data": {
+            "name": "Info Bar",
             "location": "infobar"
         }
     },

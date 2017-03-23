@@ -1,9 +1,11 @@
 {
     "class": "webWidget",
-    "name": "Instant Search",
+    "name": "Instant Search Results",
     "defaultsForOfferTemplate": {
-        "description": "Persoo instant search - fulltext search as you type with real-time filters and facets.",
+        "description": "As you type search results with real-time filters and facets.",
+        "releaseStage": "beta",
         "data": {
+            "name": "Instant Search Results",
             "location": "autocomplete"
         }
     },

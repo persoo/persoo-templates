@@ -4,7 +4,10 @@
     "name": "Content Block",
     "defaultsForOfferTemplate": {
         "description": "Content block can be placed in any location in a page.",
-        "data": {}
+        "releaseStage": "beta",
+        "data": {
+            "name": "Content Block"
+        }
     },
     "fields": [
 
