@@ -1,16 +1,16 @@
 /* Customize default CSS rules to get what you need
    or delete them all and add them to your global CSS */
 
-/* Input Search Bar */
+/* Search Bar with Autocomplete (and input element) */
 .persoo-ac-search-bar {
     display: block;
     position: relative;
-    width: 300px; /* set width you need */
+    width: 300px; /* set width you need or 'auto' */
 }
 .persoo-ac-search-bar * {
     box-sizing: border-box;
 }
-.persoo-ac-search-bar--field-wrapper {
+.persoo-ac-search-bar__field-wrapper {
     position: relative;
     height: 35px;
     margin-right: 42px;
@@ -22,7 +22,7 @@
     zoom: 1;
     overflow: hidden;
 }
-.persoo-ac-search-bar--field-wrapper input {
+.persoo-ac-search-bar__field-wrapper input {
     position: absolute;
     top: 0;
     left: 0;
@@ -42,7 +42,7 @@
     box-shadow: none;
     text-indent: 8px;
 }
-.persoo-ac-search-bar--submit-wrapper {
+.persoo-ac-search-bar__submit-wrapper {
     position: relative;
     float: right;
     top: 0;
@@ -58,7 +58,7 @@
     background-color: #498fdb;
     background-image: none;
 }
-.persoo-ac-search-bar--submit-wrapper input {
+.persoo-ac-search-bar__submit-wrapper input {
     position: relative;
     display: block;
     height: 100%;
@@ -74,7 +74,7 @@
     text-indent: -1000px;
     line-height: 1px;
 }
-.persoo-ac-search-bar--submit-wrapper .persoo-search-icon {
+.persoo-ac-search-bar__submit-wrapper .persoo-search-icon {
     display: block;
     position: absolute;
     text-indent: -500px;
@@ -91,10 +91,11 @@
 .persoo-autocompleteDropdown__root {
   overflow-y: auto;
   max-height: 100%;
-  width: 600px;
+  width: 100%; /* because of responsivity */
+  max-width: 600px;
   border-radius: 4px;
   border: 1px solid #aaa;
-  box-shadow: #666666 0px 0px 0px;
+  box-shadow: #666666 2px 2px 2px;
 }
 .persoo-autocompleteDataset__header,
 .persoo-autocompleteDataset__footer,
@@ -211,4 +212,11 @@
 .persoo-autocompleteDataset__hits__hit img {
   max-width: 100px;
   max-height: 100px;
+}
+
+/* on small screens do not start below INPUT box, but fill full screen width */
+@media (max-width: 680px) {
+    .persoo-autocompleteDropdown__root {
+    	left: 0px !important;
+    }
 }

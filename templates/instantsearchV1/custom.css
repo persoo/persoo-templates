@@ -275,6 +275,16 @@ a.ais-current-refined-values--link:hover {
   display: block;
 }
 
+/* Menu Filter */
+.ais-menu--item a {
+    padding: 0 7px;
+    color: #111;
+}
+.ais-menu--item__active > div > a {
+    color: #000;
+    font-weight: 700;
+}
+
 /* Hierarchical Menu Filter */
 .ais-hierarchical-menu--list__lvl1 {
     margin-left: 20px
@@ -291,7 +301,12 @@ a.ais-current-refined-values--link:hover {
     font-weight: 700;
 }
 .ais-hierarchical-menu--list__lvl0 > div > div > .ais-hierarchical-menu--link:before {
-    content: "\f105  ";
+    /* content: "\f105  "; */
+    content: " ";
+    float: right;
+    width: 16px;
+    height: 22px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" opacity=\'0.5\' width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z\" /></svg>") no-repeat left center / contain;
 }
 
 /* Pagination */
@@ -326,11 +341,16 @@ a.ais-current-refined-values--link:hover {
     cursor: pointer;
 }
 .ais-root__collapsible .ais-header:after {
-    content: "\f107";
+    /* content: "\f107"; */
+    content: " ";
     float: right;
+    width: 16px;
+    height: 22px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" opacity=\'0.5\' width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z\" /></svg>") no-repeat center center / contain;
 }
 .ais-root__collapsible.ais-root__collapsed .ais-header:after {
-    content: "\f104";
+    /* content: "\f104"; */
+    background: url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" opacity=\'0.5\' width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z\" /></svg>") no-repeat center center / contain;
 }
 .ais-root__collapsed .ais-body, .ais-root__collapsed .ais-footer {
   display: none;
