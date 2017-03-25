@@ -1,37 +1,6 @@
 
 <%
     var offerID = offerID || 'randomOfferID';
-    var priceSufix = '&nbsp;Kč';
-
-    function printTemplateFunctionsAsJSON(templates) {
-        var html = "{";
-        for (var key in templates) {
-            if (html != "{") {
-                 html += ',';
-            }
-            var templateFunction = templates[key];
-            if (typeof templateFunction == 'function') {
-                templateFunction = templateFunction.toString();
-            }
-            html += key + ": " + templateFunction;
-        }
-        return html + "}";
-    }
-
-    function renderTemplateFunction(pattern) {
-        return (function (data) {
-            return "$pattern".replace(/\$query/g, data.query).replace(/\$count/g, data.count);
-        }).toString().replace(/\$pattern/, pattern);
-    };
-    function renderTemplateFunctionIfNonEmpty(pattern) {
-        return (function (data) {
-            if (data.isEmpty) {
-                return "";
-            } else {
-                return "$pattern".replace(/\$query/g, data.query).replace(/\$count/g, data.count);
-            }
-        }).toString().replace(/\$pattern/, pattern);
-    };
 %>
 <div>
     <%
@@ -104,19 +73,19 @@
                                 <%
                                    var templates2 = {};
                                    if (dataset2HeaderTemplate) {
-                                       templates2.header = renderTemplateFunction(dataset2HeaderTemplate);
+                                       templates2.header = dataset2HeaderTemplate;
                                    }
                                    if (dataset2HitTemplate) {
                                        templates2.hit = dataset2HitTemplate;
                                    }
                                    if (dataset2FooterTemplate) {
-                                       templates2.footer = renderTemplateFunctionIfNonEmpty(dataset2FooterTemplate);
+                                       templates2.footer = dataset2FooterTemplate;
                                    }
                                    if (dataset2EmptyTemplate) {
-                                       templates2.empty = renderTemplateFunction(dataset2EmptyTemplate);
+                                       templates2.empty = dataset2EmptyTemplate;
                                    }
                                 %>
-                                templates: <%= printTemplateFunctionsAsJSON(templates2) %>
+                                templates: <%= JSON.stringify(templates2) %>
                             },
                         <% } %>
                         {
@@ -124,21 +93,21 @@
                             source: window.persoo.getAlgorithmSource('<%= dataset1Algorithm %>', <%= dataset1MaxResultsCount %>),
                             showWhenEmptyResults: <%= dataset1ShowWhenEmptyResults %>,
                             <%
-                            var templates1 = {};
-                            if (dataset1HeaderTemplate) {
-                                templates1.header = renderTemplateFunction(dataset1HeaderTemplate);
-                            }
-                            if (dataset1HitTemplate) {
-                                templates1.hit = dataset1HitTemplate;
-                            }
-                            if (dataset1FooterTemplate) {
-                                templates1.footer = renderTemplateFunctionIfNonEmpty(dataset1FooterTemplate);
-                            }
-                            if (dataset1EmptyTemplate) {
-                                templates1.empty = renderTemplateFunction(dataset1EmptyTemplate);
-                            }
+                                var templates1 = {};
+                                if (dataset1HeaderTemplate) {
+                                    templates1.header = dataset1HeaderTemplate;
+                                }
+                                if (dataset1HitTemplate) {
+                                    templates1.hit = dataset1HitTemplate;
+                                }
+                                if (dataset1FooterTemplate) {
+                                    templates1.footer = dataset1FooterTemplate;
+                                }
+                                if (dataset1EmptyTemplate) {
+                                    templates1.empty = dataset1EmptyTemplate;
+                                }
                             %>
-                            templates: <%= printTemplateFunctionsAsJSON(templates1) %>
+                            templates: <%= JSON.stringify(templates1) %>
                         },
                     ],
                     minChars: <%= minChars %>,
@@ -147,15 +116,14 @@
                     closeOnBlur: <%= closeOnBlur %>,
                     offsetLeft: <%= offsetLeft %>,
                     offsetTop: <%= offsetTop %>,
-                    width: <%= useInputWidth == true ? '"input"' : 'null' %>,
-                    priceSuffix: "<%= priceSufix.replace("&nbsp;", "\u00A0") %>"
+                    width: <%= useInputWidth == true ? '"input"' : 'null' %>
                 });
             }
             function loadScript(url, onloadFn, errorFn) {var d = document; var s=d.createElement("script");
                 s.src=url,s.type="text/javascript",s.async=true,s.onerror=errorFn,s.onload=onloadFn;
                 d.getElementsByTagName("head")[0].appendChild(s)};
 
-            var acLibLink = "https://scripts.persoo.cz/shared/autocompleteV2.1/persooAutocomplete.js";
+            var acLibLink = "https://scripts.persoo.cz/shared/autocompleteV2.2/persooAutocomplete.js";
             loadScript(acLibLink, initAutocomplete, function (){});
         })();
     </script>

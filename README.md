@@ -53,6 +53,8 @@ thus Persoo developers calls
 var renderedHTML = persooTemplates.render(templateString, offer.variants[0], context);
 ```
 
+> Note: Fields passed in context are rendered as well, except for fields, whose name ends with 'Template' suffix.
+I.e. ItemTemplate: "<%= abc %>" will be kept as it is. It's usefull for adding template strings to Widget configurations.
 
 ## Tests
 

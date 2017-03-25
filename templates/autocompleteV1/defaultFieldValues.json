@@ -4,16 +4,9 @@
 
     "dataset1Algorithm": "f645379a715b4b189eff1c14805e9f6e",
     "dataset1MaxResultsCount": 6,
-    "dataset1HeaderTemplate": "PRODUCTS matching '$query'",
-    "dataset1HitTemplate": "",
-    "dataset1EmptyTemplate": "Nothing found for '$query'",
 
     "dataset2Algorithm": "f645379a715b4b189eff1c14805e9f6e",
     "dataset2MaxResultsCount": 5,
-    "dataset2HeaderTemplate": "CATEGORIES",
-    "dataset2HitTemplate": "function (data) {\n    return data.hit.title ? data.highlightQuery(data.hit.title) : '';\n}",
-    "dataset2FooterTemplate": "",
-    "dataset2EmptyTemplate": "",
 
     "searchBarTemplate": "<!-- leave empty if you want to activate your own INPUT in the page\n     Fill element IDs in section \"Source Input Field\". -->\n<form id=\"persoo-autocomplele-1__form\"\n      class=\"persoo-ac-search-bar\"\n      accept-charset=\"utf-8\" role=\"search\">   \n    <div class=\"persoo-ac-search-bar__submit-wrapper\">       \n\t\t<span class=\"persoo-search-icon\">Search</span>\n        <input type=\"submit\"\n               id=\"persoo-autocomplele-1__submit\"\n               onclick=\"document.getElementById('persoo-autocomplele-1__form').submit();\"\n               value=\"Search\">\n    </div>\n    <div class=\"persoo-ac-search-bar__field-wrapper\">\n        <div class=\"persoo-ac-search-bar__field\">\n            <input type=\"text\"\n                   id=\"persoo-autocomplele-1__input\"\n                   value=\"\" name=\"query\"\n                   placeholder=\"Search for ...\"\n                   autocomplete=\"off\">\n        </div>\n    </div>\n</form>"
 }
