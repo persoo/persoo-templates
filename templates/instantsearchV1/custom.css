@@ -111,11 +111,16 @@
 }
 
 /* Product Items (hits) */
-.ais-hits {
+.ais-hits,
+.ais-infinite-hits {
   display: flex;
   flex-wrap: wrap;
 }
-.ais-hits__empty {
+.ais-hits__empty,
+.ais-infinite-hits__empty {
+}
+.ais-infinite-hits--showmore {
+    text-align: center;
 }
 
 .persoo-result-item {

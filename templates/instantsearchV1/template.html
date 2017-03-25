@@ -1,37 +1,6 @@
 
 <%
     var offerID = offerID || 'randomOfferID';
-    var priceSufix = '&nbsp;Kč';
-
-    function printTemplateFunctionsAsJSON(templates) {
-        var html = "{";
-        for (var key in templates) {
-            if (html != "{") {
-                 html += ',';
-            }
-            var templateFunction = templates[key];
-            if (typeof templateFunction == 'function') {
-                templateFunction = templateFunction.toString();
-            }
-            html += key + ": " + templateFunction;
-        }
-        return html + "}";
-    }
-
-    function renderTemplateFunction(pattern) {
-        return (function (data) {
-            return "$pattern".replace(/\$query/g, data.query).replace(/\$count/g, data.count);
-        }).toString().replace(/\$pattern/, pattern);
-    };
-    function renderTemplateFunctionIfNonEmpty(pattern) {
-        return (function (data) {
-            if (data.isEmpty) {
-                return "";
-            } else {
-                return "$pattern".replace(/\$query/g, data.query).replace(/\$count/g, data.count);
-            }
-        }).toString().replace(/\$pattern/, pattern);
-    };
 %>
 <div>
     <% /* prerequisities to see something in the preview */ %>
@@ -88,6 +57,20 @@
                     urlSync: <%= urlSync %>
                 });
                 <%
+                function addTemplate(templateField) {
+                    return 'persooInstantSearch.EJS(' + JSON.stringify(templateField) + ')';
+                }
+                var customClassNames = JSON.parse(customClassNamesJSON);
+                function addClassNamesFor(widget, defaults) {
+                    var cssClasses = defaults;
+                    var userClasses = customClassNames[widget];
+                    if (userClasses) {
+                        for (var i in userClasses) {
+                            cssClasses[i] = cssClasses[i] + ' ' + userClasses[i];
+                        }
+                    }
+                    return JSON.stringify(cssClasses);
+                }
                 function addCollapsibleOption(collapsible, collapsed) {
                     if (collapsible) {
                         return 'collapsible: { collapsed: ' + !!collapsed + '}';
@@ -97,11 +80,16 @@
                 }
                 function addShowMoreOption(showMore, limit) {
                     if (showMore) {
-                        return 'showMore: { limit: ' + limit + '}';
-                        /* FIXME custom templates do not have classNames
-                        /*    ', ' +
-                        /*    'templates: { active: "' + showMoreActiveTemplate + '", ' +
-                        /*    'inactive: "' + showMoreInactiveTemplate + '"}}'; */
+                        var opt = {
+                            limit: limit,
+                            templates: {
+                                active: "ACTIVE",
+                                inactive: "INACTIVE"
+                            }
+                        }
+                        return 'showMore: ' + JSON.stringify(opt)
+                            .replace('"ACTIVE"', addTemplate('<div class="persoo-show-less">' + showMoreActiveTemplate + '</div>'))
+                            .replace('"INACTIVE"', addTemplate('<div class="persoo-show-more">' + showMoreInactiveTemplate + '</div>'));
                     } else {
                         return 'showMore: false';
                     }
@@ -109,22 +97,22 @@
                 %>
 
                 search.addWidget(
-                    persooInstantSearch.widgets.hits({
+                    persooInstantSearch.widgets.<%= (useInfiniteHits ? 'infiniteHits' : 'hits') %>({
                         container: '<%= itemsContainerSelector %>',
                         hitsPerPage: <%= itemsPerPage %>,
+                        <%= useInfiniteHits ? 'showMoreLabel: "' + showMoreHitsLabel + '",' : '' %>
                         templates: {
-                            item: <%= JSON.stringify(itemTemplate) %>,
-                            empty: <%= JSON.stringify(emptyResultsTemplate) %>
+                            item: <%= addTemplate(itemTemplate) %>,
+                            empty: <%= addTemplate(emptyResultsTemplate) %>
                         },
-                        cssClasses: {
-                            item: "persoo-result-item"
-                        }
+                        cssClasses: <%= addClassNamesFor(useInfiniteHits ? 'infiniteHits' : 'hits', {}) %>
                     })
                 );
                 <% if (showPagination) { %>
                     search.addWidget(
                         persooInstantSearch.widgets.pagination({
-                            container: '<%= paginationContainerSelector %>'
+                            container: '<%= paginationContainerSelector %>',
+                            cssClasses: <%= addClassNamesFor('pagination', {}) %>
                         })
                     );
                 <% } %>
@@ -142,8 +130,8 @@
                                 }))
                             %>
                             autoHideContainer: true,
-                            options: <%= itemsPersPageOptions %>
-                            // default is defined in hits widget
+                            options: <%= itemsPersPageOptions %>,  // default is defined in hits widget
+                            cssClasses: <%= addClassNamesFor('hitsPerPageSelector', {}) %>
                         })
                     );
                 <% } %>
@@ -152,8 +140,9 @@
                         persooInstantSearch.widgets.stats({
                             container: '<%= statsContainerSelector %>',
                             templates: {
-                                body: <%= JSON.stringify(statsTemplate) %>
-                            }
+                                body: <%= addTemplate(statsTemplate) %>
+                            },
+                            cssClasses: <%= addClassNamesFor('stats', {}) %>
                         })
                     );
                 <% } %>
@@ -165,6 +154,7 @@
                             templates: {
                                 link: 'Reset everything but fulltext'
                             },
+                            cssClasses: <%= addClassNamesFor('clearAll', {}) %>,
                             autoHideContainer: false
                         })
                     );
@@ -175,12 +165,13 @@
                             container: '<%= currentRefinedValuesContainerSelector %>',
                             clearAll: 'after',
                             templates: {
-                                header: <%= JSON.stringify(currentRefinedValuesHeader) %>
+                                header: <%= addTemplate(currentRefinedValuesHeaderTemplate) %>,
+                                clearAll: <%= addTemplate(currentRefinedValuesClearAllTemplate) %>
                             },
-                            cssClasses: {
+                            cssClasses: <%= addClassNamesFor('currentRefinedValues', {
                                 root: "facet",
                                 count: "facet-count"
-                            }
+                            }) %>
                         })
                     );
                 <% } %>
@@ -189,7 +180,8 @@
                     search.addWidget(
                         persooInstantSearch.widgets.searchBox({
                             container: '<%= fulltextFilterContainerSelector %>',
-                            placeholder: '<%= fulltextFilterPlaceholder %>'
+                            placeholder: '<%= fulltextFilterPlaceholder %>',
+                            cssClasses: <%= addClassNamesFor('searchBox', {}) %>
                         })
                     );
                 <% } %>
@@ -202,12 +194,12 @@
                             limit: '<%= menuLimit %>',
                             <%= addCollapsibleOption(menuCollapsible, menuCollapsed) %>,
                             templates: {
-                                header: <%= JSON.stringify(menuHeader) %>
+                                header: <%= addTemplate(menuHeaderTemplate) %>
                             },
-                            cssClasses: {
+                            cssClasses: <%= addClassNamesFor('menu', {
                                 root: "facet",
                                 count: "facet-count"
-                            }
+                            }) %>
                         })
                     );
                 <% } %>
@@ -220,12 +212,12 @@
                             limit: '<%= hierarchicalMenuLimit %>',
                             <%= addCollapsibleOption(hierarchicalMenuCollapsible, hierarchicalMenuCollapsed) %>,
                             templates: {
-                                header: <%= JSON.stringify(hierarchicalMenuHeader) %>
+                                header: <%= addTemplate(hierarchicalMenuHeaderTemplate) %>
                             },
-                            cssClasses: {
+                            cssClasses: <%= addClassNamesFor('hierarchicalMenu', {
                                 root: "facet",
                                 count: "facet-count"
-                            }
+                            }) %>
                         })
                     );
                 <% } %>
@@ -237,15 +229,15 @@
                             attributeName: '<%= refinementList1AttributeName %>',
                             operator: 'or',
                             templates: {
-                                header: <%= JSON.stringify(refinementList1Header) %>
+                                header: <%= addTemplate(refinementList1HeaderTemplate) %>
                             },
                             limit: <%= refinementList1Limit %>,
                             <%= addShowMoreOption(refinementList1ShowMore, refinementList1ShowMoreLimit) %>,
                             <%= addCollapsibleOption(refinementList1Collapsible, refinementList1Collapsed) %>,
-                            cssClasses: {
+                            cssClasses: <%= addClassNamesFor('refinementList', {
                                 root: "facet",
                                 count: "facet-count"
-                            }
+                            }) %>
                         })
                     );
                 <% } %>
@@ -257,15 +249,15 @@
                             attributeName: '<%= refinementList2AttributeName %>',
                             operator: 'or',
                             templates: {
-                                header: <%= JSON.stringify(refinementList2Header) %>
+                                header: <%= addTemplate(refinementList2HeaderTemplate) %>
                             },
                             limit: <%= refinementList2Limit %>,
                             <%= addShowMoreOption(refinementList2ShowMore, refinementList2ShowMoreLimit) %>,
                             <%= addCollapsibleOption(refinementList2Collapsible, refinementList2Collapsed) %>,
-                            cssClasses: {
+                            cssClasses: <%= addClassNamesFor('refinementList', {
                                 root: "facet",
                                 count: "facet-count"
-                            }
+                            }) %>
                         })
                     );
                 <% } %>

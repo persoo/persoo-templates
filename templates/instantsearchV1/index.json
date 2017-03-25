@@ -34,19 +34,38 @@
         },
         {
             "id": "itemTemplate",
-            "name": "Item Template (HTML with {{fieldName}} placeholders)",
+            "name": "Item Template",
             "group": "items",
             "type": "html",
-            "defaultValue": "<a href={{link}}>\n    <img src={{imageLink}}>\n    <div class=\"persoo-result-item__title\" title={{description}}>{{title}}</div>\n    <div class=\"persoo-result-item__price\">{{price}} Kč</div>\n</a>"
+            "defaultValue": "<a href=<%= link %>>\n    <img src=<%= imageLink %>>\n    <div class=\"persoo-result-item__title\" title=<%= description %>><%= title %></div>\n    <div class=\"persoo-result-item__price\"><%= price %> Kč</div>\n</a>"
         },
         {
             "id": "emptyResultsTemplate",
             "name": "Empty Results Template",
             "group": "items",
             "type": "html",
-            "defaultValue": "<h2>No results. Your query did not match any products.</h2><p>Try somethink like - more general terms, check you spelling, ...</p>"
+            "defaultValue": "<h2>Your query did not match any products.</h2>\n<p>Try somethink like</p>\n<ul>\n    <li>more general terms</li>\n    <li>check you spelling</li>\n    <li>remove some filters</li>\n</ul>"
         },
 
+        {
+            "id": "useInfiniteHits",
+            "name": "Use Inifinite Result List",
+            "group": "pagination",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "showMoreHitsLabel",
+            "name": "'Show More Results' Label",
+            "group": "pagination",
+            "type": "text",
+            "defaultValue": "Show more",
+            "condition": {
+                "fieldID": "useInfiniteHits",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
         {
             "id": "showPagination",
             "name": "show Pagination",
@@ -117,7 +136,7 @@
             "name": "Container Selector",
             "group": "statistics",
             "type": "text",
-            "defaultValue": "{{nbHits}} results found"
+            "defaultValue": "<%= nbHits %> results found"
         },
 
         {
@@ -150,11 +169,18 @@
             "defaultValue": "#persoo-current-refined-values"
         },
         {
-            "id": "currentRefinedValuesHeader",
+            "id": "currentRefinedValuesHeaderTemplate",
             "name": "Header",
             "group": "currentRefinedValues",
             "type": "text",
             "defaultValue": "Selected Filters"
+        },
+        {
+            "id": "currentRefinedValuesClearAllTemplate",
+            "name": "Header",
+            "group": "currentRefinedValues",
+            "type": "text",
+            "defaultValue": "Clear all"
         },
 
         {
@@ -194,7 +220,7 @@
             "defaultValue": "#persoo-productTypes"
         },
         {
-            "id": "menuHeader",
+            "id": "menuHeaderTemplate",
             "name": "Header",
             "group": "menu",
             "type": "text",
@@ -249,7 +275,7 @@
             "defaultValue": "#persoo-categories"
         },
         {
-            "id": "hierarchicalMenuHeader",
+            "id": "hierarchicalMenuHeaderTemplate",
             "name": "Header",
             "group": "hierarchicalMenu",
             "type": "text",
@@ -305,7 +331,7 @@
             "defaultValue": "#persoo-brands--refinementList"
         },
         {
-            "id": "refinementList1Header",
+            "id": "refinementList1HeaderTemplate",
             "name": "Header",
             "group": "refinementList1",
             "type": "text",
@@ -380,7 +406,7 @@
             "defaultValue": "#persoo-gender--refinementList"
         },
         {
-            "id": "refinementList2Header",
+            "id": "refinementList2HeaderTemplate",
             "name": "Header",
             "group": "refinementList2",
             "type": "text",
@@ -484,6 +510,13 @@
             "group": "design",
             "type": "css",
             "defaultValue": "/* your own css rules */"
+        },
+        {
+            "id": "customClassNamesJSON",
+            "name": "Custom Class Names (in format 'widget.component: yourClassName')",
+            "group": "design",
+            "type": "json",
+            "defaultValue": "{\n  \"hits\": {\n    \"root\": \"persoo-results\",\n    \"item\": \"persoo-result-item\"\n},\n  \"infiniteHits\": {\n    \"root\": \"persoo-results\",\n    \"item\": \"persoo-result-item\"\n}}"
         },
         {
             "id": "section_customJS",
