@@ -243,7 +243,7 @@
             "id": "dataset2HitTemplate",
             "name": "Custom Hit (javascript function)",
             "group": "dataset2",
-            "type": "javascript",
+            "type": "html",
             "defaultValue": "<%= hit.title ? highlightQuery(hit.title) : '' %>",
             "condition": {
              "fieldID": "datasetsCount",
