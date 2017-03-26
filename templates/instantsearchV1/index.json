@@ -513,10 +513,19 @@
         },
         {
             "id": "customClassNamesJSON",
-            "name": "Custom Class Names (in format 'widget.component: yourClassName')",
+            "name": "Custom Class Names (in path 'widget.component', see classes .ais-<widget>--<component> and convert names to camelCase)",
             "group": "design",
             "type": "json",
-            "defaultValue": "{\n  \"hits\": {\n    \"root\": \"persoo-results\",\n    \"item\": \"persoo-result-item\"\n},\n  \"infiniteHits\": {\n    \"root\": \"persoo-results\",\n    \"item\": \"persoo-result-item\"\n}}"
+            "defaultValue": {
+                "hits": {
+                    "root": "persoo-results",
+                    "item": "persoo-result-item"
+                },
+                "infiniteHits": {
+                    "root": "persoo-results",
+                    "item": "persoo-result-item"
+                }
+            }
         },
         {
             "id": "section_customJS",
@@ -575,7 +584,7 @@
         },
         {
             "id": "pagination",
-            "name": "Pagination & Page Size"
+            "name": "Pagination & Page Size & Infinite scroll"
         },
         {
             "id": "algorithm",

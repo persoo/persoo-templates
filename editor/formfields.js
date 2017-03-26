@@ -78,6 +78,7 @@ var formFieldTypes = {
     html: 'html',
     richtext: 'richtext',
     javascript: 'javascript',
+    json: 'json',
     css: 'css'
 };
 

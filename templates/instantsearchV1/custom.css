@@ -2,22 +2,22 @@
  * Create your own layout, you can event use elements
  * with correct IDs inserted by your webserver. */
 
-#persoo-search-results__root {
+.persoo-search-results__root {
   display: flex;
 }
-#persoo-search-results__root * {
+.persoo-search-results__root * {
   box-sizing: border-box;
 }
-#persoo-search-results__root a {
+.persoo-search-results__root a {
   text-decoration: none;
   color: #636363;
 }
-#persoo-search-results__filters {
+.persoo-search-results__filters {
   flex: 1;
   min-width: 250px;
   margin-right: 25px;
 }
-#persoo-search-results__items {
+.persoo-search-results__items {
   flex: 4;
 }
 #persoo-pagination {
@@ -28,22 +28,22 @@
 }
 
 /* Search bar above products */
-#persoo-search-bar-container {
+.persoo-search-bar-container {
   padding-top: 0px;
   margin-bottom: 15px;
   width: 100%;
   position: relative;
 }
 
-#persoo-search-bar-container:after {
+.persoo-search-bar-container:after {
   clear: both;
   content: "";
   display: block;
 }
-#persoo-search-bar-container * {
+.persoo-search-bar-container * {
   box-sizing: border-box;
 }
-#persoo-search-bar:focus {
+.persoo-search-bar:focus {
     outline: 0;
     box-shadow: none;
 }
@@ -58,7 +58,7 @@
   text-align: right;
   position: relative;
 }
-#persoo-search-bar-container .icon {
+.persoo-search-bar-container .icon {
   display: block;
   position: absolute;
   top: 50%;
@@ -68,7 +68,7 @@
   transform: translateY(-50%);
   background: url("data:image/svg+xml;utf8,<svg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'  xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M15.553 31.107c8.59 0 15.554-6.964 15.554-15.554S24.143 0 15.553 0 0 6.964 0 15.553c0 8.59 6.964 15.554 15.553 15.554zm0-3.888c6.443 0 11.666-5.225 11.666-11.668 0-6.442-5.225-11.665-11.668-11.665-6.442 0-11.665 5.223-11.665 11.665 0 6.443 5.223 11.666 11.665 11.666zm12.21 3.84a2.005 2.005 0 0 1 .002-2.833l.463-.463a2.008 2.008 0 0 1 2.833-.003l8.17 8.168c.78.78.78 2.05-.004 2.833l-.462.463a2.008 2.008 0 0 1-2.834.004l-8.168-8.17z\' fill=\'#fff\' fill-rule=\'evenodd\'/></svg>") no-repeat center center / contain;
 }
-#persoo-search-bar-container label {
+.persoo-search-bar-container label {
   display: none;
 }
 .persoo-clear-cross {
@@ -79,7 +79,7 @@
   width: 16px;
   height: 16px;
 }
-#persoo-search-bar-container .persoo-clear-query {
+.persoo-search-bar-container .persoo-clear-query {
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
@@ -147,26 +147,26 @@
 }
 
 /* Facets */
-#persoo-search-results__filters .ais-current-refined-values.facet .ais-current-refined-values--body {
+.persoo-search-results__filters .ais-current-refined-values.facet .ais-current-refined-values--body {
     padding-left: 8px;
 }
-#persoo-search-results__filters .facet {
+.persoo-search-results__filters .facet {
     margin-bottom: 15px;
     padding-bottom: 6px;
     background-color: white;
     color: #111;
     border: solid 1px #efefef;
 }
-#persoo-search-results__filters .facet:not(:first-child) {
+.persoo-search-results__filters .facet:not(:first-child) {
     margin-top: 10px;
 }
-#persoo-search-results__filters .ais-header {
+.persoo-search-results__filters .ais-header {
     margin-bottom: 7px;
 }
-#persoo-search-results__filters .ais-header.ais-current-refined-values--header {
+.persoo-search-results__filters .ais-header.ais-current-refined-values--header {
     margin-bottom: 13px;
 }
-#persoo-search-results__filters .facet .ais-header {
+.persoo-search-results__filters .facet .ais-header {
     padding: 4px 8px;
     font-weight: 500;
     background-color: #f4f4f4;
@@ -176,15 +176,15 @@
 }
 
 /* Facet counts */
-#persoo-search-results__filters .facet-count {
+.persoo-search-results__filters .facet-count {
   margin-left: 4px;
   color: #888;
   text-decoration: none;
 }
-#persoo-search-results__filters .facet-count:before {
+.persoo-search-results__filters .facet-count:before {
   content: "("
 }
-#persoo-search-results__filters .facet-count:after {
+.persoo-search-results__filters .facet-count:after {
   content: ")"
 }
 
@@ -196,7 +196,7 @@
 /* "Clear all" button,
  * "show more" buttons in refinement filters */
 .persoo-button,
-.ais-show-more,
+.persoo-show-more,
 #persoo-clear-all > .ais-root {
     display: inline-block;
     padding: 6px 12px;
@@ -218,13 +218,13 @@
     border: 1px solid transparent;
     border-radius: 4px;
 }
-.ais-show-more,
+.persoo-show-more,
 #persoo-clear-all > .ais-root {
     color: #333;
     background-color: #fff;
     border-color: #ccc;
 }
-.ais-show-more:hover,
+.persoo-show-more:hover,
 #persoo-clear-all > .ais-root:hover {
     color: #222;
     background-color: #ccc;
@@ -232,21 +232,21 @@
 #persoo-clear-all > .ais-root {
     margin-bottom: 10px;
 }
-.ais-show-more {
+.persoo-show-more {
     border-color: transparent;
 }
-.ais-show-more:hover {
+.persoo-show-more:hover {
     border-color: #ccc;
 }
-.ais-show-more__inactive:before {
+.persoo-show-more__inactive:before {
     content: "+ "
 }
-.ais-show-more__active:before {
+.persoo-show-more__active:before {
     content: "- "
 }
 
 /* Current Refinements */
-#persoo-search-results__filters .ais-current-refined-values {
+.persoo-search-results__filters .ais-current-refined-values {
   position: relative;
 }
 .ais-current-refined-values--link {
@@ -291,6 +291,9 @@ a.ais-current-refined-values--link:hover {
 }
 
 /* Hierarchical Menu Filter */
+.ais-hierarchical-menu--list__lvl0 {
+    margin-left: 5px
+}
 .ais-hierarchical-menu--list__lvl1 {
     margin-left: 20px
 }
@@ -298,19 +301,23 @@ a.ais-current-refined-values--link:hover {
     margin-left: 20px
 }
 .ais-hierarchical-menu--item a {
-    padding: 0 7px;
+    padding: 0 7px 0 0;
     color: #111;
 }
 .ais-hierarchical-menu--item__active > div > a {
     color: #000;
     font-weight: 700;
 }
+.ais-hierarchical-menu--link {
+    margin: 0;
+    text-align: left;
+}
 .ais-hierarchical-menu--list__lvl0 > div > div > .ais-hierarchical-menu--link:before {
     /* content: "\f105  "; */
-    content: " ";
-    float: right;
-    width: 16px;
-    height: 22px;
+    content: "";
+    float: left;
+    width: 1em;
+    height: 1em;
     background: url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" opacity=\'0.5\' width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z\" /></svg>") no-repeat left center / contain;
 }
 
@@ -347,10 +354,10 @@ a.ais-current-refined-values--link:hover {
 }
 .ais-root__collapsible .ais-header:after {
     /* content: "\f107"; */
-    content: " ";
+    content: "";
     float: right;
-    width: 16px;
-    height: 22px;
+    width: 1em;
+    height: 1em;
     background: url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" opacity=\'0.5\' width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z\" /></svg>") no-repeat center center / contain;
 }
 .ais-root__collapsible.ais-root__collapsed .ais-header:after {

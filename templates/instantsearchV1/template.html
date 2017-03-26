@@ -60,13 +60,12 @@
                 function addTemplate(templateField) {
                     return 'persooInstantSearch.EJS(' + JSON.stringify(templateField) + ')';
                 }
-                var customClassNames = JSON.parse(customClassNamesJSON);
                 function addClassNamesFor(widget, defaults) {
                     var cssClasses = defaults;
-                    var userClasses = customClassNames[widget];
+                    var userClasses = customClassNamesJSON[widget];
                     if (userClasses) {
                         for (var i in userClasses) {
-                            cssClasses[i] = cssClasses[i] + ' ' + userClasses[i];
+                            cssClasses[i] = (cssClasses[i] ? cssClasses[i] + ' ' : '') + userClasses[i];
                         }
                     }
                     return JSON.stringify(cssClasses);
@@ -88,8 +87,10 @@
                             }
                         }
                         return 'showMore: ' + JSON.stringify(opt)
-                            .replace('"ACTIVE"', addTemplate('<div class="persoo-show-less">' + showMoreActiveTemplate + '</div>'))
-                            .replace('"INACTIVE"', addTemplate('<div class="persoo-show-more">' + showMoreInactiveTemplate + '</div>'));
+                            .replace('"ACTIVE"', addTemplate(
+                                '<div class="persoo-show-more persoo-show-more__active">' + showMoreActiveTemplate + '</div>'))
+                            .replace('"INACTIVE"', addTemplate(
+                                '<div class="persoo-show-more persoo-show-more__inactive">' + showMoreInactiveTemplate + '</div>'));
                     } else {
                         return 'showMore: false';
                     }
