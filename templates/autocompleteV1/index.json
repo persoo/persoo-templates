@@ -94,7 +94,7 @@
             "name": "Persoo algorithm ID",
             "group": "dataset1",
             "type": "text",
-            "defaultValue": "f645379a715b4b189eff1c14805e9f6e",
+            "defaultValue": "persooProductsFulltextSearch",
             "condition": {
                 "fieldID": "datasetsCount",
                 "operator": ">=",
@@ -106,7 +106,7 @@
             "name": "Max Results Count",
             "group": "dataset1",
             "type": "number",
-            "defaultValue": 5,
+            "defaultValue": 6,
             "condition": {
                 "fieldID": "datasetsCount",
                 "operator": ">=",
@@ -194,7 +194,7 @@
             "name": "Persoo algorithm ID",
             "group": "dataset2",
             "type": "text",
-            "defaultValue": "f645379a715b4b189eff1c14805e9f6e",
+            "defaultValue": "persooProductsFulltextSearch",
             "condition": {
              "fieldID": "datasetsCount",
              "operator": ">=",

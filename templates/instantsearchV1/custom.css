@@ -14,7 +14,7 @@
 }
 .persoo-search-results__filters {
   flex: 1;
-  min-width: 250px;
+  min-width: 260px;
   margin-right: 25px;
 }
 .persoo-search-results__items {
@@ -197,6 +197,7 @@
  * "show more" buttons in refinement filters */
 .persoo-button,
 .persoo-show-more,
+.ais-current-refined-values--clear-all,
 #persoo-clear-all > .ais-root {
     display: inline-block;
     padding: 6px 12px;
@@ -225,6 +226,7 @@
     border-color: #ccc;
 }
 .persoo-show-more:hover,
+.ais-current-refined-values--clear-all:hover,
 #persoo-clear-all > .ais-root:hover {
     color: #222;
     background-color: #ccc;
@@ -262,11 +264,13 @@
   overflow: hidden;
 }
 .ais-current-refined-values--clear-all {
+  /* position button to header */
+  /*
   position: absolute;
   right: 6px;
   top: 3px;
   color: #666666;
-  font-weight: 500;
+  font-weight: 500; */
 }
 a.ais-current-refined-values--link:hover {
   text-decoration: none;

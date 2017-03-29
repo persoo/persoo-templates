@@ -13,9 +13,9 @@
         {
             "id": "searchAlgorithm",
             "name": "Persoo algorithm ID",
-            "group": "algorithm",
+            "group": "options",
             "type": "text",
-            "defaultValue": "f645379a715b4b189eff1c14805e9f6e"
+            "defaultValue": "persooProductsFulltextSearch"
         },
         {
             "id": "urlSync",
@@ -59,7 +59,7 @@
             "name": "'Show More Results' Label",
             "group": "pagination",
             "type": "text",
-            "defaultValue": "Show more",
+            "defaultValue": "Show more results",
             "condition": {
                 "fieldID": "useInfiniteHits",
                 "operator": "==",
@@ -68,7 +68,7 @@
         },
         {
             "id": "showPagination",
-            "name": "show Pagination",
+            "name": "Show Pagination",
             "group": "pagination",
             "type": "checkbox",
             "defaultValue": true
@@ -83,7 +83,7 @@
 
         {
             "id": "showItemsPerPage",
-            "name": "show \"Items Per Page\" Selector",
+            "name": "Show \"Items Per Page\" Selector",
             "group": "pagination",
             "type": "checkbox",
             "defaultValue": true
@@ -119,7 +119,7 @@
 
         {
             "id": "showStats",
-            "name": "show Results Count",
+            "name": "Show Results Count",
             "group": "statistics",
             "type": "checkbox",
             "defaultValue": true
@@ -133,7 +133,7 @@
         },
         {
             "id": "statsTemplate",
-            "name": "Container Selector",
+            "name": "Statistics Template",
             "group": "statistics",
             "type": "text",
             "defaultValue": "<%= nbHits %> results found"
@@ -141,7 +141,7 @@
 
         {
             "id": "showClearAll",
-            "name": "show Clear All Button",
+            "name": "Show Clear All Button",
             "group": "clearAll",
             "type": "checkbox",
             "defaultValue": false
@@ -156,10 +156,24 @@
 
         {
             "id": "showCurrentRefinedValues",
-            "name": "show Current Refined Values",
+            "name": "Show Current Refined Values",
             "group": "currentRefinedValues",
             "type": "checkbox",
             "defaultValue": true
+        },
+        {
+            "id": "currentRefinedValuesHeaderTemplate",
+            "name": "Header",
+            "group": "currentRefinedValues",
+            "type": "text",
+            "defaultValue": "Current Refined Values"
+        },
+        {
+            "id": "currentRefinedValuesClearAllTemplate",
+            "name": "Clear All Button Text",
+            "group": "currentRefinedValues",
+            "type": "text",
+            "defaultValue": "Clear all"
         },
         {
             "id": "currentRefinedValuesContainerSelector",
@@ -168,34 +182,13 @@
             "type": "text",
             "defaultValue": "#persoo-current-refined-values"
         },
-        {
-            "id": "currentRefinedValuesHeaderTemplate",
-            "name": "Header",
-            "group": "currentRefinedValues",
-            "type": "text",
-            "defaultValue": "Selected Filters"
-        },
-        {
-            "id": "currentRefinedValuesClearAllTemplate",
-            "name": "Header",
-            "group": "currentRefinedValues",
-            "type": "text",
-            "defaultValue": "Clear all"
-        },
 
         {
             "id": "showFulltextFilter",
-            "name": "show Fulltext Filter",
+            "name": "Show Fulltext Filter",
             "group": "fulltextFilter",
             "type": "checkbox",
             "defaultValue": true
-        },
-        {
-            "id": "fulltextFilterContainerSelector",
-            "name": "Container Selector",
-            "group": "fulltextFilter",
-            "type": "text",
-            "defaultValue": "#persoo-search-box"
         },
         {
             "id": "fulltextFilterPlaceholder",
@@ -204,31 +197,31 @@
             "type": "text",
             "defaultValue": "Search for products..."
         },
+        {
+            "id": "fulltextFilterContainerSelector",
+            "name": "Container Selector",
+            "group": "fulltextFilter",
+            "type": "text",
+            "defaultValue": "#persoo-search-box"
+        },
 
         {
             "id": "showMenu",
-            "name": "show Menu",
+            "name": "Show Menu",
             "group": "menu",
             "type": "checkbox",
             "defaultValue": true
-        },
-        {
-            "id": "menuContainerSelector",
-            "name": "Container Selector",
-            "group": "menu",
-            "type": "text",
-            "defaultValue": "#persoo-productTypes"
         },
         {
             "id": "menuHeaderTemplate",
             "name": "Header",
             "group": "menu",
             "type": "text",
-            "defaultValue": "Categories"
+            "defaultValue": "Menu Filter"
         },
         {
             "id": "menuAttributeName",
-            "name": "AttributeName",
+            "name": "Source Field",
             "group": "menu",
             "type": "text",
             "defaultValue": "productType"
@@ -259,31 +252,31 @@
                 "fieldValue": true
             }
         },
+        {
+            "id": "menuContainerSelector",
+            "name": "Container Selector",
+            "group": "menu",
+            "type": "text",
+            "defaultValue": "#persoo-productTypes"
+        },
 
         {
             "id": "showHierarchicalMenu",
-            "name": "show Hierarchical Menu",
+            "name": "Show Hierarchical Menu",
             "group": "hierarchicalMenu",
             "type": "checkbox",
             "defaultValue": true
-        },
-        {
-            "id": "hierarchicalMenuContainerSelector",
-            "name": "Container Selector",
-            "group": "hierarchicalMenu",
-            "type": "text",
-            "defaultValue": "#persoo-categories"
         },
         {
             "id": "hierarchicalMenuHeaderTemplate",
             "name": "Header",
             "group": "hierarchicalMenu",
             "type": "text",
-            "defaultValue": "Show results for"
+            "defaultValue": "Hierarchical Menu Filter"
         },
         {
             "id": "hierarchicalMenuAttributeNames",
-            "name": "AttributeNames (comma separated)",
+            "name": "Source Fields (comma separated)",
             "group": "hierarchicalMenu",
             "type": "text",
             "defaultValue": "category_level0, category_level1, category_level2"
@@ -314,32 +307,31 @@
                 "fieldValue": true
             }
         },
-
+        {
+            "id": "hierarchicalMenuContainerSelector",
+            "name": "Container Selector",
+            "group": "hierarchicalMenu",
+            "type": "text",
+            "defaultValue": "#persoo-categories"
+        },
 
         {
             "id": "showRefinementLilst1",
-            "name": "show Refinement List",
+            "name": "Show Refinement List",
             "group": "refinementList1",
             "type": "checkbox",
             "defaultValue": true
-        },
-        {
-            "id": "refinementList1ContainerSelector",
-            "name": "Container Selector",
-            "group": "refinementList1",
-            "type": "text",
-            "defaultValue": "#persoo-brands--refinementList"
         },
         {
             "id": "refinementList1HeaderTemplate",
             "name": "Header",
             "group": "refinementList1",
             "type": "text",
-            "defaultValue": "Brands"
+            "defaultValue": "Refinement List (Brands)"
         },
         {
             "id": "refinementList1AttributeName",
-            "name": "AttributeName",
+            "name": "Source Field",
             "group": "refinementList1",
             "type": "text",
             "defaultValue": "brand"
@@ -389,32 +381,32 @@
                 "fieldValue": true
             }
         },
+        {
+            "id": "refinementList1ContainerSelector",
+            "name": "Container Selector",
+            "group": "refinementList1",
+            "type": "text",
+            "defaultValue": "#persoo-brands--refinementList"
+        },
 
 
         {
             "id": "showRefinementLilst2",
-            "name": "show Refinement List",
+            "name": "Show Refinement List",
             "group": "refinementList2",
             "type": "checkbox",
             "defaultValue": true
-        },
-        {
-            "id": "refinementList2ContainerSelector",
-            "name": "Container Selector",
-            "group": "refinementList2",
-            "type": "text",
-            "defaultValue": "#persoo-gender--refinementList"
         },
         {
             "id": "refinementList2HeaderTemplate",
             "name": "Header",
             "group": "refinementList2",
             "type": "text",
-            "defaultValue": "Gender"
+            "defaultValue": "Refinement List (Gender)"
         },
         {
             "id": "refinementList2AttributeName",
-            "name": "AttributeName",
+            "name": "Source Field",
             "group": "refinementList2",
             "type": "text",
             "defaultValue": "gender"
@@ -464,27 +456,14 @@
                 "fieldValue": true
             }
         },
+        {
+            "id": "refinementList2ContainerSelector",
+            "name": "Container Selector",
+            "group": "refinementList2",
+            "type": "text",
+            "defaultValue": "#persoo-gender--refinementList"
+        },
 
-        {
-            "id": "section_filterTemplates",
-            "name": "General Filter Templates",
-            "group": "design",
-            "type": "section"
-        },
-        {
-            "id": "showMoreInactiveTemplate",
-            "name": "Show More Template (inactive)",
-            "group": "design",
-            "type": "html",
-            "defaultValue": "show more"
-        },
-        {
-            "id": "showMoreActiveTemplate",
-            "name": "Show More Template (active)",
-            "group": "design",
-            "type": "html",
-            "defaultValue": "show less"
-        },
         {
             "id": "section_htmlLayout",
             "name": "Layout HTML",
@@ -497,6 +476,20 @@
             "group": "design",
             "type": "html",
             "defaultValue": "To be filled from default values."
+        },
+        {
+            "id": "showMoreInactiveTemplate",
+            "name": "\"Show More\" Button (inactive)",
+            "group": "design",
+            "type": "html",
+            "defaultValue": "Show more"
+        },
+        {
+            "id": "showMoreActiveTemplate",
+            "name": "\"Show More\" Button (active)",
+            "group": "design",
+            "type": "html",
+            "defaultValue": "Show less"
         },
         {
             "id": "section_customCSS",
@@ -555,12 +548,12 @@
             "name": "Current Refined Values"
         },
         {
-            "id": "hierarchicalMenu",
-            "name": "Hierarchical Menu Filter (Categories)"
-        },
-        {
             "id": "menu",
             "name": "Menu Filter (Categories)"
+        },
+        {
+            "id": "hierarchicalMenu",
+            "name": "Hierarchical Menu Filter (Categories)"
         },
         {
             "id": "refinementList1",
@@ -587,12 +580,8 @@
             "name": "Pagination & Page Size & Infinite scroll"
         },
         {
-            "id": "algorithm",
-            "name": "Search Algorithm"
-        },
-        {
             "id": "options",
-            "name": "Search Widget Options"
+            "name": "Search Widget Options & Algorithm"
         },
         {
             "id": "design",
