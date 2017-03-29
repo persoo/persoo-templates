@@ -88,6 +88,10 @@
 
 /* Autocomplete Dropdown */
 .persoo-autocompleteDropdown__root {
+  /* Dropdown's offset from input bottom left corner. Margin is counted inside absolutely positioned box. */
+  margin-top: 2px;
+  margin-left: 0px;
+
   overflow-y: auto;
   max-height: 100%;
   width: 100%; /* because of responsivity */
@@ -131,7 +135,7 @@
 
 .persoo-autocompleteDataset__header,
 .persoo-autocompleteDataset__footer,
-.persoo-autocompleteDataset__hits__hit,
+.persoo-autocompleteDataset__items__item,
 .persoo-autocompleteDataset__empty {
   box-sizing: border-box;
   width: 100%;
@@ -140,23 +144,29 @@
 .persoo-autocompleteDataset__header {
   font-weight: bold;
 }
-.persoo-autocompleteDataset__hits__hit {
+.persoo-autocompleteDataset__items__item {
   cursor: pointer;
   line-height: 23px;
   overflow: hidden;
   font-size: 1.0em;
   text-align: left;
 }
-.persoo-autocompleteDataset__hits__hit,
-.persoo-autocompleteDataset__hits__hit a,
-.persoo-autocompleteDataset__hits__hit a:hover {
+.persoo-autocompleteDataset__items__item,
+.persoo-autocompleteDataset__items__item a,
+.persoo-autocompleteDataset__items__item a:hover {
   text-decoration: none;
 }
-.persoo-autocompleteDataset__hits__hit__title {
+.persoo-autocompleteDataset__items__item__title {
   padding-left: 5px;
 }
-.persoo-autocompleteDataset__hits__hit__price {
+.persoo-autocompleteDataset__items__item__price {
   font-weight: bold;
+}
+.persoo-autocompleteDataset__items__item__price__original {
+  text-decoration: line-through;
+  font-weight: normal;
+  font-size: smaller;
+  color: #aaa;
 }
 
 /* Colors for dataset 1 */
@@ -167,15 +177,15 @@
   color: #333;
   background-color: #f0f0f0;
 }
-.persoo-autocompleteDataset-1__hits__hit.persoo-selected {
+.persoo-autocompleteDataset-1__items__item.persoo-selected {
   background-color: #f0f0f0;
 }
 .persoo-autocompleteDataset-1__root,
-.persoo-autocompleteDataset-1__hits a,
-.persoo-autocompleteDataset-1__hits a:hover {
+.persoo-autocompleteDataset-1__items a,
+.persoo-autocompleteDataset-1__items a:hover {
   color: #333;
 }
-.persoo-autocompleteDataset-1__hits__hit b {
+.persoo-autocompleteDataset-1__items__item b {
   font-weight: bold;
   color: #498fdb;
 }
@@ -188,27 +198,27 @@
   color: #fff;
   background-color: #224162;
 }
-.persoo-autocompleteDataset-2__hits__hit.persoo-selected {
+.persoo-autocompleteDataset-2__items__item.persoo-selected {
   background-color: #498fdb;
 }
 .persoo-autocompleteDataset-2__root,
-.persoo-autocompleteDataset-2__hits a,
-.persoo-autocompleteDataset-2__hits a:hover {
+.persoo-autocompleteDataset-2__items a,
+.persoo-autocompleteDataset-2__items a:hover {
   color: #fff;
 }
-.persoo-autocompleteDataset-2__hits__hit b {
+.persoo-autocompleteDataset-2__items__item b {
   font-weight: bold;
   color: #ddd;
 }
 
 /* Product Dataset Layout */
-.persoo-autocompleteDataset-1__hits {
+.persoo-autocompleteDataset-1__items {
   display: -webkit-flex;
   display: flex;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.persoo-autocompleteDataset-1__hits__hit {
+.persoo-autocompleteDataset-1__items__item {
   box-sizing: content-box;
   -webkit-flex: 1;
   flex: 1;
@@ -217,17 +227,17 @@
   max-width: 150px;
   min-height: 160px;
 }
-.persoo-autocompleteDataset-1__hits__hit a {
+.persoo-autocompleteDataset-1__items__item a {
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
 }
-.persoo-autocompleteDataset-1__hits__hit a div {
+.persoo-autocompleteDataset-1__items__item a div {
   vertical-align: middle;
   text-align: center;
 }
-.persoo-autocompleteDataset__hits__hit img {
+.persoo-autocompleteDataset__items__item img {
   max-width: 100px;
   max-height: 100px;
 }

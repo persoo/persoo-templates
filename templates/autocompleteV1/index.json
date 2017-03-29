@@ -13,21 +13,21 @@
         {
             "id": "inputSelector",
             "name": "Source Input Selector",
-            "group": "sourceInput",
+            "group": "options",
             "type": "text",
             "defaultValue": "#persoo-autocomplele-1__input"
         },
         {
             "id": "formSelector",
             "name": "Form Selector (form containing Input)",
-            "group": "sourceInput",
+            "group": "options",
             "type": "text",
             "defaultValue": "#persoo-autocomplele-1__form"
         },
         {
             "id": "searchLink",
-            "name": "Search Link (with $query)",
-            "group": "sourceInput",
+            "name": "Search Link where to send search request (with $query)",
+            "group": "options",
             "type": "text",
             "defaultValue": "/searchResults?q=$query"
         },
@@ -36,7 +36,17 @@
             "id": "datasetsCount",
             "name": "Datasets Count",
             "group": "options",
-            "type": "number",
+            "type": "select",
+            "options": [
+                {
+                    "label": "1 (Products only)",
+                    "value": 1
+                },
+                {
+                    "label": "2 (Products and Categories/Brands)",
+                    "value": 2
+                }
+            ],
             "defaultValue": 2
         },
         {
@@ -134,11 +144,11 @@
             }
         },
         {
-            "id": "dataset1HitTemplate",
-            "name": "Custom Hit Template (available variables: query {string}, hit {object}, highlightQuery {function})",
+            "id": "dataset1ItemTemplate",
+            "name": "Item (available variables: query, item, highlightQuery(str))",
             "group": "dataset1",
             "type": "html",
-            "defaultValue": "",
+            "defaultValue": "<a href=\"<%= item.link %>\">\n    <div class=\"persoo-autocompleteDataset__items__item__img\">\n        <img src=\"<%= item.imageLink %>\">\n    </div>\n    <div class=\"persoo-autocompleteDataset__items__item__title\">\n        <%= highlightQuery(item.title) %>\n    </div>\n    <div class=\"persoo-autocompleteDataset__items__item__price\">\n        <% if (item.priceOriginal) { %>\n            <span class=\"persoo-autocompleteDataset__items__item__price__original\">\n                <%= item.priceOriginal %>&nbsp;Kč</span>\n        <% } %>\n        <span class=\"persoo-autocompleteDataset__items__item__price__current\">\n            <%= item.price %>&nbsp;Kč</span>\n    </div>\n</a>",
             "condition": {
                 "fieldID": "datasetsCount",
                 "operator": ">=",
@@ -232,7 +242,7 @@
             "name": "Header (available variables: query, count, isEmpty)",
             "group": "dataset2",
             "type": "text",
-            "defaultValue": "CATEGORIES matching '<%= query %>'",
+            "defaultValue": "CATEGORIES",
             "condition": {
              "fieldID": "datasetsCount",
              "operator": ">=",
@@ -240,11 +250,11 @@
             }
         },
         {
-            "id": "dataset2HitTemplate",
-            "name": "Custom Hit (javascript function)",
+            "id": "dataset2ItemTemplate",
+            "name": "Item (available variables: query, item, highlightQuery(str))",
             "group": "dataset2",
             "type": "html",
-            "defaultValue": "<%= hit.title ? highlightQuery(hit.title) : '' %>",
+            "defaultValue": "<%= item.title ? highlightQuery(item.title) : '' %>",
             "condition": {
              "fieldID": "datasetsCount",
              "operator": ">=",
@@ -294,34 +304,6 @@
             "defaultValue": "autocomplete1"
         },
         {
-            "id": "section_dropdowpPositionAndWidth",
-            "name": "Dropdown Position and Width",
-            "group": "design",
-            "type": "section"
-        },
-        {
-            "id": "offsetLeft",
-            "name": "Dropdown Offset Left (in px relative to source input)",
-            "group": "design",
-            "type": "number",
-            "defaultValue": 0
-        },
-        {
-            "id": "offsetTop",
-            "name": "Dropdown Offset Top (in px relative to source input)",
-            "group": "design",
-            "type": "number",
-            "defaultValue": 4
-        },
-        {
-            "id": "useInputWidth",
-            "name": "Set Dropdown Width to Input Element Width by javascript and inline CSS",
-            "group": "design",
-            "type": "checkbox",
-            "defaultValue": false
-        },
-
-        {
             "id": "section_htmlLayout",
             "name": "Search Bar Template",
             "group": "design",
@@ -348,6 +330,33 @@
             "defaultValue": "/* your own css rules */"
         },
         {
+            "id": "customClassNamesJSON",
+            "name": "Custom Class Names",
+            "group": "design",
+            "type": "json",
+            "defaultValue": {
+                "dropdown": {
+                    "root": ""
+                },
+                "dataset1": {
+                    "root": "",
+                    "items": "",
+                    "item": "",
+                    "header": "",
+                    "footer": "",
+                    "empty": ""
+                },
+                "dataset2": {
+                    "root": "",
+                    "items": "",
+                    "item": "",
+                    "header": "",
+                    "footer": "",
+                    "empty": ""
+                }
+            }
+        },
+        {
             "id": "section_customJS",
             "name": "Custom Javascript",
             "group": "design",
@@ -363,10 +372,6 @@
     ],
     "groups": [
         {
-            "id": "sourceInput",
-            "name": "Source Input Field"
-        },
-        {
             "id": "dataset1",
             "name": "Products (Dataset 1)"
         },
@@ -376,7 +381,7 @@
         },
         {
             "id": "options",
-            "name": "Autocomplete Options"
+            "name": "Autocomplete Options & Source Input Field"
         },
         {
             "id": "design",
