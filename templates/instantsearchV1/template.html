@@ -3,51 +3,11 @@
     var offerID = offerID || 'randomOfferID';
 %>
 <div>
-    <% /* prerequisities to see something in the preview */ %>
-    <%
-       var debug = false;
-       if (debug) {
-    %>
-    <script type="text/javascript">
-          /* delete preview mock and load real persoo.js */
-          delete window.persoo;
-
-          /* Persoo account for testing real requests */
-          dataLayer = [{
-              pageType: 'search'
-          }];
-          var persooConfig = {
-              apikey: 'g8i7fdao17r5fpn2u72ph4rd',     // hanibal.cz (test-a clone)
-              persooName: 'persoo',
-              dataLayerName: 'dataLayer',
-              settings_tolerance: 2000,  // for loading persoo.js
-              personalizations_tolerance: 2500,    // for showing personalizations
-              rtpHostname: "rtp-test-a.persoo.cz:8081",
-              rtpProtocol: 'http:',
-              scriptsHostname: "//s3-eu-west-1.amazonaws.com/cz.persoo.test-a.javascripts/"
-          };
-          /*! Persoo js client 2015-03-16 */
-          var persooLoader=function(a,b,c,d,e){var f=d.persooName,g="_persoo_hide_body";return{hideBody:
-          function(){var b=a.createElement("style"),c="body{opacity:0 !important;filter:alpha(opacity=0)"
-          +" !important;background:none !important;}",d=a.getElementsByTagName("head")[0];b.setAttribute(
-          "id",g),b.setAttribute("type","text/css"),b.styleSheet?b.styleSheet.cssText=c:b.appendChild(
-          a.createTextNode(c)),d.appendChild(b)},finish:function(){if(!c){c=!0;var b=a.getElementById(g);b&&
-          b.parentNode.removeChild(b)}},loadScript:function(b){var c=a.createElement("script");c.src=b,c.type
-          ="text/javascript",c.onerror=function(){persooLoader.finish()},a.getElementsByTagName("head")[0
-          ].appendChild(c)},init:function(){b[f]=b[f]||function(){(b[f].q=b[f].q||[]).push([].slice.call(
-          arguments))},b[f].l=1*new Date,b[f].apikey=d.apikey,b[f].dataLayerName=d.dataLayerName;var c=
-          a.cookie.match("(^|; )"+e+"=([^;]*)"),g=location.search.match("[?&]"+e+"=([^&]*)"),h=g?g[1]:c?c[2]:
-          "p";d.settings_tolerance>0&&(setTimeout(this.finish,d.settings_tolerance),this.hideBody());var i=(
-          d.scriptsHostname||"//scripts.persoo.cz/")+d.apikey+"/"+h;this.loadScript(i+"/actions.js"),
-          this.loadScript(i+"/persoo.js")}}}(document,window,!1,persooConfig,"persooEnvironment");persooLoader.init();
-    </script>
-    <% } %>
-
-    <%= layoutTemplate %>
-
     <style type="text/css">
         <%= customCSS %>
     </style>
+
+    <%= layoutTemplate %>
 
     <script>
         var persoo_<%= offerID %> = (function () {
@@ -98,43 +58,43 @@
                 %>
 
                 search.addWidget(
-                    persooInstantSearch.widgets.<%= (useInfiniteHits ? 'infiniteHits' : 'hits') %>({
+                    persooInstantSearch.widgets.<%= (paginationType == 'infiniteItems' ? 'infiniteHits' : 'hits') %>({
                         container: '<%= itemsContainerSelector %>',
                         hitsPerPage: <%= itemsPerPage %>,
-                        <%= useInfiniteHits ? 'showMoreLabel: "' + showMoreHitsLabel + '",' : '' %>
+                        <%= paginationType == 'infiniteItems' ? 'showMoreLabel: "' + showMoreHitsLabel + '",' : '' %>
                         templates: {
                             item: <%= addTemplate(itemTemplate) %>,
                             empty: <%= addTemplate(emptyResultsTemplate) %>
                         },
-                        cssClasses: <%= addClassNamesFor(useInfiniteHits ? 'infiniteHits' : 'hits', {}) %>
+                        cssClasses: <%= addClassNamesFor(paginationType == 'infiniteItems' ? 'infiniteHits' : 'hits', {}) %>
                     })
                 );
-                <% if (showPagination) { %>
+                <% if (paginationType == 'pagination') { %>
                     search.addWidget(
                         persooInstantSearch.widgets.pagination({
                             container: '<%= paginationContainerSelector %>',
                             cssClasses: <%= addClassNamesFor('pagination', {}) %>
                         })
                     );
-                <% } %>
-                <% if (showItemsPerPage) { %>
-                    search.addWidget(
-                        persooInstantSearch.widgets.hitsPerPageSelector({
-                            container: '<%= itemsPerPageContainerSelector %>',
-                            <%
-                                var itemsPerPageAsList = itemsPerPageValues.split(/\s*,\s*/);
-                                var itemsPersPageOptions = JSON.stringify(itemsPerPageAsList.map(function (item){
-                                    return {
-                                            value: item,
-                                            label: item + itemsPerPageSuffixTemplate
-                                    };
-                                }))
-                            %>
-                            autoHideContainer: true,
-                            options: <%= itemsPersPageOptions %>,  // default is defined in hits widget
-                            cssClasses: <%= addClassNamesFor('hitsPerPageSelector', {}) %>
-                        })
-                    );
+                    <% if (showItemsPerPage) { %>
+                        search.addWidget(
+                            persooInstantSearch.widgets.hitsPerPageSelector({
+                                container: '<%= itemsPerPageContainerSelector %>',
+                                <%
+                                    var itemsPerPageAsList = itemsPerPageValues.split(/\s*,\s*/);
+                                    var itemsPersPageOptions = JSON.stringify(itemsPerPageAsList.map(function (item){
+                                        return {
+                                                value: item,
+                                                label: item + itemsPerPageSuffixTemplate
+                                        };
+                                    }))
+                                %>
+                                autoHideContainer: true,
+                                options: <%= itemsPersPageOptions %>,  // default is defined in hits widget
+                                cssClasses: <%= addClassNamesFor('hitsPerPageSelector', {}) %>
+                            })
+                        );
+                    <% } %>
                 <% } %>
                 <% if (showStats) { %>
                     search.addWidget(

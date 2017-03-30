@@ -1,48 +1,11 @@
 
 <%
     var offerID = offerID || 'randomOfferID';
+    var inputSelector = '.persoo-' + offerID + ' .persoo-search-bar__input';
+    var formSelector = '.persoo-' + offerID + ' .persoo-search-bar__form';
+    var dropdownSelector = '.persoo-' + offerID + ' .persoo-search-bar__dropdown';
 %>
-<div>
-    <%
-       /* prerequisities to see something in the preview */
-       var debug = false;
-       if (debug) {
-    %>
-    <script type="text/javascript">
-          /* delete preview mock and load real persoo.js */
-          delete window.persoo;
-
-          /* Persoo account for testing real requests */
-          dataLayer = [{
-              pageType: 'search'
-          }];
-          var persooConfig = {
-              apikey: '41kifbkoqit4dcr6c7do9h3f',
-              persooName: 'persoo',
-              dataLayerName: 'dataLayer',
-              settings_tolerance: 2000,  // for loading persoo.js
-              personalizations_tolerance: 2500,    // for showing personalizations
-              rtpProtocol: 'http:'
-          };
-          /*! Persoo js client 2015-03-16 */
-          var persooLoader=function(a,b,c,d,e){var f=d.persooName,g="_persoo_hide_body";return{hideBody:
-          function(){var b=a.createElement("style"),c="body{opacity:0 !important;filter:alpha(opacity=0)"
-          +" !important;background:none !important;}",d=a.getElementsByTagName("head")[0];b.setAttribute(
-          "id",g),b.setAttribute("type","text/css"),b.styleSheet?b.styleSheet.cssText=c:b.appendChild(
-          a.createTextNode(c)),d.appendChild(b)},finish:function(){if(!c){c=!0;var b=a.getElementById(g);b&&
-          b.parentNode.removeChild(b)}},loadScript:function(b){var c=a.createElement("script");c.src=b,c.type
-          ="text/javascript",c.onerror=function(){persooLoader.finish()},a.getElementsByTagName("head")[0
-          ].appendChild(c)},init:function(){b[f]=b[f]||function(){(b[f].q=b[f].q||[]).push([].slice.call(
-          arguments))},b[f].l=1*new Date,b[f].apikey=d.apikey,b[f].dataLayerName=d.dataLayerName;var c=
-          a.cookie.match("(^|; )"+e+"=([^;]*)"),g=location.search.match("[?&]"+e+"=([^&]*)"),h=g?g[1]:c?c[2]:
-          "p";d.settings_tolerance>0&&(setTimeout(this.finish,d.settings_tolerance),this.hideBody());var i=(
-          d.scriptsHostname||"//scripts.persoo.cz/")+d.apikey+"/"+h;this.loadScript(i+"/actions.js"),
-          this.loadScript(i+"/persoo.js")}}}(document,window,!1,persooConfig,"persooEnvironment");persooLoader.init();
-    </script>
-
-    <% } %>
-    <% /* real template source code */ %>
-
+<div class="persoo-<%= offerID %>">
     <style type="text/css">
         <%= customCSS %>
     </style>
@@ -62,8 +25,8 @@
     <script>
         var persoo_<%= offerID %> = (function () {
             function initAutocomplete() {
-                var myAutocomplete = new PersooAutocomplete('<%= inputSelector %>', {
-                    autocompleteID: "<%= autocompleteID %>",
+                var myAutocomplete = new PersooAutocomplete('<%= inputSelector %>', '<%= dropdownSelector %>', {
+                    autocompleteID: "persooAutocompleteDropdown",
                     datasets: [
                         <% if (datasetsCount >= 2) { %>
                             {
@@ -126,7 +89,7 @@
                 s.src=url,s.type="text/javascript",s.async=true,s.onerror=errorFn,s.onload=onloadFn;
                 d.getElementsByTagName("head")[0].appendChild(s)};
 
-            var acLibLink = "https://scripts.persoo.cz/shared/autocompleteV2.3/persooAutocomplete.js";
+            var acLibLink = "https://scripts.persoo.cz/shared/autocompleteV2.4/persooAutocomplete.js";
             loadScript(acLibLink, initAutocomplete, function (){});
         })();
     </script>

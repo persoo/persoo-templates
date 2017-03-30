@@ -26,13 +26,6 @@
         },
 
         {
-            "id": "itemsContainerSelector",
-            "name": "Container Selector",
-            "group": "items",
-            "type": "text",
-            "defaultValue": "#persoo-items"
-        },
-        {
             "id": "itemTemplate",
             "name": "Item Template",
             "group": "items",
@@ -46,62 +39,19 @@
             "type": "html",
             "defaultValue": "<h2>Your query did not match any products.</h2>\n<p>Try somethink like</p>\n<ul>\n    <li>more general terms</li>\n    <li>check you spelling</li>\n    <li>remove some filters</li>\n</ul>"
         },
-
         {
-            "id": "useInfiniteHits",
-            "name": "Use Inifinite Result List",
-            "group": "pagination",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "showMoreHitsLabel",
-            "name": "'Show More Results' Label",
-            "group": "pagination",
+            "id": "itemsContainerSelector",
+            "name": "Container Selector",
+            "group": "items",
             "type": "text",
-            "defaultValue": "Show more results",
+            "defaultValue": "#persoo-items",
             "condition": {
-                "fieldID": "useInfiniteHits",
+                "fieldID": "showContainerSelectorsAtWidgets",
                 "operator": "==",
                 "fieldValue": true
             }
         },
-        {
-            "id": "showPagination",
-            "name": "Show Pagination",
-            "group": "pagination",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "paginationContainerSelector",
-            "name": "Pagination Container Selector",
-            "group": "pagination",
-            "type": "text",
-            "defaultValue": "#persoo-pagination"
-        },
 
-        {
-            "id": "showItemsPerPage",
-            "name": "Show \"Items Per Page\" Selector",
-            "group": "pagination",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "itemsPerPageContainerSelector",
-            "name": "Items Per Page Container Selector",
-            "group": "pagination",
-            "type": "text",
-            "defaultValue": "#persoo-items-per-page"
-        },
-        {
-            "id": "itemsPerPageValues",
-            "name": "Items Per Page Values (comma separated values)",
-            "group": "pagination",
-            "type": "text",
-            "defaultValue": "6, 12, 24"
-        },
         {
             "id": "itemsPerPage",
             "name": "Items Per Page (default value)",
@@ -110,11 +60,130 @@
             "defaultValue": 6
         },
         {
+            "id": "paginationType",
+            "name": "Pagination Type",
+            "group": "pagination",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Pagination with Page Size Select",
+                    "value": "pagination"
+                },
+                {
+                    "label": "Infinite Items (with show more button)",
+                    "value": "infiniteItems"
+                },
+                {
+                    "label": "Do not show pagination",
+                    "value": "none"
+                }
+            ],
+            "defaultValue": "pagination"
+        },
+        {
+            "id": "showMoreHitsLabel",
+            "name": "'Show More Results' Label",
+            "group": "pagination",
+            "type": "text",
+            "defaultValue": "Show more results",
+            "condition": {
+                "fieldID": "paginationType",
+                "operator": "==",
+                "fieldValue": "infiniteItems"
+            }
+        },
+        {
+            "id": "showItemsPerPage",
+            "name": "Show \"Items Per Page\" Selector",
+            "group": "pagination",
+            "type": "checkbox",
+            "defaultValue": true,
+            "condition": {
+                "fieldID": "paginationType",
+                "operator": "==",
+                "fieldValue": "pagination"
+            }
+        },
+        {
+            "id": "itemsPerPageValues",
+            "name": "Items Per Page Values (comma separated values)",
+            "group": "pagination",
+            "type": "text",
+            "defaultValue": "6, 12, 24",
+            "condition": {
+                "operator": "and",
+                "children": [{
+                    "fieldID": "paginationType",
+                    "operator": "==",
+                    "fieldValue": "pagination"
+                },{
+                    "fieldID": "showItemsPerPage",
+                    "operator": "==",
+                    "fieldValue": true
+                }]
+            }
+        },
+        {
             "id": "itemsPerPageSuffixTemplate",
             "name": "Suffix Template ",
             "group": "pagination",
             "type": "text",
-            "defaultValue": " per page"
+            "defaultValue": " per page",
+            "condition": {
+                "operator": "and",
+                "children": [{
+                    "fieldID": "paginationType",
+                    "operator": "==",
+                    "fieldValue": "pagination"
+                },{
+                    "fieldID": "showItemsPerPage",
+                    "operator": "==",
+                    "fieldValue": true
+                }]
+            }
+        },
+        {
+            "id": "paginationContainerSelector",
+            "name": "Pagination Container Selector",
+            "group": "pagination",
+            "type": "text",
+            "defaultValue": "#persoo-pagination",
+            "condition": {
+                "operator": "and",
+                "children": [{
+                    "fieldID": "paginationType",
+                    "operator": "==",
+                    "fieldValue": "pagination"
+                },
+                {
+                    "fieldID": "showContainerSelectorsAtWidgets",
+                    "operator": "==",
+                    "fieldValue": true
+                }]
+            }
+        },
+        {
+            "id": "itemsPerPageContainerSelector",
+            "name": "Items Per Page Container Selector",
+            "group": "pagination",
+            "type": "text",
+            "defaultValue": "#persoo-items-per-page",
+            "condition": {
+                "operator": "and",
+                "children": [{
+                    "fieldID": "paginationType",
+                    "operator": "==",
+                    "fieldValue": "pagination"
+                },{
+                    "fieldID": "showItemsPerPage",
+                    "operator": "==",
+                    "fieldValue": true
+                },{
+                    "fieldID": "showContainerSelectorsAtWidgets",
+                    "operator": "==",
+                    "fieldValue": true
+                }]
+            }
         },
 
         {
@@ -125,18 +194,23 @@
             "defaultValue": true
         },
         {
+            "id": "statsTemplate",
+            "name": "Results Count Template (available variables: nbHits)",
+            "group": "statistics",
+            "type": "text",
+            "defaultValue": "<%= nbHits %> results found"
+        },
+        {
             "id": "statsContainerSelector",
             "name": "Container Selector",
             "group": "statistics",
             "type": "text",
-            "defaultValue": "#persoo-stats"
-        },
-        {
-            "id": "statsTemplate",
-            "name": "Statistics Template",
-            "group": "statistics",
-            "type": "text",
-            "defaultValue": "<%= nbHits %> results found"
+            "defaultValue": "#persoo-stats",
+            "condition": {
+                "fieldID": "showContainerSelectorsAtWidgets",
+                "operator": "==",
+                "fieldValue": true
+            }
         },
 
         {
@@ -151,12 +225,17 @@
             "name": "Container Selector",
             "group": "clearAll",
             "type": "text",
-            "defaultValue": "#persoo-clear-all"
+            "defaultValue": "#persoo-clear-all",
+            "condition": {
+                "fieldID": "showContainerSelectorsAtWidgets",
+                "operator": "==",
+                "fieldValue": true
+            }
         },
 
         {
             "id": "showCurrentRefinedValues",
-            "name": "Show Current Refined Values",
+            "name": "Show Selected Filters",
             "group": "currentRefinedValues",
             "type": "checkbox",
             "defaultValue": true
@@ -166,7 +245,7 @@
             "name": "Header",
             "group": "currentRefinedValues",
             "type": "text",
-            "defaultValue": "Current Refined Values"
+            "defaultValue": "Selected Filters"
         },
         {
             "id": "currentRefinedValuesClearAllTemplate",
@@ -180,7 +259,12 @@
             "name": "Container Selector",
             "group": "currentRefinedValues",
             "type": "text",
-            "defaultValue": "#persoo-current-refined-values"
+            "defaultValue": "#persoo-current-refined-values",
+            "condition": {
+                "fieldID": "showContainerSelectorsAtWidgets",
+                "operator": "==",
+                "fieldValue": true
+            }
         },
 
         {
@@ -202,7 +286,12 @@
             "name": "Container Selector",
             "group": "fulltextFilter",
             "type": "text",
-            "defaultValue": "#persoo-search-box"
+            "defaultValue": "#persoo-search-box",
+            "condition": {
+                "fieldID": "showContainerSelectorsAtWidgets",
+                "operator": "==",
+                "fieldValue": true
+            }
         },
 
         {
@@ -257,7 +346,12 @@
             "name": "Container Selector",
             "group": "menu",
             "type": "text",
-            "defaultValue": "#persoo-productTypes"
+            "defaultValue": "#persoo-productTypes",
+            "condition": {
+                "fieldID": "showContainerSelectorsAtWidgets",
+                "operator": "==",
+                "fieldValue": true
+            }
         },
 
         {
@@ -312,7 +406,12 @@
             "name": "Container Selector",
             "group": "hierarchicalMenu",
             "type": "text",
-            "defaultValue": "#persoo-categories"
+            "defaultValue": "#persoo-categories",
+            "condition": {
+                "fieldID": "showContainerSelectorsAtWidgets",
+                "operator": "==",
+                "fieldValue": true
+            }
         },
 
         {
@@ -386,7 +485,12 @@
             "name": "Container Selector",
             "group": "refinementList1",
             "type": "text",
-            "defaultValue": "#persoo-brands--refinementList"
+            "defaultValue": "#persoo-brands--refinementList",
+            "condition": {
+                "fieldID": "showContainerSelectorsAtWidgets",
+                "operator": "==",
+                "fieldValue": true
+            }
         },
 
 
@@ -461,21 +565,27 @@
             "name": "Container Selector",
             "group": "refinementList2",
             "type": "text",
-            "defaultValue": "#persoo-gender--refinementList"
+            "defaultValue": "#persoo-gender--refinementList",
+            "condition": {
+                "fieldID": "showContainerSelectorsAtWidgets",
+                "operator": "==",
+                "fieldValue": true
+            }
         },
 
         {
-            "id": "section_htmlLayout",
-            "name": "Layout HTML",
-            "group": "design",
-            "type": "section"
-        },
-        {
             "id": "layoutTemplate",
-            "name": "Layout Template as HTML (elements marked as 'persoo-container' will be replaced by dynamic widgets)",
+            "name": "Layout HTML Template (elements marked as 'persoo-container' will be replaced by Dynamic widgets)",
             "group": "design",
             "type": "html",
             "defaultValue": "To be filled from default values."
+        },
+        {
+            "id": "showContainerSelectorsAtWidgets",
+            "name": "Show Container Selector for each Dynamic widget (in its group)",
+            "group": "design",
+            "type": "checkbox",
+            "defaultValue": false
         },
         {
             "id": "showMoreInactiveTemplate",
@@ -490,12 +600,6 @@
             "group": "design",
             "type": "html",
             "defaultValue": "Show less"
-        },
-        {
-            "id": "section_customCSS",
-            "name": "Custom CSS",
-            "group": "design",
-            "type": "section"
         },
         {
             "id": "customCSS",
@@ -521,12 +625,6 @@
             }
         },
         {
-            "id": "section_customJS",
-            "name": "Custom Javascript",
-            "group": "design",
-            "type": "section"
-        },
-        {
             "id": "customJS",
             "name": "Custom Javascript",
             "group": "design",
@@ -545,7 +643,7 @@
         },
         {
             "id": "currentRefinedValues",
-            "name": "Current Refined Values"
+            "name": "Selected Filters"
         },
         {
             "id": "menu",
@@ -577,15 +675,15 @@
         },
         {
             "id": "pagination",
-            "name": "Pagination & Page Size & Infinite scroll"
+            "name": "Page Size & Pagination/Infinite scroll"
         },
         {
             "id": "options",
-            "name": "Search Widget Options & Algorithm"
+            "name": "Algorithm & Options"
         },
         {
             "id": "design",
-            "name": "Layout HTML & CSS Styles"
+            "name": "Layout, HTML & CSS Styles"
         }
     ],
     "template": "Note: this will be replaced by content of template.html",

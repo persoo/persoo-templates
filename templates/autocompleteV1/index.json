@@ -2,7 +2,7 @@
     "class": "webWidget",
     "name": "Autocomplete",
     "defaultsForOfferTemplate": {
-        "description": "Insert Search Box with Autocomplete and Product Suggestions.",
+        "description": "Search Box with Autocomplete and Product Suggestions.",
         "releaseStage": "beta",
         "data": {
             "name": "Autocomplete",
@@ -10,20 +10,6 @@
         }
     },
     "fields": [
-        {
-            "id": "inputSelector",
-            "name": "Source Input Selector",
-            "group": "options",
-            "type": "text",
-            "defaultValue": "#persoo-autocomplele-1__input"
-        },
-        {
-            "id": "formSelector",
-            "name": "Form Selector (form containing Input)",
-            "group": "options",
-            "type": "text",
-            "defaultValue": "#persoo-autocomplele-1__form"
-        },
         {
             "id": "searchLink",
             "name": "Search Link where to send search request (with $query)",
@@ -34,20 +20,20 @@
 
         {
             "id": "datasetsCount",
-            "name": "Datasets Count",
+            "name": "Suggested Result Sets",
             "group": "options",
             "type": "select",
             "options": [
                 {
-                    "label": "1 (Products only)",
+                    "label": "Products only (1 result set)",
                     "value": 1
                 },
                 {
-                    "label": "2 (Products and Categories/Brands)",
+                    "label": "Products and Queries/Categories/Brands (2 result sets)",
                     "value": 2
                 }
             ],
-            "defaultValue": 2
+            "defaultValue": 1
         },
         {
             "id": "minChars",
@@ -82,7 +68,7 @@
         },
         {
             "id": "closeOnBlur",
-            "name": "Close On Blur (false is usefull for debug)",
+            "name": "Close On Blur (false is useful for debug)",
             "group": "options",
             "type": "checkbox",
             "defaultValue": false
@@ -106,19 +92,7 @@
             "name": "Max Results Count",
             "group": "dataset1",
             "type": "number",
-            "defaultValue": 6,
-            "condition": {
-                "fieldID": "datasetsCount",
-                "operator": ">=",
-                "fieldValue": 1
-            }
-        },
-        {
-            "id": "dataset1ShowWhenEmptyResults",
-            "name": "Show Dataset with Empty Results",
-            "group": "dataset1",
-            "type": "checkbox",
-            "defaultValue": false,
+            "defaultValue": 8,
             "condition": {
                 "fieldID": "datasetsCount",
                 "operator": ">=",
@@ -168,8 +142,20 @@
              }
         },
         {
+            "id": "dataset1ShowWhenEmptyResults",
+            "name": "Show Nothing Found Message",
+            "group": "dataset1",
+            "type": "checkbox",
+            "defaultValue": true,
+            "condition": {
+                "fieldID": "datasetsCount",
+                "operator": ">=",
+                "fieldValue": 1
+            }
+        },
+        {
              "id": "dataset1EmptyTemplate",
-             "name": "Empty (available variables: query, count, isEmpty)",
+             "name": "Nothing Found Message (available variables: query)",
              "group": "dataset1",
              "type": "text",
              "defaultValue": "Nothing found for '<%= query %>'",
@@ -207,18 +193,6 @@
             "group": "dataset2",
             "type": "number",
             "defaultValue": 5,
-            "condition": {
-                "fieldID": "datasetsCount",
-                "operator": ">=",
-                "fieldValue": 2
-            }
-        },
-        {
-            "id": "dataset2ShowWhenEmptyResults",
-            "name": "Show Dataset with Empty Results",
-            "group": "dataset2",
-            "type": "checkbox",
-            "defaultValue": false,
             "condition": {
                 "fieldID": "datasetsCount",
                 "operator": ">=",
@@ -274,8 +248,20 @@
             }
         },
         {
+            "id": "dataset2ShowWhenEmptyResults",
+            "name": "Show Nothing Found Message",
+            "group": "dataset2",
+            "type": "checkbox",
+            "defaultValue": false,
+            "condition": {
+                "fieldID": "datasetsCount",
+                "operator": ">=",
+                "fieldValue": 2
+            }
+        },
+        {
              "id": "dataset2EmptyTemplate",
-             "name": "Empty template (available variables: query, count, isEmpty)",
+             "name": "Nothing Found Message (available variables: query)",
              "group": "dataset2",
              "type": "text",
              "defaultValue": "",
@@ -297,30 +283,11 @@
         },
 
         {
-            "id": "autocompleteID",
-            "name": "Autocomplete Dropdown Element ID (usefull for CSS rules)",
-            "group": "design",
-            "type": "text",
-            "defaultValue": "autocomplete1"
-        },
-        {
-            "id": "section_htmlLayout",
-            "name": "Search Bar Template",
-            "group": "design",
-            "type": "section"
-        },
-        {
             "id": "searchBarTemplate",
             "name": "Search Bar Template as HTML",
             "group": "design",
             "type": "html",
             "defaultValue": "To be filled from default values."
-        },
-        {
-            "id": "section_customCSS",
-            "name": "Custom CSS",
-            "group": "design",
-            "type": "section"
         },
         {
             "id": "customCSS",
@@ -357,12 +324,6 @@
             }
         },
         {
-            "id": "section_customJS",
-            "name": "Custom Javascript",
-            "group": "design",
-            "type": "section"
-        },
-        {
             "id": "customJS",
             "name": "Custom Javascript",
             "group": "design",
@@ -373,19 +334,19 @@
     "groups": [
         {
             "id": "dataset1",
-            "name": "Products (Dataset 1)"
+            "name": "Suggested Products"
         },
         {
             "id": "dataset2",
-            "name": "Categories, Brands (Dataset 2)"
+            "name": "Suggested Queries (Categories, Brands,...)"
         },
         {
             "id": "options",
-            "name": "Autocomplete Options & Source Input Field"
+            "name": "Options"
         },
         {
             "id": "design",
-            "name": "Layout HTML & CSS Styles"
+            "name": "HTML & CSS Styles"
         }
     ],
     "template": "Note: this will be replaced by content of template.html",
