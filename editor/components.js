@@ -327,7 +327,10 @@ module.exports = {
             var currentTemplate = templateStore.templates[templateStore.currentTemplateID];
             var templateString = currentTemplate.htmlBody || currentTemplate.template;
             var currentOffer = offerStore.offers[templateStore.currentTemplateID];
-            var currentContext = {};
+            var currentContext = {
+                offerID: "randomOfferID",
+                locationID: "randoLocationID"
+            };
             this.addProductsToContext(currentContext, currentOffer.variants[0]);
             var previewHTML = persooTemplates.render(templateString, currentOffer.variants[0], currentContext);
 
@@ -374,28 +377,67 @@ module.exports = {
         }
         return list;
     },
-    handleCallbacksInPersooMock: function(persooArgs) {
-        // Return sample products for 'suggest' and 'getAlgorithm' calls
-        if (persooArgs[0] == 'send') {
-            // find itemsPerPage
-            var itemsPerPage = 20;
-            for (var i = 0; i < persooArgs.length; i++) {
-                var arg = persooArgs[i];
-                if (typeof arg == 'object' || arg.itemsPerPage) {
-                    itemsPerPage = arg.itemsPerPage;
+    getRequestParams: function(args) {
+        var defaultParams = {
+            itemsPerPage: 20,
+            maxValuesPerFacet: 20
+        };
+        for (var i = 0; i < args.length; i++) {
+            var arg = args[i];
+            for (var field in arg) {
+                if (arg.hasOwnProperty(field)) {
+                    defaultParams[field] = arg[field];
                 }
+
             }
-            // return items
+        }
+        return defaultParams;
+    },
+    createMockAggregations: function(defaultParams) {
+        var includeAggregations = defaultParams.includeAggregations || [];
+        var aggregations = {};
+        for (var j = 0; j < includeAggregations.length; j++ ) {
+            var aggregationField = includeAggregations[j];
+
+            aggregations[aggregationField] = [];
+            for (var k = 0; k < defaultParams.maxValuesPerFacet; k++) {
+                aggregations[aggregationField].push({
+                    count: 2 * defaultParams.maxValuesPerFacet - 2 * k,
+                    value: aggregationField + ' ' + (k + 1)
+                });
+            }
+        }
+        return aggregations;
+    },
+    handleCallbacksInPersooMock: function(persooArgs) {
+        /* Return mock products for 'suggest' and 'getAlgorithm' calls */
+        if (persooArgs[0] == 'send') {
+            var defaultParams = this.getRequestParams(persooArgs);
+
+            // return at most itemsPerPage items
             for (var i = 0; i < persooArgs.length; i++) {
                 if (typeof persooArgs[i] == 'function') {
                     var getSampleProducts = this.getSampleProducts;
-                    setTimeout( function(callback) {
-                        var mockResponse = {
-                            items: getSampleProducts(itemsPerPage),
-                            itemsCount: itemsPerPage * 2
-                        };
-                        callback(mockResponse);
-                    }, 1, persooArgs[i]);
+                    var createMockAggregations = this.createMockAggregations;
+                    setTimeout(
+                        function(callback) {
+                            var mockResponse = {
+                                items: getSampleProducts(defaultParams.itemsPerPage),
+                                itemsCount: defaultParams.itemsPerPage * 10,
+                                page: 0,
+                                pagesCount: 10
+                            };
+                            if (defaultParams.externalRequestID) {
+                                mockResponse.externalRequestID = defaultParams.externalRequestID;
+                            }
+                            if (defaultParams.includeAggregations) {
+                                mockResponse.aggregations = createMockAggregations(defaultParams);
+                            }
+                            callback(mockResponse);
+                        },
+                        1,
+                        persooArgs[i]
+                    );
                     break;
                 }
             }

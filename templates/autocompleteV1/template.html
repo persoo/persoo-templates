@@ -1,11 +1,9 @@
-
 <%
-    var offerID = offerID || 'randomOfferID';
-    var inputSelector = '.persoo-' + offerID + ' .persoo-search-bar__input';
-    var formSelector = '.persoo-' + offerID + ' .persoo-search-bar__form';
-    var dropdownSelector = '.persoo-' + offerID + ' .persoo-search-bar__dropdown';
+    var inputSelector = '#persoo--' + offerID + ' .persoo-search-bar__input';
+    var formSelector = '#persoo--' + offerID + ' .persoo-search-bar__form';
+    var dropdownSelector = '#persoo--' + offerID + ' .persoo-search-bar__dropdown';
 %>
-<div class="persoo-<%= offerID %>">
+<div id="persoo--<%= offerID %>">
     <style type="text/css">
         <%= customCSS %>
     </style>
