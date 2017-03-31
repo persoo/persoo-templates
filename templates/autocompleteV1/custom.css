@@ -99,8 +99,11 @@
   width: 100%; /* because of responsivity */
   max-width: 600px;
   border-radius: 4px;
+  overflow: hidden;
   border: 1px solid #aaa;
-  box-shadow: #666666 2px 2px 2px;
+  -moz-box-shadow:0 2px 21px rgba(2,2,2,0.16);
+  -webkit-box-shadow:0 2px 21px rgba(2,2,2,0.16);
+  box-shadow:0 2px 21px rgba(2,2,2,0.16);
 }
 /* on small screens do not start below INPUT box, but fill full screen width */
 @media (max-width: 680px) {
@@ -147,6 +150,9 @@
 }
 .persoo-autocompleteDataset__header {
   font-weight: bold;
+}
+.persoo-autocompleteDataset__footer {
+  font-size: 86.667%;
 }
 .persoo-autocompleteDataset__items__item {
   cursor: pointer;

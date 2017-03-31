@@ -5,7 +5,7 @@
         "description": "Search Box with Autocomplete and Product Suggestions.",
         "releaseStage": "beta",
         "data": {
-            "name": "Autocomplete",
+            "name": "Search Box with Autocomplete",
             "location": "autocomplete"
         }
     },
