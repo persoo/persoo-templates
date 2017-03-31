@@ -1,99 +1,85 @@
 /* Layout
- * Create your own layout, you can event use elements
- * with correct IDs inserted by your webserver. */
+* Create your own layout, you can event use elements
+* with correct IDs inserted by your webserver. */
 
 .persoo-search-results__root {
-  display: flex;
+    display: flex;
 }
 .persoo-search-results__root * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 .persoo-search-results__root a {
-  text-decoration: none;
-  color: #636363;
+    text-decoration: none;
+    color: #636363;
 }
 .persoo-search-results__filters {
-  flex: 1;
-  min-width: 260px;
-  margin-right: 25px;
+    flex: 1;
+    min-width: 260px;
+    margin-right: 25px;
 }
 .persoo-search-results__items {
-  flex: 4;
+    flex: 4;
 }
 #persoo-pagination {
-  text-align: center;
+    text-align: center;
 }
 #persoo-items-per-page {
-  float: right;
+    float: right;
 }
 
 /* Search bar above products */
-.persoo-search-bar-container {
-  padding-top: 0px;
-  margin-bottom: 15px;
-  width: 100%;
-  position: relative;
+#persoo-search-bar {
+    position: relative;
 }
-
-.persoo-search-bar-container:after {
-  clear: both;
-  content: "";
-  display: block;
-}
-.persoo-search-bar-container * {
-  box-sizing: border-box;
-}
-.persoo-search-bar:focus {
+#persoo-search-bar:focus {
     outline: 0;
     box-shadow: none;
 }
-.persoo-search-bar-label {
-  background-color: #54A5CD;
-  height: 40px;
-  line-height: 24px;
-  padding: 8px 12px;
-  color: white;
-  float: left;
-  width: 140px;
-  text-align: right;
-  position: relative;
+#persoo-search-bar .persoo-clear-cross {
+    position: absolute;
+    display: none;
+    /* change color and size in decoded SVG. Note: svg must be encoded because of IE. */
+    background: url("data:image/svg+xml;charset=utf8,%3Csvg%20width%3D%2712%27%20height%3D%2712%27%20viewBox%3D%270%200%2012%2012%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20opacity%3D%270.6%27%3E%3Cpath%20d%3D%27M.566%201.698L0%201.13%201.132%200l.565.566L6%204.868%2010.302.566%2010.868%200%2012%201.132l-.566.565L7.132%206l4.302%204.3.566.568L10.868%2012l-.565-.566L6%207.132l-4.3%204.302L1.13%2012%200%2010.868l.566-.565L4.868%206%20.566%201.698z%27%3E%3C%2Fpath%3E%3C%2Fsvg%3E") no-repeat center center / contain;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
 }
-.persoo-search-bar-container .icon {
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 8px;
-  width: 16px;
-  height: 16px;
-  transform: translateY(-50%);
-  /* change color and size in decoded SVG. Note: svg must be encoded because of IE. */
-  background: url("data:image/svg+xml;charset=utf8,%3Csvg%20width%3D%2740%27%20height%3D%2740%27%20viewBox%3D%270%200%2040%2040%27%20%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cpath%20d%3D%27M15.553%2031.107c8.59%200%2015.554-6.964%2015.554-15.554S24.143%200%2015.553%200%200%206.964%200%2015.553c0%208.59%206.964%2015.554%2015.553%2015.554zm0-3.888c6.443%200%2011.666-5.225%2011.666-11.668%200-6.442-5.225-11.665-11.668-11.665-6.442%200-11.665%205.223-11.665%2011.665%200%206.443%205.223%2011.666%2011.665%2011.666zm12.21%203.84a2.005%202.005%200%200%201%20.002-2.833l.463-.463a2.008%202.008%200%200%201%202.833-.003l8.17%208.168c.78.78.78%202.05-.004%202.833l-.462.463a2.008%202.008%200%200%201-2.834.004l-8.168-8.17z%27%20fill%3D%27%23fff%27%20fill-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E") no-repeat center center / contain;
+#persoo-search-bar .persoo-clear-query {
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
 }
-.persoo-search-bar-container label {
-  display: none;
+#persoo-search-bar .ais-search-box {
+    display: flex;
+    margin-bottom: 15px;
 }
-.persoo-clear-cross {
-  position: absolute;
-  display: none;
-  /* change color and size in decoded SVG. Note: svg must be encoded because of IE. */
-  background: url("data:image/svg+xml;charset=utf8,%3Csvg%20width%3D%2712%27%20height%3D%2712%27%20viewBox%3D%270%200%2012%2012%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20opacity%3D%270.6%27%3E%3Cpath%20d%3D%27M.566%201.698L0%201.13%201.132%200l.565.566L6%204.868%2010.302.566%2010.868%200%2012%201.132l-.566.565L7.132%206l4.302%204.3.566.568L10.868%2012l-.565-.566L6%207.132l-4.3%204.302L1.13%2012%200%2010.868l.566-.565L4.868%206%20.566%201.698z%27%3E%3C%2Fpath%3E%3C%2Fsvg%3E") no-repeat center center / contain;
-  cursor: pointer;
-  width: 16px;
-  height: 16px;
+#persoo-search-bar .ais-search-box::before {
+    flex: 0 0 auto;
+    display: block;
+    box-sizing: border-box;
+    content: 'Current search';
+    background-color: #54A5CD;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20width%3D%2740%27%20height%3D%2740%27%20viewBox%3D%270%200%2040%2040%27%20%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cpath%20d%3D%27M15.553%2031.107c8.59%200%2015.554-6.964%2015.554-15.554S24.143%200%2015.553%200%200%206.964%200%2015.553c0%208.59%206.964%2015.554%2015.553%2015.554zm0-3.888c6.443%200%2011.666-5.225%2011.666-11.668%200-6.442-5.225-11.665-11.668-11.665-6.442%200-11.665%205.223-11.665%2011.665%200%206.443%205.223%2011.666%2011.665%2011.666zm12.21%203.84a2.005%202.005%200%200%201%20.002-2.833l.463-.463a2.008%202.008%200%200%201%202.833-.003l8.17%208.168c.78.78.78%202.05-.004%202.833l-.462.463a2.008%202.008%200%200%201-2.834.004l-8.168-8.17z%27%20fill%3D%27%23fff%27%20fill-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-size: 1em 1em;
+    background-position: 1em center;
+    color: #fff;
+    max-height: 48px;
+    line-height: 48px;
+    padding-left: 3em;
+    padding-right: 1.5em;
 }
-.persoo-search-bar-container .persoo-clear-query {
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
+#persoo-search-box {
+    display: none;
 }
 #persoo-search-box.ais-search-box--input {
-    float: left;
-    width: calc(100% - 140px);
-    height: 40px;
+    display: block;
+    flex: 1;
+    height: 48px;
+    box-sizing: border-box;
     border: solid 2px #54A5CD;
     border-left: none;
-    padding-left: 6px;
-    padding-top: 2px;
+    padding: 0 1.5em;
 }
 #persoo-search-box.ais-search-box--input:focus {
     outline: 0;
@@ -115,8 +101,8 @@
 /* Product Items (hits) */
 .ais-hits,
 .ais-infinite-hits {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 .ais-hits__empty,
 .ais-infinite-hits__empty {
@@ -126,26 +112,26 @@
 }
 
 .persoo-result-item {
-  display: block;
-  box-sizing: border-box;
-  width: 33.333333%;
-  margin: 0;
-  padding: 16px 24px;
-  border: solid 2px #EDEDED;
-  background-color: white;
+    display: block;
+    box-sizing: border-box;
+    width: 33.333333%;
+    margin: 0;
+    padding: 16px 24px;
+    border: solid 2px #EDEDED;
+    background-color: white;
 
-  text-align: center;
+    text-align: center;
 }
 .persoo-result-item > a > img {
-  max-width: 150px;
-  max-height: 150px;
+    max-width: 150px;
+    max-height: 150px;
 }
 .persoo-result-item__title {
-  color: #666;
-  font-weight: bold;
+    color: #666;
+    font-weight: bold;
 }
 .persoo-result-item__price {
-  color: #54A5CD;
+    color: #54A5CD;
 }
 
 /* Facets */
@@ -179,24 +165,24 @@
 
 /* Facet counts */
 .persoo-search-results__filters .facet-count {
-  margin-left: 4px;
-  color: #888;
-  text-decoration: none;
+    margin-left: 4px;
+    color: #888;
+    text-decoration: none;
 }
 .persoo-search-results__filters .facet-count:before {
-  content: "("
+    content: "("
 }
 .persoo-search-results__filters .facet-count:after {
-  content: ")"
+    content: ")"
 }
 
 .ais-current-refined-values--item > a > div:before {
-  content: "\d7";
-  margin-right: 5px;
+    content: "\d7";
+    margin-right: 5px;
 }
 
 /* "Clear all" button,
- * "show more" buttons in refinement filters */
+* "show more" buttons in refinement filters */
 .persoo-button,
 .persoo-show-more,
 .ais-current-refined-values--clear-all,
@@ -251,39 +237,39 @@
 
 /* Current Refinements */
 .persoo-search-results__filters .ais-current-refined-values {
-  position: relative;
+    position: relative;
 }
 .ais-current-refined-values--link {
-  cursor: pointer;
-  color: #636363;
-  border-radius: 2px;
-  border: solid 1px #DDDDDD;
-  background-color: #f4f4f4;
-  display: inline-block;
-  max-width: 100%;
-  white-space: nowrap;
-  padding: 0 8px 0 0;
-  overflow: hidden;
+    cursor: pointer;
+    color: #636363;
+    border-radius: 2px;
+    border: solid 1px #DDDDDD;
+    background-color: #f4f4f4;
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    padding: 0 8px 0 0;
+    overflow: hidden;
 }
 .ais-current-refined-values--clear-all {
-  /* position button to header */
-  /*
-  position: absolute;
-  right: 6px;
-  top: 3px;
-  color: #666666;
-  font-weight: 500; */
+    /* position button to header */
+    /*
+    position: absolute;
+    right: 6px;
+    top: 3px;
+    color: #666666;
+    font-weight: 500; */
 }
 a.ais-current-refined-values--link:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 .ais-current-refined-values--item {
-  margin-top: 8px;
+    margin-top: 8px;
 }
 .ais-current-refined-values--item:after {
-  clear: both;
-  content: "";
-  display: block;
+    clear: both;
+    content: "";
+    display: block;
 }
 
 /* Menu Filter */
@@ -330,17 +316,17 @@ a.ais-current-refined-values--link:hover {
 
 /* Pagination */
 .ais-pagination--item {
-  display: inline-block;
-  padding: 3px;
+    display: inline-block;
+    padding: 3px;
 }
 .ais-pagination--item a {
-  color: #666;
+    color: #666;
 }
 .ais-pagination--item__disabled {
-  visibility: hidden;
+    visibility: hidden;
 }
 .ais-pagination--item__active {
-  font-weight: bold;
+    font-weight: bold;
 }
 .ais-pagination--item__first {
 }
@@ -373,5 +359,5 @@ a.ais-current-refined-values--link:hover {
     background: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20version%3D%221.1%22%20opacity%3D%270.5%27%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M15.41%2C16.58L10.83%2C12L15.41%2C7.41L14%2C6L8%2C12L14%2C18L15.41%2C16.58Z%22%20%2F%3E%3C%2Fsvg%3E") no-repeat center center / contain;
 }
 .ais-root__collapsed .ais-body, .ais-root__collapsed .ais-footer {
-  display: none;
+    display: none;
 }
