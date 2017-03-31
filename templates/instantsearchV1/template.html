@@ -125,10 +125,7 @@
                                 header: <%= addTemplate(currentRefinedValuesHeaderTemplate) %>,
                                 clearAll: <%= addTemplate(currentRefinedValuesClearAllTemplate) %>
                             },
-                            cssClasses: <%= addClassNamesFor('currentRefinedValues', {
-                                root: "facet",
-                                count: "facet-count"
-                            }) %>
+                            cssClasses: <%= addClassNamesFor('currentRefinedValues', {}) %>
                         })
                     );
                 <% } %>
@@ -153,10 +150,7 @@
                             templates: {
                                 header: <%= addTemplate(menuHeaderTemplate) %>
                             },
-                            cssClasses: <%= addClassNamesFor('menu', {
-                                root: "facet",
-                                count: "facet-count"
-                            }) %>
+                            cssClasses: <%= addClassNamesFor('menu', {}) %>
                         })
                     );
                 <% } %>
@@ -171,15 +165,12 @@
                             templates: {
                                 header: <%= addTemplate(hierarchicalMenuHeaderTemplate) %>
                             },
-                            cssClasses: <%= addClassNamesFor('hierarchicalMenu', {
-                                root: "facet",
-                                count: "facet-count"
-                            }) %>
+                            cssClasses: <%= addClassNamesFor('hierarchicalMenu', {}) %>
                         })
                     );
                 <% } %>
 
-                <% if (showRefinementLilst1) { %>
+                <% if (showRefinementList1) { %>
                     search.addWidget(
                         persooInstantSearch.widgets.refinementList({
                             container: '<%= refinementList1ContainerSelector %>',
@@ -191,15 +182,12 @@
                             limit: <%= refinementList1Limit %>,
                             <%= addShowMoreOption(refinementList1ShowMore, refinementList1ShowMoreLimit) %>,
                             <%= addCollapsibleOption(refinementList1Collapsible, refinementList1Collapsed) %>,
-                            cssClasses: <%= addClassNamesFor('refinementList', {
-                                root: "facet",
-                                count: "facet-count"
-                            }) %>
+                            cssClasses: <%= addClassNamesFor('refinementList', {}) %>
                         })
                     );
                 <% } %>
 
-                <% if (showRefinementLilst2) { %>
+                <% if (showRefinementList2) { %>
                     search.addWidget(
                         persooInstantSearch.widgets.refinementList({
                             container: '<%= refinementList2ContainerSelector %>',
@@ -211,10 +199,24 @@
                             limit: <%= refinementList2Limit %>,
                             <%= addShowMoreOption(refinementList2ShowMore, refinementList2ShowMoreLimit) %>,
                             <%= addCollapsibleOption(refinementList2Collapsible, refinementList2Collapsed) %>,
-                            cssClasses: <%= addClassNamesFor('refinementList', {
-                                root: "facet",
-                                count: "facet-count"
-                            }) %>
+                            cssClasses: <%= addClassNamesFor('refinementList', {}) %>
+                        })
+                    );
+                <% } %>
+
+                <% if (showRefinementList3) { %>
+                    search.addWidget(
+                        persooInstantSearch.widgets.refinementList({
+                            container: '<%= refinementList3ContainerSelector %>',
+                            attributeName: '<%= refinementList3AttributeName %>',
+                            operator: 'or',
+                            templates: {
+                                header: <%= addTemplate(refinementList3HeaderTemplate) %>
+                            },
+                            limit: <%= refinementList3Limit %>,
+                            <%= addShowMoreOption(refinementList3ShowMore, refinementList3ShowMoreLimit) %>,
+                            <%= addCollapsibleOption(refinementList3Collapsible, refinementList3Collapsed) %>,
+                            cssClasses: <%= addClassNamesFor('refinementList', {}) %>
                         })
                     );
                 <% } %>

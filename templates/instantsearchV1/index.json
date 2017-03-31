@@ -346,7 +346,7 @@
             "name": "Container Selector",
             "group": "menu",
             "type": "text",
-            "defaultValue": "#persoo-productTypes",
+            "defaultValue": "#persoo-menu",
             "condition": {
                 "fieldID": "showContainerSelectorsAtWidgets",
                 "operator": "==",
@@ -406,7 +406,7 @@
             "name": "Container Selector",
             "group": "hierarchicalMenu",
             "type": "text",
-            "defaultValue": "#persoo-categories",
+            "defaultValue": "#persoo-hierarchical-menu",
             "condition": {
                 "fieldID": "showContainerSelectorsAtWidgets",
                 "operator": "==",
@@ -415,7 +415,7 @@
         },
 
         {
-            "id": "showRefinementLilst1",
+            "id": "showRefinementList1",
             "name": "Show Refinement List",
             "group": "refinementList1",
             "type": "checkbox",
@@ -426,7 +426,7 @@
             "name": "Header",
             "group": "refinementList1",
             "type": "text",
-            "defaultValue": "Refinement List (Brands)"
+            "defaultValue": "Refinement List 1"
         },
         {
             "id": "refinementList1AttributeName",
@@ -485,7 +485,7 @@
             "name": "Container Selector",
             "group": "refinementList1",
             "type": "text",
-            "defaultValue": "#persoo-brands--refinementList",
+            "defaultValue": "#persoo-refinementList--1",
             "condition": {
                 "fieldID": "showContainerSelectorsAtWidgets",
                 "operator": "==",
@@ -495,7 +495,7 @@
 
 
         {
-            "id": "showRefinementLilst2",
+            "id": "showRefinementList2",
             "name": "Show Refinement List",
             "group": "refinementList2",
             "type": "checkbox",
@@ -506,7 +506,7 @@
             "name": "Header",
             "group": "refinementList2",
             "type": "text",
-            "defaultValue": "Refinement List (Gender)"
+            "defaultValue": "Refinement List 2"
         },
         {
             "id": "refinementList2AttributeName",
@@ -565,7 +565,87 @@
             "name": "Container Selector",
             "group": "refinementList2",
             "type": "text",
-            "defaultValue": "#persoo-gender--refinementList",
+            "defaultValue": "#persoo-refinementList--2",
+            "condition": {
+                "fieldID": "showContainerSelectorsAtWidgets",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+
+
+        {
+            "id": "showRefinementList3",
+            "name": "Show Refinement List",
+            "group": "refinementList3",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "refinementList3HeaderTemplate",
+            "name": "Header",
+            "group": "refinementList3",
+            "type": "text",
+            "defaultValue": "Refinement List 3"
+        },
+        {
+            "id": "refinementList3AttributeName",
+            "name": "Source Field",
+            "group": "refinementList3",
+            "type": "text",
+            "defaultValue": "available"
+        },
+        {
+            "id": "refinementList3Limit",
+            "name": "Limit",
+            "group": "refinementList3",
+            "type": "number",
+            "defaultValue": 5
+        },
+        {
+            "id": "refinementList3ShowMore",
+            "name": "Show More",
+            "group": "refinementList3",
+            "type": "checkbox",
+            "defaultValue": false
+        },
+        {
+            "id": "refinementList3ShowMoreLimit",
+            "name": "Limit with Show more",
+            "group": "refinementList3",
+            "type": "number",
+            "defaultValue": 10,
+            "condition": {
+                "fieldID": "refinementList3ShowMore",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+        {
+            "id": "refinementList3Collapsible",
+            "name": "collapsible by click on box header",
+            "group": "refinementList3",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "refinementList3Collapsed",
+            "name": "collapsed by default",
+            "group": "refinementList3",
+            "type": "checkbox",
+            "defaultValue": false,
+            "condition": {
+                "fieldID": "refinementList3Collapsible",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+        {
+            "id": "refinementList3ContainerSelector",
+            "name": "Container Selector",
+            "group": "refinementList3",
+            "type": "text",
+            "defaultValue": "#persoo-refinementList--3",
             "condition": {
                 "fieldID": "showContainerSelectorsAtWidgets",
                 "operator": "==",
@@ -575,28 +655,28 @@
 
         {
             "id": "layoutTemplate",
-            "name": "Layout HTML Template (elements marked as 'persoo-container' will be replaced by Dynamic widgets)",
+            "name": "Layout HTML Template (elements marked as 'persoo-container' will be replaced by Dynamic widgets loaded by javascript libraty in browser)",
             "group": "design",
             "type": "html",
             "defaultValue": "To be filled from default values."
         },
         {
             "id": "showContainerSelectorsAtWidgets",
-            "name": "Show Container Selector for each Dynamic widget (in its group)",
+            "name": "Show Container Selector for each Dynamic widget (see each widget group)",
             "group": "design",
             "type": "checkbox",
             "defaultValue": false
         },
         {
             "id": "showMoreInactiveTemplate",
-            "name": "\"Show More\" Button (inactive)",
+            "name": "\"Show More\" Button (when inactive)",
             "group": "design",
             "type": "html",
             "defaultValue": "Show more"
         },
         {
             "id": "showMoreActiveTemplate",
-            "name": "\"Show More\" Button (active)",
+            "name": "\"Show More\" Button (when active)",
             "group": "design",
             "type": "html",
             "defaultValue": "Show less"
@@ -610,17 +690,99 @@
         },
         {
             "id": "customClassNamesJSON",
-            "name": "Custom Class Names (in path 'widget.component', see classes .ais-<widget>--<component> and convert names to camelCase)",
+            "name": "Custom Class Names for Dynamic Widgets (i.e. to add custom class to Result Item, find its default class in browser, which is '.ais-hits--item' and add custom clasa below to path 'hits.item')",
             "group": "design",
             "type": "json",
             "defaultValue": {
                 "hits": {
                     "root": "persoo-results",
+                    "empty": "",
                     "item": "persoo-result-item"
                 },
                 "infiniteHits": {
                     "root": "persoo-results",
+                    "empty": "",
                     "item": "persoo-result-item"
+                },
+                "hitsPerPageSelector": {
+                    "root": "",
+                    "item": ""
+                },
+                "pagination": {
+                    "root": "",
+                    "item": "",
+                    "link": "",
+                    "page": "",
+                    "previous": "",
+                    "next": "",
+                    "first": "",
+                    "last": "",
+                    "active": "",
+                    "disabled": ""
+                },
+                "searchBox": {
+                    "root": "",
+                    "input": ""
+                },
+                "stats": {
+                    "root": "",
+                    "header": "",
+                    "body": "",
+                    "footer": ""
+                },
+                "clearAll": {
+                    "root": "",
+                    "header": "",
+                    "body": "",
+                    "link": "",
+                    "footer": ""
+                },
+                "currentRefinedValues": {
+                    "root": "facet",
+                    "header": "",
+                    "body": "",
+                    "clearAll": "",
+                    "list": "",
+                    "item": "",
+                    "link": "",
+                    "count": "facet-count",
+                    "footer": ""
+                },
+                "menu": {
+                    "root": "facet",
+                    "header": "",
+                    "body": "",
+                    "footer": "",
+                    "list": "",
+                    "item": "",
+                    "active": "",
+                    "link": "",
+                    "count": "facet-count"
+                },
+                "hierarchicalMenu": {
+                    "root": "facet",
+                    "header": "",
+                    "body": "",
+                    "footer": "",
+                    "list": "",
+                    "item": "",
+                    "depth": "",
+                    "active": "",
+                    "link": "",
+                    "count": "facet-count"
+                },
+                "refinementList": {
+                    "root": "facet",
+                    "header": "",
+                    "body": "",
+                    "footer": "",
+                    "clearAll": "",
+                    "list": "",
+                    "item": "",
+                    "active": "",
+                    "label": "",
+                    "checkbox": "",
+                    "count": "facet-count"
                 }
             }
         },
@@ -655,15 +817,15 @@
         },
         {
             "id": "refinementList1",
-            "name": "Refinement List Filter 1 (Brands)"
+            "name": "Refinement List Filter 1"
         },
         {
             "id": "refinementList2",
-            "name": "Refinement List Filter 2 (Gender)"
+            "name": "Refinement List Filter 2"
         },
         {
             "id": "refinementList3",
-            "name": "Refinement List Filter 3 (Colors)"
+            "name": "Refinement List Filter 3"
         },
         {
             "id": "clearAll",
