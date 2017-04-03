@@ -286,7 +286,7 @@
             "name": "Container Selector",
             "group": "fulltextFilter",
             "type": "text",
-            "defaultValue": "#persoo-search-box",
+            "defaultValue": "#persoo-search-results__search-box",
             "condition": {
                 "fieldID": "showContainerSelectorsAtWidgets",
                 "operator": "==",
@@ -702,7 +702,8 @@
                 "infiniteHits": {
                     "root": "persoo-results",
                     "empty": "",
-                    "item": "persoo-result-item"
+                    "item": "persoo-result-item",
+                    "showmore": ""
                 },
                 "hitsPerPageSelector": {
                     "root": "",

@@ -28,14 +28,14 @@
 }
 
 /* Search bar above products */
-#persoo-search-bar {
+#persoo-search-results__search-bar {
     position: relative;
 }
-#persoo-search-bar:focus {
+#persoo-search-results__search-bar:focus {
     outline: 0;
     box-shadow: none;
 }
-#persoo-search-bar .persoo-clear-cross {
+#persoo-search-results__search-bar .persoo-clear-cross {
     position: absolute;
     display: none;
     /* change color and size in decoded SVG. Note: svg must be encoded because of IE. */
@@ -44,16 +44,16 @@
     width: 16px;
     height: 16px;
 }
-#persoo-search-bar .persoo-clear-query {
+#persoo-search-results__search-bar .persoo-clear-query {
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
 }
-#persoo-search-bar .ais-search-box {
+#persoo-search-results__search-bar .ais-search-box {
     display: flex;
     margin-bottom: 15px;
 }
-#persoo-search-bar .ais-search-box::before {
+#persoo-search-results__search-bar .ais-search-box::before {
     flex: 0 0 auto;
     display: block;
     box-sizing: border-box;
@@ -69,10 +69,10 @@
     padding-left: 3em;
     padding-right: 1.5em;
 }
-#persoo-search-box {
+#persoo-search-results__search-box {
     display: none;
 }
-#persoo-search-box.ais-search-box--input {
+#persoo-search-results__search-box.ais-search-box--input {
     display: block;
     flex: 1;
     height: 48px;
@@ -81,7 +81,7 @@
     border-left: none;
     padding: 0 1.5em;
 }
-#persoo-search-box.ais-search-box--input:focus {
+#persoo-search-results__search-box.ais-search-box--input:focus {
     outline: 0;
     box-shadow: none;
 }
