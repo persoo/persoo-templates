@@ -39,18 +39,6 @@
             "type": "html",
             "defaultValue": "<h2>Your query did not match any products.</h2>\n<p>Try somethink like</p>\n<ul>\n    <li>more general terms</li>\n    <li>check you spelling</li>\n    <li>remove some filters</li>\n</ul>"
         },
-        {
-            "id": "itemsContainerSelector",
-            "name": "Container Selector",
-            "group": "items",
-            "type": "text",
-            "defaultValue": "#persoo-items",
-            "condition": {
-                "fieldID": "showContainerSelectorsAtWidgets",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
 
         {
             "id": "itemsPerPage",
@@ -142,49 +130,6 @@
                 }]
             }
         },
-        {
-            "id": "paginationContainerSelector",
-            "name": "Pagination Container Selector",
-            "group": "pagination",
-            "type": "text",
-            "defaultValue": "#persoo-pagination",
-            "condition": {
-                "operator": "and",
-                "children": [{
-                    "fieldID": "paginationType",
-                    "operator": "==",
-                    "fieldValue": "pagination"
-                },
-                {
-                    "fieldID": "showContainerSelectorsAtWidgets",
-                    "operator": "==",
-                    "fieldValue": true
-                }]
-            }
-        },
-        {
-            "id": "itemsPerPageContainerSelector",
-            "name": "Items Per Page Container Selector",
-            "group": "pagination",
-            "type": "text",
-            "defaultValue": "#persoo-items-per-page",
-            "condition": {
-                "operator": "and",
-                "children": [{
-                    "fieldID": "paginationType",
-                    "operator": "==",
-                    "fieldValue": "pagination"
-                },{
-                    "fieldID": "showItemsPerPage",
-                    "operator": "==",
-                    "fieldValue": true
-                },{
-                    "fieldID": "showContainerSelectorsAtWidgets",
-                    "operator": "==",
-                    "fieldValue": true
-                }]
-            }
-        },
 
         {
             "id": "showStats",
@@ -200,18 +145,6 @@
             "type": "text",
             "defaultValue": "<%= nbHits %> results found"
         },
-        {
-            "id": "statsContainerSelector",
-            "name": "Container Selector",
-            "group": "statistics",
-            "type": "text",
-            "defaultValue": "#persoo-stats",
-            "condition": {
-                "fieldID": "showContainerSelectorsAtWidgets",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
 
         {
             "id": "showClearAll",
@@ -219,18 +152,6 @@
             "group": "clearAll",
             "type": "checkbox",
             "defaultValue": false
-        },
-        {
-            "id": "clearAllContainerSelector",
-            "name": "Container Selector",
-            "group": "clearAll",
-            "type": "text",
-            "defaultValue": "#persoo-clear-all",
-            "condition": {
-                "fieldID": "showContainerSelectorsAtWidgets",
-                "operator": "==",
-                "fieldValue": true
-            }
         },
 
         {
@@ -254,18 +175,6 @@
             "type": "text",
             "defaultValue": "Clear all"
         },
-        {
-            "id": "currentRefinedValuesContainerSelector",
-            "name": "Container Selector",
-            "group": "currentRefinedValues",
-            "type": "text",
-            "defaultValue": "#persoo-current-refined-values",
-            "condition": {
-                "fieldID": "showContainerSelectorsAtWidgets",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
 
         {
             "id": "showFulltextFilter",
@@ -280,18 +189,6 @@
             "group": "fulltextFilter",
             "type": "text",
             "defaultValue": "Search for products..."
-        },
-        {
-            "id": "fulltextFilterContainerSelector",
-            "name": "Container Selector",
-            "group": "fulltextFilter",
-            "type": "text",
-            "defaultValue": "#persoo-search-results__search-box",
-            "condition": {
-                "fieldID": "showContainerSelectorsAtWidgets",
-                "operator": "==",
-                "fieldValue": true
-            }
         },
 
         {
@@ -341,18 +238,6 @@
                 "fieldValue": true
             }
         },
-        {
-            "id": "menuContainerSelector",
-            "name": "Container Selector",
-            "group": "menu",
-            "type": "text",
-            "defaultValue": "#persoo-menu",
-            "condition": {
-                "fieldID": "showContainerSelectorsAtWidgets",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
 
         {
             "id": "showHierarchicalMenu",
@@ -397,18 +282,6 @@
             "defaultValue": false,
             "condition": {
                 "fieldID": "hierarchicalMenuCollapsible",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "hierarchicalMenuContainerSelector",
-            "name": "Container Selector",
-            "group": "hierarchicalMenu",
-            "type": "text",
-            "defaultValue": "#persoo-hierarchical-menu",
-            "condition": {
-                "fieldID": "showContainerSelectorsAtWidgets",
                 "operator": "==",
                 "fieldValue": true
             }
@@ -480,19 +353,6 @@
                 "fieldValue": true
             }
         },
-        {
-            "id": "refinementList1ContainerSelector",
-            "name": "Container Selector",
-            "group": "refinementList1",
-            "type": "text",
-            "defaultValue": "#persoo-refinementList--1",
-            "condition": {
-                "fieldID": "showContainerSelectorsAtWidgets",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
-
 
         {
             "id": "showRefinementList2",
@@ -560,19 +420,6 @@
                 "fieldValue": true
             }
         },
-        {
-            "id": "refinementList2ContainerSelector",
-            "name": "Container Selector",
-            "group": "refinementList2",
-            "type": "text",
-            "defaultValue": "#persoo-refinementList--2",
-            "condition": {
-                "fieldID": "showContainerSelectorsAtWidgets",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
-
 
         {
             "id": "showRefinementList3",
@@ -640,18 +487,6 @@
                 "fieldValue": true
             }
         },
-        {
-            "id": "refinementList3ContainerSelector",
-            "name": "Container Selector",
-            "group": "refinementList3",
-            "type": "text",
-            "defaultValue": "#persoo-refinementList--3",
-            "condition": {
-                "fieldID": "showContainerSelectorsAtWidgets",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
 
         {
             "id": "layoutTemplate",
@@ -659,13 +494,6 @@
             "group": "design",
             "type": "html",
             "defaultValue": "To be filled from default values."
-        },
-        {
-            "id": "showContainerSelectorsAtWidgets",
-            "name": "Show Container Selector for each Dynamic widget (see each widget group)",
-            "group": "design",
-            "type": "checkbox",
-            "defaultValue": false
         },
         {
             "id": "showMoreInactiveTemplate",
@@ -785,6 +613,26 @@
                     "checkbox": "",
                     "count": "facet-count"
                 }
+            }
+        },
+        {
+            "id": "widgetContainerSelectors",
+            "name": "Custom Selectors for Dynamic Widgets (each dynamic widget will replace DOW element with given selector)",
+            "group": "design",
+            "type": "json",
+            "defaultValue": {
+                "fulltextFilter": "#persoo-search-results__search-box",
+                "items": "#persoo-items",
+                "currentRefinedValues": "#persoo-current-refined-values",
+                "menu": "#persoo-menu",
+                "hierarchicalMenu": "#persoo-hierarchical-menu",
+                "refinementList1": "#persoo-refinementList--1",
+                "refinementList2": "#persoo-refinementList--2",
+                "refinementList3": "#persoo-refinementList--3",
+                "clearAll": "#persoo-clear-all",
+                "stats": "#persoo-stats",
+                "pagination": "#persoo-pagination",
+                "itemsPerPage": "#persoo-items-per-page"
             }
         },
         {
