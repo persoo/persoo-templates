@@ -24,6 +24,13 @@
             "type": "checkbox",
             "defaultValue": true
         },
+        {
+            "id": "hideOnEmptyInput",
+            "name": "Hide Search Results Container on empty input in Search Bar",
+            "group": "options",
+            "type": "checkbox",
+            "defaultValue": false
+        },
 
         {
             "id": "itemTemplate",
@@ -489,9 +496,16 @@
         },
 
         {
-            "id": "layoutTemplate",
+            "id": "layoutHTML",
             "name": "Layout HTML Template (elements marked as 'persoo-container' will be replaced by Dynamic widgets loaded by javascript libraty in browser)",
             "group": "design",
+            "type": "html",
+            "defaultValue": "To be filled from default values."
+        },
+        {
+            "id": "searchBarHTML",
+            "name": "Search Bar HTML Template",
+            "group": "fulltextFilter",
             "type": "html",
             "defaultValue": "To be filled from default values."
         },
@@ -621,7 +635,10 @@
             "group": "design",
             "type": "json",
             "defaultValue": {
-                "fulltextFilter": "#persoo-search-results__search-box",
+                "searchResults": "#persoo-search-results",
+                "originalPageContent": "#your-main-content-selector",
+                "searchBar": "#persoo-search-bar-container",
+                "fulltextFilter": "#persoo-search-results--search-box",
                 "items": "#persoo-items",
                 "currentRefinedValues": "#persoo-current-refined-values",
                 "menu": "#persoo-menu",

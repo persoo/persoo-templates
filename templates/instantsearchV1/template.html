@@ -3,7 +3,25 @@
         <%= customCSS %>
     </style>
 
-    <%= layoutTemplate %>
+    <%= layoutHTML %>
+
+    <% if (showFulltextFilter) { %>
+        <div id="persoo-sb-template-<%= offerID %>" style="display:none;">
+            <%= searchBarHTML %>
+        </div>
+        <script>
+            (function () {
+                var containerElem = document.querySelector('<%= widgetContainerSelectors.searchBar %>');
+                if (containerElem) {
+                    var contentElem = document.getElementById('persoo-sb-template-<%= offerID %>');
+                    containerElem.innerHTML = contentElem.innerHTML;
+                } else {
+                    console.warn('Persoo Search Results: external search bar selector ' +
+                    '"<%= widgetContainerSelectors.searchBar %>" does not match any element in page.');
+                }
+            })();
+        </script>
+    <% } %>
 
     <script>
         var persoo_<%= offerID %> = (function () {
@@ -224,22 +242,45 @@
                 search.start();
 
                 function activateSearchBarCross() {
-                    var searcBarElem = document.querySelector('#persoo--<%= offerID %> .persoo-search-results__search-bar');
-                    var input = searcBarElem.querySelector('input');
+                    var searchBarElem = document.querySelector('.persoo-search-results--search-bar');
+                    var input = searchBarElem.querySelector('input');
 
                     conditionallyHideClearCross();
                     input.addEventListener('input', conditionallyHideClearCross);
-                    searcBarElem.querySelector('.persoo-clear-query').addEventListener('click', function(e) {
+                    searchBarElem.querySelector('.persoo-clear-query').addEventListener('click', function(e) {
                         search.helper.setQuery('').search();
                         conditionallyHideClearCross();
                     });
 
                     function conditionallyHideClearCross(e) {
-                        var crossElem = searcBarElem.querySelector('.persoo-clear-query');
+                        var crossElem = searchBarElem.querySelector('.persoo-clear-query');
                         crossElem.style.display = input.value ? 'inline' : 'none';
                     }
                 }
                 activateSearchBarCross();
+
+                <% if (showFulltextFilter && hideOnEmptyInput) { %>
+                    function setHiddenClass(elem, isVisible) {
+                        if (elem) {
+                            if (isVisible) {
+                                elem.className = elem.className.replace(/\s*persoo-hidden/g,'');
+                            } else {
+                                if (!elem.className.indexOf('persoo-hidden') >=0 ) {
+                                    elem.className += ' persoo-hidden';
+                                }
+                            }
+                        }
+                    }
+                    function hideSearchResultsOnEmptyInput() {
+                         var inputElem = document.querySelector('<%= widgetContainerSelectors.fulltextFilter %>');
+                         var searchResultsElem = document.querySelector('<%= widgetContainerSelectors.searchResults %>');
+                         var originalPageContentElem = document.querySelector('<%= widgetContainerSelectors.originalPageContent %>');
+                         setHiddenClass(searchResultsElem, inputElem.value);
+                         setHiddenClass(originalPageContentElem, !inputElem.value);
+                    }
+                    search.on('render', hideSearchResultsOnEmptyInput);
+                    hideSearchResultsOnEmptyInput();
+                <% } %>
             }
             function loadScript(url, onloadFn, errorFn) {var d = document; var s=d.createElement("script");
                 s.src=url,s.type="text/javascript",s.async=true,s.onerror=errorFn,s.onload=onloadFn;

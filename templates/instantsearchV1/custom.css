@@ -28,14 +28,14 @@
 }
 
 /* Search bar above products */
-#persoo-search-results__search-bar {
+#persoo-search-results--search-bar {
     position: relative;
 }
-#persoo-search-results__search-bar:focus {
+#persoo-search-results--search-bar:focus {
     outline: 0;
     box-shadow: none;
 }
-#persoo-search-results__search-bar .persoo-clear-cross {
+#persoo-search-results--search-bar .persoo-clear-cross {
     position: absolute;
     display: none;
     /* change color and size in decoded SVG. Note: svg must be encoded because of IE. */
@@ -44,16 +44,16 @@
     width: 16px;
     height: 16px;
 }
-#persoo-search-results__search-bar .persoo-clear-query {
+#persoo-search-results--search-bar .persoo-clear-query {
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
 }
-#persoo-search-results__search-bar .ais-search-box {
+#persoo-search-results--search-bar .ais-search-box {
     display: flex;
     margin-bottom: 15px;
 }
-#persoo-search-results__search-bar .ais-search-box::before {
+#persoo-search-results--search-bar .ais-search-box::before {
     flex: 0 0 auto;
     display: block;
     box-sizing: border-box;
@@ -69,10 +69,10 @@
     padding-left: 3em;
     padding-right: 1.5em;
 }
-#persoo-search-results__search-box {
+#persoo-search-results--search-box {
     display: none;
 }
-#persoo-search-results__search-box.ais-search-box--input {
+#persoo-search-results--search-box.ais-search-box--input {
     display: block;
     flex: 1;
     height: 48px;
@@ -81,7 +81,7 @@
     border-left: none;
     padding: 0 1.5em;
 }
-#persoo-search-results__search-box.ais-search-box--input:focus {
+#persoo-search-results--search-box.ais-search-box--input:focus {
     outline: 0;
     box-shadow: none;
 }
@@ -359,5 +359,9 @@ a.ais-current-refined-values--link:hover {
     background: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20version%3D%221.1%22%20opacity%3D%270.5%27%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M15.41%2C16.58L10.83%2C12L15.41%2C7.41L14%2C6L8%2C12L14%2C18L15.41%2C16.58Z%22%20%2F%3E%3C%2Fsvg%3E") no-repeat center center / contain;
 }
 .ais-root__collapsed .ais-body, .ais-root__collapsed .ais-footer {
+    display: none;
+}
+
+.persoo-hidden {
     display: none;
 }
