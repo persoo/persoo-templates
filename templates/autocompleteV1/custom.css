@@ -2,17 +2,17 @@
    or delete them all and add them to your global CSS */
 
 /* Search Bar with Autocomplete (and input element) */
-.persoo-search-bar {
+.persoo-ac-search-bar {
     display: block;
     position: relative;
     /* set width you need or 'auto' */
     min-width: 100px;
     max-width: 600px;
 }
-.persoo-search-bar * {
+.persoo-ac-search-bar * {
     box-sizing: border-box;
 }
-.persoo-search-bar__field-wrapper {
+.persoo-ac-search-bar__field-wrapper {
     position: relative;
     height: 35px;
     margin-right: 42px;
@@ -24,7 +24,7 @@
     zoom: 1;
     overflow: hidden;
 }
-.persoo-search-bar__field-wrapper input {
+.persoo-ac-search-bar__field-wrapper input {
     position: absolute;
     top: 0;
     left: 0;
@@ -44,7 +44,7 @@
     box-shadow: none;
     text-indent: 8px;
 }
-.persoo-search-bar__submit-wrapper {
+.persoo-ac-search-bar__submit-wrapper {
     position: relative;
     float: right;
     top: 0;
@@ -60,7 +60,7 @@
     background-color: #498fdb;
     background-image: none;
 }
-.persoo-search-bar__submit-wrapper input {
+.persoo-ac-search-bar__submit-wrapper input {
     position: relative;
     display: block;
     height: 100%;
@@ -76,7 +76,7 @@
     text-indent: -1000px;
     line-height: 1px;
 }
-.persoo-search-bar__submit-wrapper .persoo-search-icon {
+.persoo-ac-search-bar__submit-wrapper .persoo-search-icon {
     display: block;
     position: absolute;
     text-indent: -500px;

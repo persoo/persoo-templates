@@ -503,6 +503,29 @@
             "defaultValue": "To be filled from default values."
         },
         {
+            "id": "widgetContainerSelectors",
+            "name": "Custom Selectors for Dynamic Widgets (each dynamic widget will replace DOW element with given selector)",
+            "group": "design",
+            "type": "json",
+            "defaultValue": {
+                "searchResults": "#persoo-search-results",
+                "originalPageContent": "#your-main-content-selector",
+                "searchBar": "#persoo-search-bar",
+                "fulltextFilter": "#persoo-search-bar--search-box",
+                "items": "#persoo-items",
+                "currentRefinedValues": "#persoo-current-refined-values",
+                "menu": "#persoo-menu",
+                "hierarchicalMenu": "#persoo-hierarchical-menu",
+                "refinementList1": "#persoo-refinementList--1",
+                "refinementList2": "#persoo-refinementList--2",
+                "refinementList3": "#persoo-refinementList--3",
+                "clearAll": "#persoo-clear-all",
+                "stats": "#persoo-stats",
+                "pagination": "#persoo-pagination",
+                "itemsPerPage": "#persoo-items-per-page"
+            }
+        },
+        {
             "id": "searchBarHTML",
             "name": "Search Bar HTML Template",
             "group": "fulltextFilter",
@@ -627,29 +650,6 @@
                     "checkbox": "",
                     "count": "facet-count"
                 }
-            }
-        },
-        {
-            "id": "widgetContainerSelectors",
-            "name": "Custom Selectors for Dynamic Widgets (each dynamic widget will replace DOW element with given selector)",
-            "group": "design",
-            "type": "json",
-            "defaultValue": {
-                "searchResults": "#persoo-search-results",
-                "originalPageContent": "#your-main-content-selector",
-                "searchBar": "#persoo-search-bar-container",
-                "fulltextFilter": "#persoo-search-results--search-box",
-                "items": "#persoo-items",
-                "currentRefinedValues": "#persoo-current-refined-values",
-                "menu": "#persoo-menu",
-                "hierarchicalMenu": "#persoo-hierarchical-menu",
-                "refinementList1": "#persoo-refinementList--1",
-                "refinementList2": "#persoo-refinementList--2",
-                "refinementList3": "#persoo-refinementList--3",
-                "clearAll": "#persoo-clear-all",
-                "stats": "#persoo-stats",
-                "pagination": "#persoo-pagination",
-                "itemsPerPage": "#persoo-items-per-page"
             }
         },
         {
