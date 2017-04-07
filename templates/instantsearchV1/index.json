@@ -511,7 +511,7 @@
                 "searchResults": "#persoo-search-results",
                 "originalPageContent": "#your-main-content-selector",
                 "searchBar": "#persoo-search-bar",
-                "fulltextFilter": "#persoo-search-bar--search-box",
+                "fulltextFilter": "#persoo-search-bar__search-box",
                 "items": "#persoo-items",
                 "currentRefinedValues": "#persoo-current-refined-values",
                 "menu": "#persoo-menu",
