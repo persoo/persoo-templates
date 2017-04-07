@@ -250,6 +250,7 @@
                     searchBarElem.querySelector('.persoo-clear-query').addEventListener('click', function(e) {
                         search.helper.setQuery('').search();
                         conditionallyHideClearCross();
+                        setTimeout(conditionallyHideClearCross, 10);
                     });
 
                     function conditionallyHideClearCross(e) {
