@@ -154,6 +154,21 @@
         },
 
         {
+            "id": "showHeader",
+            "name": "Show Header",
+            "group": "header",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "headerTemplate",
+            "name": "Header Template (available variables: nbHits, page, query)",
+            "group": "header",
+            "type": "html",
+            "defaultValue": "<% if (nbHits > 0) { %>\n    <h1>Search Results for \"<%= query %>\"</h1>\n<% } else { %>\n    <h1>Your query did not match any products</h1>\n<% } %>"
+        },
+
+        {
             "id": "showClearAll",
             "name": "Show Clear All Button",
             "group": "clearAll",
@@ -521,6 +536,7 @@
                 "refinementList3": "#persoo-refinementList--3",
                 "clearAll": "#persoo-clear-all",
                 "stats": "#persoo-stats",
+                "header": "#persoo-header",
                 "pagination": "#persoo-pagination",
                 "itemsPerPage": "#persoo-items-per-page"
             }
@@ -595,6 +611,9 @@
                     "header": "",
                     "body": "",
                     "footer": ""
+                },
+                "header": {
+                    "root": ""
                 },
                 "clearAll": {
                     "root": "",
@@ -700,6 +719,10 @@
         {
             "id": "statistics",
             "name": "Found Results Count"
+        },
+        {
+            "id": "header",
+            "name": "Header"
         },
         {
             "id": "pagination",

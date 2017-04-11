@@ -110,6 +110,25 @@
 .ais-infinite-hits--showmore {
     text-align: center;
 }
+.ais-infinite-hits--showmore > button {
+    padding: 6px 12px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.ais-infinite-hits--showmore > button[disabled] {
+    display: none;
+}
+
 
 .persoo-result-item {
     display: block;

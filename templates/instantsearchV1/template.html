@@ -121,7 +121,17 @@
                         })
                     );
                 <% } %>
-
+                <% if (showHeader) { %>
+                    search.addWidget(
+                        persooInstantSearch.widgets.header({
+                            container: '<%= widgetContainerSelectors.header %>',
+                            templates: {
+                                root: <%= addTemplate(headerTemplate) %>
+                            },
+                            cssClasses: <%= addClassNamesFor('header', {}) %>
+                        })
+                    );
+                <% } %>
                 <% if (showClearAll) { %>
                     search.addWidget(
                         persooInstantSearch.widgets.clearAll({
@@ -273,11 +283,11 @@
                         }
                     }
                     function hideSearchResultsOnEmptyInput() {
-                         var inputElem = document.querySelector('<%= widgetContainerSelectors.fulltextFilter %>');
-                         var searchResultsElem = document.querySelector('<%= widgetContainerSelectors.searchResults %>');
-                         var originalPageContentElem = document.querySelector('<%= widgetContainerSelectors.originalPageContent %>');
-                         setHiddenClass(searchResultsElem, inputElem.value);
-                         setHiddenClass(originalPageContentElem, !inputElem.value);
+                        var isEmptyQuery = (search.helper.getStateAsQueryString() == 'q=');
+                        var searchResultsElem = document.querySelector('<%= widgetContainerSelectors.searchResults %>');
+                        var originalPageContentElem = document.querySelector('<%= widgetContainerSelectors.originalPageContent %>');
+                        setHiddenClass(searchResultsElem, !isEmptyQuery);
+                        setHiddenClass(originalPageContentElem, isEmptyQuery);
                     }
                     search.on('render', hideSearchResultsOnEmptyInput);
                     hideSearchResultsOnEmptyInput();
