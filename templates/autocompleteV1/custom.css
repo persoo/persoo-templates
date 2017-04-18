@@ -1,255 +1,221 @@
 /* Customize default CSS rules to get what you need
-   or delete them all and add them to your global CSS */
+or delete them all and add them to your global CSS */
 
 /* Search Bar with Autocomplete (and input element) */
-.persoo-ac-search-bar {
-    display: block;
-    position: relative;
-    /* set width you need or 'auto' */
-    min-width: 100px;
-    max-width: 600px;
-}
+.persoo-ac-search-bar,
 .persoo-ac-search-bar * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  text-rendering: geometricPrecision;
+  font-smooth: always;
+  font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-.persoo-ac-search-bar__field-wrapper {
-    position: relative;
-    height: 35px;
-    margin-right: 42px;
-    border: none;
-    -webkit-border-radius: 4px 0 0 4px;
-    -moz-border-radius: 4px 0 0 4px;
-    border-radius: 4px 0 0 4px;
-    background: #fff;
-    zoom: 1;
-    overflow: hidden;
+.persoo-ac-search-bar {
+  position: relative;
+  /* set width you need or 'auto' */
+  min-width: 200px;
+  max-width: 500px;
 }
-.persoo-ac-search-bar__field-wrapper input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    line-height: 15px;
-    padding: 6px 10px 6px 0;
-    margin: 0;
-    border: 0;
-    height: 33px;
-    font-family: arial,sans-serif;
-    font-size: 15px;
-    background: 0 0;
-    color: #111;
-    outline: 0;
-    -webkit-appearance: none;
-    box-shadow: none;
-    text-indent: 8px;
-}
-.persoo-ac-search-bar__submit-wrapper {
-    position: relative;
-    float: right;
-    top: 0;
-    right: 0;
-    height: 35px;
-    width: 42px;
-    overflow: hidden;
-    cursor: pointer;
-    -webkit-border-radius: 0 4px 4px 0;
-    -moz-border-radius: 0 4px 4px 0;
-    border-radius: 0 4px 4px 0;
-    border: none;
-    background-color: #498fdb;
-    background-image: none;
-}
-.persoo-ac-search-bar__submit-wrapper input {
-    position: relative;
-    display: block;
-    height: 100%;
-    width: 100%;
-    font-size: 14px;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    outline: 0;
-    color: #fff;
-    background: 0 0;
-    border: none;
-    text-indent: -1000px;
-    line-height: 1px;
-}
-.persoo-ac-search-bar__submit-wrapper .persoo-search-icon {
-    display: block;
-    position: absolute;
-    text-indent: -500px;
-    top: 50%;
-    left: 12px;
-    width: 16px;
-    height: 16px;
-    transform: translateY(-50%);
-    /* change color and size in decoded SVG. Note: svg must be encoded because of IE. */
-    background: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2740%27%20height%3D%2740%27%20style%3D%27fill%3Awhite%3B%20stroke%3Anone%27%3E%3Cpath%20d%3D%27M15.553%2031.107c8.59%200%2015.554-6.964%2015.554-15.554S24.143%200%2015.553%200%200%206.964%200%2015.553c0%208.59%206.964%2015.554%2015.553%2015.554zm0-3.888c6.443%200%2011.666-5.225%2011.666-11.668%200-6.442-5.225-11.665-11.668-11.665-6.442%200-11.665%205.223-11.665%2011.665%200%206.443%205.223%2011.666%2011.665%2011.666zm12.21%203.84a2.005%202.005%200%200%201%20.002-2.833l.463-.463a2.008%202.008%200%200%201%202.833-.003l8.17%208.168c.78.78.78%202.05-.004%202.833l-.462.463a2.008%202.008%200%200%201-2.834.004l-8.168-8.17z%27%20fill%3D%27%23fff%27%20fill-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E") no-repeat center center / contain;
-}
-
-/* Autocomplete Dropdown */
-.persoo-autocompleteDropdown__root {
-  /* Dropdown's offset from input bottom left corner. Margin is counted inside absolutely positioned box. */
-  margin-top: 2px;
-  margin-left: 0px;
-
-  max-height: 100%;
-  width: 100%; /* because of responsivity */
-  max-width: 600px;
-  border-radius: 4px;
-  overflow: hidden;
-  border: 1px solid #aaa;
-  -moz-box-shadow:0 2px 21px rgba(2,2,2,0.16);
-  -webkit-box-shadow:0 2px 21px rgba(2,2,2,0.16);
-  box-shadow:0 2px 21px rgba(2,2,2,0.16);
-}
-/* on small screens do not start below INPUT box, but fill full screen width */
-@media (max-width: 680px) {
-    .persoo-autocompleteDropdown__root {
-        left: 0px !important;
-    }
-}
-/* hide dropdown on too small screens
-@media (max-width: 380px) {
-    .persoo-autocompleteDropdown__root {
-        display: none;
-    }
-}
-*/
-/* Note on responsivity:
-      TODO use different desing on small screens. List products one below the other with large images on the right
- */
-
-/* Datasets Layout */
-.persoo-autocompleteDropdown__root {
-  display: -webkit-flex;
+.persoo-ac-search-bar__form {
   display: flex;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  height: 48px;
 }
-.persoo-autocompleteDataset-2__root {
-  overflow-y: auto;
-  -webkit-flex: 1;
-  flex: 1;
+.persoo-ac-search-bar__input,
+.persoo-ac-search-bar__submit {
+    height: 48px;
+    margin: 0;
 }
-.persoo-autocompleteDataset-1__root {
-  overflow-y: auto;
-  -webkit-flex: 2;
-  flex: 2;
+.persoo-ac-search-bar__input {
+  flex: 1 1 auto;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  width: 100%;
+  font-size: 16px;
+  background: #fff;
+  color: #111;
+  outline: 0;
+  box-shadow: none;
+  padding-left: 24px;
+  border-radius: 4px 0 0 4px;
+  overflow: hidden;
+  border: 1px solid #CCC;
+  border-right: 0;
+}
+.persoo-ac-search-bar__input::-ms-clear {
+    display: none;
+}
+.persoo-ac-search-bar__submit {
+  width: 48px;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  border: none;
+  background-color: #555;
+  /* change color and size in decoded SVG. Note: svg must be encoded because of IE. */
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2740%27%20height%3D%2740%27%20style%3D%27fill%3Awhite%3B%20stroke%3Anone%27%3E%3Cpath%20d%3D%27M15.553%2031.107c8.59%200%2015.554-6.964%2015.554-15.554S24.143%200%2015.553%200%200%206.964%200%2015.553c0%208.59%206.964%2015.554%2015.553%2015.554zm0-3.888c6.443%200%2011.666-5.225%2011.666-11.668%200-6.442-5.225-11.665-11.668-11.665-6.442%200-11.665%205.223-11.665%2011.665%200%206.443%205.223%2011.666%2011.665%2011.666zm12.21%203.84a2.005%202.005%200%200%201%20.002-2.833l.463-.463a2.008%202.008%200%200%201%202.833-.003l8.17%208.168c.78.78.78%202.05-.004%202.833l-.462.463a2.008%202.008%200%200%201-2.834.004l-8.168-8.17z%27%20fill%3D%27%23fff%27%20fill-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E");
+  background-size: 16px 16px;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-indent: -500px;
+}
+.persoo-ac-search-bar__submit:hover,
+.persoo-ac-search-bar__submit:focus {
+  background-color: #333;
+}
+.persoo-ac-search-bar__form--visible .persoo-ac-search-bar__input {
+    border-radius: 4px 0 0 0;
+}
+.persoo-ac-search-bar__form--visible .persoo-ac-search-bar__submit {
+    border-radius: 0 4px 0 0;
+}
+/* Autocomplete Dropdown */
+.persoo-ac-search-bar__dropdown {
+  /* Dropdown's offset from input bottom left corner. Margin is counted inside absolutely positioned box. */
+  dispaly: none;
+  margin-left: 0;
+  position: absolute;
+  width: auto;
+  min-width: 100%;
+  top: 100%;
+  left: 0;
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  flex-direction: column;
+  -webkit-directiom: column;
+  -ms-directiom: column;
+  z-index: 9999;
+  font-size: 14px;
+}
+/* Note on responsivity:
+TODO use different desing on small screens. List products one below the other with large images on the right
+*/
+@media (min-width: 361px) {
+  .persoo-ac-search-bar__dropdown {
+    display: block;
+  }
+}
+.persoo-autocompleteDropdown__root {
+  position: static !important; /* FIXME - remove */
 }
 
 /* Dataset styles */
-
+.persoo-autocompleteDataset__root:not(:first-child){
+  border-top: 1px solid #CCC;
+}
+.persoo-autocompleteDataset__root > div {
+  border: 1px solid #CCC;
+}
+.persoo-autocompleteDataset__root > div:first-child {
+  border-top: 0;
+}
+.persoo-autocompleteDataset__root > div:not(:last-child),
+.persoo-autocompleteDataset__root:not(:last-child) > div:last-child {
+  border-bottom: 0;
+}
+.persoo-autocompleteDataset__root:last-child > div:last-child {
+  border-radius: 0 0 4px 4px;
+}
 .persoo-autocompleteDataset__header,
-.persoo-autocompleteDataset__footer,
-.persoo-autocompleteDataset__items__item,
-.persoo-autocompleteDataset__empty {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 10px 3% 10px 3%;
+.persoo-autocompleteDataset__footer {
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  height: 48px;
+  align-items: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  background: #f3f3f3;
 }
 .persoo-autocompleteDataset__header {
   font-weight: bold;
 }
-.persoo-autocompleteDataset__footer {
-  font-size: 86.667%;
+.persoo-autocompleteDataset__empty {
+ padding: 8px 24px;
+ background: #fff;
+}
+.persoo-autocompleteDataset__items {
+  padding: 1px 16px;
+  background: #FFF;
+}
+.persoo-autocompleteDataset__items:empty {
+  display: none; /* FIXME - remove empty div from DOM */
 }
 .persoo-autocompleteDataset__items__item {
   cursor: pointer;
-  line-height: 23px;
-  overflow: hidden;
-  font-size: 1.0em;
-  text-align: left;
+  border-bottom: 1px solid #CCC;
+}
+.persoo-autocompleteDataset__items__item:last-child {
+  border-bottom: 0;
 }
 .persoo-autocompleteDataset__items__item,
 .persoo-autocompleteDataset__items__item a,
 .persoo-autocompleteDataset__items__item a:hover {
   text-decoration: none;
 }
+.persoo-autocompleteDataset__items__item a {
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  margin: -1px -17px;
+  align-items: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  border: 2px solid rgba(0, 0, 0, 0);
+  color: #555;
+  padding: 8px 24px;
+}
+.persoo-autocompleteDataset__items__item a:hover,
+.persoo-autocompleteDataset__items__item.persoo-selected a {
+  border-color: rgba(0, 0, 0, 0.6);
+  color: #111;
+}
+.persoo-autocompleteDataset__items__item__img-container {
+  width: 100px;
+  height: 100px;
+  margin: 8px 0;
+  position: relative;
+}
+.persoo-autocompleteDataset__items__item__img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+}
+.persoo-autocompleteDataset__items__item__content {
+  flex: 1 1 auto;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  padding-left: 24px;
+}
 .persoo-autocompleteDataset__items__item__title {
-  padding-left: 5px;
+  font-size: 18px;
+  line-height: 32px;
+  margin-bottom: 8px;
 }
 .persoo-autocompleteDataset__items__item__price {
   font-weight: bold;
+  color: #BD1E51;
+  font-size: 16px;
 }
 .persoo-autocompleteDataset__items__item__price__original {
   text-decoration: line-through;
   font-weight: normal;
-  font-size: smaller;
   color: #aaa;
-}
-
-/* Colors for dataset 1 */
-.persoo-autocompleteDataset-1__root {
-  background-color: #fff;
-}
-.persoo-autocompleteDataset-1__header {
-  color: #333;
-  background-color: #f0f0f0;
-}
-.persoo-autocompleteDataset-1__items__item.persoo-selected {
-  /* background-color: #f0f0f0; */
-  border-color: #498fdb;
-}
-.persoo-autocompleteDataset-1__root,
-.persoo-autocompleteDataset-1__items a,
-.persoo-autocompleteDataset-1__items a:hover {
-  color: #333;
-}
-.persoo-autocompleteDataset-1__items__item b {
-  font-weight: bold;
-  color: #498fdb;
-}
-
-/* Colors for dataset 2 */
-.persoo-autocompleteDataset-2__root {
-  background-color: #224162;
-}
-.persoo-autocompleteDataset-2__header {
-  color: #fff;
-  background-color: #224162;
-}
-.persoo-autocompleteDataset-2__items__item.persoo-selected {
-  background-color: #498fdb;
-}
-.persoo-autocompleteDataset-2__root,
-.persoo-autocompleteDataset-2__items a,
-.persoo-autocompleteDataset-2__items a:hover {
-  color: #fff;
-}
-.persoo-autocompleteDataset-2__items__item b {
-  font-weight: bold;
-  color: #ddd;
-}
-
-/* Product Dataset Layout */
-.persoo-autocompleteDataset-1__items {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
-}
-.persoo-autocompleteDataset-1__items__item {
-  box-sizing: content-box;
-  border: solid transparent 3px;
-  -webkit-flex: 1;
-  flex: 1;
-  width: auto;
-  min-width: 100px;
-  max-width: 150px;
-  min-height: 160px;
-}
-.persoo-autocompleteDataset-1__items__item a {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-}
-.persoo-autocompleteDataset-1__items__item a div {
-  vertical-align: middle;
-  text-align: center;
-}
-.persoo-autocompleteDataset__items__item img {
-  max-width: 100px;
-  max-height: 100px;
+  margin-left: 8px;
 }

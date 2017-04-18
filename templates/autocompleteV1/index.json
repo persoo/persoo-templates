@@ -33,7 +33,7 @@
                     "value": 2
                 }
             ],
-            "defaultValue": 1
+            "defaultValue": 2
         },
         {
             "id": "minChars",
@@ -71,7 +71,7 @@
             "name": "Close On Blur (false is useful for debug)",
             "group": "options",
             "type": "checkbox",
-            "defaultValue": false
+            "defaultValue": true
         },
 
 
@@ -92,7 +92,7 @@
             "name": "Max Results Count",
             "group": "dataset1",
             "type": "number",
-            "defaultValue": 8,
+            "defaultValue": 5,
             "condition": {
                 "fieldID": "datasetsCount",
                 "operator": ">=",
@@ -110,7 +110,7 @@
             "name": "Header (available variables: query, count, isEmpty)",
             "group": "dataset1",
             "type": "text",
-            "defaultValue": "PRODUCTS matching '<%= query %>'",
+            "defaultValue": "",
             "condition": {
                 "fieldID": "datasetsCount",
                 "operator": ">=",
@@ -122,7 +122,7 @@
             "name": "Item (available variables: query, item, highlightQuery(str))",
             "group": "dataset1",
             "type": "html",
-            "defaultValue": "<a href=\"<%= item.link %>\">\n    <div class=\"persoo-autocompleteDataset__items__item__img\">\n        <img src=\"<%= item.imageLink %>\">\n    </div>\n    <div class=\"persoo-autocompleteDataset__items__item__title\">\n        <%= highlightQuery(item.title) %>\n    </div>\n    <div class=\"persoo-autocompleteDataset__items__item__price\">\n        <% if (item.priceOriginal) { %>\n            <span class=\"persoo-autocompleteDataset__items__item__price__original\">\n                <%= item.priceOriginal %>&nbsp;Kč</span>\n        <% } %>\n        <span class=\"persoo-autocompleteDataset__items__item__price__current\">\n            <%= item.price %>&nbsp;Kč</span>\n    </div>\n</a>",
+            "defaultValue": "<%\n  function truncate(string, length) {\n    length = length === undefined ? 55 : length;\n    if (string.length <= length) return string;\n    return string.slice(0, length - 3) + '...';\n  }\n%>\n\n<a href=\"<%= item.link %>\">\n  <div class=\"persoo-autocompleteDataset__items__item__img-container\">\n    <img class=\"persoo-autocompleteDataset__items__item__img\"\n       src=\"<%= item.imageLink %>\"\n       alt=\"<%= item.title %>\"\n    />\n  </div>\n  \n  <div class=\"persoo-autocompleteDataset__items__item__content\">\n    <div class=\"persoo-autocompleteDataset__items__item__title\">\n      <%= highlightQuery(truncate(item.title)) %>\n   \t</div>\n    <div class=\"persoo-autocompleteDataset__items__item__price\">\n      <span class=\"persoo-autocompleteDataset__items__item__price__current\">\n        <%= item.price %>&nbsp;Kč\n      </span>\n      <% if (item.priceOriginal) { %>\n        <span class=\"persoo-autocompleteDataset__items__item__price__original\">\n          <%= item.priceOriginal %>&nbsp;Kč\n        </span>\n      <% } %> \n    </div>\n  </div>\n</a>",
             "condition": {
                 "fieldID": "datasetsCount",
                 "operator": ">=",
@@ -158,7 +158,7 @@
              "name": "Nothing Found Message (available variables: query)",
              "group": "dataset1",
              "type": "text",
-             "defaultValue": "Nothing found for '<%= query %>'",
+             "defaultValue": "",
              "condition": {
                  "operator": "and",
                  "children": [
@@ -192,7 +192,7 @@
             "name": "Maximum Results Count",
             "group": "dataset2",
             "type": "number",
-            "defaultValue": 5,
+            "defaultValue": 3,
             "condition": {
                 "fieldID": "datasetsCount",
                 "operator": ">=",
@@ -216,7 +216,7 @@
             "name": "Header (available variables: query, count, isEmpty)",
             "group": "dataset2",
             "type": "text",
-            "defaultValue": "CATEGORIES",
+            "defaultValue": "",
             "condition": {
              "fieldID": "datasetsCount",
              "operator": ">=",
@@ -228,7 +228,7 @@
             "name": "Item (available variables: query, item, highlightQuery(str))",
             "group": "dataset2",
             "type": "html",
-            "defaultValue": "<%= item.title ? highlightQuery(item.title) : '' %>",
+            "defaultValue": "<a href=\"<%= item.link %>\">\n  <%= item.title ? highlightQuery(item.title) : '' %>\n</a>",
             "condition": {
              "fieldID": "datasetsCount",
              "operator": ">=",
@@ -302,24 +302,24 @@
             "group": "design",
             "type": "json",
             "defaultValue": {
-                "dropdown": {
+                "dataset1": {
+                    "empty": "",
+                    "footer": "",
+                    "header": "",
+                    "item": "",
+                    "items": "",
                     "root": ""
                 },
-                "dataset1": {
-                    "root": "",
-                    "items": "",
-                    "item": "",
-                    "header": "",
-                    "footer": "",
-                    "empty": ""
-                },
                 "dataset2": {
-                    "root": "",
-                    "items": "",
-                    "item": "",
-                    "header": "",
+                    "empty": "",
                     "footer": "",
-                    "empty": ""
+                    "header": "",
+                    "item": "",
+                    "items": "",
+                    "root": ""
+                },
+                "dropdown": {
+                    "root": ""
                 }
             }
         },

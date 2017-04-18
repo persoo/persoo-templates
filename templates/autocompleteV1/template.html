@@ -11,7 +11,9 @@
     <%= searchBarTemplate %>
     <% if (inputSelector && formSelector) { %>
         <script>
-            document.querySelector('<%= formSelector %>').onsubmit = function() {
+            var formNode = document.querySelector('<%= formSelector %>');
+
+            formNode.onsubmit = function() {
                 var query = document.querySelector('<%= inputSelector %>').value;
                 console.log("You searched for query '" + query + "'");
                 document.location.href = '<%= searchLink %>'.replace(/\$query/g, query);
@@ -78,9 +80,28 @@
                     openOnFocus: <%= openOnFocus %>,
                     closeOnBlur: <%= closeOnBlur %>,
                     classNames: <%= JSON.stringify(customClassNamesJSON.dropdown || {}) %>,
-                    offsetLeft: 0,
-                    offsetTop: 0,
-                    width: null
+                        offsetLeft: null,
+                        offsetTop: null,
+                        width: null,
+                        onRender: function(state) {
+                            <% if (formSelector) { %>
+                                var formClassName = formNode.className;
+                                var formVisibleClassName = ' persoo-ac-search-bar__form--visible';
+                                var hasFormVisibleClassName = formClassName.match(formVisibleClassName) !== null;
+
+                                if (state.isVisible) {
+                                    formClassName = hasFormVisibleClassName ?
+                                        formClassName :
+                                    	formClassName + formVisibleClassName;
+                                } else {
+                                    formClassName = hasFormVisibleClassName ?
+                                        formClassName.replace(formVisibleClassName, '') :
+                                    	formClassName;
+                                }
+
+                                formNode.className = formClassName;
+                            <% } %>
+                        }
                 });
             }
             function loadScript(url, onloadFn, errorFn) {var d = document; var s=d.createElement("script");
