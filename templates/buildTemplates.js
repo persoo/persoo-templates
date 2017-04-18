@@ -7,7 +7,11 @@ var allTemplatesJSON = {};
 
 function addTemplate(id, json, templateHTML, defaultValues) {
     allTemplatesJSON[id] = json;
-    allTemplatesJSON[id].template = templateHTML.replace(/@@childTemplate/mi, '');
+    if (json.class == "webWidget") {
+        allTemplatesJSON[id].template = templateHTML.replace(/@@childTemplate/mi, '');
+    } else {
+        allTemplatesJSON[id].htmlBody = templateHTML.replace(/@@childTemplate/mi, '');
+    }
 
     // override default values in original fields
     var fields = allTemplatesJSON[id].fields;

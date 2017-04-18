@@ -329,7 +329,12 @@ module.exports = {
             var currentOffer = offerStore.offers[templateStore.currentTemplateID];
             var currentContext = {
                 offerID: "randomOfferID",
-                locationID: "randoLocationID"
+                locationID: "randoLocationID",
+                profile: {
+                    db: {
+                        identifications: {}
+                    }
+                }
             };
             this.addProductsToContext(currentContext, currentOffer.variants[0]);
             var previewHTML = persooTemplates.render(templateString, currentOffer.variants[0], currentContext);
