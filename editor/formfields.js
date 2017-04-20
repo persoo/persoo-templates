@@ -348,6 +348,48 @@ CssFormField.prototype.onChange = function() {
     this.parentOnChange(value);
 }
 
+function JavascriptFormField(label, parentElement, dataGetter, dataSetter) {
+    FormField.call(this, formFieldTypes.input, label, parentElement, dataGetter, dataSetter);
+
+    var value = this.dataGetter("");
+    if (typeof value !== 'string') value = '[Error: value is not a string.]';
+    this.formElementParent.innerHTML = '<textarea>' + value + '</textarea>';
+    this.formElement = this.formElementParent.children[0];
+
+    this.editor = CodeMirror.fromTextArea(this.formElement, {
+      mode: 'javascript',
+      lineWrapping: true,
+      extraKeys: {
+        'Ctrl-Space': 'autocomplete',
+        'F11': function(cm) {
+                   cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+        },
+        'Esc': function(cm) {
+                   if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+        }
+      },
+      lineNumbers: true
+    });
+    this.editor.on('changes', this.onChange.bind(this));
+}
+JavascriptFormField.prototype = Object.create(FormField.prototype);
+JavascriptFormField.prototype.constructor = JavascriptFormField;
+JavascriptFormField.prototype.update = function() {
+    var value = this.dataGetter("");
+    if (typeof value != 'undefined') {
+        if (typeof value !== 'string') value = '[Error: value is not a string.]';
+        // update only if values are different
+        var editorValue = this.editor.getDoc().getValue();
+        if (editorValue != value) {
+            this.editor.getDoc().setValue(value);
+        }
+    }
+    this.editor.refresh();
+};
+JavascriptFormField.prototype.onChange = function() {
+    var value = this.editor.getDoc().getValue();
+    this.parentOnChange(value);
+}
 
 module.exports = {
     formFieldTypes: formFieldTypes,
@@ -360,6 +402,6 @@ module.exports = {
     HtmlFormField: HtmlFormField,
     RichtextFormField: HtmlFormField,
     JsonFormField: JsonFormField,
-    JavascriptFormField: JsonFormField,
+    JavascriptFormField: JavascriptFormField,
     CssFormField: CssFormField
 };

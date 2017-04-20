@@ -249,6 +249,29 @@
                     );
                 <% } %>
 
+                <% if (analyticsPushFunction.match(/^\s*function\s+push\(/)) { %>
+                    search.addWidget(
+                        persooInstantSearch.widgets.analytics({
+                            pushFunction: function (formattedParameters, state, results) {
+                                <%= analyticsPushFunction %>;
+                                var filters = formattedParameters ? formattedParameters.split('&') : [];
+                                filters = filters.map(decodeURIComponent);
+                                window.persoo('send', 'impression', {
+                                    locationID: '<%= locationID %>',
+                                    offerID: '<%= offerID %>',
+                                    query: state.query,
+                                    filters: filters,
+                                    foundResultsCount: results.nbHits
+                                });
+                                push(formattedParameters, state, results);
+                            },
+                            pushInitialSearch: <%= analyticsPushInitialSearch %>,
+                            triggerOnUIInteraction: <%= analyticsTriggerOnUIInteraction %>,
+                            delay: <%= analyticsTriggerDelay %>
+                        })
+                    );
+                <% } %>
+
                 search.start();
 
                 function activateSearchBarCross() {
