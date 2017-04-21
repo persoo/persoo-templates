@@ -5,8 +5,20 @@
     "textBody": "<%= textBody %>",
     "groups": [
         {
+            "id": "subject",
+            "name": "Subject"
+        },
+        {
+            "id": "layout",
+            "name": "Layout / Select Content Blocks"
+        },
+        {
+            "id": "headline",
+            "name": "Headline"
+        },
+        {
             "id": "messageBlock",
-            "name": "Main Block"
+            "name": "Text Block"
         },
         {
             "id": "sideImageBlock",
@@ -21,16 +33,12 @@
             "name": "Products Block 2"
         },
         {
+            "id": "bottomBannerBlock",
+            "name": "Bottom Banner"
+        },
+        {
             "id": "options",
             "name": "Options"
-        },
-        {
-            "id": "subject",
-            "name": "Subject"
-        },
-        {
-            "id": "textBody",
-            "name": "Text Body"
         }
     ],
     "class": "email",
@@ -39,18 +47,70 @@
             "defaultValue": "Your email subject, i.e. product X is on sale!",
             "group": "subject",
             "id": "subject",
-            "name": "Subject",
+            "name": "Email Subject",
             "type": "text"
         },
         {
+            "defaultValue": true,
+            "group": "layout",
+            "id": "showHeadline",
+            "name": "Show Headline",
+            "type": "checkbox"
+        },
+        {
+            "defaultValue": true,
+            "group": "layout",
+            "id": "showTextBlock",
+            "name": "Show Text Block",
+            "type": "checkbox"
+        },
+        {
+            "defaultValue": true,
+            "group": "layout",
+            "id": "showSideImageBlock",
+            "name": "Show Image + Text block",
+            "type": "checkbox"
+        },
+        {
+            "defaultValue": true,
+            "group": "layout",
+            "id": "showProductsBlock1",
+            "name": "Show Products Block 1",
+            "type": "checkbox"
+        },
+        {
+            "defaultValue": true,
+            "group": "layout",
+            "id": "showProductsBlock2",
+            "name": "Show Products Block 2",
+            "type": "checkbox"
+        },
+        {
+            "defaultValue": true,
+            "group": "layout",
+            "id": "showBottomBannerBlock",
+            "name": "Show Bottom Banner Block",
+            "type": "checkbox"
+        },
+        {
+            "condition": {
+                "fieldID": "showHeadline",
+                "fieldValue": true,
+                "operator": "=="
+            },
             "defaultValue": "Heading",
-            "group": "messageBlock",
+            "group": "headline",
             "id": "messageTitle",
-            "name": "Title",
+            "name": "Text",
             "type": "text"
         },
         {
-            "defaultValue": "<p>Can we help you with finishing the order? Call us on <b>555 555 5555</b> or write us on <a href=\"#\">info@eshop.com</a>.</p>\n<p> Remember that you have two weeks to return the goods without any quesions asked.</p>",
+            "condition": {
+                "fieldID": "showMessageBlock",
+                "fieldValue": true,
+                "operator": "=="
+            },
+            "defaultValue":  "<p style=\"color:red;\">Clone and modify this template in \"Settings > Content Templates\". Create your corporate header, colors, fonts and then use it as email template for all your emails. (Update header and footer only in one place, in your email content template.)\n<p>\n<p>Can we help you with finishing the order? Call us on <b>555 555 5555</b> or write us on <a href=\"#\">info@eshop.com</a>.</p>\n<p> Remember that you have two weeks to return the goods without any quesions asked.</p>",
             "group": "messageBlock",
             "id": "messageText",
             "name": "Text",
@@ -62,10 +122,22 @@
                 "fieldValue": true,
                 "operator": "=="
             },
-            "defaultValue": "https://placehold.it/250x200?text=medium+image",
+            "defaultValue": "https://placehold.it/250x200?text=medium+image+250x200",
             "group": "sideImageBlock",
             "id": "sideImageBlockImageLink",
             "name": "Image Link",
+            "type": "text"
+        },
+        {
+            "condition": {
+                "fieldID": "showSideImageBlock",
+                "fieldValue": true,
+                "operator": "=="
+            },
+            "defaultValue": "Image Alt Text",
+            "group": "sideImageBlock",
+            "id": "sideImageBlockAltText",
+            "name": "Image Alt Text",
             "type": "text"
         },
         {
@@ -128,129 +200,137 @@
         },
         {
             "condition": {
-                "fieldID": "productBlocksCount",
-                "fieldValue": 1,
-                "operator": ">="
+                "fieldID": "showProductsBlock1",
+                "fieldValue": true,
+                "operator": "=="
             },
             "defaultValue": "Product Block Title 1",
             "group": "productsBlock1",
             "id": "productBlockTitle1",
-            "name": "Product Block Title 1",
+            "name": "Product Block Title",
             "type": "text"
         },
         {
             "condition": {
-                "fieldID": "productBlocksCount",
-                "fieldValue": 1,
-                "operator": ">="
+                "fieldID": "showProductsBlock1",
+                "fieldValue": true,
+                "operator": "=="
             },
             "defaultValue": "Show more",
             "group": "productsBlock1",
             "id": "productBlockShowMoreText1",
-            "name": "Show More Button Text",
+            "name": "\"Show More\" Button Text",
             "type": "text"
         },
         {
             "condition": {
-                "fieldID": "productBlocksCount",
-                "fieldValue": 1,
-                "operator": ">="
+                "fieldID": "showProductsBlock1",
+                "fieldValue": true,
+                "operator": "=="
             },
             "defaultValue": "#",
             "group": "productsBlock1",
             "id": "productBlockShowMoreLink1",
-            "name": "Show More Button Target Link",
+            "name": "\"Show More\" Button Target Link",
             "type": "text"
         },
         {
             "condition": {
-                "fieldID": "productBlocksCount",
-                "fieldValue": 2,
-                "operator": ">="
+                "fieldID": "showProductsBlock1",
+                "fieldValue": true,
+                "operator": "=="
+            },
+            "defaultValue": "Show",
+            "group": "productsBlock1",
+            "id": "productCTAButtonText1",
+            "name": "Produt Call to Action Button Text.",
+            "type": "text"
+        },
+        {
+            "condition": {
+                "fieldID": "showProductsBlock2",
+                "fieldValue": true,
+                "operator": "=="
             },
             "defaultValue": "Product Block Title 2",
             "group": "productsBlock2",
             "id": "productBlockTitle2",
-            "name": "Product Block Title 2",
+            "name": "Product Block Title",
             "type": "text"
         },
         {
             "condition": {
-                "fieldID": "productBlocksCount",
-                "fieldValue": 2,
-                "operator": ">="
+                "fieldID": "showProductsBlock2",
+                "fieldValue": true,
+                "operator": "=="
             },
             "defaultValue": "Show more",
             "group": "productsBlock2",
             "id": "productBlockShowMoreText2",
-            "name": "Show More Button Text",
+            "name": "\"Show More\" Button Text",
             "type": "text"
         },
         {
             "condition": {
-                "fieldID": "productBlocksCount",
-                "fieldValue": 2,
-                "operator": ">="
+                "fieldID": "showProductsBlock2",
+                "fieldValue": true,
+                "operator": "=="
             },
             "defaultValue": "#",
             "group": "productsBlock2",
             "id": "productBlockShowMoreLink2",
-            "name": "Show More Button Target Link",
+            "name": "\"Show More\" Button Target Link",
             "type": "text"
         },
         {
-            "defaultValue": "Come back and buy product X.",
-            "group": "textBody",
-            "id": "textBody",
-            "name": "Text Body",
-            "type": "textarea"
-        },
-        {
-            "defaultValue": true,
-            "group": "options",
-            "id": "showSideImageBlock",
-            "name": "Show Block With Image On the Side",
-            "type": "checkbox"
-        },
-        {
-            "defaultValue": 2,
-            "group": "options",
-            "id": "productBlocksCount",
-            "name": "Product Blocks Layout",
-            "options": [
-                {
-                    "label": "No product block",
-                    "value": 0
-                },
-                {
-                    "label": "One product block",
-                    "value": 1
-                },
-                {
-                    "label": "Two product blocks",
-                    "value": 2
-                }
-            ],
-            "type": "select"
-        },
-        {
             "condition": {
-                "fieldID": "productBlocksCount",
-                "fieldValue": 1,
-                "operator": ">="
+                "fieldID": "showProductsBlock2",
+                "fieldValue": true,
+                "operator": "=="
             },
-            "defaultValue": "Display",
-            "group": "options",
-            "id": "productCTAButtonText",
+            "defaultValue": "Detail",
+            "group": "productsBlock2",
+            "id": "productCTAButtonText2",
             "name": "Produt Call to Action Button Text",
             "type": "text"
         },
         {
-            "defaultValue": "exampleCampaignName",
+            "condition": {
+                "fieldID": "showBottomBannerBlock",
+                "fieldValue": true,
+                "operator": "=="
+            },
+            "defaultValue": "https://placehold.it/600x200?text=banner+600x200",
+            "group": "bottomBannerBlock",
+            "id": "bottomBannerImageLink",
+            "name": "Image Link",
+            "type": "text"
+        },
+        {
+            "condition": {
+                "fieldID": "showBottomBannerBlock",
+                "fieldValue": true,
+                "operator": "=="
+            },
+            "defaultValue": "Banner Alt Text",
+            "group": "bottomBannerBlock",
+            "id": "bottomBannerAltText",
+            "name": "Image Alt Text",
+            "type": "text"
+        },
+        {
+            "defaultValue": "persooTriggerEmail",
             "group": "options",
             "id": "googleAnalyticsCampaign",
             "name": "Google Analytics Campaign",
             "type": "text"
+        },
+        {
+            "defaultValue": "",
+            "group": "options",
+            "id": "textBody",
+            "name": "Text Body",
+            "type": "textarea"
         }
     ],
     "id": "b674d062632f4ca6a83a50c4df4357eb",
