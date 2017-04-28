@@ -18,18 +18,72 @@
             "defaultValue": "persooProductsFulltextSearch"
         },
         {
-            "id": "urlSync",
-            "name": "Write chosen filters to URL params",
-            "group": "options",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
             "id": "hideOnEmptyInput",
             "name": "Hide Search Results Container on empty input in Search Bar",
             "group": "options",
             "type": "checkbox",
             "defaultValue": false
+        },
+        {
+            "id": "section_urlSync",
+            "name": "URL Synchronization",
+            "group": "options",
+            "type": "section"
+        },
+        {
+            "id": "urlSync",
+            "name": "Write Seach State to URL Params",
+            "group": "options",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "defaultValue": [ "query", "attribute:*", "page", "hitsPerPage"],
+            "group": "options",
+            "id": "urlSyncTrackedParameters",
+            "name": "URL Tracked Parameters",
+            "type": "json",
+            "condition": {
+                "fieldID": "urlSync",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+        {
+            "defaultValue": { "q": "query" },
+            "group": "options",
+            "id": "urlSyncMapping",
+            "name": "URL Params Mapping (keys are original param names, values are new param names)",
+            "type": "json",
+            "condition": {
+                "fieldID": "urlSync",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+        {
+            "defaultValue": 700,
+            "group": "options",
+            "id": "urlSyncThreshold",
+            "name": "URL Sync Threshold (sync after so many milliseconds)",
+            "type": "number",
+            "condition": {
+                "fieldID": "urlSync",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+        {
+            "defaultValue": false,
+            "group": "options",
+            "id": "urlSyncUseHash",
+            "name": "URL Use Hash instead of Parameters",
+            "type": "checkbox",
+            "condition": {
+                "fieldID": "urlSync",
+                "operator": "==",
+                "fieldValue": true
+            }
         },
 
         {

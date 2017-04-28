@@ -1,4 +1,4 @@
-<div id="persoo--<%= offerID %>">
+<div id="persoo--<%= offerID %>" data-inner-location-id="persoo-do-not-track-impressions-by-default">
     <style type="text/css">
         <%= customCSS %>
     </style>
@@ -28,7 +28,13 @@
             function initInstantSearch() {
                 var search = persooInstantSearch({
                     algorithmID: "<%= searchAlgorithm %>",
-                    urlSync: <%= urlSync %>
+                    hideOnEmptyQuery: <%= hideOnEmptyInput %>,
+                    urlSync: <%= !urlSync ? 'false' : JSON.stringify({
+                        mapping: urlSyncMapping,
+                        trackedParameters: urlSyncTrackedParameters,
+                        threshold: urlSyncThreshold,
+                        useHash: urlSyncUseHash
+                    }) %>
                 });
                 <%
                 function addTemplate(templateField) {
@@ -271,6 +277,28 @@
                         })
                     );
                 <% } %>
+                <% if (showFulltextFilter && hideOnEmptyInput) { %>
+                    function setHiddenClass(elem, isVisible) {
+                        if (elem) {
+                            if (isVisible) {
+                                elem.className = elem.className.replace(/\s*persoo-hidden/g,'');
+                            } else {
+                                if (!(elem.className.indexOf('persoo-hidden') >= 0)) {
+                                    elem.className += ' persoo-hidden';
+                                }
+                            }
+                        }
+                    }
+                    function hideSearchResultsOnEmptyInput() {
+                        var isEmptyQuery = (search.helper.getStateAsQueryString() == 'q=');
+                        var searchResultsElem = document.querySelector('<%= widgetContainerSelectors.searchResults %>');
+                        var originalPageContentElem = document.querySelector('<%= widgetContainerSelectors.originalPageContent %>');
+                        setHiddenClass(searchResultsElem, !isEmptyQuery);
+                        setHiddenClass(originalPageContentElem, isEmptyQuery);
+                    }
+                    search.setPersooCallback('show', hideSearchResultsOnEmptyInput);
+                    search.setPersooCallback('hide', hideSearchResultsOnEmptyInput);
+                <% } %>
 
                 search.start();
 
@@ -286,35 +314,13 @@
                         setTimeout(conditionallyHideClearCross, 10);
                     });
 
-                    function conditionallyHideClearCross(e) {
+                    function conditionallyHideClearCross() {
                         var crossElem = searchBarElem.querySelector('.persoo-clear-query');
                         crossElem.style.display = input.value ? 'inline' : 'none';
                     }
+                    search.on('render', conditionallyHideClearCross);
                 }
                 activateSearchBarCross();
-
-                <% if (showFulltextFilter && hideOnEmptyInput) { %>
-                    function setHiddenClass(elem, isVisible) {
-                        if (elem) {
-                            if (isVisible) {
-                                elem.className = elem.className.replace(/\s*persoo-hidden/g,'');
-                            } else {
-                                if (!elem.className.indexOf('persoo-hidden') >=0 ) {
-                                    elem.className += ' persoo-hidden';
-                                }
-                            }
-                        }
-                    }
-                    function hideSearchResultsOnEmptyInput() {
-                        var isEmptyQuery = (search.helper.getStateAsQueryString() == 'q=');
-                        var searchResultsElem = document.querySelector('<%= widgetContainerSelectors.searchResults %>');
-                        var originalPageContentElem = document.querySelector('<%= widgetContainerSelectors.originalPageContent %>');
-                        setHiddenClass(searchResultsElem, !isEmptyQuery);
-                        setHiddenClass(originalPageContentElem, isEmptyQuery);
-                    }
-                    search.on('render', hideSearchResultsOnEmptyInput);
-                    hideSearchResultsOnEmptyInput();
-                <% } %>
             }
             function loadScript(url, onloadFn, errorFn) {var d = document; var s=d.createElement("script");
                 s.src=url,s.type="text/javascript",s.async=true,s.onerror=errorFn,s.onload=onloadFn;
