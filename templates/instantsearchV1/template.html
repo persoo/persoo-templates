@@ -261,15 +261,18 @@
                             pushFunction: function (formattedParameters, state, results) {
                                 <%= analyticsPushFunction %>;
                                 var filters = formattedParameters ? formattedParameters.split('&') : [];
-                                filters = filters.map(decodeURIComponent);
+                                filters = filters.map(function(filter) {
+                                    var paramName = filter.substring(0, filter.indexOf('='));
+                                    return filter.replace('=' + paramName + '_', '=');
+                                });
                                 window.persoo('send', 'impression', {
                                     locationID: '<%= locationID %>',
                                     offerID: '<%= offerID %>',
                                     query: state.query,
-                                    filters: filters,
+                                    filters: filters.map(decodeURIComponent),
                                     foundResultsCount: results.nbHits
                                 });
-                                push(formattedParameters, state, results);
+                                push(filters.join('&'), state, results);
                             },
                             pushInitialSearch: <%= analyticsPushInitialSearch %>,
                             triggerOnUIInteraction: <%= analyticsTriggerOnUIInteraction %>,
