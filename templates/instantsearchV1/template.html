@@ -25,6 +25,23 @@
 
     <script>
         var persoo_<%= offerID %> = (function () {
+            <% if (showMultiRefinementList) { %>
+                <%  /* Add HTML containers into MultiRefinementList container */
+                    var multiContainerID = widgetContainerSelectors.multiRefinementList.replace('#','');
+                    var containerIDs = [];
+                    for (var g=0; g < multiRefinementListGroups.length; g++) {
+                        containerIDs.push(multiContainerID + '_' + multiRefinementListGroups[g].attributeName);
+                    }
+                %>
+                var multiRefinementsContainerElem = document.getElementById("<%= multiContainerID %>");
+                var innerContainerIDs = <%=  JSON.stringify(containerIDs) %>;
+                innerContainerIDs.map( function(myID) {
+                    var elem = document.createElement("div");
+                    elem.id = myID;
+                    multiRefinementsContainerElem.appendChild(elem);
+                });
+            <% } %>
+
             function initInstantSearch() {
                 var search = persooInstantSearch({
                     algorithmID: "<%= searchAlgorithm %>",
@@ -214,6 +231,7 @@
                                 header: <%= addTemplate(refinementList1HeaderTemplate) %>
                             },
                             limit: <%= refinementList1Limit %>,
+                            sortBy: ['isRefined', 'count:desc', 'name:asc'],
                             <%= addShowMoreOption(refinementList1ShowMore, refinementList1ShowMoreLimit) %>,
                             <%= addCollapsibleOption(refinementList1Collapsible, refinementList1Collapsed) %>,
                             cssClasses: <%= addClassNamesFor('refinementList', {}) %>
@@ -231,6 +249,7 @@
                                 header: <%= addTemplate(refinementList2HeaderTemplate) %>
                             },
                             limit: <%= refinementList2Limit %>,
+                            sortBy: ['isRefined', 'count:desc', 'name:asc'],
                             <%= addShowMoreOption(refinementList2ShowMore, refinementList2ShowMoreLimit) %>,
                             <%= addCollapsibleOption(refinementList2Collapsible, refinementList2Collapsed) %>,
                             cssClasses: <%= addClassNamesFor('refinementList', {}) %>
@@ -248,11 +267,36 @@
                                 header: <%= addTemplate(refinementList3HeaderTemplate) %>
                             },
                             limit: <%= refinementList3Limit %>,
+                            sortBy: ['isRefined', 'count:desc', 'name:asc'],
                             <%= addShowMoreOption(refinementList3ShowMore, refinementList3ShowMoreLimit) %>,
                             <%= addCollapsibleOption(refinementList3Collapsible, refinementList3Collapsed) %>,
                             cssClasses: <%= addClassNamesFor('refinementList', {}) %>
                         })
                     );
+                <% } %>
+
+                <% if (showMultiRefinementList) { %>
+                    <%
+                        for (var g=0; g < multiRefinementListGroups.length; g++) {
+                            var multiRefinementContainerID = widgetContainerSelectors.multiRefinementList + '_' + multiRefinementListGroups[g].attributeName;
+                    %>
+
+                        search.addWidget(
+                            persooInstantSearch.widgets.refinementList({
+                                container: '<%= multiRefinementContainerID %>',
+                                attributeName: '<%= multiRefinementListGroups[g].attributeName %>',
+                                operator: 'or',
+                                templates: {
+                                    header: <%= addTemplate(multiRefinementListGroups[g].headerTemplate) %>
+                                },
+                                limit: <%= multiRefinementListLimit %>,
+                                sortBy: ['isRefined', 'count:desc', 'name:asc'],
+                                <%= addShowMoreOption(multiRefinementListShowMore, multiRefinementListShowMoreLimit) %>,
+                                <%= addCollapsibleOption(multiRefinementListCollapsible, multiRefinementListGroups[g].collapsed) %>,
+                                cssClasses: <%= addClassNamesFor('refinementList', {}) %>
+                            })
+                        );
+                    <% } %>
                 <% } %>
 
                 <% if (analyticsPushFunction.match(/^\s*function\s+push\(/)) { %>

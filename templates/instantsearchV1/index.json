@@ -565,6 +565,60 @@
         },
 
         {
+            "id": "showMultiRefinementList",
+            "name": "Show Multi Refinement List",
+            "group": "multiRefinementList",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "multiRefinementListGroups",
+            "name": "Refinement Groups",
+            "group": "multiRefinementList",
+            "type": "json",
+            "defaultValue": [
+                {
+                    "headerTemplate": "Nice Parameter Name",
+                    "attributeName": "paramName",
+                    "collapsed": true
+                }
+            ]
+        },
+        {
+            "id": "multiRefinementListLimit",
+            "name": "Limit",
+            "group": "multiRefinementList",
+            "type": "number",
+            "defaultValue": 10
+        },
+        {
+            "id": "multiRefinementListShowMore",
+            "name": "Show More",
+            "group": "multiRefinementList",
+            "type": "checkbox",
+            "defaultValue": false
+        },
+        {
+            "id": "multiRefinementListShowMoreLimit",
+            "name": "Limit with Show more",
+            "group": "multiRefinementList",
+            "type": "number",
+            "defaultValue": 20,
+            "condition": {
+                "fieldID": "MultiRefinementListShowMore",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+        {
+            "id": "multiRefinementListCollapsible",
+            "name": "collapsible by click on box header",
+            "group": "multiRefinementList",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+
+        {
             "id": "layoutHTML",
             "name": "Layout HTML Template (elements marked as 'persoo-container' will be replaced by Dynamic widgets loaded by javascript libraty in browser)",
             "group": "design",
@@ -588,6 +642,7 @@
                 "refinementList1": "#persoo-refinementList--1",
                 "refinementList2": "#persoo-refinementList--2",
                 "refinementList3": "#persoo-refinementList--3",
+                "multiRefinementList": "#persoo-multiRefinementList",
                 "clearAll": "#persoo-clear-all",
                 "stats": "#persoo-stats",
                 "header": "#persoo-header",
@@ -737,7 +792,7 @@
             "name": "Push Function (called only when query and filters had changed)",
             "group": "analytics",
             "type": "javascript",
-            "defaultValue": "function push(formattedParameters, state, results) {\n    // Google Analytics\n    // window.ga('set', 'page', '/search/query/?query=' + state.query + '&' + formattedParameters + '&numberOfHits=' + results.nbHits);\n    // window.ga('send', 'pageView');\n    \n    // GTM\n    // dataLayer.push({\n    //     'event': 'search',\n    //     'Search Query': state.query,\n    //     'Facet Parameters': formattedParameters,\n    //     'Number of Hits': results.nbHits\n    // });\n    \n    // any other analytics service\n}"
+            "defaultValue": "function push(formattedParameters, state, results) {\n    // Google Analytics\n    //var pageURL = '/instant-search-results/?term=' + state.query + '&' + formattedParameters + '&foundResultsCount=' + results.nbHits;\n    // window.ga('set', 'page', pageURL);\n    // window.ga('send', 'pageView');\n  \n    // Google Analytics includend by GTM\n    // persoo.actions.googleAnalyticsTrackPageview(pageURL);\n\n    // GTM\n    // dataLayer.push({\n    //     'event': 'search',\n    //     'Search Query': state.query,\n    //     'Facet Parameters': formattedParameters,\n    //     'Number of Hits': results.nbHits\n    // });\n    \n    // any other analytics service\n}"
         },
         {
             "id": "analyticsPushInitialSearch",
@@ -793,6 +848,10 @@
         {
             "id": "refinementList3",
             "name": "Refinement List Filter 3"
+        },
+        {
+            "id": "multiRefinementList",
+            "name": "Refinement Multi List Filter"
         },
         {
             "id": "clearAll",
