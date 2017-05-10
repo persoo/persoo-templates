@@ -1,0 +1,246 @@
+/* Create your own CSS rules */
+.persoo--topProducts__tabs {
+        width:100%;
+        display:inline-block;
+        border-bottom: 1px solid #dfdfdf;
+}
+.persoo--topProducts__tabs a {
+        float:left;
+        margin-right:5px;
+        display:inline-block;
+        cursor: pointer;
+        padding:10px;
+        line-height:1em;
+        text-decoration:none;
+}
+.persoo--topProducts__tabs a {
+        margin-top: 1px;
+        color: #000000;
+        background: #EEEEEE;
+}
+.persoo--topProducts__tabs a[data-active="true"] {
+        font-weight:bold;
+        margin-top: 0;
+        color: #cb1040;
+        background: #FFFFFF;
+        margin-bottom:-1px;
+        border: 1px solid #dfdfdf;
+        border-bottom-color: #EEEEEE;
+}
+.persoo--topProducts__tabs a:hover {
+        background: #f7f7f7;
+}
+.persoo--topProducts__tabs a[data-active="true"]:hover {
+        background: #FFFFFF;
+}
+.persoo--topProducts__tabs a:last-of-type {
+        margin-right:0;
+}
+.persoo--topProducts__list {
+        display:none;
+}
+.persoo--topProducts__list[data-active="true"] {
+        display:block;
+}
+.persoo--topProducts__list__moreProducts {
+        display: block;
+        height: 0px;
+        width: 100%;
+        overflow: hidden;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s;
+}
+.persoo--topProducts__list__moreProducts__inner {
+        width:100%;
+}
+/* Item Box Spacing */
+.persoo--topProducts__list__item {
+        display: table;
+        margin: 8px 0 0 0;
+        padding: 5px 0;
+        width: 100%;
+        min-height: 60px;
+        border: 1px solid #dfdfdf;
+        clear:both;
+        background-color: #FFFFFF;
+}
+.persoo--topProducts__showMore {
+        margin:8px 0 0 0;
+        border-top: 1px solid #dfdfdf;
+}
+
+.persoo--topProducts__list__item__number {
+        display: table-cell;
+        vertical-align: middle;
+        width: 35px;
+        padding: 19px 0;
+}
+.persoo--topProducts__list__item__number div {
+        float: left;
+        width: 2em;
+        height: 1.8em;
+        font-size: 0.85em;
+        line-height: 1.8em;
+        letter-spacing: 0;
+        text-align: center;
+        -webkit-border-radius: 0 4px 4px 0;
+        -moz-border-radius: 0 4px 4px 0;
+        border-radius: 0 4px 4px 0;
+        color: #000000;
+        background-color: #dfdfdf;
+}
+.persoo--topProducts__list__item__image {
+        display: table-cell;
+        vertical-align: middle;
+        padding: 3px 5px;
+        text-align: center;
+        width: 54px;
+}
+.persoo--topProducts__list__item__image img {
+        width: auto;
+        height: auto;
+        max-width: 54px;
+        max-height: 54px;
+}
+.persoo--topProducts__list__item__textWrapper {
+        display: table-cell;
+        vertical-align: middle;
+        margin: 0 0;
+        padding: 3px 0;
+        text-align: left;
+}
+.persoo--topProducts__list__item__textWrapper2 {
+        display: table;
+        width: 100%;
+}
+.persoo--topProducts__list__item__text {
+        display: table-cell;
+        vertical-align: middle;
+        margin: 0;
+        margin-right: 120px;
+        padding: 0;
+        text-align: left;
+}
+.persoo--topProducts__list__item__text__title a {
+        font-weight: bold;
+        max-width: 100%;
+        height: 1.1em;
+        line-height: 1.1em;
+        overflow: hidden;
+        white-space: nowrap;
+        display: inline-block;
+        text-decoration: none;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        color: #cb1040;
+}
+.persoo--topProducts__list__item__text__title a:hover {
+        text-decoration: underline;
+        opacity: 0.8;
+        filter: brightness(50%);
+}
+.persoo--topProducts__list__item__text__description {
+        line-height: 1.1em;
+        height: 1.1em; /* Mutiply by Description Lines Count */
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        font-size: smaller;
+        color: #333333;
+}
+.persoo--topProducts__list__item__price {
+        display: table-cell;
+        vertical-align: middle;
+        width: 100px;
+        text-align: right;
+        padding: 3px 8px 3px 0;
+}
+.persoo--topProducts__list__item__price {
+        font-weight: bold;
+}
+.persoo--topProducts__list__item__price small {
+        font-size:0.8em;
+}
+.persoo--topProducts__list__item__price > del {
+        font-size: smaller;
+        float: left;
+        width: 100%;
+        font-weight: bold;
+        vertical-align: sub;
+        line-height: 1.1em;
+        color: #cccccc;
+}
+.persoo--topProducts__list__item__price > div {
+        float:left;
+        width:100%;
+        vertical-align:sub;
+        color: #cb1040;
+}
+.persoo--topProducts__list__item__text__price > .persoo-clear {
+        float: none;
+        clear: both;
+}
+
+.persoo--topProducts__list__item:hover .persoo--topProducts__list__item__text__description a {
+        color: #cb1040;
+}
+
+.persoo--topProducts__showMore {
+        width:100%;
+        display:block!important;
+        text-align:center;
+}
+.persoo--topProducts__showMore__toggle {
+        width:90px;
+        height:30px;
+        overflow:hidden;
+        display:inline-block;
+        cursor: pointer;
+        background-color: #cb1040;
+        -webkit-border-bottom-right-radius: 7px;
+        -webkit-border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+        border-bottom-left-radius: 7px;
+}
+.persoo--topProducts__showMore__toggle__icon {
+    width: 100%;
+    height: 100%;
+}
+.persoo--topProducts__showMore__toggle[data-open="false"] .persoo--topProducts__showMore__toggle__icon {
+    /* change color and size in decoded SVG. Note: svg must be encoded because of IE. */
+    background: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20version%3D%221.1%22%20style%3D%27fill%3Awhite%3B%20stroke%3Anone%27%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M7.41%2C8.58L12%2C13.17L16.59%2C8.58L18%2C10L12%2C16L6%2C10L7.41%2C8.58Z%22%20fill%3D%27%23fff%27%20fill-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E") no-repeat center center / contain;
+}
+.persoo--topProducts__showMore__toggle[data-open="true"] .persoo--topProducts__showMore__toggle__icon {
+    /* change color and size in decoded SVG. Note: svg must be encoded because of IE. */
+    background: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20version%3D%221.1%22%20style%3D%27fill%3Awhite%3B%20stroke%3Anone%27%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M7.41%2C15.41L12%2C10.83L16.59%2C15.41L18%2C14L12%2C8L6%2C14L7.41%2C15.41Z%22%20fill%3D%27%23fff%27%20fill-rule%3D%27evenodd%27%20%2F%3E%3C%2Fsvg%3E") no-repeat center center / contain;
+}
+
+/* move priceBox from the top right corner to below content */
+@media (max-width:964px){
+    .persoo--topProducts__list__item__text {
+            display: block;
+            margin-right: 5px;
+    }
+    .persoo--topProducts__list__item__price {
+            display: block;
+            right: auto;
+            width: auto;
+            margin: 0 5px 0 0;
+            padding: 0 0;
+            text-align:left;
+    }
+    .persoo--topProducts__list__item__price del {
+            width:auto;
+            padding-right:5px;
+    }
+    .persoo--topProducts__list__item__price div {
+            width:auto;
+    }
+}

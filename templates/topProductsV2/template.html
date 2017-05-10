@@ -1,0 +1,201 @@
+<%
+/* TODO use flex to display divs inside "item" */
+var postPriceCurrency = 'K&#269;';
+
+var productListNames = [tabName1, tabName2];
+var productLists = [products1, products2];
+
+function printPrice(p){
+  return String(Math.round(p)).replace(/(.*)([0-9]{3})/,'$1&nbsp;$2');
+}
+%>
+<div id="persoo--<%= offerID %>"
+     class="persoo--topProdcts persoo--widget"
+>
+<% if (productLists[0].length >= 3 || productLists[1].length >= 3) { %>
+    <style>
+        <%= customCSS %>
+    </style>
+    <% if (useSimpleStyling) { %>
+        <style>
+            /* Tabs Border Width */
+            #persoo--<%= offerID %> .persoo--topProducts__tabs {
+                    border-bottom:<%= tabsBorderWidth %>px solid <%= tabsBorderColor %>;
+            }
+            #persoo--<%= offerID %> .persoo--topProducts__tabs a {
+                    margin-top: <%= tabsBorderWidth %>px;
+            }
+            #persoo--<%= offerID %> .persoo--topProducts__tabs a[data-active="true"] {
+                    margin-bottom:-<%= tabsBorderWidth %>px;
+                    border: <%= tabsBorderWidth %>px solid <%= tabsBorderColor %>;
+                    border-bottom-color: transparent;
+            }
+            #persoo--<%= offerID %> .persoo--topProducts__showMore {
+                    border-top:<%= tabsBorderWidth %>px solid <%= tabsBorderColor %>;
+            }
+
+            /* Image Size */
+            #persoo--<%= offerID %> .persoo--topProducts__list__item__image {
+                    width: <%= itemImageSize %>px;
+            }
+            #persoo--<%= offerID %> .persoo--topProducts__list__item__image img {
+                    max-width: <%= itemImageSize %>px;
+                    max-height: <%= itemImageSize %>px;
+            }
+            #persoo--<%= offerID %> .persoo--topProducts__list__item {
+                    min-height: <%= itemImageSize + 6 %>px;
+            }
+
+            /* Description Lines Count */
+            #persoo--<%= offerID %> .persoo--topProducts__list__item__text__description {
+                    height: <%= 1.1 * itemDescriptionLinesCount %>em;
+            }
+        </style>
+    <% } %>
+
+    <!--Tabs to switch between product lists -->
+    <div class="persoo--topProducts__tabs">
+        <% for(var listIndex = 0; listIndex < productListNames.length; listIndex++) { %>
+            <a id="persoo--<%= offerID %>__tab--<%= listIndex %>"
+               class="persoo--topProducts__tab persooAction"
+               data-active="<%= listIndex==0 %>"
+               onclick="persoo_<%= offerID %>_switchTabs(<%= listIndex %>)">
+                   <%= productListNames[listIndex] %>
+            </a>
+        <% } %>
+    </div>
+
+    <!-- Product Lists -->
+    <% for(var listIndex = 0; listIndex < productListNames.length; listIndex++) { %>
+        <div id="persoo--<%= offerID %>__list--<%= listIndex %>"
+             class="persoo--topProducts__list"
+             data-active="<%= listIndex==0 %>"
+        >
+
+            <% for(i = 0; i < 10 && i < productLists[listIndex].length; i++) { %>
+                <% var currentProduct = productLists[listIndex][i]; %>
+                <% if (i==3) { %>
+                     <div class="persoo--topProducts__list__moreProducts">
+                     <div class="persoo--topProducts__list__moreProducts__inner">
+                <% } %>
+                <div class="persoo--topProducts__list__item">
+                   <div class="persoo--topProducts__list__item__number">
+                       <div><%= i + 1 %></div>
+                   </div>
+                   <div class="persoo--topProducts__list__item__image">
+                       <a title="<%= currentProduct.title %>" href="<%= currentProduct.link %>">
+                           <img alt="<%= currentProduct.title %>" title="<%= currentProduct.title %>" src="<%= currentProduct.imageLink %>" />
+                       </a>
+                   </div>
+                   <div class="persoo--topProducts__list__item__textWrapper">
+                       <div class="persoo--topProducts__list__item__textWrapper2">
+                           <div class="persoo--topProducts__list__item__text">
+                               <div class="persoo--topProducts__list__item__text__title">
+                                   <a title="<%= currentProduct.title %>" href="<%= currentProduct.link %>"><%= currentProduct.title %></a>
+                               </div>
+                               <% if (showDescription) { %>
+                                   <div class="persoo--topProducts__list__item__text__description">
+                                       <%= currentProduct.description %>
+                                   </div>
+                               <% } %>
+                           </div>
+                           <div class="persoo--topProducts__list__item__price">
+                               <% if (showOriginalPrice && currentProduct.priceOriginal && currentProduct.priceOriginal > currentProduct.price) { %>
+                                   <del><%= printPrice(currentProduct.priceOriginal) %> <small><%= postPriceCurrency %></small></del>
+                               <% } %>
+                               <div>
+                                  <%= printPrice(currentProduct.price) %> <small><%= postPriceCurrency %></small>
+                               </div>
+                               <div class="persoo-clear"></div>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+            <% } %>
+            <% if (i>2) { %>
+                </div></div>
+            <% } %>
+        </div>
+    <% } %>
+
+    <!-- Button to show all items -->
+    <div id="persoo--<%= offerID %>__showMore" class="persoo--topProducts__showMore">
+        <div id="persoo--<%= offerID %>__showMore__toggle"
+             class="persoo--topProducts__showMore__toggle persooAction"
+             onclick="persoo_<%= offerID %>_toggleShowMore()"
+             data-open="false"
+        >
+            <div class="persoo--topProducts__showMore__toggle__icon"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        <% if (productLists[0].length <= 3) { %>
+            document.getElementById("persoo--<%= offerID %>__showMore").style.display = "none";
+        <% } %>
+
+        function persoo_<%= offerID %>_scrollToTopOfTheWidget(){
+            var scrollToOffset = document.getElementById("persoo--<%= offerID %>").getBoundingClientRect().top;
+            var currentPosition = document.body.scrollTop;
+            var scrollToFinal = scrollToOffset + currentPosition;
+
+            //animation
+            function scrollTo(element, to, duration) {
+                if (duration <= 0) return;
+                var difference = to - element.scrollTop;
+                var perTick = difference / duration * 10;
+
+                setTimeout(function() {
+                    element.scrollTop = element.scrollTop + perTick;
+                    if (element.scrollTop == to) return;
+                    scrollTo(element, to, duration - 10);
+                }, 10);
+            }
+            scrollTo(document.body, scrollToFinal, 200);
+        };
+
+        function persoo_<%= offerID %>_toggleShowMore(forceRefreshOnly) {
+            var toggleElem = document.getElementById('persoo--<%= offerID %>__showMore__toggle');
+            var isOpen = (toggleElem.getAttribute("data-open") == 'true');
+            var newIsOpenStatus = forceRefreshOnly ? isOpen : !isOpen;
+            toggleElem.setAttribute("data-open", newIsOpenStatus);
+
+            var moreProductsContainer = document.querySelector("#persoo--<%= offerID %> [data-active=\"true\"] .persoo--topProducts__list__moreProducts");
+            var moreProductsContainerInner = moreProductsContainer.firstElementChild;
+            moreProductsContainer.style.height = (newIsOpenStatus ? moreProductsContainerInner.scrollHeight : 0) + 'px';
+
+            if (!forceRefreshOnly) {
+                window.persoo('send', isOpen ? 'close' : 'open', {offerID: "<%= offerID %>"});
+                persoo_<%= offerID %>_scrollToTopOfTheWidget();
+            }
+        };
+
+        function persoo_<%= offerID %>_switchTabs(listIndex){
+            var elem;
+            for(var i = 0; i < <%= productListNames.length %>; i++){
+                elem = document.getElementById('persoo--<%= offerID %>__tab--' + i);
+                if (elem) { elem.setAttribute("data-active", false); }
+                elem = document.getElementById('persoo--<%= offerID %>__list--' + i);
+                if (elem) { elem.setAttribute("data-active", false); }
+            }
+            elem = document.getElementById('persoo--<%= offerID %>__tab--' + listIndex);
+            elem.setAttribute("data-active", true);
+            elem = document.getElementById('persoo--<%= offerID %>__list--' + listIndex);
+            elem.setAttribute("data-active", true);
+
+            window.persoo('send', 'switchTab', {offerID: "<%= offerID %>", tabIndex: listIndex});
+
+            /* keep the same "showMore" status on the new tab */
+            persoo_<%= offerID %>_toggleShowMore(true);
+
+            /* show/hide "showMore" button according to available products count */
+            var productListLengths = <%= JSON.stringify(productLists.map(function (obj){ return obj.length;})) %>;
+            var displayValue = (productListLengths[listIndex] <= 3 ? "none" : "block");
+            document.getElementById("persoo--<%= offerID %>__showMore").style.display = displayValue;
+        };
+    </script>
+    <script type="text/javascript">
+        <%= customJS %>
+    </script>
+<% } %>
+</div>

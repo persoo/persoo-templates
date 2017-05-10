@@ -1,0 +1,134 @@
+{
+    "class": "webWidget",
+    "name": "Top Products",
+    "defaultsForOfferTemplate": {
+        "description": "Box with vertical lists of best selling and trending products.",
+        "releaseStage": "beta",
+        "data": {
+            "name": "Top Products"
+        }
+    },
+    "minScenariosCount": 2,
+    "fields": [
+        {
+            "defaultValue": "Best selling",
+            "group": "main",
+            "id": "tabName1",
+            "name": "Tab Name 1",
+            "type": "text"
+        },
+        {
+            "defaultValue": "Most trendy",
+            "group": "main",
+            "id": "tabName2",
+            "name": "Tab Name 2",
+            "type": "text"
+        },
+        {
+            "defaultValue": true,
+            "group": "design",
+            "id": "useSimpleStyling",
+            "name": "Use Simple Styling (adding CSS rules from configurator)",
+            "type": "checkbox"
+        },
+        {
+            "defaultValue": 1,
+            "group": "design",
+            "id": "tabsBorderWidth",
+            "name": "Tabs Border Width (in px)",
+            "type": "number",
+            "condition": {
+                "fieldID": "useSimpleStyling",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+        {
+            "defaultValue": "#dfdfdf",
+            "group": "design",
+            "id": "tabsBorderColor",
+            "name": "Tabs Border Color",
+            "type": "color",
+            "condition": {
+                "fieldID": "useSimpleStyling",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+        {
+            "defaultValue": 54,
+            "group": "design",
+            "id": "itemImageSize",
+            "name": "Item Image Size (in px)",
+            "type": "number",
+            "condition": {
+                "fieldID": "useSimpleStyling",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+        {
+            "defaultValue": true,
+            "group": "design",
+            "id": "showOriginalPrice",
+            "name": "Show Original Price",
+            "type": "checkbox"
+        },
+        {
+            "defaultValue": true,
+            "group": "design",
+            "id": "showDescription",
+            "name": "Show Description",
+            "type": "checkbox"
+        },
+        {
+            "defaultValue": 1,
+            "group": "design",
+            "id": "itemDescriptionLinesCount",
+            "name": "Description Lines Count",
+            "type": "number",
+            "condition": {
+                "fieldID": "showDescription",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+        {
+            "id": "section_customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "css",
+            "defaultValue": "/* your own css rules */"
+        },
+        {
+            "id": "section_customJS",
+            "name": "Custom Javascript",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "customJS",
+            "name": "Custom Javascript",
+            "group": "design",
+            "type": "javascript",
+            "defaultValue": "/* your own javascript */"
+        }
+    ],
+    "groups": [
+        {
+            "id": "main",
+            "name": "Content"
+        },
+        {
+            "id": "design",
+            "name": "Design"
+        }
+    ],
+    "template": "Note: this will be replaced by content of template.html"
+}
