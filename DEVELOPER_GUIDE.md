@@ -80,6 +80,16 @@ HTML templates are using [EJS] for rendering (which is basically javascript). Du
 * Avoid using global selectors (without offerID), when the CSS property comes from user fields.
   Otherwise your "public" CSS rule in the page may redefine style also for other widgets of the same template.
 
+**best practices**
+
+It depends for whom you are writting the content template:
+
+* Marketer/Secretary: When you design Pop-up, for example. Your developer want to define site-wide design (CSS style) at one place, maintain it at one place and use it for all instances all around your website. It's nice, that all your pop-ups looks the same, have your corporate design and marketer cannot break them. Therefore you should keep such CSS styles at the level of content template. (Developer can easily clone and redesign such content template in case he needs another theme).
+
+* Developer: In case you develop content templates for developers, who will use it once. Style it and then run the widget for more then a year, it's more comfortable to have all CSS styles as "customCSS" field for the instance, he uses.
+
+> _**Note**:_ Developers preferes having CSS rules. Secretaries prefers color pickers, font selectors, etc.
+
 **example:**
 
 ```html
