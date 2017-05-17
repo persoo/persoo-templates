@@ -85,9 +85,9 @@
                         }
                         return 'showMore: ' + JSON.stringify(opt)
                             .replace('"ACTIVE"', addTemplate(
-                                '<div class="persoo-show-more persoo-show-more__active">' + showMoreActiveTemplate + '</div>'))
+                                '<div class="persoo-show-more persoo-show-more--active">' + showMoreActiveTemplate + '</div>'))
                             .replace('"INACTIVE"', addTemplate(
-                                '<div class="persoo-show-more persoo-show-more__inactive">' + showMoreInactiveTemplate + '</div>'));
+                                '<div class="persoo-show-more persoo-show-more--inactive">' + showMoreInactiveTemplate + '</div>'));
                     } else {
                         return 'showMore: false';
                     }
@@ -110,7 +110,13 @@
                     search.addWidget(
                         persooInstantSearch.widgets.pagination({
                             container: '<%= widgetContainerSelectors.pagination %>',
-                            cssClasses: <%= addClassNamesFor('pagination', {}) %>
+                            cssClasses: <%= addClassNamesFor('pagination', {}) %>,
+                            labels: {
+                        		previous: "<span class=\"persoo-pagination__label\">‹</span>",
+                            	next: "<span class=\"persoo-pagination__label\">›</span>",
+                            	first: "<span class=\"persoo-pagination__label\">«</span>",
+                            	last: "<span class=\"persoo-pagination__label\">»</span>"
+                        	}
                         })
                     );
                     <% if (showItemsPerPage) { %>
@@ -350,19 +356,18 @@
                 search.start();
 
                 function activateSearchBarCross() {
-                    var searchBarElem = document.querySelector('.persoo-search-bar__root');
-                    var input = searchBarElem.querySelector('input');
+                    var searchBarElem = document.querySelector('.persoo-search-bar__wrapper');
+                    var input = searchBarElem.querySelector('.persoo-search-bar__input');
+                    var crossElem = searchBarElem.querySelector('.persoo-search-bar__clear-query');
 
                     conditionallyHideClearCross();
                     input.addEventListener('input', conditionallyHideClearCross);
-                    searchBarElem.querySelector('.persoo-clear-query').addEventListener('click', function(e) {
+                    crossElem.addEventListener('click', function(e) {
                         search.helper.setQuery('').search();
-                        conditionallyHideClearCross();
-                        setTimeout(conditionallyHideClearCross, 10);
+                        crossElem.style.display = 'none';
                     });
 
                     function conditionallyHideClearCross() {
-                        var crossElem = searchBarElem.querySelector('.persoo-clear-query');
                         crossElem.style.display = input.value ? 'inline' : 'none';
                     }
                     search.on('render', conditionallyHideClearCross);
@@ -376,6 +381,123 @@
             var isLibLink = "https://scripts.persoo.cz/shared/instantsearchV1/persooInstantSearch.js";
             loadScript(isLibLink, initInstantSearch, function (){});
         })();
+    </script>
+
+    <script>
+        var ResponsiveClassNames = (function() {
+            function prepareOptions(defaultOptions, extraOptions) {
+                var options = Object(defaultOptions);
+                for (var key in extraOptions) {
+                    if (extraOptions.hasOwnProperty(key)) {
+                        options[key] = extraOptions[key];
+                    }
+                }
+
+                return options;
+            }
+
+            function ResponsiveClassNames(element, breakpoints, options) {
+                this._element = element;
+
+                this._defaultClassNames = this._element.className ?
+                    this._element.className.split(' ') :
+                [];
+
+                this._breakpoints = breakpoints;
+
+                this._options = prepareOptions(
+                    {
+                        updateInterval: 300,
+                        updateOnResize: false
+                    },
+                    options || {}
+                );
+
+                this._update = (function() {
+                    var classNames = [].concat(this._defaultClassNames);
+                    var width = this._element.offsetWidth;
+
+                    for (
+                        var i = 0, length = this._breakpoints.length;
+                        i < length;
+                        i += 1
+                    ) {
+                        var breakpoint = this._breakpoints[i];
+
+                        if (
+                            (!breakpoint.minWidth || breakpoint.minWidth <= width) &&
+                            (!breakpoint.maxWidth || breakpoint.maxWidth >= width)
+                        ) {
+                            classNames.push(breakpoint.className);
+                        }
+                    }
+
+                    this._element.className = classNames.join(' ');
+                }).bind(this);
+
+                this._interval = null;
+            }
+
+            ResponsiveClassNames.prototype.init = function() {
+                if (this._options.updateOnResize) {
+                    window.addEventListener('resize', this._update);
+                }
+                if (this._options.updateInterval) {
+                    this._interval = setInterval(this._update, this._options.updateInterval);
+                }
+                this._update();
+            };
+
+            ResponsiveClassNames.prototype.destroy = function() {
+                if (this._options.updateOnResize) {
+                    window.removeEventListener('resize', this._update);
+                }
+                if (this._options.updateInterval) {
+                    clearInterval(this._interval);
+                }
+
+                this._element.className = this._defaultClassNames.join(' ');
+            };
+
+            return ResponsiveClassNames;
+        })();
+
+        var node = document.querySelector('<%= widgetContainerSelectors.items %>');
+        if (node) {
+            var instance = new ResponsiveClassNames(
+                node,
+                <%= JSON.stringify(responsiveClassNamesJSON) %>
+            );
+
+                instance.init();
+        }
+    </script>
+
+    <script>
+        (function() {
+            function createElementToggleClassName(element, toggleClass) {
+                return function() {
+                    console.log('toggling');
+                    var currentClass = element.className;
+                    if(currentClass.split(" ").indexOf(toggleClass) > -1){
+                        newClass = currentClass.replace(new RegExp('\\b' + toggleClass + '\\b','g'), "");
+                    } else {
+                        newClass = currentClass + " " + toggleClass;
+                    }
+                    element.className = newClass.trim();
+                };
+            }
+
+            var container = document.querySelector('<%= widgetContainerSelectors.searchResults %>');
+            if (!container) return false;
+
+            var filters = container.querySelector('<%= widgetContainerSelectors.filters %>');
+            var toggle = container.querySelector('<%= widgetContainerSelectors.filtersToggle %>');
+            if (!filters || !toggle) return false;
+
+            var toggleFiltersClassNameVisible = createElementToggleClassName(filters, 'persoo-search-results__filters--visible');
+            toggle.addEventListener('click', toggleFiltersClassNameVisible);
+        }());
     </script>
 
     <script type="text/javascript">

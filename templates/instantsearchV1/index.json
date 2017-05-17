@@ -91,7 +91,7 @@
             "name": "Item Template",
             "group": "items",
             "type": "html",
-            "defaultValue": "<a href=<%= link %>>\n    <img src=<%= imageLink %>>\n    <div class=\"persoo-result-item__title\" title=<%= description %>><%= title %></div>\n    <div class=\"persoo-result-item__price\"><%= price %> Kč</div>\n</a>"
+            "defaultValue": "<%\n    function prepareDescription(desc) {\n        desc = desc || '';\n        return desc.replace('\"', '\\\"');\n    }\n    function commas(n, s, d) {\n        s = s || ' ';\n        d = d || '.';\n        var parts = n.toString().split('.');\n        parts[0] = parts[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, s);\n        return parts.join(d);\n    }\n%>\n<a href=<%= link %>\n   class=\"persoo-result-item__link\">\n    <div class=\"persoo-result-item__img-container\">\n        <img src=<%= imageLink %>\n             class=\"persoo-result-item__img\">\n    </div>\n    <div class=\"persoo-result-item__title\" title=<%= prepareDescription(description) %>>\n        <%= title %>\n    </div>\n    <div class=\"persoo-result-item__price\">\n        <span class=\"persoo-result-item__price__current\">\n            <%= commas(price) %>&nbsp;Kč\n        </span>\n        <% if (priceOriginal && priceOriginal !== price) { %>\n            <span class=\"persoo-result-item__price__original\">\n                <%= commas(priceOriginal) %>&nbsp;Kč\n            </span>\n        <% } %> \n    </div>\n</a>"
         },
         {
             "id": "emptyResultsTemplate",
@@ -633,6 +633,8 @@
             "defaultValue": {
                 "searchResults": "#persoo-search-results",
                 "originalPageContent": "#your-main-content-selector",
+                "filters": "#persoo-search-results__filters",
+                "filtersToggle": "#persoo-filters-toggle",
                 "searchBar": "#persoo-search-bar",
                 "fulltextFilter": "#persoo-search-bar__search-box",
                 "items": "#persoo-items",
@@ -679,104 +681,138 @@
             "defaultValue": "/* your own css rules */"
         },
         {
+            "id": "responsiveClassNamesJSON",
+            "name": "Responsive Product Items Container Class Names",
+            "group": "design",
+            "type": "json",
+            "defaultValue": [
+                {
+                    "className": "persoo-items--cols"
+                },
+                {
+                    "className": "persoo-items--col-1",
+                    "maxWidth": 540
+                },
+                {
+                    "className": "persoo-items--col-2",
+                    "maxWidth": 810,
+                    "minWidth": 541
+                },
+                {
+                    "className": "persoo-items--col-3",
+                    "maxWidth": 1080,
+                    "minWidth": 811
+                },
+                {
+                    "className": "persoo-items--col-4",
+                    "maxWidth": 1350,
+                    "minWidth": 1081
+                },
+                {
+                    "className": "persoo-items--col-5",
+                    "minWidth": 1351
+                }
+            ]
+        },
+        {
             "id": "customClassNamesJSON",
             "name": "Custom Class Names for Dynamic Widgets (i.e. to add custom class to Result Item, find its default class in browser, which is '.ais-hits--item' and add custom clasa below to path 'hits.item')",
             "group": "design",
             "type": "json",
             "defaultValue": {
                 "hits": {
-                    "root": "persoo-results",
-                    "empty": "",
-                    "item": "persoo-result-item"
+                    "empty": "persoo-results--empty",
+                    "item": "persoo-result-item",
+                    "root": "persoo-results"
                 },
                 "infiniteHits": {
-                    "root": "persoo-results",
-                    "empty": "",
+                    "empty": "persoo-results--empty",
                     "item": "persoo-result-item",
-                    "showmore": ""
+                    "root": "persoo-results",
+                    "showmore": "persoo-results__showmore"
                 },
                 "hitsPerPageSelector": {
-                    "root": "",
-                    "item": ""
+                    "item": "persoo-items-per-page__option",
+                    "root": "persoo-items-per-page__select"
                 },
                 "pagination": {
-                    "root": "",
-                    "item": "",
-                    "link": "",
+                    "root": "persoo-pagination",
+                    "active": "persoo-pagination__item--active",
                     "page": "",
-                    "previous": "",
-                    "next": "",
                     "first": "",
+                    "next": "persoo-pagination__next",
+                    "item": "persoo-pagination__item",
                     "last": "",
-                    "active": "",
-                    "disabled": ""
+                    "previous": "persoo-pagination__prev",
+                    "link": "persoo-pagination__link",
+                    "disabled": "persoo-pagination__item--disabled"
                 },
                 "searchBox": {
-                    "root": "",
-                    "input": ""
+                    "input": "persoo-search-bar__input",
+                    "root": "persoo-search-bar__root"
                 },
                 "stats": {
-                    "root": "",
-                    "header": "",
                     "body": "",
-                    "footer": ""
+                    "footer": "",
+                    "header": "",
+                    "root": "persoo-stats__root"
                 },
                 "header": {
                     "root": ""
                 },
                 "clearAll": {
-                    "root": "",
+                    "body": "persoo-clear-all__body",
+                    "footer": "",
                     "header": "",
-                    "body": "",
-                    "link": "",
-                    "footer": ""
+                    "link": "persoo-clear-all__link",
+                    "root": ""
                 },
                 "currentRefinedValues": {
-                    "root": "facet",
-                    "header": "",
-                    "body": "",
-                    "clearAll": "",
-                    "list": "",
-                    "item": "",
-                    "link": "",
-                    "count": "facet-count",
-                    "footer": ""
+                    "root": "persoo-current-refined-values",
+                    "body": "persoo-current-refined-values__body",
+                    "header": "persoo-current-refined-values__header",
+                    "count": "persoo-current-refined-values__count",
+                    "item": "persoo-current-refined-values__item",
+                    "clearAll": "persoo-current-refined-values__clear-all",
+                    "link": "persoo-current-refined-values__link",
+                    "footer": "",
+                    "list": "persoo-current-refined-values__list"
                 },
                 "menu": {
-                    "root": "facet",
-                    "header": "",
-                    "body": "",
+                    "root": "persoo-facet",
+                    "body": "persoo-facet__body",
+                    "active": "persoo-facet__item--active",
+                    "header": "persoo-facet__header",
+                    "count": "persoo-facet__count",
+                    "item": "persoo-facet__item persoo-menu__item",
+                    "link": "persoo-facet__link persoo-menu__link",
                     "footer": "",
-                    "list": "",
-                    "item": "",
-                    "active": "",
-                    "link": "",
-                    "count": "facet-count"
+                    "list": "persoo-facet__list"
                 },
                 "hierarchicalMenu": {
-                    "root": "facet",
-                    "header": "",
-                    "body": "",
-                    "footer": "",
-                    "list": "",
-                    "item": "",
+                    "root": "persoo-facet",
+                    "body": "persoo-facet__body",
                     "depth": "",
-                    "active": "",
-                    "link": "",
-                    "count": "facet-count"
+                    "active": "persoo-facet__item--active",
+                    "header": "persoo-facet__header",
+                    "count": "persoo-facet__count",
+                    "item": "persoo-facet__item",
+                    "link": "persoo-facet__link persoo-hierarchical-menu__link",
+                    "footer": "",
+                    "list": "persoo-facet__list"
                 },
                 "refinementList": {
-                    "root": "facet",
-                    "header": "",
-                    "body": "",
+                    "root": "persoo-facet",
+                    "body": "persoo-facet__body",
+                    "checkbox": "persoo-facet__checkbox",
+                    "active": "persoo-facet__item--active",
+                    "header": "persoo-facet__header",
+                    "count": "persoo-facet__count",
+                    "item": "persoo-facet__item",
+                    "clearAll": "persoo-facet__clear-all",
+                    "label": "persoo-facet__label",
                     "footer": "",
-                    "clearAll": "",
-                    "list": "",
-                    "item": "",
-                    "active": "",
-                    "label": "",
-                    "checkbox": "",
-                    "count": "facet-count"
+                    "list": "persoo-facet__list"
                 }
             }
         },
