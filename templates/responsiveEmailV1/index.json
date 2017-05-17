@@ -17,7 +17,7 @@
             "name": "Headline"
         },
         {
-            "id": "messageBlock",
+            "id": "textBlock",
             "name": "Text Block"
         },
         {
@@ -100,19 +100,19 @@
             },
             "defaultValue": "Heading",
             "group": "headline",
-            "id": "messageTitle",
+            "id": "headline",
             "name": "Text",
             "type": "text"
         },
         {
             "condition": {
-                "fieldID": "showMessageBlock",
+                "fieldID": "showTextBlock",
                 "fieldValue": true,
                 "operator": "=="
             },
             "defaultValue":  "<p style=\"color:red;\">Clone and modify this template in \"Settings > Content Templates\". Create your corporate header, colors, fonts and then use it as email template for all your emails. (Update header and footer only in one place, in your email content template.)\n<p>\n<p>Can we help you with finishing the order? Call us on <b>555 555 5555</b> or write us on <a href=\"#\">info@eshop.com</a>.</p>\n<p> Remember that you have two weeks to return the goods without any quesions asked.</p>",
-            "group": "messageBlock",
-            "id": "messageText",
+            "group": "textBlock",
+            "id": "textBlock",
             "name": "Text",
             "type": "richtext"
         },
@@ -333,7 +333,6 @@
             "type": "textarea"
         }
     ],
-    "id": "b674d062632f4ca6a83a50c4df4357eb",
     "minScenariosCount": 0,
     "defaultsForOfferTemplate": {
         "data": {
