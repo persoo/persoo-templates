@@ -1,7 +1,3 @@
-#persooDemoNavigation2 {
-    display: none; /* FIXME - remove */
-}
-
 /* Layout
 * Create your own layout, you can event use elements
 * with correct IDs inserted by your webserver. */
@@ -179,6 +175,9 @@
     border-radius: 0 4px 4px 0;
     overflow: hidden;
     border-left: 0;
+}
+.persoo-search-bar__input::-ms-clear {
+    display: none;
 }
 
 /* Product Items header */
