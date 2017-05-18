@@ -620,14 +620,14 @@
 
         {
             "id": "layoutHTML",
-            "name": "Layout HTML Template (elements marked as 'persoo-container' will be replaced by Dynamic widgets loaded by javascript libraty in browser)",
+            "name": "Layout HTML Template (elements marked as 'persoo-container' will be replaced by Dynamic widgets loaded by javascript library in browser)",
             "group": "design",
             "type": "html",
             "defaultValue": "To be filled from default values."
         },
         {
             "id": "widgetContainerSelectors",
-            "name": "Custom Selectors for Dynamic Widgets (each dynamic widget will replace DOW element with given selector)",
+            "name": "Custom Selectors for Dynamic Widgets (each dynamic widget will replace DOM element with given selector)",
             "group": "design",
             "type": "json",
             "defaultValue": {
