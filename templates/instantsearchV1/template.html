@@ -94,11 +94,27 @@
                 }
                 %>
 
+                function setHiddenClass(elem, isVisible) {
+                    if (elem) {
+                        if (isVisible) {
+                            elem.className = elem.className.replace(/\s*persoo-hidden/g,'');
+                        } else {
+                            if (!(elem.className.indexOf('persoo-hidden') >= 0)) {
+                                elem.className += ' persoo-hidden';
+                            }
+                        }
+                    }
+                }
+
                 search.addWidget(
                     persooInstantSearch.widgets.<%= (paginationType == 'infiniteItems' ? 'infiniteHits' : 'hits') %>({
                         container: '<%= widgetContainerSelectors.items %>',
                         hitsPerPage: <%= itemsPerPage %>,
-                        <%= paginationType == 'infiniteItems' ? 'showMoreLabel: "' + showMoreHitsLabel + '",' : '' %>
+                        <%=
+                        	paginationType == 'infiniteItems' ?
+                        		'showMoreLabel: "' + showMoreHitsLabel + '",' :
+                        		''
+                        %>
                         templates: {
                             item: <%= addTemplate(itemTemplate) %>,
                             empty: <%= addTemplate(emptyResultsTemplate) %>
@@ -331,17 +347,6 @@
                     );
                 <% } %>
                 <% if (showFulltextFilter && hideOnEmptyInput) { %>
-                    function setHiddenClass(elem, isVisible) {
-                        if (elem) {
-                            if (isVisible) {
-                                elem.className = elem.className.replace(/\s*persoo-hidden/g,'');
-                            } else {
-                                if (!(elem.className.indexOf('persoo-hidden') >= 0)) {
-                                    elem.className += ' persoo-hidden';
-                                }
-                            }
-                        }
-                    }
                     function hideSearchResultsOnEmptyInput() {
                         var isEmptyQuery = (search.helper.getStateAsQueryString() == 'q=');
                         var searchResultsElem = document.querySelector('<%= widgetContainerSelectors.searchResults %>');
@@ -375,8 +380,13 @@
                     }
                 }
                 activateSearchBarCross();
+
+                search.helper.on('result', function(state) {
+                    var filtersElem = document.querySelector('<%= widgetContainerSelectors.filters %>');
+                    setHiddenClass(filtersElem, state.nbHits > 0);
+                });
             }
-            function loadScript(url, onloadFn, errorFn) {var d = document; var s=d.createElement("script");
+            function loadScript(url, onloadFn, errorFn) {var d = document; var s=d.createElement("script");``
                 s.src=url,s.type="text/javascript",s.async=true,s.onerror=errorFn,s.onload=onloadFn;
                 d.getElementsByTagName("head")[0].appendChild(s)};
 
@@ -479,7 +489,6 @@
         (function() {
             function createElementToggleClassName(element, toggleClass) {
                 return function() {
-                    console.log('toggling');
                     var currentClass = element.className;
 
                     if(currentClass.split(" ").indexOf(toggleClass) > -1){
