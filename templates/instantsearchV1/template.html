@@ -24,7 +24,7 @@
     <% } %>
 
     <script>
-        var persoo_<%= offerID %> = (function () {
+        (function () {
             <% if (showMultiRefinementList) { %>
                 <%  /* Add HTML containers into MultiRefinementList container */
                     var multiContainerID = widgetContainerSelectors.multiRefinementList.replace('#','');
@@ -360,17 +360,19 @@
                     var input = searchBarElem.querySelector('.persoo-search-bar__input');
                     var crossElem = searchBarElem.querySelector('.persoo-search-bar__clear-query');
 
-                    conditionallyHideClearCross();
-                    input.addEventListener('input', conditionallyHideClearCross);
-                    crossElem.addEventListener('click', function(e) {
-                        search.helper.setQuery('').search();
-                        crossElem.style.display = 'none';
-                    });
+                    if (searchBarElem && input && crossElem) {
+                        conditionallyHideClearCross();
+                        input.addEventListener('input', conditionallyHideClearCross);
+                        crossElem.addEventListener('click', function(e) {
+                            search.helper.setQuery('').search();
+                            crossElem.style.display = 'none';
+                        });
 
-                    function conditionallyHideClearCross() {
-                        crossElem.style.display = input.value ? 'inline' : 'none';
+                        function conditionallyHideClearCross() {
+                            crossElem.style.display = input.value ? 'inline' : 'none';
+                        }
+                        search.on('render', conditionallyHideClearCross);
                     }
-                    search.on('render', conditionallyHideClearCross);
                 }
                 activateSearchBarCross();
             }
@@ -469,7 +471,7 @@
                 <%= JSON.stringify(responsiveClassNamesJSON) %>
             );
 
-                instance.init();
+            instance.init();
         }
     </script>
 
@@ -479,6 +481,7 @@
                 return function() {
                     console.log('toggling');
                     var currentClass = element.className;
+
                     if(currentClass.split(" ").indexOf(toggleClass) > -1){
                         newClass = currentClass.replace(new RegExp('\\b' + toggleClass + '\\b','g'), "");
                     } else {
@@ -489,14 +492,15 @@
             }
 
             var container = document.querySelector('<%= widgetContainerSelectors.searchResults %>');
-            if (!container) return false;
+            if (container) {
+                var filters = container.querySelector('<%= widgetContainerSelectors.filters %>');
+                var toggle = container.querySelector('<%= widgetContainerSelectors.filtersToggle %>');
 
-            var filters = container.querySelector('<%= widgetContainerSelectors.filters %>');
-            var toggle = container.querySelector('<%= widgetContainerSelectors.filtersToggle %>');
-            if (!filters || !toggle) return false;
-
-            var toggleFiltersClassNameVisible = createElementToggleClassName(filters, 'persoo-search-results__filters--visible');
-            toggle.addEventListener('click', toggleFiltersClassNameVisible);
+                if (filters && toggle) {
+                    var toggleFiltersClassNameVisible = createElementToggleClassName(filters, 'persoo-search-results__filters--visible');
+                    toggle.addEventListener('click', toggleFiltersClassNameVisible);
+                }
+            }
         }());
     </script>
 

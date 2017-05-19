@@ -106,7 +106,7 @@
             "name": "Items Per Page (default value)",
             "group": "pagination",
             "type": "number",
-            "defaultValue": 6
+            "defaultValue": 12
         },
         {
             "id": "paginationType",
@@ -158,7 +158,7 @@
             "name": "Items Per Page Values (comma separated values)",
             "group": "pagination",
             "type": "text",
-            "defaultValue": "6, 12, 24",
+            "defaultValue": "12, 24, 36",
             "condition": {
                 "operator": "and",
                 "children": [{
@@ -212,7 +212,7 @@
             "name": "Show Header",
             "group": "header",
             "type": "checkbox",
-            "defaultValue": true
+            "defaultValue": false
         },
         {
             "id": "headerTemplate",
@@ -705,12 +705,12 @@
                 },
                 {
                     "className": "persoo-items--col-4",
-                    "maxWidth": 1350,
+                    "maxWidth": 1620,
                     "minWidth": 1081
                 },
                 {
-                    "className": "persoo-items--col-5",
-                    "minWidth": 1351
+                    "className": "persoo-items--col-6",
+                    "minWidth": 1621
                 }
             ]
         },
