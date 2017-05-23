@@ -416,7 +416,7 @@
             "type": "number",
             "defaultValue": 20,
             "condition": {
-                "fieldID": "MultiRefinementListShowMore",
+                "fieldID": "multiRefinementListShowMore",
                 "operator": "==",
                 "fieldValue": true
             }
