@@ -211,27 +211,25 @@ describe('embeddedJS.render(str, data, opts)', function () {
             '<p>geddy</p>');
     });
 
-//    it('accept locals without using with() {}', function () {
-//        assert.equal(embeddedJS.render('<p><%= locals.name %></p>', {name: 'geddy'},
-//                                {_with: false}),
-//            '<p>geddy</p>');
-//        assert.throws(function() {
-//          embeddedJS.render('<p><%= name %></p>', {name: 'geddy'},
-//                     {_with: false});
-//        }, /name is not defined/);
-//    });
-//
-//    it('accept custom name for locals', function () {
-//        embeddedJS.localsName = 'it';
-//        assert.equal(embeddedJS.render('<p><%= it.name %></p>', {name: 'geddy'},
-//                                {_with: false}),
-//            '<p>geddy</p>');
-//        assert.throws(function() {
-//          embeddedJS.render('<p><%= name %></p>', {name: 'geddy'},
-//                     {_with: false});
-//        }, /name is not defined/);
-//        embeddedJS.localsName = 'locals';
-//    });
+    it('accept locals without using with() {}', function () {
+        assert.equal(embeddedJS.render('<p><%= locals.myname %></p>', {myname: 'kuba'}, {_with: false}),'<p>kuba</p>');
+        assert.equal(embeddedJS.render('<p><%= locals.nonExistingField %></p>', {}, {_with: false}),'<p></p>');
+        assert.throws(function() {
+                embeddedJS.render('<p><%= myname %></p>', {myname: 'kuba'}, {_with: false});
+            },
+            /myname is not defined/
+        );
+    });
+
+    it('accept custom name for locals', function () {
+        assert.equal(embeddedJS.render('<p><%= item.myname %></p>', {myname: 'kuba'}, {_with: false, localsName: 'item'}), '<p>kuba</p>');
+        assert.equal(embeddedJS.render('<p><%= item.nonExistingField %></p>', {}, {_with: false, localsName: 'item'}),'<p></p>');
+        assert.throws(function() {
+                embeddedJS.render('<p><%= myname %></p>', {myname: 'kuba'}, {_with: false});
+            },
+            /myname is not defined/
+        );
+    });
 //
 //    it('support caching', function () {
 //        var file = __dirname + '/tmp/render.embeddedJS'
