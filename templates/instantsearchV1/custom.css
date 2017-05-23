@@ -1,7 +1,7 @@
-/* Layout
-* Create your own layout, you can event use elements
-* with correct IDs inserted by your webserver. */
-
+/*  Modify following CSS rules to get design you need.
+ *  You can even delete all these rules
+ *  and move them from this widget to your website.
+ */
 .persoo-search-results__root,
 .persoo-search-results__root * {
     box-sizing: border-box;

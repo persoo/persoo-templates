@@ -54,8 +54,11 @@
                     }) %>
                 });
                 <%
-                function addTemplate(templateField) {
-                    return 'persooInstantSearch.EJS(' + JSON.stringify(templateField) + ')';
+                function addTemplate(templateField, options) {
+                    return 'persooInstantSearch.EJS(' +
+                            JSON.stringify(templateField) +
+                            (options ? ', ' + JSON.stringify(options) : '') +
+                        ')';
                 }
                 function addClassNamesFor(widget, defaults) {
                     var cssClasses = defaults;
@@ -116,7 +119,7 @@
                         		''
                         %>
                         templates: {
-                            item: <%= addTemplate(itemTemplate) %>,
+                            item: <%= addTemplate(itemTemplate, {_with: false, localsName: 'item'}) %>,
                             empty: <%= addTemplate(emptyResultsTemplate) %>
                         },
                         cssClasses: <%= addClassNamesFor(paginationType == 'infiniteItems' ? 'infiniteHits' : 'hits', {}) %>

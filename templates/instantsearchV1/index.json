@@ -91,14 +91,14 @@
             "name": "Item Template",
             "group": "items",
             "type": "html",
-            "defaultValue": "<%\n    function prepareDescription(desc) {\n        desc = desc || '';\n        return desc.replace('\"', '\\\"');\n    }\n    function commas(n, s, d) {\n        s = s || ' ';\n        d = d || '.';\n        var parts = n.toString().split('.');\n        parts[0] = parts[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, s);\n        return parts.join(d);\n    }\n%>\n<a href=<%= link %>\n   class=\"persoo-result-item__link\">\n    <div class=\"persoo-result-item__img-container\">\n        <img src=<%= imageLink %>\n             class=\"persoo-result-item__img\">\n    </div>\n    <div class=\"persoo-result-item__title\" title=<%= prepareDescription(description) %>>\n        <%= title %>\n    </div>\n    <div class=\"persoo-result-item__price\">\n        <span class=\"persoo-result-item__price__current\">\n            <%= commas(price) %>&nbsp;Kč\n        </span>\n        <% if (priceOriginal && priceOriginal !== price) { %>\n            <span class=\"persoo-result-item__price__original\">\n                <%= commas(priceOriginal) %>&nbsp;Kč\n            </span>\n        <% } %> \n    </div>\n</a>"
+            "defaultValue": "<%\n    function prepareDescription(desc) {\n        desc = desc || '';\n        return desc.replace('\"', '\\\"');\n    }\n    function commas(n, s, d) {\n        s = s || ' ';\n        d = d || '.';\n        var parts = n.toString().split('.');\n        parts[0] = parts[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, s);\n        return parts.join(d);\n    }\n%>\n<a href=<%= item.link %>\n   class=\"persoo-result-item__link\">\n    <div class=\"persoo-result-item__img-container\">\n        <img src=<%= item.imageLink %>\n             class=\"persoo-result-item__img\">\n    </div>\n    <div class=\"persoo-result-item__title\" title=<%= prepareDescription(item.description) %>>\n        <%= item.title %>\n    </div>\n    <div class=\"persoo-result-item__price\">\n        <span class=\"persoo-result-item__price__current\">\n            <%= commas(item.price) %>&nbsp;Kč\n        </span>\n        <% if (item.priceOriginal && item.priceOriginal !== item.price) { %>\n            <span class=\"persoo-result-item__price__original\">\n                <%= commas(item.priceOriginal) %>&nbsp;Kč\n            </span>\n        <% } %> \n    </div>\n</a>"
         },
         {
             "id": "emptyResultsTemplate",
             "name": "Empty Results Template",
             "group": "items",
             "type": "html",
-            "defaultValue": "<h2>Your query did not match any products.</h2>\n<p>Try somethink like</p>\n<ul>\n    <li>more general terms</li>\n    <li>check you spelling</li>\n    <li>remove some filters</li>\n</ul>"
+            "defaultValue": "<h2>Your query did not match any products.</h2>\n<p>Try something like</p>\n<ul>\n    <li>more general terms</li>\n    <li>check your spelling</li>\n    <li>remove some filters</li>\n</ul>"
         },
 
         {
@@ -219,7 +219,7 @@
             "name": "Header Template (available variables: nbHits, page, query)",
             "group": "header",
             "type": "html",
-            "defaultValue": "<% if (nbHits > 0) { %>\n    <h1>Search Results for \"<%= query %>\"</h1>\n<% } else { %>\n    <h1>Your query did not match any products</h1>\n<% } %>"
+            "defaultValue": "<% if (nbHits > 0) { %>\n    <h1>Search Results<%= query ? ' for \"' + query + '\"' : '' %></h1>\n<% } else { %>\n    <h1>Your query did not match any products</h1>\n<% } %>"
         },
 
         {
@@ -297,14 +297,14 @@
         },
         {
             "id": "menuCollapsible",
-            "name": "collapsible by click on box header",
+            "name": "Collapsible by click on box header",
             "group": "menu",
             "type": "checkbox",
             "defaultValue": true
         },
         {
             "id": "menuCollapsed",
-            "name": "collapsed by default",
+            "name": "Collapsed by default",
             "group": "menu",
             "type": "checkbox",
             "defaultValue": false,
@@ -345,14 +345,14 @@
         },
         {
             "id": "hierarchicalMenuCollapsible",
-            "name": "collapsible by click on box header",
+            "name": "Collapsible by click on box header",
             "group": "hierarchicalMenu",
             "type": "checkbox",
             "defaultValue": true
         },
         {
             "id": "hierarchicalMenuCollapsed",
-            "name": "collapsed by default",
+            "name": "Collapsed by default",
             "group": "hierarchicalMenu",
             "type": "checkbox",
             "defaultValue": false,
@@ -412,14 +412,14 @@
         },
         {
             "id": "refinementList1Collapsible",
-            "name": "collapsible by click on box header",
+            "name": "Collapsible by click on box header",
             "group": "refinementList1",
             "type": "checkbox",
             "defaultValue": true
         },
         {
             "id": "refinementList1Collapsed",
-            "name": "collapsed by default",
+            "name": "Collapsed by default",
             "group": "refinementList1",
             "type": "checkbox",
             "defaultValue": false,
@@ -479,14 +479,14 @@
         },
         {
             "id": "refinementList2Collapsible",
-            "name": "collapsible by click on box header",
+            "name": "Collapsible by click on box header",
             "group": "refinementList2",
             "type": "checkbox",
             "defaultValue": true
         },
         {
             "id": "refinementList2Collapsed",
-            "name": "collapsed by default",
+            "name": "Collapsed by default",
             "group": "refinementList2",
             "type": "checkbox",
             "defaultValue": false,
@@ -546,14 +546,14 @@
         },
         {
             "id": "refinementList3Collapsible",
-            "name": "collapsible by click on box header",
+            "name": "Collapsible by click on box header",
             "group": "refinementList3",
             "type": "checkbox",
             "defaultValue": true
         },
         {
             "id": "refinementList3Collapsed",
-            "name": "collapsed by default",
+            "name": "Collapsed by default",
             "group": "refinementList3",
             "type": "checkbox",
             "defaultValue": false,
@@ -612,7 +612,7 @@
         },
         {
             "id": "multiRefinementListCollapsible",
-            "name": "collapsible by click on box header",
+            "name": "Collapsible by click on box header",
             "group": "multiRefinementList",
             "type": "checkbox",
             "defaultValue": true
@@ -620,7 +620,7 @@
 
         {
             "id": "layoutHTML",
-            "name": "Layout HTML Template (elements marked as 'persoo-container' will be replaced by Dynamic widgets loaded by javascript library in browser)",
+            "name": "Layout HTML Template (elements corresponding to 'Custom Selectors' will be replaced by Dynamic widgets loaded by javascript library in the browser)",
             "group": "design",
             "type": "html",
             "defaultValue": "To be filled from default values."
@@ -682,7 +682,7 @@
         },
         {
             "id": "responsiveClassNamesJSON",
-            "name": "Responsive Product Items Container Class Names",
+            "name": "Responsive Class Names for Items Container (Items container will has the class, iff it has its width in specified range)",
             "group": "design",
             "type": "json",
             "defaultValue": [
@@ -716,7 +716,7 @@
         },
         {
             "id": "customClassNamesJSON",
-            "name": "Custom Class Names for Dynamic Widgets (i.e. to add custom class to Result Item, find its default class in browser, which is '.ais-hits--item' and add custom clasa below to path 'hits.item')",
+            "name": "Custom Class Names for Dynamic Widgets (i.e. if your find default widget class in debug console of your browser, let us say you found '.ais-hits--item', then add custom class below to the path 'hits.item')",
             "group": "design",
             "type": "json",
             "defaultValue": {
