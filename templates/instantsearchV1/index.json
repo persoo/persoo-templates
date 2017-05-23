@@ -364,207 +364,6 @@
         },
 
         {
-            "id": "showRefinementList1",
-            "name": "Show Refinement List",
-            "group": "refinementList1",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "refinementList1HeaderTemplate",
-            "name": "Header",
-            "group": "refinementList1",
-            "type": "text",
-            "defaultValue": "Refinement List 1"
-        },
-        {
-            "id": "refinementList1AttributeName",
-            "name": "Source Field",
-            "group": "refinementList1",
-            "type": "text",
-            "defaultValue": "brand"
-        },
-        {
-            "id": "refinementList1Limit",
-            "name": "Limit",
-            "group": "refinementList1",
-            "type": "number",
-            "defaultValue": 10
-        },
-        {
-            "id": "refinementList1ShowMore",
-            "name": "Show More",
-            "group": "refinementList1",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "refinementList1ShowMoreLimit",
-            "name": "Limit with Show more",
-            "group": "refinementList1",
-            "type": "number",
-            "defaultValue": 20,
-            "condition": {
-                "fieldID": "refinementList1ShowMore",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "refinementList1Collapsible",
-            "name": "Collapsible by click on box header",
-            "group": "refinementList1",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "refinementList1Collapsed",
-            "name": "Collapsed by default",
-            "group": "refinementList1",
-            "type": "checkbox",
-            "defaultValue": false,
-            "condition": {
-                "fieldID": "refinementList1Collapsible",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
-
-        {
-            "id": "showRefinementList2",
-            "name": "Show Refinement List",
-            "group": "refinementList2",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "refinementList2HeaderTemplate",
-            "name": "Header",
-            "group": "refinementList2",
-            "type": "text",
-            "defaultValue": "Refinement List 2"
-        },
-        {
-            "id": "refinementList2AttributeName",
-            "name": "Source Field",
-            "group": "refinementList2",
-            "type": "text",
-            "defaultValue": "gender"
-        },
-        {
-            "id": "refinementList2Limit",
-            "name": "Limit",
-            "group": "refinementList2",
-            "type": "number",
-            "defaultValue": 5
-        },
-        {
-            "id": "refinementList2ShowMore",
-            "name": "Show More",
-            "group": "refinementList2",
-            "type": "checkbox",
-            "defaultValue": false
-        },
-        {
-            "id": "refinementList2ShowMoreLimit",
-            "name": "Limit with Show more",
-            "group": "refinementList2",
-            "type": "number",
-            "defaultValue": 10,
-            "condition": {
-                "fieldID": "refinementList2ShowMore",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "refinementList2Collapsible",
-            "name": "Collapsible by click on box header",
-            "group": "refinementList2",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "refinementList2Collapsed",
-            "name": "Collapsed by default",
-            "group": "refinementList2",
-            "type": "checkbox",
-            "defaultValue": false,
-            "condition": {
-                "fieldID": "refinementList2Collapsible",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
-
-        {
-            "id": "showRefinementList3",
-            "name": "Show Refinement List",
-            "group": "refinementList3",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "refinementList3HeaderTemplate",
-            "name": "Header",
-            "group": "refinementList3",
-            "type": "text",
-            "defaultValue": "Refinement List 3"
-        },
-        {
-            "id": "refinementList3AttributeName",
-            "name": "Source Field",
-            "group": "refinementList3",
-            "type": "text",
-            "defaultValue": "available"
-        },
-        {
-            "id": "refinementList3Limit",
-            "name": "Limit",
-            "group": "refinementList3",
-            "type": "number",
-            "defaultValue": 5
-        },
-        {
-            "id": "refinementList3ShowMore",
-            "name": "Show More",
-            "group": "refinementList3",
-            "type": "checkbox",
-            "defaultValue": false
-        },
-        {
-            "id": "refinementList3ShowMoreLimit",
-            "name": "Limit with Show more",
-            "group": "refinementList3",
-            "type": "number",
-            "defaultValue": 10,
-            "condition": {
-                "fieldID": "refinementList3ShowMore",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
-        {
-            "id": "refinementList3Collapsible",
-            "name": "Collapsible by click on box header",
-            "group": "refinementList3",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "refinementList3Collapsed",
-            "name": "Collapsed by default",
-            "group": "refinementList3",
-            "type": "checkbox",
-            "defaultValue": false,
-            "condition": {
-                "fieldID": "refinementList3Collapsible",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
-
-        {
             "id": "showMultiRefinementList",
             "name": "Show Multi Refinement List",
             "group": "multiRefinementList",
@@ -573,13 +372,25 @@
         },
         {
             "id": "multiRefinementListGroups",
-            "name": "Refinement Groups",
+            "name": "Refinement Filters (each filter replaces 'containerSelector' element or is appended to 'multiRefinementList' element if selector missing)",
             "group": "multiRefinementList",
             "type": "json",
             "defaultValue": [
                 {
-                    "headerTemplate": "Nice Parameter Name",
-                    "attributeName": "paramName",
+                    "attributeName": "brand",
+                    "containerSelector": "#persoo-refinementList--1",
+                    "headerTemplate": "Brand",
+                    "collapsed": false
+                },
+                {
+                    "attributeName": "gender",
+                    "containerSelector": "#persoo-refinementList--2",
+                    "headerTemplate": "Gender",
+                    "collapsed": false
+                },
+                {
+                    "attributeName": "available",
+                    "headerTemplate": "Availability",
                     "collapsed": true
                 }
             ]
@@ -641,9 +452,6 @@
                 "currentRefinedValues": "#persoo-current-refined-values",
                 "menu": "#persoo-menu",
                 "hierarchicalMenu": "#persoo-hierarchical-menu",
-                "refinementList1": "#persoo-refinementList--1",
-                "refinementList2": "#persoo-refinementList--2",
-                "refinementList3": "#persoo-refinementList--3",
                 "multiRefinementList": "#persoo-multiRefinementList",
                 "clearAll": "#persoo-clear-all",
                 "stats": "#persoo-stats",
@@ -874,20 +682,8 @@
             "name": "Hierarchical Menu Filter (Categories)"
         },
         {
-            "id": "refinementList1",
-            "name": "Refinement List Filter 1"
-        },
-        {
-            "id": "refinementList2",
-            "name": "Refinement List Filter 2"
-        },
-        {
-            "id": "refinementList3",
-            "name": "Refinement List Filter 3"
-        },
-        {
             "id": "multiRefinementList",
-            "name": "Refinement Multi List Filter"
+            "name": "Refinement List Filters"
         },
         {
             "id": "clearAll",

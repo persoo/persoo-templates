@@ -30,7 +30,9 @@
                     var multiContainerID = widgetContainerSelectors.multiRefinementList.replace('#','');
                     var containerIDs = [];
                     for (var g=0; g < multiRefinementListGroups.length; g++) {
-                        containerIDs.push(multiContainerID + '_' + multiRefinementListGroups[g].attributeName);
+                        if (!multiRefinementListGroups[g].containerSelector) {
+                            containerIDs.push(multiContainerID + '_' + multiRefinementListGroups[g].attributeName);
+                        }
                     }
                 %>
                 var multiRefinementsContainerElem = document.getElementById("<%= multiContainerID %>");
@@ -246,60 +248,6 @@
                     );
                 <% } %>
 
-                <% if (showRefinementList1) { %>
-                    search.addWidget(
-                        persooInstantSearch.widgets.refinementList({
-                            container: '<%= widgetContainerSelectors.refinementList1 %>',
-                            attributeName: '<%= refinementList1AttributeName %>',
-                            operator: 'or',
-                            templates: {
-                                header: <%= addTemplate(refinementList1HeaderTemplate) %>
-                            },
-                            limit: <%= refinementList1Limit %>,
-                            sortBy: ['isRefined', 'count:desc', 'name:asc'],
-                            <%= addShowMoreOption(refinementList1ShowMore, refinementList1ShowMoreLimit) %>,
-                            <%= addCollapsibleOption(refinementList1Collapsible, refinementList1Collapsed) %>,
-                            cssClasses: <%= addClassNamesFor('refinementList', {}) %>
-                        })
-                    );
-                <% } %>
-
-                <% if (showRefinementList2) { %>
-                    search.addWidget(
-                        persooInstantSearch.widgets.refinementList({
-                            container: '<%= widgetContainerSelectors.refinementList2 %>',
-                            attributeName: '<%= refinementList2AttributeName %>',
-                            operator: 'or',
-                            templates: {
-                                header: <%= addTemplate(refinementList2HeaderTemplate) %>
-                            },
-                            limit: <%= refinementList2Limit %>,
-                            sortBy: ['isRefined', 'count:desc', 'name:asc'],
-                            <%= addShowMoreOption(refinementList2ShowMore, refinementList2ShowMoreLimit) %>,
-                            <%= addCollapsibleOption(refinementList2Collapsible, refinementList2Collapsed) %>,
-                            cssClasses: <%= addClassNamesFor('refinementList', {}) %>
-                        })
-                    );
-                <% } %>
-
-                <% if (showRefinementList3) { %>
-                    search.addWidget(
-                        persooInstantSearch.widgets.refinementList({
-                            container: '<%= widgetContainerSelectors.refinementList3 %>',
-                            attributeName: '<%= refinementList3AttributeName %>',
-                            operator: 'or',
-                            templates: {
-                                header: <%= addTemplate(refinementList3HeaderTemplate) %>
-                            },
-                            limit: <%= refinementList3Limit %>,
-                            sortBy: ['isRefined', 'count:desc', 'name:asc'],
-                            <%= addShowMoreOption(refinementList3ShowMore, refinementList3ShowMoreLimit) %>,
-                            <%= addCollapsibleOption(refinementList3Collapsible, refinementList3Collapsed) %>,
-                            cssClasses: <%= addClassNamesFor('refinementList', {}) %>
-                        })
-                    );
-                <% } %>
-
                 <% if (showMultiRefinementList) { %>
                     <%
                         for (var g=0; g < multiRefinementListGroups.length; g++) {
@@ -308,7 +256,7 @@
 
                         search.addWidget(
                             persooInstantSearch.widgets.refinementList({
-                                container: '<%= multiRefinementContainerID %>',
+                                container: '<%= multiRefinementListGroups[g].containerSelector || multiRefinementContainerID %>',
                                 attributeName: '<%= multiRefinementListGroups[g].attributeName %>',
                                 operator: 'or',
                                 templates: {
