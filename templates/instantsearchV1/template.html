@@ -36,12 +36,15 @@
                     }
                 %>
                 var multiRefinementsContainerElem = document.getElementById("<%= multiContainerID %>");
-                var innerContainerIDs = <%=  JSON.stringify(containerIDs) %>;
-                innerContainerIDs.map( function(myID) {
-                    var elem = document.createElement("div");
-                    elem.id = myID;
-                    multiRefinementsContainerElem.appendChild(elem);
-                });
+
+                if (multiRefinementsContainerElem) {
+                    var innerContainerIDs = <%=  JSON.stringify(containerIDs) %>;
+                    innerContainerIDs.forEach( function(myID) {
+                        var elem = document.createElement("div");
+                        elem.id = myID;
+                        multiRefinementsContainerElem.appendChild(elem);
+                    });
+                }
             <% } %>
 
             function initInstantSearch() {
@@ -312,22 +315,25 @@
                 search.start();
 
                 function activateSearchBarCross() {
-                    var searchBarElem = document.querySelector('.persoo-search-bar__wrapper');
-                    var input = searchBarElem.querySelector('.persoo-search-bar__input');
-                    var crossElem = searchBarElem.querySelector('.persoo-search-bar__clear-query');
+                    var searchBarElem = document.querySelector('<%= widgetContainerSelectors.searchBar %>');
 
-                    if (searchBarElem && input && crossElem) {
-                        conditionallyHideClearCross();
-                        input.addEventListener('input', conditionallyHideClearCross);
-                        crossElem.addEventListener('click', function(e) {
-                            search.helper.setQuery('').search();
-                            crossElem.style.display = 'none';
-                        });
+                    if (searchBarElem) {
+                        var input = searchBarElem.querySelector('<%= widgetContainerSelectors.fulltextFilter %>');
+                        var crossElem = searchBarElem.querySelector('.persoo-search-bar__clear-query');
 
-                        function conditionallyHideClearCross() {
-                            crossElem.style.display = input.value ? 'inline' : 'none';
+                        if (input && crossElem) {
+                            conditionallyHideClearCross();
+                            input.addEventListener('input', conditionallyHideClearCross);
+                            crossElem.addEventListener('click', function(e) {
+                                search.helper.setQuery('').search();
+                                crossElem.style.display = 'none';
+                            });
+
+                            function conditionallyHideClearCross() {
+                                crossElem.style.display = input.value ? 'inline' : 'none';
+                            }
+                            search.on('render', conditionallyHideClearCross);
                         }
-                        search.on('render', conditionallyHideClearCross);
                     }
                 }
                 activateSearchBarCross();
@@ -337,7 +343,7 @@
                     setHiddenClass(filtersElem, state.nbHits > 0);
                 });
             }
-            function loadScript(url, onloadFn, errorFn) {var d = document; var s=d.createElement("script");``
+            function loadScript(url, onloadFn, errorFn) {var d = document; var s=d.createElement("script");
                 s.src=url,s.type="text/javascript",s.async=true,s.onerror=errorFn,s.onload=onloadFn;
                 d.getElementsByTagName("head")[0].appendChild(s)};
 
