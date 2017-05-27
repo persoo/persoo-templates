@@ -25,13 +25,13 @@
 
     <script>
         (function () {
-            <% if (showMultiRefinementList) { %>
+            <% if (showFilters) { %>
                 <%  /* Add HTML containers into MultiRefinementList container */
-                    var multiContainerID = widgetContainerSelectors.multiRefinementList.replace('#','');
+                    var multiContainerID = widgetContainerSelectors.filters.replace('#','');
                     var containerIDs = [];
-                    for (var g=0; g < multiRefinementListGroups.length; g++) {
-                        if (!multiRefinementListGroups[g].containerSelector) {
-                            containerIDs.push(multiContainerID + '_' + multiRefinementListGroups[g].attributeName);
+                    for (var g=0; g < filtersGroups.length; g++) {
+                        if (!filtersGroups[g].containerSelector) {
+                            containerIDs.push(multiContainerID + '_' + filtersGroups[g].attributeName);
                         }
                     }
                 %>
@@ -65,7 +65,21 @@
                             (options ? ', ' + JSON.stringify(options) : '') +
                         ')';
                 }
-                function addClassNamesFor(widget, defaults) {
+                /* We need to generate "JSON with javascript calls" to be send as js to browser. */
+                function wrapTemplate(code) {
+                    return '$CLEAN_QUOTE_BEFORE' + code + '$CLEAN_QUOTE_AFTER';
+                }
+                function unwrapTemplates(json) {
+                    var parts = json.split(/"\$CLEAN_QUOTE_BEFORE|\$CLEAN_QUOTE_AFTER"/);
+                    for (var i = 0; i < parts.length; i++) {
+                        if (i % 2 == 1) {
+                            parts[i] = parts[i].replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+                        }
+                    }
+                    return parts.join('');
+                }
+
+                function addClassNamesFor(widget, defaults, doStringify) {
                     var cssClasses = defaults;
                     var userClasses = customClassNamesJSON[widget];
                     if (userClasses) {
@@ -73,31 +87,28 @@
                             cssClasses[i] = (cssClasses[i] ? cssClasses[i] + ' ' : '') + userClasses[i];
                         }
                     }
-                    return JSON.stringify(cssClasses);
+                    return doStringify ? JSON.stringify(cssClasses) : cssClasses;
                 }
-                function addCollapsibleOption(collapsible, collapsed) {
+                function addCollapsibleOptionTo(config, collapsible, collapsed) {
                     if (collapsible) {
-                        return 'collapsible: { collapsed: ' + !!collapsed + '}';
+                        config.collapsible = { collapsed: !!collapsed };
                     } else {
-                        return 'collapsible: false';
+                        config.collapsible = false;
                     }
                 }
-                function addShowMoreOption(showMore, limit) {
+                function addShowMoreOptionTo(config, showMore, limit) {
                     if (showMore) {
-                        var opt = {
+                        config.showMore = {
                             limit: limit,
                             templates: {
-                                active: "ACTIVE",
-                                inactive: "INACTIVE"
+                                active: wrapTemplate(addTemplate(
+                                    '<div class="persoo-show-more persoo-show-more--active">' + showMoreActiveTemplate + '</div>')),
+                                inactive: wrapTemplate(addTemplate(
+                                    '<div class="persoo-show-more persoo-show-more--inactive">' + showMoreInactiveTemplate + '</div>'))
                             }
-                        }
-                        return 'showMore: ' + JSON.stringify(opt)
-                            .replace('"ACTIVE"', addTemplate(
-                                '<div class="persoo-show-more persoo-show-more--active">' + showMoreActiveTemplate + '</div>'))
-                            .replace('"INACTIVE"', addTemplate(
-                                '<div class="persoo-show-more persoo-show-more--inactive">' + showMoreInactiveTemplate + '</div>'));
+                        };
                     } else {
-                        return 'showMore: false';
+                        config.showMore = false;
                     }
                 }
                 %>
@@ -127,14 +138,14 @@
                             item: <%= addTemplate(itemTemplate, {_with: false, localsName: 'item'}) %>,
                             empty: <%= addTemplate(emptyResultsTemplate) %>
                         },
-                        cssClasses: <%= addClassNamesFor(paginationType == 'infiniteItems' ? 'infiniteHits' : 'hits', {}) %>
+                        cssClasses: <%= addClassNamesFor(paginationType == 'infiniteItems' ? 'infiniteHits' : 'hits', {}, true) %>
                     })
                 );
                 <% if (paginationType == 'pagination') { %>
                     search.addWidget(
                         persooInstantSearch.widgets.pagination({
                             container: '<%= widgetContainerSelectors.pagination %>',
-                            cssClasses: <%= addClassNamesFor('pagination', {}) %>,
+                            cssClasses: <%= addClassNamesFor('pagination', {}, true) %>,
                             labels: {
                         		previous: "<span class=\"persoo-pagination__label\">‹</span>",
                             	next: "<span class=\"persoo-pagination__label\">›</span>",
@@ -158,7 +169,7 @@
                                 %>
                                 autoHideContainer: true,
                                 options: <%= itemsPersPageOptions %>,  // default is defined in hits widget
-                                cssClasses: <%= addClassNamesFor('hitsPerPageSelector', {}) %>
+                                cssClasses: <%= addClassNamesFor('hitsPerPageSelector', {}, true) %>
                             })
                         );
                     <% } %>
@@ -170,7 +181,7 @@
                             templates: {
                                 body: <%= addTemplate(statsTemplate) %>
                             },
-                            cssClasses: <%= addClassNamesFor('stats', {}) %>
+                            cssClasses: <%= addClassNamesFor('stats', {}, true) %>
                         })
                     );
                 <% } %>
@@ -181,7 +192,7 @@
                             templates: {
                                 root: <%= addTemplate(headerTemplate) %>
                             },
-                            cssClasses: <%= addClassNamesFor('header', {}) %>
+                            cssClasses: <%= addClassNamesFor('header', {}, true) %>
                         })
                     );
                 <% } %>
@@ -192,7 +203,7 @@
                             templates: {
                                 link: 'Reset everything but fulltext'
                             },
-                            cssClasses: <%= addClassNamesFor('clearAll', {}) %>,
+                            cssClasses: <%= addClassNamesFor('clearAll', {}, true) %>,
                             autoHideContainer: false
                         })
                     );
@@ -204,9 +215,11 @@
                             clearAll: 'after',
                             templates: {
                                 header: <%= addTemplate(currentRefinedValuesHeaderTemplate) %>,
+                                /* TODO: is there a better way to pass custom EJS template to page? */
+                                item: <%= addTemplate('<'+'% var operator = operator || null; %'+'><'+'%= operator ? attributeName : "" %'+'> <'+'%= operator + " " %'+'><'+'%= name %'+'>') %>,
                                 clearAll: <%= addTemplate(currentRefinedValuesClearAllTemplate) %>
                             },
-                            cssClasses: <%= addClassNamesFor('currentRefinedValues', {}) %>
+                            cssClasses: <%= addClassNamesFor('currentRefinedValues', {}, true) %>
                         })
                     );
                 <% } %>
@@ -216,62 +229,64 @@
                         persooInstantSearch.widgets.searchBox({
                             container: '<%= widgetContainerSelectors.fulltextFilter %>',
                             placeholder: '<%= fulltextFilterPlaceholder %>',
-                            cssClasses: <%= addClassNamesFor('searchBox', {}) %>
+                            cssClasses: <%= addClassNamesFor('searchBox', {}, true) %>
                         })
                     );
                 <% } %>
 
-                <% if (showMenu) { %>
-                    search.addWidget(
-                        persooInstantSearch.widgets.menu({
-                            container: '<%= widgetContainerSelectors.menu %>',
-                            attributeName: '<%= menuAttributeName %>',
-                            limit: '<%= menuLimit %>',
-                            <%= addCollapsibleOption(menuCollapsible, menuCollapsed) %>,
+                <% if (showFilters) {
+                    for (var g=0; g < filtersGroups.length; g++) {
+                        var showFilter = true;
+                        var multiRefinementContainerID = widgetContainerSelectors.filters + '_' + filtersGroups[g].attributeName;
+                        var filterConfig = {
+                            container: filtersGroups[g].containerSelector || multiRefinementContainerID,
+                            attributeName: filtersGroups[g].attributeName,
                             templates: {
-                                header: <%= addTemplate(menuHeaderTemplate) %>
+                                header: wrapTemplate(addTemplate(filtersGroups[g].headerTemplate))
                             },
-                            cssClasses: <%= addClassNamesFor('menu', {}) %>
-                        })
-                    );
-                <% } %>
-                <% if (showHierarchicalMenu) { %>
-                    search.addWidget(
-                        persooInstantSearch.widgets.hierarchicalMenu({
-                            container: '<%= widgetContainerSelectors.hierarchicalMenu %>',
-                            <% var hierarchicalMenuParsedAttrNames = hierarchicalMenuAttributeNames.split(/\s*,\s*/); %>
-                            attributes: <%= JSON.stringify(hierarchicalMenuParsedAttrNames) %>,
-                            limit: '<%= hierarchicalMenuLimit %>',
-                            <%= addCollapsibleOption(hierarchicalMenuCollapsible, hierarchicalMenuCollapsed) %>,
-                            templates: {
-                                header: <%= addTemplate(hierarchicalMenuHeaderTemplate) %>
-                            },
-                            cssClasses: <%= addClassNamesFor('hierarchicalMenu', {}) %>
-                        })
-                    );
-                <% } %>
+                            limit: filtersGroups[g].limit || filtersLimit,
+                            cssClasses: addClassNamesFor(filtersGroups[g].type, filtersGroups[g].classNames || {})
+                        };
+                        addShowMoreOptionTo(filterConfig,
+                            filtersGroups[g].showMore || filtersShowMore,
+                            filtersGroups[g].showMoreLimit || filtersShowMoreLimit);
+                        addCollapsibleOptionTo(filterConfig,
+                            filtersGroups[g].collapsible || filtersCollapsible,
+                            filtersGroups[g].collapsed);
 
-                <% if (showMultiRefinementList) { %>
-                    <%
-                        for (var g=0; g < multiRefinementListGroups.length; g++) {
-                            var multiRefinementContainerID = widgetContainerSelectors.multiRefinementList + '_' + multiRefinementListGroups[g].attributeName;
-                    %>
-
-                        search.addWidget(
-                            persooInstantSearch.widgets.refinementList({
-                                container: '<%= multiRefinementListGroups[g].containerSelector || multiRefinementContainerID %>',
-                                attributeName: '<%= multiRefinementListGroups[g].attributeName %>',
-                                operator: 'or',
-                                templates: {
-                                    header: <%= addTemplate(multiRefinementListGroups[g].headerTemplate) %>
-                                },
-                                limit: <%= multiRefinementListLimit %>,
-                                sortBy: ['isRefined', 'count:desc', 'name:asc'],
-                                <%= addShowMoreOption(multiRefinementListShowMore, multiRefinementListShowMoreLimit) %>,
-                                <%= addCollapsibleOption(multiRefinementListCollapsible, multiRefinementListGroups[g].collapsed) %>,
-                                cssClasses: <%= addClassNamesFor('refinementList', {}) %>
-                            })
-                        );
+                        /* extra filter config by type */
+                        switch (filtersGroups[g].type) {
+                            case 'menu':
+                                break;
+                            case 'hierarchicalMenu':
+                                delete filterConfig.attributeName;
+                                filterConfig.attributes = filtersGroups[g].attributes.split(/\s*,\s*/)
+                                break;
+                            case 'refinementList':
+                                filterConfig.operator = 'or';
+                                filterConfig.sortBy = ['isRefined', 'count:desc', 'name:asc'];
+                                break;
+                            case 'rangeSlider':
+                                if (filtersGroups[g].format) {
+                                    filterConfig.tooltips = {
+                                        format: wrapTemplate(addTemplate(filtersGroups[g].format, {_with: false, localsName: 'rawValue'}))
+                                    };
+                                }
+                                filterConfig.options = {
+                                    pips: filtersGroups[g].pips || false
+                                };
+                                break;
+                            default:
+                                showFilter = false;
+                                %>
+                                    console.warn('Persoo Search Results: unknown filter type in <%= JSON.stringify(filtersGroups[g]) %>.');
+                                <%
+                        }
+                        if (showFilter) { %>
+                            search.addWidget(
+                                persooInstantSearch.widgets.<%= filtersGroups[g].type %>(<%= unwrapTemplates(JSON.stringify(filterConfig, false, 4)) %>)
+                            );
+                        <% } %>
                     <% } %>
                 <% } %>
 
@@ -367,13 +382,8 @@
 
             function ResponsiveClassNames(element, breakpoints, options) {
                 this._element = element;
-
-                this._defaultClassNames = this._element.className ?
-                    this._element.className.split(' ') :
-                [];
-
+                this._defaultClassNames = this._element.className ? this._element.className.split(' ') : [];
                 this._breakpoints = breakpoints;
-
                 this._options = prepareOptions(
                     {
                         updateInterval: 300,
@@ -386,17 +396,11 @@
                     var classNames = [].concat(this._defaultClassNames);
                     var width = this._element.offsetWidth;
 
-                    for (
-                        var i = 0, length = this._breakpoints.length;
-                        i < length;
-                        i += 1
-                    ) {
+                    for (var i = 0, length = this._breakpoints.length; i < length; i++) {
                         var breakpoint = this._breakpoints[i];
+                        if ((!breakpoint.minWidth || breakpoint.minWidth <= width) &&
+                            (!breakpoint.maxWidth || breakpoint.maxWidth >= width)) {
 
-                        if (
-                            (!breakpoint.minWidth || breakpoint.minWidth <= width) &&
-                            (!breakpoint.maxWidth || breakpoint.maxWidth >= width)
-                        ) {
                             classNames.push(breakpoint.className);
                         }
                     }
@@ -433,11 +437,7 @@
 
         var node = document.querySelector('<%= widgetContainerSelectors.items %>');
         if (node) {
-            var instance = new ResponsiveClassNames(
-                node,
-                <%= JSON.stringify(responsiveClassNamesJSON) %>
-            );
-
+            var instance = new ResponsiveClassNames(node, <%= JSON.stringify(responsiveClassNamesJSON) %>);
             instance.init();
         }
     </script>
@@ -448,7 +448,7 @@
                 return function() {
                     var currentClass = element.className;
 
-                    if(currentClass.split(" ").indexOf(toggleClass) > -1){
+                    if (currentClass.split(" ").indexOf(toggleClass) > -1) {
                         newClass = currentClass.replace(new RegExp('\\b' + toggleClass + '\\b','g'), "");
                     } else {
                         newClass = currentClass + " " + toggleClass;

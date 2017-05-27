@@ -268,127 +268,59 @@
         },
 
         {
-            "id": "showMenu",
-            "name": "Show Menu",
-            "group": "menu",
+            "id": "showFilters",
+            "name": "Show Filters",
+            "group": "filters",
             "type": "checkbox",
             "defaultValue": true
         },
         {
-            "id": "menuHeaderTemplate",
-            "name": "Header",
-            "group": "menu",
-            "type": "text",
-            "defaultValue": "Menu Filter"
-        },
-        {
-            "id": "menuAttributeName",
-            "name": "Source Field",
-            "group": "menu",
-            "type": "text",
-            "defaultValue": "productType"
-        },
-        {
-            "id": "menuLimit",
-            "name": "Limit",
-            "group": "menu",
-            "type": "number",
-            "defaultValue": 10
-        },
-        {
-            "id": "menuCollapsible",
-            "name": "Collapsible by click on box header",
-            "group": "menu",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "menuCollapsed",
-            "name": "Collapsed by default",
-            "group": "menu",
-            "type": "checkbox",
-            "defaultValue": false,
-            "condition": {
-                "fieldID": "menuCollapsible",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
-
-        {
-            "id": "showHierarchicalMenu",
-            "name": "Show Hierarchical Menu",
-            "group": "hierarchicalMenu",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "hierarchicalMenuHeaderTemplate",
-            "name": "Header",
-            "group": "hierarchicalMenu",
-            "type": "text",
-            "defaultValue": "Hierarchical Menu Filter"
-        },
-        {
-            "id": "hierarchicalMenuAttributeNames",
-            "name": "Source Fields (comma separated)",
-            "group": "hierarchicalMenu",
-            "type": "text",
-            "defaultValue": "category_level0, category_level1, category_level2"
-        },
-        {
-            "id": "hierarchicalMenuLimit",
-            "name": "Limit",
-            "group": "hierarchicalMenu",
-            "type": "number",
-            "defaultValue": 10
-        },
-        {
-            "id": "hierarchicalMenuCollapsible",
-            "name": "Collapsible by click on box header",
-            "group": "hierarchicalMenu",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "hierarchicalMenuCollapsed",
-            "name": "Collapsed by default",
-            "group": "hierarchicalMenu",
-            "type": "checkbox",
-            "defaultValue": false,
-            "condition": {
-                "fieldID": "hierarchicalMenuCollapsible",
-                "operator": "==",
-                "fieldValue": true
-            }
-        },
-
-        {
-            "id": "showMultiRefinementList",
-            "name": "Show Multi Refinement List",
-            "group": "multiRefinementList",
-            "type": "checkbox",
-            "defaultValue": true
-        },
-        {
-            "id": "multiRefinementListGroups",
-            "name": "Refinement Filters (each filter replaces 'containerSelector' element or is appended to 'multiRefinementList' element if selector missing)",
-            "group": "multiRefinementList",
+            "id": "filtersGroups",
+            "name": "Refinement Filters (each filter replaces 'containerSelector' element or is appended to 'filters' element if selector missing. Optional fields 'limit', 'showMore', 'showMoreLimit', 'collapsible', 'collapsed' overrides default values. Optional 'classNames' are merged to filter type classNames - see filter type classNames for supported format.)",
+            "group": "filters",
             "type": "json",
             "defaultValue": [
                 {
+                    "type": "menu",
+                    "attributeName": "productType",
+                    "containerSelector": "#persoo-menu",
+                    "headerTemplate": "Menu Filter",
+                    "limit": 15,
+                    "collapsible": true,
+                    "collapsed": false
+                },
+                {
+                    "type": "hierarchicalMenu",
+                    "attributes": "category_level0, category_level1, category_level2",
+                    "containerSelector": "#persoo-hierarchical-menu",
+                    "headerTemplate": "Hierarchical Menu Filter",
+                    "collapsed": false
+                },
+                {
+                    "type": "refinementList",
                     "attributeName": "brand",
                     "containerSelector": "#persoo-refinementList--1",
                     "headerTemplate": "Brand",
                     "collapsed": false
                 },
                 {
+                    "type": "refinementList",
                     "attributeName": "gender",
                     "containerSelector": "#persoo-refinementList--2",
                     "headerTemplate": "Gender",
+                    "collapsed": false,
+                    "classNames": {"root": "persoo-gender"}
+                },
+                {
+                    "type": "rangeSlider",
+                    "attributeName": "price",
+                    "headerTemplate": "Price",
+                    "format": "$<%= Math.round(rawValue) %>",
+                    "pips": true,
                     "collapsed": false
                 },
                 {
+                    "type": "refinementList",
                     "attributeName": "available",
                     "headerTemplate": "Availability",
                     "collapsed": true
@@ -396,35 +328,35 @@
             ]
         },
         {
-            "id": "multiRefinementListLimit",
-            "name": "Limit",
-            "group": "multiRefinementList",
+            "id": "filtersLimit",
+            "name": "Default Limit",
+            "group": "filters",
             "type": "number",
             "defaultValue": 10
         },
         {
-            "id": "multiRefinementListShowMore",
-            "name": "Show More",
-            "group": "multiRefinementList",
+            "id": "filtersShowMore",
+            "name": "Default Show More",
+            "group": "filters",
             "type": "checkbox",
             "defaultValue": false
         },
         {
-            "id": "multiRefinementListShowMoreLimit",
-            "name": "Limit with Show more",
-            "group": "multiRefinementList",
+            "id": "filtersShowMoreLimit",
+            "name": "Default Limit with Show more",
+            "group": "filters",
             "type": "number",
             "defaultValue": 20,
             "condition": {
-                "fieldID": "multiRefinementListShowMore",
+                "fieldID": "filtersShowMore",
                 "operator": "==",
                 "fieldValue": true
             }
         },
         {
-            "id": "multiRefinementListCollapsible",
+            "id": "filtersCollapsible",
             "name": "Collapsible by click on box header",
-            "group": "multiRefinementList",
+            "group": "filters",
             "type": "checkbox",
             "defaultValue": true
         },
@@ -452,7 +384,6 @@
                 "currentRefinedValues": "#persoo-current-refined-values",
                 "menu": "#persoo-menu",
                 "hierarchicalMenu": "#persoo-hierarchical-menu",
-                "multiRefinementList": "#persoo-multiRefinementList",
                 "clearAll": "#persoo-clear-all",
                 "stats": "#persoo-stats",
                 "header": "#persoo-header",
@@ -529,98 +460,104 @@
             "type": "json",
             "defaultValue": {
                 "hits": {
-                    "empty": "persoo-results--empty",
+                    "root": "persoo-results",
                     "item": "persoo-result-item",
-                    "root": "persoo-results"
+                    "empty": "persoo-results--empty"
                 },
                 "infiniteHits": {
+                    "root": "persoo-results",
                     "empty": "persoo-results--empty",
                     "item": "persoo-result-item",
-                    "root": "persoo-results",
                     "showmore": "persoo-results__showmore"
                 },
                 "hitsPerPageSelector": {
-                    "item": "persoo-items-per-page__option",
-                    "root": "persoo-items-per-page__select"
+                    "root": "persoo-items-per-page__select",
+                    "item": "persoo-items-per-page__option"
                 },
                 "pagination": {
                     "root": "persoo-pagination",
+                    "item": "persoo-pagination__item",
                     "active": "persoo-pagination__item--active",
+                    "disabled": "persoo-pagination__item--disabled",
                     "page": "",
                     "first": "",
-                    "next": "persoo-pagination__next",
-                    "item": "persoo-pagination__item",
-                    "last": "",
                     "previous": "persoo-pagination__prev",
-                    "link": "persoo-pagination__link",
-                    "disabled": "persoo-pagination__item--disabled"
+                    "next": "persoo-pagination__next",
+                    "last": "",
+                    "link": "persoo-pagination__link"
                 },
                 "searchBox": {
-                    "input": "persoo-search-bar__input",
-                    "root": "persoo-search-bar__root"
+                    "root": "persoo-search-bar__root",
+                    "input": "persoo-search-bar__input"
                 },
                 "stats": {
-                    "body": "",
-                    "footer": "",
+                    "root": "persoo-stats__root",
                     "header": "",
-                    "root": "persoo-stats__root"
+                    "body": "",
+                    "footer": ""
                 },
                 "header": {
                     "root": ""
                 },
                 "clearAll": {
-                    "body": "persoo-clear-all__body",
-                    "footer": "",
+                    "root": "",
                     "header": "",
+                    "body": "persoo-clear-all__body",
                     "link": "persoo-clear-all__link",
-                    "root": ""
+                    "footer": ""
                 },
                 "currentRefinedValues": {
                     "root": "persoo-current-refined-values",
-                    "body": "persoo-current-refined-values__body",
                     "header": "persoo-current-refined-values__header",
+                    "body": "persoo-current-refined-values__body",
                     "count": "persoo-current-refined-values__count",
                     "item": "persoo-current-refined-values__item",
                     "clearAll": "persoo-current-refined-values__clear-all",
                     "link": "persoo-current-refined-values__link",
-                    "footer": "",
-                    "list": "persoo-current-refined-values__list"
+                    "list": "persoo-current-refined-values__list",
+                    "footer": ""
                 },
                 "menu": {
                     "root": "persoo-facet",
+                    "header": "persoo-facet__header",
                     "body": "persoo-facet__body",
                     "active": "persoo-facet__item--active",
-                    "header": "persoo-facet__header",
                     "count": "persoo-facet__count",
                     "item": "persoo-facet__item persoo-menu__item",
                     "link": "persoo-facet__link persoo-menu__link",
-                    "footer": "",
-                    "list": "persoo-facet__list"
+                    "list": "persoo-facet__list",
+                    "footer": ""
                 },
                 "hierarchicalMenu": {
                     "root": "persoo-facet",
+                    "header": "persoo-facet__header",
                     "body": "persoo-facet__body",
                     "depth": "",
                     "active": "persoo-facet__item--active",
-                    "header": "persoo-facet__header",
                     "count": "persoo-facet__count",
                     "item": "persoo-facet__item",
                     "link": "persoo-facet__link persoo-hierarchical-menu__link",
-                    "footer": "",
-                    "list": "persoo-facet__list"
+                    "list": "persoo-facet__list",
+                    "footer": ""
                 },
                 "refinementList": {
                     "root": "persoo-facet",
+                    "header": "persoo-facet__header",
                     "body": "persoo-facet__body",
                     "checkbox": "persoo-facet__checkbox",
                     "active": "persoo-facet__item--active",
-                    "header": "persoo-facet__header",
                     "count": "persoo-facet__count",
                     "item": "persoo-facet__item",
                     "clearAll": "persoo-facet__clear-all",
                     "label": "persoo-facet__label",
-                    "footer": "",
-                    "list": "persoo-facet__list"
+                    "list": "persoo-facet__list",
+                    "footer": ""
+                },
+                "rangeSlider": {
+                    "root": "persoo-facet persoo-rangeSlider",
+                    "header": "persoo-facet__header",
+                    "body": "persoo-facet__body",
+                    "footer": ""
                 }
             }
         },
@@ -670,20 +607,12 @@
             "name": "Fulltext Filter"
         },
         {
+            "id": "filters",
+            "name": "Filters"
+        },
+        {
             "id": "currentRefinedValues",
             "name": "Selected Filters"
-        },
-        {
-            "id": "menu",
-            "name": "Menu Filter (Categories)"
-        },
-        {
-            "id": "hierarchicalMenu",
-            "name": "Hierarchical Menu Filter (Categories)"
-        },
-        {
-            "id": "multiRefinementList",
-            "name": "Refinement List Filters"
         },
         {
             "id": "clearAll",

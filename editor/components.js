@@ -403,10 +403,17 @@ module.exports = {
         var aggregations = {};
         for (var j = 0; j < includeAggregations.length; j++ ) {
             var aggregationField = includeAggregations[j];
-
-            aggregations[aggregationField] = [];
+            aggregations[aggregationField] = {
+                terms: [],
+                numeric: {
+                    min: 123,
+                    avg: 456,
+                    max: 789
+                }
+            };
+            var termsList = aggregations[aggregationField].terms;
             for (var k = 0; k < defaultParams.maxValuesPerFacet; k++) {
-                aggregations[aggregationField].push({
+                termsList.push({
                     count: 2 * defaultParams.maxValuesPerFacet - 2 * k,
                     value: aggregationField + ' ' + (k + 1)
                 });
