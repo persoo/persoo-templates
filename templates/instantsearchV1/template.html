@@ -50,6 +50,7 @@
             function initInstantSearch() {
                 var search = persooInstantSearch({
                     algorithmID: "<%= searchAlgorithm %>",
+                    index: "products",
                     hideOnEmptyQuery: <%= hideOnEmptyInput %>,
                     urlSync: <%= !urlSync ? 'false' : JSON.stringify({
                         mapping: urlSyncMapping,
@@ -173,6 +174,28 @@
                             })
                         );
                     <% } %>
+                <% } %>
+
+                <% if (showSortBy) { %>
+                    search.addWidget(
+                        persooInstantSearch.widgets.sortBySelector({
+                            container: '<%= widgetContainerSelectors.sortBy %>',
+                            <%
+                                var sortIndices = sortByOptions.map(function (item) {
+                                    var name = 'products';
+                                    if (item.attribute) {
+                                        name += '_' + item.attribute + '_' + (item.order ? item.order : 'asc');
+                                    }
+                                    return {
+                                        name: name,
+                                        label: item.label
+                                    }
+                                });
+                            %>
+                            indices: <%= JSON.stringify(sortIndices) %>,
+                            cssClasses: <%= addClassNamesFor('sortBySelector', {}, true) %>
+                        })
+                    );
                 <% } %>
                 <% if (showStats) { %>
                     search.addWidget(

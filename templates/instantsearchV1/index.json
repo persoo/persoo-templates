@@ -223,6 +223,35 @@
         },
 
         {
+            "id": "showSortBy",
+            "name": "Show Sort By",
+            "group": "sortBy",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "sortByOptions",
+            "name": "Options",
+            "group": "sortBy",
+            "type": "json",
+            "defaultValue": [
+                {
+                    "label": "Most relevant"
+                },
+                {
+                    "label": "Lowest price",
+                    "attribute": "price",
+                    "order": "asc"
+                },
+                {
+                    "label": "Highest price",
+                    "attribute": "price",
+                    "order": "desc"
+                }
+            ]
+        },
+
+        {
             "id": "showClearAll",
             "name": "Show Clear All Button",
             "group": "clearAll",
@@ -299,17 +328,9 @@
                 {
                     "type": "refinementList",
                     "attributeName": "brand",
-                    "containerSelector": "#persoo-refinementList--1",
+                    "classNames": {"root": "persoo-brands"},
                     "headerTemplate": "Brand",
                     "collapsed": false
-                },
-                {
-                    "type": "refinementList",
-                    "attributeName": "gender",
-                    "containerSelector": "#persoo-refinementList--2",
-                    "headerTemplate": "Gender",
-                    "collapsed": false,
-                    "classNames": {"root": "persoo-gender"}
                 },
                 {
                     "type": "rangeSlider",
@@ -317,6 +338,12 @@
                     "headerTemplate": "Price",
                     "format": "$<%= Math.round(rawValue) %>",
                     "pips": true,
+                    "collapsed": false
+                },
+                {
+                    "type": "refinementList",
+                    "attributeName": "gender",
+                    "headerTemplate": "Gender",
                     "collapsed": false
                 },
                 {
@@ -376,18 +403,17 @@
             "defaultValue": {
                 "searchResults": "#persoo-search-results",
                 "originalPageContent": "#your-main-content-selector",
-                "filters": "#persoo-search-results__filters",
-                "filtersToggle": "#persoo-filters-toggle",
                 "searchBar": "#persoo-search-bar",
                 "fulltextFilter": "#persoo-search-bar__search-box",
-                "items": "#persoo-items",
                 "currentRefinedValues": "#persoo-current-refined-values",
-                "menu": "#persoo-menu",
-                "hierarchicalMenu": "#persoo-hierarchical-menu",
+                "filtersToggle": "#persoo-filters-toggle",
+                "filters": "#persoo-search-results__filters",
+                "header": "#persoo-header",
+                "items": "#persoo-items",
                 "clearAll": "#persoo-clear-all",
                 "stats": "#persoo-stats",
-                "header": "#persoo-header",
                 "pagination": "#persoo-pagination",
+                "sortBy": "#persoo-sort-by",
                 "itemsPerPage": "#persoo-items-per-page"
             }
         },
@@ -473,6 +499,10 @@
                 "hitsPerPageSelector": {
                     "root": "persoo-items-per-page__select",
                     "item": "persoo-items-per-page__option"
+                },
+                "sortBySelector": {
+                    "root": "persoo-sort-by__select",
+                    "item": "persoo-sort-by__option"
                 },
                 "pagination": {
                     "root": "persoo-pagination",
@@ -613,6 +643,10 @@
         {
             "id": "currentRefinedValues",
             "name": "Selected Filters"
+        },
+        {
+            "id": "sortBy",
+            "name": "Sort By"
         },
         {
             "id": "clearAll",

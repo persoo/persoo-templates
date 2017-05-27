@@ -192,6 +192,7 @@
     -ms-flex-pack: justify;
 }
 .persoo-stats__root,
+#persoo-sort-by > div,
 #persoo-items-per-page > div {
 	display: flex;
     display: -webkit-flex;
@@ -205,12 +206,14 @@
 .persoo-stats__root {
     padding: 0 16px;
 }
+#persoo-sort-by > div,
 #persoo-items-per-page > div {
     background: #F3F3F3;
     border: 1px solid #CCC;
     border-radius: 4px;
     padding: 4px 0;
 }
+.persoo-sort-by__select,
 .persoo-items-per-page__select {
     border: 0;
     cursor: pointer;
@@ -231,6 +234,7 @@
 	-webkit-appearance: none;
 	appearance: none;
 }
+.persoo-sort-by__select::-ms-expand,
 .persoo-items-per-page__select::-ms-expand {
 	display: none;
 }
