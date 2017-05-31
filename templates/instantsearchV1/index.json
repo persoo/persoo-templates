@@ -354,6 +354,12 @@
                     "limit": 28
                 },
                 {
+                    "type": "refinementButtonList",
+                    "attributeName": "size",
+                    "headerTemplate": "Size",
+                    "collapsed": false
+                },
+                {
                     "type": "refinementList",
                     "attributeName": "available",
                     "headerTemplate": "Availability",
@@ -601,6 +607,19 @@
                     "clearAll": "persoo-facet__clear-all",
                     "label": "persoo-facet__label persoo-refinement-color__wrapper",
                     "list": "persoo-facet__list persoo-refinement-color__list",
+                    "footer": ""
+                },
+                "refinementButtonList": {
+                    "root": "persoo-facet persoo-refinement-button",
+                    "header": "persoo-facet__header",
+                    "body": "persoo-facet__body",
+                    "checkbox": "persoo-refinement-button__button",
+                    "active": "persoo-facet__item--active",
+                    "count": "persoo-facet__count",
+                    "item": "persoo-facet__item  persoo-refinement-button__item",
+                    "clearAll": "persoo-facet__clear-all",
+                    "label": "persoo-facet__label persoo-refinement-button__wrapper",
+                    "list": "persoo-facet__list persoo-refinement-button__list",
                     "footer": ""
                 },
                 "rangeSlider": {

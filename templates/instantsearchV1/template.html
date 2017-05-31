@@ -77,7 +77,7 @@
                             parts[i] = parts[i]
                                 .replace(/\\"/g, '"')
                                 .replace(/\\\\/g, '\\')
-                                .replace(/\\n/g, '');
+                                .replace(/\\n/g, '\n');
                         }
                     }
                     return parts.join('');
@@ -264,6 +264,7 @@
                     function getWidgetType(type) {
                         switch(type) {
                             case 'refinementColorList':
+                            case 'refinementButtonList':
                                 return 'refinementList';
                             default:
                                 return type;
@@ -310,15 +311,30 @@
                                 filterConfig.templates.item = wrapTemplate(function(data) {
                                     var parts = [
                                         '<div class="' + data.cssClasses.label + '">',
-                                        '<button class="' + data.cssClasses.checkbox + '"',
-                                            'title="' + data.name + ' (' + data.count + ')"',
-                                            'data-value="' + data.name + '"',
-                                        '>',
-                                        '</button>',
+                                            '<button class="' + data.cssClasses.checkbox + '"',
+                                                'title="' + data.name + ' (' + data.count + ')"',
+                                                'data-value="' + data.name + '"',
+                                            '>',
+                                            '</button>',
                                             data.name,
                                             '<span class="' + data.cssClasses.count + '">',
                                                 data.count,
                                             '</span>',
+                                        '</div>'
+                                    ];
+                                    return parts.join(' ');
+                                });
+                                break;
+                            case 'refinementButtonList':
+                                applyRefinementListOptionsToConfig(filterConfig);
+                                filterConfig.templates.item = wrapTemplate(function(data) {
+                                    var parts = [
+                                        '<div class="' + data.cssClasses.label + '"',
+                                            'title="' + data.name + ' (' + data.count + ')"',
+                                        '>',
+                                            '<button class="' + data.cssClasses.checkbox + '" >',
+                                                data.name,
+                                            '</button>',
                                         '</div>'
                                     ];
                                     return parts.join(' ');
