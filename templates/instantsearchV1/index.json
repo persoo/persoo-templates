@@ -337,7 +337,7 @@
                     "attributeName": "price",
                     "headerTemplate": "Price",
                     "format": "$<%= Math.round(rawValue) %>",
-                    "pips": true,
+                    "pips": false,
                     "collapsed": false
                 },
                 {
@@ -586,8 +586,8 @@
                 "rangeSlider": {
                     "root": "persoo-facet persoo-rangeSlider",
                     "header": "persoo-facet__header",
-                    "body": "persoo-facet__body",
-                    "footer": ""
+                    "body": "persoo-facet__body persoo-rangeSlider__body",
+                    "footer": "persoo-rangeSlider__footer"
                 }
             }
         },

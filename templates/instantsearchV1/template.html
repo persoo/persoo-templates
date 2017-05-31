@@ -295,9 +295,9 @@
                                         format: wrapTemplate(addTemplate(filtersGroups[g].format, {_with: false, localsName: 'rawValue'}))
                                     };
                                 }
-                                filterConfig.options = {
-                                    pips: filtersGroups[g].pips || false
-                                };
+                                filterConfig.pips = filtersGroups[g].pips || false;
+                                filterConfig.templates.footer = '<span class="persoo-rangeSlider__value persoo-rangeSlider__value--lower"></span><span class="persoo-rangeSlider__value persoo-rangeSlider__value--upper"></span>';
+                                filterConfig.cssClasses.root = [].concat(filterConfig.cssClasses.root, 'persoo-rangeSlider-js');
                                 break;
                             default:
                                 showFilter = false;
@@ -375,6 +375,46 @@
                     }
                 }
                 activateSearchBarCross();
+
+                function activateRangeSliders() {
+                    function applyValue(tooltipNode, valueNode) {
+                        valueNode.innerHTML = tooltipNode.innerHTML;
+                    }
+
+                    function initValue(tooltipNode, valueNode) {
+                        if (tooltipNode instanceof HTMLElement && valueNode instanceof HTMLElement) {
+							function applyCurrentValues() {
+                            	applyValue(tooltipNode, valueNode);
+                            }
+
+                            applyCurrentValues();
+                            tooltipNode.addEventListener('DOMSubtreeModified', applyCurrentValues);
+                            search.helper.once('change', function() {
+                            	tooltipNode.removeEventListener('DOMSubtreeModified', applyCurrentValues);
+                            });
+                        }
+                    }
+
+                    function activateRangeSlider(rangeSliderNode) {
+                        if (rangeSliderNode instanceof HTMLElement) {
+                        	var tooltipLower = rangeSliderNode.querySelector('.ais-range-slider--handle-lower .ais-range-slider--tooltip');
+                            var tooltipUpper = rangeSliderNode.querySelector('.ais-range-slider--handle-upper .ais-range-slider--tooltip');
+                            var valueLower = rangeSliderNode.querySelector('.persoo-rangeSlider__value--lower');
+                            var valueUpper = rangeSliderNode.querySelector('.persoo-rangeSlider__value--upper');
+
+                            initValue(tooltipLower, valueLower);
+                            initValue(tooltipUpper, valueUpper);
+                        }
+                    }
+
+                	var rangeSliders = document.querySelectorAll('.persoo-rangeSlider-js');
+                    if (rangeSliders && rangeSliders.length > 0) {
+                    	for (var i = 0, length = rangeSliders.length; i < length; i++) {
+                        	activateRangeSlider(rangeSliders[i]);
+                        }
+                    }
+                }
+                search.helper.on('result', activateRangeSliders);
 
                 search.helper.on('result', function(state) {
                     var filtersElem = document.querySelector('<%= widgetContainerSelectors.filters %>');
