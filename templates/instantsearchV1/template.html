@@ -74,7 +74,10 @@
                     var parts = json.split(/"\$CLEAN_QUOTE_BEFORE|\$CLEAN_QUOTE_AFTER"/);
                     for (var i = 0; i < parts.length; i++) {
                         if (i % 2 == 1) {
-                            parts[i] = parts[i].replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+                            parts[i] = parts[i]
+                                .replace(/\\"/g, '"')
+                                .replace(/\\\\/g, '\\')
+                                .replace(/\\n/g, '');
                         }
                     }
                     return parts.join('');
@@ -258,6 +261,20 @@
                 <% } %>
 
                 <% if (showFilters) {
+                    function getWidgetType(type) {
+                        switch(type) {
+                            case 'refinementColorList':
+                                return 'refinementList';
+                            default:
+                                return type;
+                        }
+                    }
+
+                    function applyRefinementListOptionsToConfig(config) {
+                        config.operator = 'or';
+                        config.sortBy = ['isRefined', 'count:desc', 'name:asc'];
+                    }
+
                     for (var g=0; g < filtersGroups.length; g++) {
                         var showFilter = true;
                         var multiRefinementContainerID = widgetContainerSelectors.filters + '_' + filtersGroups[g].attributeName;
@@ -286,8 +303,20 @@
                                 filterConfig.attributes = filtersGroups[g].attributes.split(/\s*,\s*/)
                                 break;
                             case 'refinementList':
-                                filterConfig.operator = 'or';
-                                filterConfig.sortBy = ['isRefined', 'count:desc', 'name:asc'];
+                                applyRefinementListOptionsToConfig(filterConfig);
+                                break;
+                            case 'refinementColorList':
+                                applyRefinementListOptionsToConfig(filterConfig);
+                                filterConfig.templates.item = wrapTemplate(function(data) {
+                                    var parts = [
+                                        '<button class="' + data.cssClasses.checkbox + '"',
+                                            'title="' + data.name + ' (' + data.count + ')"',
+                                            'data-value="' + data.name + '"',
+                                        '>',
+                                        '</button>'
+                                    ];
+                                    return parts.join(' ');
+                                });
                                 break;
                             case 'rangeSlider':
                                 if (filtersGroups[g].format) {
@@ -307,7 +336,7 @@
                         }
                         if (showFilter) { %>
                             search.addWidget(
-                                persooInstantSearch.widgets.<%= filtersGroups[g].type %>(<%= unwrapTemplates(JSON.stringify(filterConfig, false, 4)) %>)
+                                persooInstantSearch.widgets.<%= getWidgetType(filtersGroups[g].type) %>(<%= unwrapTemplates(JSON.stringify(filterConfig, false, 4)) %>)
                             );
                         <% } %>
                     <% } %>

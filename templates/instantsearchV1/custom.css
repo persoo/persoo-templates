@@ -497,6 +497,69 @@
     content: ")"
 }
 
+/* Refinement color list */
+.persoo-refinement-color__list {
+    padding-left: 4px;
+}
+.persoo-refinement-color__item {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 0 4px;
+}
+.persoo-refinement-color__button {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    background: #CCC;
+    border: none;
+    padding: 0;
+    outline: none;
+    position: relative;
+}
+.persoo-refinement-color__button:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 1px;
+    border: 1px solid #FFF;
+    border-radius: 2px;
+}
+.persoo-facet__item--active .persoo-refinement-color__button{
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.persoo-refinement-color__button[data-value="red"]:before {
+    background: #F44336;
+}
+.persoo-refinement-color__button[data-value="pink"]:before {
+    background: #E91E63;
+}
+.persoo-refinement-color__button[data-value="purple"]:before {
+    background: #9C27B0;
+}
+.persoo-refinement-color__button[data-value="blue"]:before {
+    background: #2196F3;
+}
+.persoo-refinement-color__button[data-value="green"]:before {
+    background: #4CAF50;
+}
+.persoo-refinement-color__button[data-value="yellow"]:before {
+    background: #FFEB3B;
+}
+.persoo-refinement-color__button[data-value="orange"]:before {
+    background: #FF9800;
+}
+.persoo-refinement-color__button[data-value="brown"]:before {
+    background: #795548;
+}
+.persoo-refinement-color__button[data-value="black"]:before {
+    background: #000;
+}
+.persoo-refinement-color__button[data-value="white"]:before {
+    background: #FFF;
+}
 /* Range slider */
 .persoo-rangeSlider__body {
 	margin: 20px 8px 16px;

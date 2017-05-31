@@ -347,6 +347,12 @@
                     "collapsed": false
                 },
                 {
+                    "type": "refinementColorList",
+                    "attributeName": "color",
+                    "headerTemplate": "Color",
+                    "collapsed": false
+                },
+                {
                     "type": "refinementList",
                     "attributeName": "available",
                     "headerTemplate": "Availability",
@@ -581,6 +587,19 @@
                     "clearAll": "persoo-facet__clear-all",
                     "label": "persoo-facet__label",
                     "list": "persoo-facet__list",
+                    "footer": ""
+                },
+                "refinementColorList": {
+                    "root": "persoo-facet persoo-refinement-color",
+                    "header": "persoo-facet__header",
+                    "body": "persoo-facet__body",
+                    "checkbox": "persoo-refinement-color__button",
+                    "active": "persoo-facet__item--active",
+                    "count": "persoo-facet__count",
+                    "item": "persoo-facet__item  persoo-refinement-color__item",
+                    "clearAll": "persoo-facet__clear-all",
+                    "label": "persoo-facet__label",
+                    "list": "persoo-facet__list persoo-refinement-color__list",
                     "footer": ""
                 },
                 "rangeSlider": {
