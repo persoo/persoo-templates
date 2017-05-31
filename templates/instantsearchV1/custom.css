@@ -506,8 +506,15 @@
     margin-top: 4px;
     padding: 0 4px;
 }
+.persoo-refinement-color__wrapper {
+    overflow: hidden;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+}
 .persoo-refinement-color__button {
     width: 32px;
+    min-width: 32px;
     height: 32px;
     border-radius: 4px;
     background: #CCC;
@@ -515,6 +522,7 @@
     padding: 0;
     outline: none;
     position: relative;
+    margin-right: 8px;
 }
 .persoo-refinement-color__button:before {
     content: '';
@@ -525,7 +533,7 @@
     bottom: 1px;
     left: 1px;
     border: 1px solid #FFF;
-    border-radius: 2px;
+    border-radius: 3px;
 }
 .persoo-facet__item--active .persoo-refinement-color__button{
     background-color: rgba(0, 0, 0, 0.6);

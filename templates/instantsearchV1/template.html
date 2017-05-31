@@ -309,11 +309,17 @@
                                 applyRefinementListOptionsToConfig(filterConfig);
                                 filterConfig.templates.item = wrapTemplate(function(data) {
                                     var parts = [
+                                        '<div class="' + data.cssClasses.label + '">',
                                         '<button class="' + data.cssClasses.checkbox + '"',
                                             'title="' + data.name + ' (' + data.count + ')"',
                                             'data-value="' + data.name + '"',
                                         '>',
-                                        '</button>'
+                                        '</button>',
+                                            data.name,
+                                            '<span class="' + data.cssClasses.count + '">',
+                                                data.count,
+                                            '</span>',
+                                        '</div>'
                                     ];
                                     return parts.join(' ');
                                 });

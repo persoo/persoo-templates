@@ -350,7 +350,8 @@
                     "type": "refinementColorList",
                     "attributeName": "color",
                     "headerTemplate": "Color",
-                    "collapsed": false
+                    "collapsed": false,
+                    "limit": 28
                 },
                 {
                     "type": "refinementList",
@@ -598,7 +599,7 @@
                     "count": "persoo-facet__count",
                     "item": "persoo-facet__item  persoo-refinement-color__item",
                     "clearAll": "persoo-facet__clear-all",
-                    "label": "persoo-facet__label",
+                    "label": "persoo-facet__label persoo-refinement-color__wrapper",
                     "list": "persoo-facet__list persoo-refinement-color__list",
                     "footer": ""
                 },
