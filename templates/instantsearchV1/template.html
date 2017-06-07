@@ -242,7 +242,7 @@
                             templates: {
                                 header: <%= addTemplate(currentRefinedValuesHeaderTemplate) %>,
                                 /* TODO: is there a better way to pass custom EJS template to page? */
-                                item: <%= addTemplate('<'+'% var operator = operator || null; %'+'><'+'%= operator ? attributeName : "" %'+'> <'+'%= operator + " " %'+'><'+'%= name %'+'>') %>,
+                                item: <%= addTemplate('<'+'% var operator = operator || null; %'+'><'+'%= operator ? attributeName + " " + operator + " " : "" %'+'><'+'%= name %'+'>') %>,
                                 clearAll: <%= addTemplate(currentRefinedValuesClearAllTemplate) %>
                             },
                             cssClasses: <%= addClassNamesFor('currentRefinedValues', {}, true) %>
