@@ -692,10 +692,14 @@
     display: -ms-flexbox;
 }
 .persoo-rangeSlider__value {
-	width: 50%;
+	display: block;
+    width: 50%;
 }
 .persoo-rangeSlider__value--upper {
 	text-align: right;
+}
+.ais-root__collapsed .ais-range-slider--footer {
+    display: none;
 }
 
 /* "Clear all" button,

@@ -348,7 +348,6 @@
                                 }
                                 filterConfig.pips = filtersGroups[g].pips || false;
                                 filterConfig.templates.footer = '<span class="persoo-rangeSlider__value persoo-rangeSlider__value--lower"></span><span class="persoo-rangeSlider__value persoo-rangeSlider__value--upper"></span>';
-                                filterConfig.cssClasses.root = [].concat(filterConfig.cssClasses.root, 'persoo-rangeSlider-js');
                                 break;
                             default:
                                 showFilter = false;
@@ -411,61 +410,131 @@
                         var crossElem = searchBarElem.querySelector('.persoo-search-bar__clear-query');
 
                         if (input && crossElem) {
+                            function conditionallyHideClearCross() {
+                                crossElem.style.display = input.value ? 'inline' : 'none';
+                            }
+
                             conditionallyHideClearCross();
                             input.addEventListener('input', conditionallyHideClearCross);
                             crossElem.addEventListener('click', function(e) {
                                 search.helper.setQuery('').search();
                                 crossElem.style.display = 'none';
                             });
-
-                            function conditionallyHideClearCross() {
-                                crossElem.style.display = input.value ? 'inline' : 'none';
-                            }
                             search.on('render', conditionallyHideClearCross);
                         }
                     }
                 }
                 activateSearchBarCross();
 
-                function activateRangeSliders() {
-                    function applyValue(tooltipNode, valueNode) {
-                        valueNode.innerHTML = tooltipNode.innerHTML;
-                    }
+                function activateRangeSlidersCustomFooter() {
+                    function createRangeSlidersCustomFooterUpdater() {
+                        function getTooltipNodes(rangeSliderBodyNode) {
+                            return {
+                                lower: rangeSliderBodyNode.querySelector(
+                                    '.ais-range-slider--handle-lower .ais-range-slider--tooltip'
+                                ),
+                                upper: rangeSliderBodyNode.querySelector(
+                                    '.ais-range-slider--handle-upper .ais-range-slider--tooltip'
+                                )
+                            };
+                        }
 
-                    function initValue(tooltipNode, valueNode) {
-                        if (tooltipNode instanceof HTMLElement && valueNode instanceof HTMLElement) {
-							function applyCurrentValues() {
-                            	applyValue(tooltipNode, valueNode);
+                        function createUpdateNodes(rangeSliderBodyNode, footerNodes) {
+                            function updateTarget(valueNode, targetNode) {
+                                if (valueNode && targetNode && targetNode.innerHTML !== valueNode.innerHTML) {
+                                    targetNode.innerHTML = valueNode.innerHTML;
+                                }
                             }
 
-                            applyCurrentValues();
-                            tooltipNode.addEventListener('DOMSubtreeModified', applyCurrentValues);
-                            search.helper.once('change', function() {
-                            	tooltipNode.removeEventListener('DOMSubtreeModified', applyCurrentValues);
-                            });
+                            return function updateNodes() {
+                                var tooltipNodes = getTooltipNodes(rangeSliderBodyNode);
+                                updateTarget(tooltipNodes.lower, footerNodes.lower);
+                                updateTarget(tooltipNodes.upper, footerNodes.upper);
+                            }
+                        }
+
+                        function initObserver(rangeSliderBodyNode, footerNodes) {
+                            var updateNodes = createUpdateNodes(rangeSliderBodyNode, footerNodes);
+                            updateNodes();
+
+                            var observer = new MutationObserver(
+                                function(mutations) {
+                                    mutations.forEach(function(mutation) {
+                                        updateNodes();
+                                    });
+                                }
+                            );
+                            observer.observe(rangeSliderBodyNode, { childList: true, subtree: true });
+
+                            return observer.disconnect;
+                        }
+
+                        function initListener(rangeSliderBodyNode, footerNodes) {
+                            var updateNodes = createUpdateNodes(rangeSliderBodyNode, footerNodes);
+                            updateNodes();
+
+                            rangeSliderBodyNode.addEventListener('DOMSubtreeModified', updateNodes);
+
+                            return function() {
+                                rangeSliderBodyNode.removeEventListener('DOMSubtreeModified', updateNodes);
+                            };
+                        }
+
+                        function initRangeSlider(rangeSliderNode) {
+                            var rangeSliderBodyNode = rangeSliderNode.querySelector('.ais-range-slider--body');
+                            var footerNodes = {
+                                lower: rangeSliderNode.querySelector('.persoo-rangeSlider__value--lower'),
+                                upper: rangeSliderNode.querySelector('.persoo-rangeSlider__value--upper')
+                            };
+                            var nodesFound = rangeSliderBodyNode && footerNodes.lower && footerNodes.upper && true;
+
+                            // FIXME - check state of MutationObserver,
+                            // in chrome 56 and older is called in childList bulk only
+                            if (nodesFound && typeof MutationObserver === 'function' && false) {
+                                return initObserver(rangeSliderBodyNode, footerNodes);
+                            } else if (nodesFound) {
+                                return initListener(rangeSliderBodyNode, footerNodes);
+                            }
+
+                            return null;
+                        }
+
+                        var rangeSlidersState = {};
+
+                        return function initRangeSlidersCustomFooter() {
+                            var rangeSliders = document.querySelectorAll('.ais-range-slider');
+                            var initedRangeSlidersIDs = Object.keys(rangeSlidersState);
+                            var actualRangeSlidersIDs = [];
+
+                            if (rangeSliders && rangeSliders.length > 0) {
+                            	for (var i = 0, length = rangeSliders.length; i < length; i++) {
+                                    var rangeSlider = rangeSliders[i];
+                    				var rangeSliderID = rangeSlider.parentNode.parentNode.id;
+                                    actualRangeSlidersIDs.push(rangeSliderID);
+
+                    				if(!rangeSlidersState[rangeSliderID]) {
+                                        rangeSlidersState[rangeSliderID] = {
+                                            rangeSlider: rangeSlider,
+                                            destroy: initRangeSlider(rangeSlider)
+                                        };
+                                    }
+                                }
+                            }
+
+                            for (var i = 0, length = initedRangeSlidersIDs.length; i < length; i++) {
+                                var testedID = initedRangeSlidersIDs[i];
+
+                                if (actualRangeSlidersIDs.indexOf(testedID) < 0) {
+                                    rangeSlidersState[testedID]();
+                                    delete rangeSlidersState[testedID];
+                                }
+                            }
                         }
                     }
 
-                    function activateRangeSlider(rangeSliderNode) {
-                        if (rangeSliderNode instanceof HTMLElement) {
-                        	var tooltipLower = rangeSliderNode.querySelector('.ais-range-slider--handle-lower .ais-range-slider--tooltip');
-                            var tooltipUpper = rangeSliderNode.querySelector('.ais-range-slider--handle-upper .ais-range-slider--tooltip');
-                            var valueLower = rangeSliderNode.querySelector('.persoo-rangeSlider__value--lower');
-                            var valueUpper = rangeSliderNode.querySelector('.persoo-rangeSlider__value--upper');
-
-                            initValue(tooltipLower, valueLower);
-                            initValue(tooltipUpper, valueUpper);
-                        }
-                    }
-
-                	var rangeSliders = document.querySelectorAll('.persoo-rangeSlider-js');
-                    if (rangeSliders && rangeSliders.length > 0) {
-                    	for (var i = 0, length = rangeSliders.length; i < length; i++) {
-                        	activateRangeSlider(rangeSliders[i]);
-                        }
-                    }
+                    search.helper.on('result', createRangeSlidersCustomFooterUpdater());
                 }
-                search.helper.on('result', activateRangeSliders);
+                activateRangeSlidersCustomFooter();
 
                 search.helper.on('result', function(state) {
                     var filtersElem = document.querySelector('<%= widgetContainerSelectors.filters %>');
