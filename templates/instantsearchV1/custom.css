@@ -187,6 +187,9 @@
     display: flex;
     display: -webkit-flex;
     display: -ms-flexbox;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
 }
 .persoo-stats__root,
 #persoo-sort-by:not(:empty),
@@ -202,9 +205,9 @@
 }
 #persoo-stats:not(:empty) {
     padding-left: 16px;
-    flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
+    flex: 1 0 200px;
+    -webkit-flex: 1 0 200px;
+    -ms-flex: 1 0 200px;
 }
 #persoo-sort-by:not(:empty),
 #persoo-items-per-page > div {
