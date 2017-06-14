@@ -525,7 +525,7 @@
                                 var testedID = initedRangeSlidersIDs[i];
 
                                 if (actualRangeSlidersIDs.indexOf(testedID) < 0) {
-                                    rangeSlidersState[testedID]();
+                                    rangeSlidersState[testedID].destroy();
                                     delete rangeSlidersState[testedID];
                                 }
                             }
