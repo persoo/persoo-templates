@@ -228,7 +228,7 @@
             "name": "Item (available variables: query, item, highlightQuery(str))",
             "group": "dataset2",
             "type": "html",
-            "defaultValue": "<a href=\"<%= item.link %>\">\n  <%= item.title ? highlightQuery(item.title) : '' %>\n</a>",
+            "defaultValue": "<a href=\"<%= item.link %>\">\n  <span>\n    <%= item.title ? highlightQuery(item.title) : '' %>\n  <span>\n</a>",
             "condition": {
              "fieldID": "datasetsCount",
              "operator": ">=",

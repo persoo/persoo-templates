@@ -183,6 +183,7 @@ TODO use different desing on small screens. List products one below the other wi
 .persoo-autocompleteDataset__items__item__img-container {
   width: 100px;
   height: 100px;
+  flex-shrink: 0;
   margin: 8px 0;
   position: relative;
 }

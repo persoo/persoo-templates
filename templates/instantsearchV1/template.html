@@ -1,4 +1,4 @@
-<div id="persoo--<%= offerID %>" data-inner-location-id="persoo-do-not-track-impressions-by-default">
+<div id="persoo--<%= offerID %>" data-inner-location-id="persoo-do-not-track-impressions-by-default" class="persoo-search-results">
     <style type="text/css">
         <%= customCSS %>
     </style>
@@ -100,10 +100,11 @@
                         config.collapsible = false;
                     }
                 }
-                function addShowMoreOptionTo(config, showMore, limit) {
+                function addShowMoreOptionTo(config, showMore, showMoreLimit) {
                     if (showMore) {
+                        var limit = config.limit;
                         config.showMore = {
-                            limit: limit,
+                            limit: limit < showMoreLimit ? showMoreLimit : limit,
                             templates: {
                                 active: wrapTemplate(addTemplate(
                                     '<div class="persoo-show-more persoo-show-more--active">' + showMoreActiveTemplate + '</div>')),
@@ -242,7 +243,25 @@
                             templates: {
                                 header: <%= addTemplate(currentRefinedValuesHeaderTemplate) %>,
                                 /* TODO: is there a better way to pass custom EJS template to page? */
-                                item: <%= addTemplate('<'+'% var operator = operator || null; %'+'><'+'%= operator ? attributeName + " " + operator + " " : "" %'+'><'+'%= name %'+'>') %>,
+                                item: function(data) {
+                                    function filterFn(config) {
+                                        return data.attributeName === config.attributeName;
+                                    }
+                                    var filterConfig = <%= JSON.stringify(filtersGroups) %>.filter(filterFn)[0];
+
+                                    switch(filterConfig.type) {
+                                        case 'rangeSlider':
+                                            return (
+                                                persooInstantSearch.EJS(filterConfig.headerTemplate)() + 
+                                                ' ' +
+                                                data.displayOperator + ' ' +
+                                                persooInstantSearch.EJS(filterConfig.format)({ rawValue: data.name })
+                                            );
+
+                                        default:
+                                            return data.name
+                                    }
+                                },
                                 clearAll: <%= addTemplate(currentRefinedValuesClearAllTemplate) %>
                             },
                             cssClasses: <%= addClassNamesFor('currentRefinedValues', {}, true) %>
