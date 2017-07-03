@@ -305,7 +305,7 @@
         },
         {
             "id": "filtersGroups",
-            "name": "Refinement Filters (each filter replaces 'containerSelector' element or is appended to 'filters' element if selector missing. Optional fields 'limit', 'showMore', 'showMoreLimit', 'collapsible', 'collapsed' overrides default values. Optional 'classNames' are merged to filter type classNames - see filter type classNames for supported format.)",
+            "name": "Refinement Filters",
             "group": "filters",
             "type": "json",
             "defaultValue": [
@@ -366,6 +366,13 @@
                     "collapsed": true
                 }
             ]
+        },
+        {
+            "id": "filters_sections",
+            "name": "",
+            "description": "Each filter replaces 'containerSelector' element or is appended to 'filters' element if selector missing. Optional fields 'limit', 'showMore', 'showMoreLimit', 'collapsible', 'collapsed' overrides default values. Optional 'classNames' are merged to filter type classNames - see filter type classNames for supported format.",
+            "group": "filters",
+            "type": "section"
         },
         {
             "id": "filtersLimit",

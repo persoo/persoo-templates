@@ -10,17 +10,23 @@
             <%= searchBarHTML %>
         </div>
         <script>
-            (function () {
-                var containerElem = document.querySelector('<%= widgetContainerSelectors.searchBar %>');
-                if (containerElem) {
-                    var contentElem = document.getElementById('persoo-sb-template-<%= offerID %>');
-                    containerElem.innerHTML = contentElem.innerHTML;
-                } else {
-                    console.warn('Persoo Search Results: external search bar selector ' +
-                    '"<%= widgetContainerSelectors.searchBar %>" does not match any element in page.');
-                }
-            })();
-        </script>
+        (function() {
+    var containerElem = document.querySelector(
+        '<%= widgetContainerSelectors.searchBar %>'
+    );
+    if (containerElem) {
+        var contentElem = document.getElementById(
+            'persoo-sb-template-<%= offerID %>'
+        );
+        containerElem.innerHTML = contentElem.innerHTML;
+    } else {
+        console.warn(
+            'Persoo Search Results: external search bar selector ' +
+                '"<%= widgetContainerSelectors.searchBar %>" does not match any element in page.'
+        );
+    }
+})();
+</script>
     <% } %>
 
     <script>
@@ -247,12 +253,13 @@
                                     function filterFn(config) {
                                         return data.attributeName === config.attributeName;
                                     }
-                                    var filterConfig = <%= JSON.stringify(filtersGroups) %>.filter(filterFn)[0];
+                                    /* hiearchal filter do not have atributeName, it has field attributes */
+                                    var filterConfig = <%= JSON.stringify(filtersGroups) %>.filter(filterFn)[0] || {};
 
                                     switch(filterConfig.type) {
                                         case 'rangeSlider':
                                             return (
-                                                persooInstantSearch.EJS(filterConfig.headerTemplate)() + 
+                                                persooInstantSearch.EJS(filterConfig.headerTemplate)() +
                                                 ' ' +
                                                 data.displayOperator + ' ' +
                                                 persooInstantSearch.EJS(filterConfig.format)({ rawValue: data.name })
@@ -645,32 +652,44 @@
     </script>
 
     <script>
-        (function() {
-            function createElementToggleClassName(element, toggleClass) {
-                return function() {
-                    var currentClass = element.className;
+    (function() {
+    function createElementToggleClassName(element, toggleClass) {
+        return function() {
+            var currentClass = element.className;
 
-                    if (currentClass.split(" ").indexOf(toggleClass) > -1) {
-                        newClass = currentClass.replace(new RegExp('\\b' + toggleClass + '\\b','g'), "");
-                    } else {
-                        newClass = currentClass + " " + toggleClass;
-                    }
-                    element.className = newClass.trim();
-                };
+            if (currentClass.split(' ').indexOf(toggleClass) > -1) {
+                newClass = currentClass.replace(
+                    new RegExp('\\b' + toggleClass + '\\b', 'g'),
+                    ''
+                );
+            } else {
+                newClass = currentClass + ' ' + toggleClass;
             }
+            element.className = newClass.trim();
+        };
+    }
 
-            var container = document.querySelector('<%= widgetContainerSelectors.searchResults %>');
-            if (container) {
-                var filters = container.querySelector('<%= widgetContainerSelectors.filters %>');
-                var toggle = container.querySelector('<%= widgetContainerSelectors.filtersToggle %>');
+    var container = document.querySelector(
+        '<%= widgetContainerSelectors.searchResults %>'
+    );
+    if (container) {
+        var filters = container.querySelector(
+            '<%= widgetContainerSelectors.filters %>'
+        );
+        var toggle = container.querySelector(
+            '<%= widgetContainerSelectors.filtersToggle %>'
+        );
 
-                if (filters && toggle) {
-                    var toggleFiltersClassNameVisible = createElementToggleClassName(filters, 'persoo-search-results__filters--visible');
-                    toggle.addEventListener('click', toggleFiltersClassNameVisible);
-                }
-            }
-        }());
-    </script>
+        if (filters && toggle) {
+            var toggleFiltersClassNameVisible = createElementToggleClassName(
+                filters,
+                'persoo-search-results__filters--visible'
+            );
+            toggle.addEventListener('click', toggleFiltersClassNameVisible);
+        }
+    }
+})();
+</script>
 
     <script type="text/javascript">
         <%= customJS %>
