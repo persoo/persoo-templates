@@ -239,6 +239,16 @@
                     "label": "Most relevant"
                 },
                 {
+                    "label": "Bestselling",
+                    "attribute": "buy90",
+                    "order": "desc"
+                },
+                {
+                    "label": "Most viewed",
+                    "attribute": "view30",
+                    "order": "desc"
+                },
+                {
                     "label": "Lowest price",
                     "attribute": "price",
                     "order": "asc"
