@@ -1,4 +1,7 @@
-<div id="persoo--<%= offerID %>" data-inner-location-id="persoo-do-not-track-impressions-by-default" class="persoo-search-results">
+<div id="persoo--<%= offerID %>"
+    data-inner-location-id="persoo-do-not-track-impressions-by-default"
+    class="persoo-search-results<%= hideOnEmptyInput ? ' persoo-hidden' : '' %>"
+>
     <style type="text/css">
         <%= customCSS %>
     </style>
