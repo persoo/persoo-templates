@@ -431,7 +431,7 @@
             "group": "design",
             "type": "json",
             "defaultValue": {
-                "searchResults": "#persoo-search-results",
+                "searchResults": ".persoo-search-results",
                 "originalPageContent": "#your-main-content-selector",
                 "searchBar": "#persoo-search-bar",
                 "fulltextFilter": "#persoo-search-bar__search-box",
