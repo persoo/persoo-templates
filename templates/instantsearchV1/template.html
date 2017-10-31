@@ -317,12 +317,22 @@
                             limit: filtersGroups[g].limit || filtersLimit,
                             cssClasses: addClassNamesFor(filtersGroups[g].type, filtersGroups[g].classNames || {})
                         };
-                        addShowMoreOptionTo(filterConfig,
-                            filtersGroups[g].showMore || filtersShowMore,
-                            filtersGroups[g].showMoreLimit || filtersShowMoreLimit);
-                        addCollapsibleOptionTo(filterConfig,
-                            filtersGroups[g].collapsible || filtersCollapsible,
-                            filtersGroups[g].collapsed);
+                        addShowMoreOptionTo(
+                            filterConfig,
+                            typeof filtersGroups[g].showMore === 'boolean'
+                                ? filtersGroups[g].showMore
+                                : filtersShowMore,
+                            typeof filtersGroups[g].showMoreLimit === 'number'
+                                ? filtersGroups[g].showMoreLimit
+                                : filtersShowMoreLimit
+                        );
+                        addCollapsibleOptionTo(
+                            filterConfig,
+                            typeof filtersGroups[g].collapsible === 'boolean'
+                                ? filtersGroups[g].collapsible
+                                : filtersCollapsible,
+                            filtersGroups[g].collapsed
+                        );
 
                         /* extra filter config by type */
                         switch (filtersGroups[g].type) {
