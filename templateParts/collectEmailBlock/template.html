@@ -25,6 +25,7 @@
         function persoo_submit_email_<%= offerID %>() {
             var elem = document.getElementById("persoo--<%= offerID %>__form__email");
             var email = elem.value.replace(/^\s*/,'').replace(/\s*$/,'');
+            var offerID = "<%= offerID %>";
             try {
                 if (!email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
                     /* invalid email address */
@@ -32,7 +33,11 @@
                 } else {
                     /* submit */
                     console.log('Persoo: submitting email ' + email);
-                    window.persoo('send','submit', {offerID: "<%= offerID %>", email: email});  // TODO use callback for confirmation?
+                    if (window.persoo.offerActions && window.persoo.offerActions[offerID] && window.persoo.offerActions[offerID].submit) {
+                        window.persoo.offerActions[offerID].submit({offerID: offerID , email: email});
+                    } else {
+                        window.persoo('send','submit', {offerID: offerID, email: email});  // TODO use callback for confirmation?
+                    }
 
                     document.getElementById("persoo--<%= offerID %>__form").style.display = "none";
                     document.getElementById("persoo--<%= offerID %>__thank-you").style.display = "inline-block";
