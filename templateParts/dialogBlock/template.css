@@ -1,0 +1,10 @@
+.persoo-block--dialog {
+    text-align: center;
+    margin: 0 auto 15px auto;
+    max-width: 50em;
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

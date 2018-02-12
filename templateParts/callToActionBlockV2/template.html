@@ -1,0 +1,31 @@
+<div class="persoo-block persoo-block--cta">
+    <a
+        id="persoo--<%= offerID %>__cta__button"
+        class="persoo-block--cta__<%= ctaActionType == 'button' ? 'link' : 'background-link' %>"
+        href="<%= ctaButtonLink && ctaAction == 'redirect' ? ctaButtonLink : '#' %>"
+        target="_blank"
+        onclick="return persoo_cta_clicked_<%= offerID %>(event);"
+    >
+        <%= ctaActionType == 'button' ? ctaButtonLabel : '' %>
+    </a>
+    <script>
+    function persoo_cta_clicked_<%= offerID %>(event) {
+        var offerID="<%= offerID %>";
+        <%= ctaOnClickCallback %>;
+
+        <% if (ctaAction == 'coupon') { %>
+            document.getElementById("persoo--<%= offerID %>__cta__button").style.display = "none";
+            document.getElementById("persoo--<%= offerID %>__coupon").style.display = "inline-block";
+            return false;
+        <% } else if (ctaAction == 'close') { %>
+            persoo_close_<%= offerID %>();
+            return false;
+        <% } %>
+    }
+    </script>
+    <% if (ctaAction == 'coupon') { %>
+        <span id="persoo--<%= offerID %>__coupon" class="persoo-block--cta__coupon">
+            <%= ctaButtonCoupon %>
+        </span>
+    <% } %>
+</div>

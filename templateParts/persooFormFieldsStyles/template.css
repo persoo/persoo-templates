@@ -1,0 +1,37 @@
+<% if (useCSSWizard) { %>
+
+    #persoo--<%= offerID %> input[type="submit"],
+    #persoo--<%= offerID %> input[type="text"],
+    #persoo--<%= offerID %> .persoo-block--collect-email__form__email,
+    #persoo--<%= offerID %> .persoo-block--collect-email__form__submit,
+    #persoo--<%= offerID %> .persoo-block--collect-email__form__thank-you,
+    #persoo--<%= offerID %> .persoo-block--cta__link,
+    #persoo--<%= offerID %> .persoo-block--cta__coupon,
+    #persoo--<%= offerID %> .persoo-block--dialog__link {
+        border-color:  <%= buttonBackgroundColor %>;
+        background-color: <%= buttonBackgroundColor %>;
+        color: <%= buttonTextColor %>;
+    }
+    #persoo--<%= offerID %> input[type="text"],
+    #persoo--<%= offerID %> .persoo-block--collect-email__form__email {
+        background-color: <%= inputBackgroundColor %>;
+        color: <%= inputTextColor %>;
+    }
+
+    #persoo--<%= offerID %> input[type="submit"]:hover,
+    #persoo--<%= offerID %> .persoo-block--collect-email__form__submit:hover,
+    #persoo--<%= offerID %> .persoo-block--collect-email__form__thank-you:hover,
+    #persoo--<%= offerID %> .persoo-block--cta__link:hover,
+    #persoo--<%= offerID %> .persoo-block--cta__coupon:hover,
+    #persoo--<%= offerID %> .persoo-block--dialog__link:hover {
+        border-color:  <%= buttonBackgroundColor %>;
+        background-color: <%= buttonBackgroundColor %>;
+        color: <%= buttonTextColor %>;
+        opacity: 0.8;
+    }
+    #persoo--<%= offerID %> .persoo-block--dialog__link--secondary {
+        background-color: transparent;
+        color: <%= buttonBackgroundColor %>;
+    }
+
+<% } %>

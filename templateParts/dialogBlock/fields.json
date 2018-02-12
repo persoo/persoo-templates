@@ -1,0 +1,72 @@
+{
+    "id": "dialogPrimaryActionText",
+    "name": "Primary Action Text",
+    "group": "dialog",
+    "type": "text",
+    "defaultValue": "Yes",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "Dialog"
+    }
+},
+{
+    "id": "dialogPrimaryActionLink",
+    "name": "Primary Action Target Link",
+    "group": "dialog",
+    "type": "text",
+    "defaultValue": "/your/target/page?dialog=yes",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "Dialog"
+    }
+},
+{
+    "id": "dialogPrimaryCallback",
+    "name": "Primary onClick callback",
+    "group": "dialog",
+    "type": "javascript",
+    "defaultValue": "console.log('Primary action in offer \"' + offerID + '\" was clicked');",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "Dialog"
+    }
+},
+{
+    "id": "dialogSecondaryActionText",
+    "name": "Secondary Action Text",
+    "group": "dialog",
+    "type": "text",
+    "defaultValue": "No",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "Dialog"
+    }
+},
+{
+    "id": "dialogSecondaryActionLink",
+    "name": "Secondary Action Target Link",
+    "group": "dialog",
+    "type": "text",
+    "defaultValue": "/your/target/page?dialog=no",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "Dialog"
+    }
+},
+{
+    "id": "dialogSecondaryCallback",
+    "name": "Secondary onClick callback",
+    "group": "dialog",
+    "type": "javascript",
+    "defaultValue": "console.log('Secondary action in offer \"' + offerID + '\" was clicked');",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "Dialog"
+    }
+},

@@ -1,0 +1,237 @@
+{
+    "class": "webWidget",
+    "minScenariosCount": 0,
+    "name": "Pop-up V3",
+    "defaultsForOfferTemplate": {
+        "description": "Basic Pop-up with rich options.",
+        "releaseStage": "beta",
+        "data": {
+            "name": "Pop-up 2018",
+            "location": "popup"
+        }
+    },
+    "fields": [
+        {
+            "id": "imagePosition",
+            "name": "Image Position",
+            "group": "image",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Above content",
+                    "value": "above"
+                },
+                {
+                    "label": "Left to the content",
+                    "value": "left"
+                },
+                {
+                    "label": "Right to the content",
+                    "value": "right"
+                }
+            ],
+            "defaultValue": "above"
+        },
+        {
+            "id": "imageLink",
+            "name": "Image Link (with proper size or fix it in CSS)",
+            "group": "image",
+            "type": "text"
+        },
+
+        @@include templateParts/innerContentBlockV2/fields-innerContentType.json
+
+        {
+            "id": "position",
+            "name": "Position",
+            "group": "options",
+            "type": "select",
+            "options": [
+                {
+                    "label": "Center",
+                    "value": "center"
+                },
+                {
+                    "label": "Bottom Left",
+                    "value": "bottomLeft"
+                },
+                {
+                    "label": "Bottom Right",
+                    "value": "bottomRight"
+                },
+                {
+                    "label": "Left",
+                    "value": "left"
+                },
+                {
+                    "label": "Right",
+                    "value": "right"
+                },
+                {
+                    "label": "Top",
+                    "value": "top"
+                },
+                {
+                    "label": "Bottom",
+                    "value": "bottom"
+                }
+            ],
+            "defaultValue": "center"
+        },
+
+
+        {
+            "id": "animationEffect",
+            "name": "Animation Effect",
+            "group": "options",
+            "type": "select",
+            "options": [
+                {
+                    "label": "None",
+                    "value": "none"
+                },
+                {
+                    "label": "Fade",
+                    "value": "fade"
+                },
+                {
+                    "label": "Move Down to Up",
+                    "value": "down_to_up"
+                },
+                {
+                    "label": "Move Up to Down",
+                    "value": "up_to_down"
+                },
+                {
+                    "label": " Move Left to Right",
+                    "value": "left_to_right"
+                },
+                {
+                    "label": "Move Right to Left",
+                    "value": "right_to_left"
+                }
+            ],
+            "defaultValue": "none"
+        },
+        {
+            "id": "animationDuration",
+            "name": "Animation Duration (in ms)",
+            "group": "options",
+            "type": "number",
+            "defaultValue": 600,
+            "condition": {
+                "operator": "!=",
+                "fieldID": "animationEffect",
+                "fieldValue": "none"
+            }
+        },
+
+        {
+            "id": "showAfterMillis",
+            "name": "Timing - wait time before showing (in ms)",
+            "group": "options",
+            "type": "number",
+            "defaultValue": 0
+        },
+        {
+            "id": "useOverlay",
+            "name": "Use screen overlay",
+            "group": "options",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+
+        {
+            "id": "closeOnClickOutside",
+            "name": "Close on click outside (on overlay)",
+            "group": "options",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "closingTextInFooter",
+            "name": "Closing text in pop-up footer",
+            "group": "options",
+            "type": "text",
+            "defaultValue": "No thanks"
+        },
+
+
+        @@include templateParts/innerContentBlockV2/fields.json
+
+        @@include templateParts/persooFormFieldsStyles/fields.json
+
+        @@include templateParts/backgroundImageBlockV2/fields.json
+
+        {
+            "id": "section_overlay",
+            "name": "Overlay",
+            "group": "design",
+            "type": "section",
+            "condition": {
+                "fieldID": "useCSSWizard",
+                "operator": "==",
+                "fieldValue": true
+            }
+        },
+        {
+            "id": "overlayColor",
+            "name": "Screen Overlay Color",
+            "group": "design",
+            "type": "color",
+            "defaultValue": "rgba(36, 39, 41, 0.1)",
+            "condition": {
+                "operator": "and",
+                "children": [
+                    {
+                        "operator": "==",
+                        "fieldID": "useOverlay",
+                        "fieldValue": true
+                    },
+                    {
+                        "fieldID": "useCSSWizard",
+                        "operator": "==",
+                        "fieldValue": true
+                    }
+                ]
+            }
+        },
+
+        {
+            "id": "section_customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "section"
+        },
+        {
+            "id": "customCSS",
+            "name": "Custom CSS",
+            "group": "design",
+            "type": "css",
+            "defaultValue": "/* your own css rules, i.e\n.persoo--popup__content {\n    margin-left: 50%;\n}\n*/"
+        },
+        {
+            "id": "customJS",
+            "name": "Custom Javascript",
+            "group": "options",
+            "type": "javascript",
+            "defaultValue": "/* your own javascript */"
+        }
+    ],
+    "groups": [
+        {
+            "id": "image",
+            "name": "Flexible Image"
+        },
+
+        @@include templateParts/innerContentBlockV2/groups.json
+        @@include templateParts/persooFormFieldsStyles/groups.json
+
+        {
+            "id": "options",
+            "name": "Pop-up Options"
+        }
+
+    ],
+    "template": "Note: this will be replaced by content of template.html"
+}

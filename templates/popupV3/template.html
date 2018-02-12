@@ -1,0 +1,365 @@
+<%
+const baseZIndex = 1000200;
+
+var getPosition = {
+    center: {top: "50%", left: "50%", transform: "translate(-50%, -50%)"},
+    left: {top: "50%", left: "0", margin_left: 15, transform: "translate(0%, -50%)"},
+    right: {top: "50%", right: "0", margin_right: 15, transform: "translate(0%, -50%)"},
+    top: {left: "50%", top: "0", margin_top: 15, transform: "translate(-50%, 0%)"},
+    bottom: {left: "50%", bottom: "0", margin_bottom: 15, transform: "translate(-50%, 0%)"},
+    bottomLeft: {bottom: "0", left: "0", margin_bottom: 15, margin_left: 15},
+    bottomRight: {bottom: "0", right: "0", margin_bottom: 15, margin_right: 15}
+};
+
+var animationDurationInSec = (animationDuration || 0)/1000 + "s";
+var getAnimationProps = {
+    fade: {
+        start: {
+            opacity: "0"
+        },
+        stop: {
+            opacity: "1"
+        }
+    },
+    left_to_right: {
+        start: {
+            left: getPosition[position].left ? "-50%" : "",
+            right: getPosition[position].right ? "150%" : ""
+        },
+        stop: {
+            left: getPosition[position].left,
+            right: getPosition[position].right
+        }
+    },
+    right_to_left: {
+        start: {
+            left: getPosition[position].left ? "150%" : "",
+            right: getPosition[position].right ? "-50%" : ""
+        },
+        stop: {
+            left: getPosition[position].left,
+            right: getPosition[position].right
+        }
+    },
+    up_to_down: {
+        start: {
+            top: getPosition[position].top ? "-50%" : "",
+            bottom: getPosition[position].bottom ? "150%" : ""
+        },
+        stop: {
+            top: getPosition[position].top,
+            bottom: getPosition[position].bottom
+        }
+    },
+    down_to_up: {
+        start: {
+            top: getPosition[position].top ? "150%" : "",
+            bottom: getPosition[position].bottom ? "-50%" : ""
+        },
+        stop: {
+            top: getPosition[position].top,
+            bottom: getPosition[position].bottom
+        }
+    }
+};
+function printCSSProps(obj) {
+    var result = "";
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+            result += prop + ': ' + obj[prop] + ';'
+        }
+    }
+    return result;
+}
+%>
+
+<div
+    id="persoo--<%= offerID %>"
+    class="persoo--popup persoo--widget"
+    data-animate-closing="false"
+    data-inner-location-id="persoo--<%= offerID %>__box"
+>
+
+    <% if (useOverlay) { %>
+        <div
+            class="persooAction persoo--popup__overlay"
+            <%= closeOnClickOutside ? 'onclick="persoo_close_' + offerID + '()"' : '' %>
+        >
+        </div>
+            <a
+                class="persooAction persoo--popup__close-x"
+                href="javascript:persoo_close_<%= offerID %>();"
+            >
+                <span class="persoo--popup__icon"></span>
+            </a>
+    <% } %>
+
+    <div id="persoo--<%= offerID %>__box" class="persoo--popup__box">
+        <a
+            class="persooAction persoo--popup__close-x"
+            href="javascript:persoo_close_<%= offerID %>();"
+        >
+            <span class="persoo--popup__icon"></span>
+        </a>
+
+        <div class="persoo--popup__scrollWrapper">
+            <div class="persoo--popup__wrapper">
+
+                @@include templateParts/backgroundImageBlockV2/template.html
+
+                <% if (imageLink) { %>
+                    <div class="persoo--popup__image">
+                    <img
+                        class="persoo-block persoo-block--image"
+                        src="<%= imageLink %>"
+                        alt="popup image"
+                    >
+                    </div>
+                <% } %>
+
+                <div id="persoo--<%= offerID %>__content" class="persoo--popup__content persoo--widget__content">
+
+                    @@include templateParts/innerContentBlockV2/template.html
+
+                    <div class="persoo-block persoo-block--separator"></div>
+                    <div class="persoo--popup__dismiss-links">
+                        <a
+                            class="persooAction persoo--popup__dismiss-links--close"
+                            data-action="close"
+                            href="javascript:persoo_close_<%= offerID %>()"
+                        >
+                            <%= closingTextInFooter %>
+                        </a>
+                    </div>
+                </div>
+             </div>
+         </div>
+    </div>
+
+    <style type="text/css">
+
+        @@include templateParts/persooFormFieldsStyles/template.css
+        @@include templateParts/backgroundImageBlockV2/template.css
+        @@include templateParts/innerContentBlockV2/template.css
+
+        <% if (showAfterMillis > 0) { %>
+            #persoo--<%= offerID %> {
+                display: none;
+            }
+        <% } %>
+
+        .persoo--popup,
+        .persoo--popup * {
+            box-sizing: border-box;
+        }
+
+        .persoo--popup {
+            line-height: normal;
+            visibility: visible;
+        }
+        .persoo--popup__box {
+            -webkit-font-smoothing: antialiased;
+            position: fixed;
+            opacity: 1;
+        }
+        #persoo--<%= offerID %> .persoo--popup__box {
+            z-index: <%= baseZIndex %>;
+            <%= getPosition[position].top ? 'top: '+ getPosition[position].top +';' : '' %>
+            <%= getPosition[position].bottom ? 'bottom: '+ getPosition[position].bottom +';' : '' %>
+            <%= getPosition[position].left ? 'left: '+ getPosition[position].left +';' : '' %>
+            <%= getPosition[position].right ? 'right: '+ getPosition[position].right +';' : '' %>
+            <%= getPosition[position].margin_top ? 'margin-top: '+ getPosition[position].margin_top +'px;' : '' %>
+            <%= getPosition[position].margin_bottom ? 'margin-bottom: '+ getPosition[position].margin_bottom +'px;' : '' %>
+            <%= getPosition[position].margin_left ? 'margin-left: '+ getPosition[position].margin_left +'px;' : '' %>
+            <%= getPosition[position].margin_right ? 'margin-right: '+ getPosition[position].margin_right +'px;' : '' %>
+            <%= getPosition[position].transform ?
+                    '-ms-transform: '+ getPosition[position].transform +';' +
+                    '-webkit-transform: '+ getPosition[position].transform +';' +
+                    'transform: '+ getPosition[position].transform +';'
+                    : '' %>
+        }
+        @media (max-width: 600px) {
+            #persoo--<%= offerID %> .persoo--popup__box {
+                left: 0;
+                right: 0;
+                top: auto;
+                bottom: 0;
+                transform: none;
+                margin: 0;
+            }
+        }
+        .persoo--popup__wrapper > div:last-child {
+            margin-bottom: 0 !important;
+        }
+        .persoo--popup__wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-clip: padding-box;
+            zoom: 1;
+            display: -webkit-flex;
+            -webkit-flex-direction: <%= imagePosition == 'above' ? 'column' : (imagePosition == 'left' ? 'row' : 'row-reverse') %>;
+            display: flex;
+            flex-direction: <%= imagePosition == 'above' ? 'column' : (imagePosition == 'left' ? 'row' : 'row-reverse') %>;
+        }
+        .persoo--popup__image,
+        .persoo--popup__content {
+            flex: 1 0 auto;
+        }
+        .persoo--popup__scrollWrapper {
+            overflow-y: auto;
+            overflow-x: hidden;
+            max-height: 1000px; /* screen height */
+        }
+
+        .persoo--popup__content {
+            position: relative;
+            -webkit-flex: 1;
+            flex: 1;
+        }
+        .persoo--popup__image,
+        .persoo--popup__content {
+            -ms-flex: 1 0 auto;
+        }
+        <% if (imageLink && imagePosition == 'left') { %>
+            .persoo--popup__image {  margin-right: 20px; }
+        <% } else if (imageLink && imagePosition == 'right') { %>
+           .persoo--popup__image {  margin-left: 20px; }
+        <% } %>
+
+        .persoo--popup__overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        #persoo--<%= offerID %> .persoo--popup__overlay {
+            z-index: <%= baseZIndex - 1 %>;
+            <% if (useCSSWizard) { %>
+                background-color: <%= overlayColor %>;
+            <% } %>
+        }
+        .persoo--popup__close-x {
+            z-index: <%= baseZIndex + 1 %>;
+        }
+
+        <% if (animationEffect && animationEffect != 'none') {
+            var animationProps = getAnimationProps[animationEffect];
+        %>
+            @keyframes persoo--<%= offerID %>__overlayAnimation {
+                0% { opacity: 0; }
+                100% { opacity: 1; }
+            }
+            @-webkit-keyframes persoo--<%= offerID %>__overlayAnimation {
+                0% { opacity: 0; }
+                100% { opacity: 1; }
+            }
+            @keyframes persoo--<%= offerID %>__animation {
+                0% {
+                    <%= printCSSProps(animationProps.start) %>
+                }
+                100% {
+                    <%= printCSSProps(animationProps.stop) %>
+                }
+            }
+            @-webkit-keyframes persoo--<%= offerID %>__animation {
+                0% {
+                    <%= printCSSProps(animationProps.start) %>
+                }
+                100% {
+                    <%= printCSSProps(animationProps.stop) %>
+                }
+            }
+            #persoo--<%= offerID %> .persoo--popup__overlay {
+                animation: persoo--<%= offerID %>__overlayAnimation <%= animationDurationInSec %> ease 0s 1 normal;
+                -webkit-animation: persoo--<%= offerID %>__overlayAnimation <%= animationDurationInSec %> ease 0s 1 normal;
+            }
+            #persoo--<%= offerID %> .persoo--popup__box {
+                animation: persoo--<%= offerID %>__animation <%= animationDurationInSec %> ease 0s 1 normal;
+                -webkit-animation: persoo--<%= offerID %>__animation <%= animationDurationInSec %> ease 0s 1 normal;
+            }
+
+            #persoo--<%= offerID %>[data-animate-closing="true"] .persoo--popup__box {
+                <%= animationProps.start.left ? 'left: ' + animationProps.start.left + ';' : '' %>
+                <%= animationProps.start.right ? 'right: ' + animationProps.start.right + ';' : '' %>
+                <%= animationProps.start.top ? 'top: ' + animationProps.start.top + ';' : '' %>
+                <%= animationProps.start.bottom ? 'bottom: ' + animationProps.start.bottom + ';' : '' %>
+                opacity: 0;
+                transition: all <%= animationDurationInSec %> ease;
+            }
+            <% if (animationEffect != 'fade') { %>
+                @media (max-width: 600px) {
+                    #persoo--<%= offerID %>[data-animate-closing="true"] .persoo--popup__box {
+                        bottom: 0;
+                    }
+                    @keyframes persoo--<%= offerID %>__animation {
+                        0% {
+                            top: 100%;
+                            bottom: -100%;
+                        }
+                        100% {
+                            top: auto;
+                            bottom: 0;
+                        }
+                    }
+                    @-webkit-keyframes persoo--<%= offerID %>__animation {
+                        0% {
+                            top: 100%;
+                            bottom: -100%;
+                        }
+                        100% {
+                            top: auto;
+                            bottom: 0;
+                        }
+                    }
+                }
+            <% } %>
+        <% } %>
+    </style>
+    <style type="text/css">
+        <%= customCSS %>
+    </style>
+
+    <script type="text/javascript">
+        window.persoo = window.persoo || function () {}; /* TODO until having persoo in preview */
+
+        function persooPopupInit_<%= offerID %>() {
+            var elem = document.querySelector("#persoo--<%= offerID %> .persoo--popup__scrollWrapper");
+            elem.style.maxHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + "px";
+
+            if (navigator.userAgent.match(/MSIE [78]\./i)
+               ) {
+                elem = document.getElementById("persoo--<%= offerID %>");
+                elem.style.display = "none";
+                console.log("Persoo: browser too old.");
+            } <% if (showAfterMillis > 0) { %>
+                else {
+                    setTimeout(function () {
+                        elem = document.getElementById("persoo--<%= offerID %>");
+                        elem.style.display = "block";
+                    }, <%= showAfterMillis %>);
+                }
+            <% } %>
+        }
+        persooPopupInit_<%= offerID %>();
+
+        function persoo_close_<%= offerID %>(href) {
+            var elem = document.getElementById("persoo--<%= offerID %>");
+            window.persoo('send', 'close', {offerID: "<%= offerID %>"});
+            if (href) {
+                window.location.href = href;
+            }
+
+            elem.setAttribute("data-animate-closing", "true");
+            window.setTimeout(function () {
+                elem.style.display = "none";
+                elem.setAttribute("data-animate-closing", "false");
+            }, <%= animationEffect === "none" ? 0 : animationDuration %>);
+        }
+    </script>
+    <script type="text/javascript">
+        <%= customJS %>
+    </script>
+</div>

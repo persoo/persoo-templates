@@ -1,0 +1,60 @@
+{
+    "id": "collectEmailInputLabel",
+    "name": "Input Label",
+    "group": "collectEmail",
+    "type": "text",
+    "defaultValue": "your@email.com",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CollectEmail"
+    }
+},
+{
+    "id": "collectEmailSubmitLabel",
+    "name": "Submit Button Text",
+    "group": "collectEmail",
+    "type": "text",
+    "defaultValue": "SUBSCRIBE",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CollectEmail"
+    }
+},
+{
+    "id": "collectEmailThankYouMessage",
+    "name": "Thank you message",
+    "group": "collectEmail",
+    "type": "text",
+    "defaultValue": "Thank you for subscription",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CollectEmail"
+    }
+},
+{
+    "id": "collectEmailOnSubmitCallback",
+    "name": "onSubmit callback",
+    "group": "collectEmail",
+    "type": "javascript",
+    "defaultValue": "/* create subscription list in settings:\nconsole.log('Email \"' + email + '\" submitted in offer \"' + offerID + '\".'); \nwindow.persoo('send', '<yourSubscribeEventName>', {\n    updateSubscriptions: [{\n        listID: '<yourListID>',\n        sublistID: \"\",\n        action: 'subscribe',\n        data: email\n}]});\n*/",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CollectEmail"
+    }
+},
+{
+    "id": "collectEmailConsent",
+    "name": "Consent checkbox text (empty for no checkbox)",
+    "group": "collectEmail",
+    "type": "richtext",
+    "defaultValue": "By signing up you agree with our <a href='#'>terms and privacy policy</a>.",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CollectEmail"
+    }
+},

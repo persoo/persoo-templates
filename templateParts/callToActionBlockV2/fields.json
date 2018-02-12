@@ -1,0 +1,126 @@
+{
+    "id": "ctaActionType",
+    "name": "Action triggered by click on ",
+    "group": "cta",
+    "type": "select",
+    "options": [
+        {
+            "label": "Button",
+            "value": "button"
+        },
+        {
+            "label": "Whole content box",
+            "value": "background"
+        }
+    ],
+    "defaultValue": "button",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CTA"
+    }
+},
+{
+    "id": "ctaButtonLabel",
+    "name": "Button Text",
+    "group": "cta",
+    "type": "text",
+    "defaultValue": "SHOW&nbsp;ME",
+    "condition": {
+        "operator": "and",
+        "children": [
+            {
+                "fieldID": "innerContentType",
+                "operator": "match",
+                "fieldValue": "CTA"
+            },
+            {
+                "fieldID": "ctaActionType",
+                "operator": "==",
+                "fieldValue": "button"
+            }
+        ]
+    }
+},
+{
+    "id": "ctaAction",
+    "name": "Action",
+    "group": "cta",
+    "type": "select",
+    "options": [
+        {
+            "label": "Open target link",
+            "value": "redirect"
+        },
+        {
+            "label": "Show coupon",
+            "value": "coupon"
+        },
+        {
+            "label": "Close offer",
+            "value": "close"
+        }
+    ],
+    "defaultValue": "redirect",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CTA"
+    }
+},
+{
+    "id": "ctaButtonCoupon",
+    "name": "Coupon text",
+    "group": "cta",
+    "type": "text",
+    "defaultValue": "Your coupon is AX1Y2A45",
+    "condition": {
+        "operator": "and",
+        "children": [
+            {
+                "fieldID": "innerContentType",
+                "operator": "match",
+                "fieldValue": "CTA"
+            },
+            {
+                "fieldID": "ctaAction",
+                "operator": "==",
+                "fieldValue": "coupon"
+            }
+        ]
+    }
+},
+{
+    "id": "ctaButtonLink",
+    "name": "Button Target Link",
+    "group": "cta",
+    "type": "text",
+    "defaultValue": "/your/target/page",
+    "condition": {
+        "operator": "and",
+        "children": [
+            {
+                "fieldID": "innerContentType",
+                "operator": "match",
+                "fieldValue": "CTA"
+            },
+            {
+                "fieldID": "ctaAction",
+                "operator": "==",
+                "fieldValue": "redirect"
+            }
+        ]
+    }
+},
+{
+    "id": "ctaOnClickCallback",
+    "name": "onClick callback",
+    "group": "cta",
+    "type": "javascript",
+    "defaultValue": "console.log('Call to action in offer \"' + offerID + '\" was clicked');",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CTA"
+    }
+},

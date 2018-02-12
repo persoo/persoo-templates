@@ -1,0 +1,17 @@
+<% if (showTitleBlock) { %>
+    @@include templateParts/titleBlock/template.css
+<% } %>
+<% if (showRichTextBlock) { %>
+    @@include templateParts/richTextBlock/template.css
+<% } %>
+<% if (showCustomHTMLBlock) { %>
+    @@include templateParts/customHTML/template.css
+<% } %>
+
+<% if (innerContentType == "CTA") { %>
+    @@include templateParts/callToActionBlockV2/template.css
+<% } else if (innerContentType == "Dialog") { %>
+    @@include templateParts/dialogBlock/template.css
+<% } else if (innerContentType == "CollectEmail") { %>
+    @@include templateParts/collectEmailBlockV2/template.css
+<% } %>

@@ -1,0 +1,69 @@
+{
+    "defaultValue": true,
+    "group": "design",
+    "id": "useCSSWizard",
+    "name": "Use simple CSS Wizard (will add CSS rules to page)",
+    "type": "checkbox"
+},
+
+{
+    "id": "section_form_field_styles",
+    "name": "Form field styles",
+    "group": "design",
+    "type": "section",
+    "condition": {
+        "fieldID": "useCSSWizard",
+        "operator": "==",
+        "fieldValue": true
+    }
+},
+
+{
+    "id": "buttonBackgroundColor",
+    "name": "Button Color",
+    "group": "design",
+    "type": "color",
+    "defaultValue": "#40a4f4",
+    "condition": {
+        "fieldID": "useCSSWizard",
+        "operator": "==",
+        "fieldValue": true
+    }
+},
+{
+    "id": "buttonTextColor",
+    "name": "Button Text Color",
+    "group": "design",
+    "type": "color",
+    "defaultValue": "#fff",
+    "condition": {
+        "fieldID": "useCSSWizard",
+        "operator": "==",
+        "fieldValue": true
+    }
+},
+
+{
+    "id": "inputTextColor",
+    "name": "Input Text Color",
+    "group": "design",
+    "type": "color",
+    "defaultValue": "#333",
+    "condition": {
+        "fieldID": "useCSSWizard",
+        "operator": "==",
+        "fieldValue": true
+    }
+},
+{
+    "id": "inputBackgroundColor",
+    "name": "Input Background Color",
+    "group": "design",
+    "type": "color",
+    "defaultValue": "#fff",
+    "condition": {
+        "fieldID": "useCSSWizard",
+        "operator": "==",
+        "fieldValue": true
+    }
+},

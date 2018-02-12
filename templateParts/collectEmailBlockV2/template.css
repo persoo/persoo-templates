@@ -1,0 +1,27 @@
+.persoo-block--collect-email {
+    text-align: center;
+    margin: 0 auto 15px auto;
+    max-width: 50em;
+}
+#persoo--<%= offerID %>__form {
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
+}
+.persoo-block--collect-email__form__email {
+    display: inline-block;
+    max-width: 100%;
+    -ms-flex: 3;
+    -webkit-flex: 3;
+    flex: 3;
+}
+.persoo-block--collect-email__form__submit {
+    display: inline-block;
+    -ms-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+}
+.persoo-block--collect-email__form__thank-you {
+    display: none;
+}

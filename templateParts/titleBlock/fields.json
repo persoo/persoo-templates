@@ -1,0 +1,12 @@
+{
+    "id": "title",
+    "name": "Title",
+    "group": "titleBlock",
+    "type": "text",
+    "defaultValue": "New collection arrived!",
+    "condition": {
+        "fieldID": "showTitleBlock",
+        "operator": "==",
+        "fieldValue": true
+    }
+},

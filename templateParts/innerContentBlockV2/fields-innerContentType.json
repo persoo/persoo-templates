@@ -1,0 +1,46 @@
+{
+    "defaultValue": true,
+    "group": "layout",
+    "id": "showTitleBlock",
+    "name": "Show Title Block",
+    "type": "checkbox"
+},
+{
+    "defaultValue": true,
+    "group": "layout",
+    "id": "showRichTextBlock",
+    "name": "Show Rich Text Block",
+    "type": "checkbox"
+},
+{
+    "defaultValue": false,
+    "group": "layout",
+    "id": "showCustomHTMLBlock",
+    "name": "Show Custom HTML Block",
+    "type": "checkbox"
+},
+{
+    "id": "innerContentType",
+    "name": "Action Block",
+    "group": "layout",
+    "type": "select",
+    "options": [
+        {
+            "label": "Call to Action",
+            "value": "CTA"
+        },
+        {
+            "label": "Dialog (Yes, No)",
+            "value": "Dialog"
+        },
+        {
+            "label": "Collect Email Form",
+            "value": "CollectEmail"
+        },
+        {
+            "label": "None",
+            "value": "None"
+        }
+    ],
+    "defaultValue": "CollectEmail"
+},

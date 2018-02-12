@@ -1,0 +1,74 @@
+<div class="persoo-block persoo-block--collect-email">
+    <form
+        id="persoo--<%= offerID %>__form"
+    >
+        <input
+            id="persoo--<%= offerID %>__form__email"
+            class="persoo-block--collect-email__form__email"
+            type="text"
+            size="12"
+            placeholder="<%= collectEmailInputLabel %>"
+            value=""
+        >
+        <button class="persooAction persoo-block--collect-email__form__submit">
+            <%= collectEmailSubmitLabel %>
+        </button>
+    </form>
+    <% if (collectEmailConsent) { %>
+        <div class="persoo-block--collect-email__form__consentParent">
+            <input type="checkbox" id="persoo--<%= offerID %>__form__consent" name="consent">
+            <label for="persoo--<%= offerID %>__form__consent"><%= collectEmailConsent %></label>
+          </div>
+    <% } %>
+    <a
+        id="persoo--<%= offerID %>__thank-you"
+        class="persoo-block--collect-email__form__thank-you"
+        href="javascript:typeof persoo_close_<%= offerID %> && persoo_close_<%= offerID %>()"
+    >
+        <%= collectEmailThankYouMessage %>
+    </a>
+    <script>
+        function persoo_submit_email_<%= offerID %>() {
+            var inputElem = document.getElementById("persoo--<%= offerID %>__form__email");
+            var email = inputElem.value.replace(/^\s*/,'').replace(/\s*$/,'');
+            var offerID = "<%= offerID %>";
+            var isValid = true;
+            try {
+                if (typeof inputElem.originalBorder != 'undefined') { inputElem.style.border = inputElem.originalBorder;}
+
+                if (!email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+                    /* invalid email address */
+                    inputElem.originalBorder = inputElem.style.border;
+                    inputElem.style.border = "3px solid red";
+                    isValid = false;
+                }
+                <% if (collectEmailConsent) { %>
+                    var checkboxElem = document.getElementById("persoo--<%= offerID %>__form__consent");
+                    var checkboxParent = checkboxElem.parentNode;
+                    if (typeof checkboxParent.originalBorder != 'undefined') { checkboxParent.style.border = checkboxParent.originalBorder; }
+                    if (!checkboxElem.checked) {
+                        checkboxParent.originalBorder = checkboxParent.style.border;
+                        checkboxParent.style.border = "3px solid red";
+                        isValid = false;
+                    }
+                <% } %>
+            } catch(err) {}
+
+            if (isValid) {
+                /* submit */
+                <%= collectEmailOnSubmitCallback %>;
+                if (window.persoo.offerActions && window.persoo.offerActions[offerID] && window.persoo.offerActions[offerID].submit) {
+                    window.persoo.offerActions[offerID].submit({offerID: offerID , email: email});
+                } else {
+                    window.persoo('send','submit', {offerID: offerID, email: email});  // TODO use callback for confirmation?
+                }
+
+                document.getElementById("persoo--<%= offerID %>__form").style.display = "none";
+                document.getElementById("persoo--<%= offerID %>__thank-you").style.display = "inline-block";
+            }
+
+            return false;
+        }
+        document.getElementById("persoo--<%= offerID %>__form").onsubmit = persoo_submit_email_<%= offerID %>;
+    </script>
+</div>

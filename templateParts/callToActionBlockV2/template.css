@@ -1,0 +1,18 @@
+.persoo-block--cta {
+    text-align: center;
+    margin-bottom: 15px;
+}
+.persoo-block--cta__background-link {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.persoo-block--cta__link {
+    display: inline-block;
+}
+#persoo--<%= offerID %>__coupon {
+    display: none;
+}

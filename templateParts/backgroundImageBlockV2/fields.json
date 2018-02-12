@@ -1,0 +1,67 @@
+{
+    "id": "section_background",
+    "name": "Background",
+    "group": "design",
+    "type": "section",
+    "condition": {
+        "fieldID": "useCSSWizard",
+        "operator": "==",
+        "fieldValue": true
+    }    
+},
+{
+    "id": "backgroundColor",
+    "name": "Background Color",
+    "group": "design",
+    "type": "color",
+    "defaultValue": "#eeeeee",
+    "condition": {
+        "fieldID": "useCSSWizard",
+        "operator": "==",
+        "fieldValue": true
+    }
+},
+{
+    "id": "backgroundImageLink",
+    "name": "Background Image Link",
+    "group": "design",
+    "type": "text",
+    "defaultValue": "",
+    "condition": {
+        "fieldID": "useCSSWizard",
+        "operator": "==",
+        "fieldValue": true
+    }
+},
+{
+    "group": "design",
+    "id": "backgroundImagePosition",
+    "name": "Background Image Position",
+    "options": [
+        {
+            "label": "fill container",
+            "value": "fillContainer"
+        },
+        {
+            "label": "centered in container",
+            "value": "centeredInContainer"
+        }
+    ],
+    "type": "select",
+    "defaultValue": "fillContainer",
+    "condition": {
+        "operator": "and",
+        "children": [
+            {
+                "operator": "!=",
+                "fieldID": "backgroundImageLink",
+                "fieldValue": ""
+            },
+            {
+                "fieldID": "useCSSWizard",
+                "operator": "==",
+                "fieldValue": true
+            }
+        ]
+    }
+},

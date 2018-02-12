@@ -1,0 +1,10 @@
+@@include templateParts/titleBlock/groups.json
+@@include templateParts/richTextBlockV2/groups.json
+@@include templateParts/customHTMLV2/groups.json
+@@include templateParts/callToActionBlockV2/groups.json
+@@include templateParts/dialogBlock/groups.json
+@@include templateParts/collectEmailBlockV2/groups.json
+{
+    "id": "layout",
+    "name": "Layout"
+},

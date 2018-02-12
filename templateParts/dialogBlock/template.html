@@ -1,0 +1,32 @@
+<div class="persoo-block persoo-block--dialog">
+    <a
+        id="persoo--<%= offerID %>__dialog__button1"
+        class="persoo-block--dialog__link persoo-block--dialog__link--primary"
+        href="<%= dialogPrimaryActionLink %>"
+        onclick="return persoo_dialog_primary_clicked_<%= offerID %>(event);"
+        target="_blank"
+    >
+        <%= dialogPrimaryActionText %>
+    </a>
+    <a
+        id="persoo--<%= offerID %>__dialog__button2"
+        class="persoo-block--dialog__link persoo-block--dialog__link--secondary"
+        href="<%= dialogSecondaryActionLink %>"
+        onclick="return persoo_dialog_secondary_clicked_<%= offerID %>(event);"
+        target="_blank"
+    >
+        <%= dialogSecondaryActionText %>
+    </a>
+    <script>
+    function persoo_dialog_primary_clicked_<%= offerID %>(event) {
+        var offerID="<%= offerID %>";
+        <%= dialogPrimaryCallback %>;
+        persoo_close_<%= offerID %>();
+    }
+    function persoo_dialog_secondary_clicked_<%= offerID %>(event) {
+        var offerID="<%= offerID %>";
+        <%= dialogSecondaryCallback %>;
+        persoo_close_<%= offerID %>();
+    }
+    </script>
+</div>
