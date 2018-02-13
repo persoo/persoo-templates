@@ -1,4 +1,3 @@
-@@include templateParts/titleBlock/fields.json
 @@include templateParts/customHTMLV2/fields.json
 @@include templateParts/richTextBlockV2/fields.json
 @@include templateParts/callToActionBlockV2/fields.json

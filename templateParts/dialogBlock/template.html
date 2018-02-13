@@ -21,12 +21,12 @@
     function persoo_dialog_primary_clicked_<%= offerID %>(event) {
         var offerID="<%= offerID %>";
         <%= dialogPrimaryCallback %>;
-        persoo_close_<%= offerID %>();
+        persoo_close_<%= offerID %>(null, "dialogPrimary");
     }
     function persoo_dialog_secondary_clicked_<%= offerID %>(event) {
         var offerID="<%= offerID %>";
         <%= dialogSecondaryCallback %>;
-        persoo_close_<%= offerID %>();
+        persoo_close_<%= offerID %>(null, "dialogSecondary");
     }
     </script>
 </div>

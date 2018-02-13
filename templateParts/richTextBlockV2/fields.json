@@ -1,6 +1,18 @@
 {
+    "id": "title",
+    "name": "Title",
+    "group": "richTextBlock",
+    "type": "text",
+    "defaultValue": "New collection arrived!",
+    "condition": {
+        "fieldID": "showRichTextBlock",
+        "operator": "==",
+        "fieldValue": true
+    }
+},
+{
     "id": "richTextMessage",
-    "name": "Message (Rich Text)",
+    "name": "Rich Text",
     "group": "richTextBlock",
     "type": "richtext",
     "defaultValue": "<h1>H1</h1>\n<h2>H2</h2>\n<h3>H3</h3>\n<p>paragraph text paragraph text paragraph text</p>\n<p>paragraph text paragraph text paragraph text</p>",

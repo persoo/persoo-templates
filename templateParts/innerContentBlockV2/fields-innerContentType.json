@@ -1,13 +1,6 @@
 {
     "defaultValue": true,
     "group": "layout",
-    "id": "showTitleBlock",
-    "name": "Show Title Block",
-    "type": "checkbox"
-},
-{
-    "defaultValue": true,
-    "group": "layout",
     "id": "showRichTextBlock",
     "name": "Show Rich Text Block",
     "type": "checkbox"

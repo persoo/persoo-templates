@@ -30,16 +30,40 @@
                     "value": "right"
                 }
             ],
-            "defaultValue": "above"
+            "defaultValue": "above",
+            "condition": {
+                "operator": "==",
+                "fieldID": "showImage",
+                "fieldValue": true
+            }
         },
         {
             "id": "imageLink",
             "name": "Image Link (with proper size or fix it in CSS)",
             "group": "image",
-            "type": "text"
+            "type": "text",
+            "condition": {
+                "operator": "==",
+                "fieldID": "showImage",
+                "fieldValue": true
+            }
         },
 
+        {
+            "defaultValue": true,
+            "group": "layout",
+            "id": "showImage",
+            "name": "Show Image",
+            "type": "checkbox"
+        },
         @@include templateParts/innerContentBlockV2/fields-innerContentType.json
+        {
+            "defaultValue": true,
+            "group": "layout",
+            "id": "showDismissLinkInFooter",
+            "name": "Show Dismiss Link in Footer",
+            "type": "checkbox"
+        },
 
         {
             "id": "position",
@@ -134,6 +158,13 @@
             "defaultValue": 0
         },
         {
+            "id": "mobileResponsivityMaxWidth",
+            "name": "Show mobile version for screen width (in px) smaller than",
+            "group": "options",
+            "type": "number",
+            "defaultValue": 600
+        },
+        {
             "id": "useOverlay",
             "name": "Use screen overlay",
             "group": "options",
@@ -153,9 +184,13 @@
             "name": "Closing text in pop-up footer",
             "group": "options",
             "type": "text",
-            "defaultValue": "No thanks"
+            "defaultValue": "No thanks",
+            "condition": {
+                "fieldID": "showDismissLinkInFooter",
+                "operator": "==",
+                "fieldValue": true
+            }
         },
-
 
         @@include templateParts/innerContentBlockV2/fields.json
 
@@ -219,12 +254,13 @@
         }
     ],
     "groups": [
+
+        @@include templateParts/innerContentBlockV2/groups.json
         {
             "id": "image",
             "name": "Flexible Image"
         },
 
-        @@include templateParts/innerContentBlockV2/groups.json
         @@include templateParts/persooFormFieldsStyles/groups.json
 
         {

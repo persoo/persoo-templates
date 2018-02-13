@@ -16,10 +16,13 @@
         <% if (ctaAction == 'coupon') { %>
             document.getElementById("persoo--<%= offerID %>__cta__button").style.display = "none";
             document.getElementById("persoo--<%= offerID %>__coupon").style.display = "inline-block";
+            window.persoo('send', 'showCoupon', {offerID: "<%= offerID %>"});
             return false;
         <% } else if (ctaAction == 'close') { %>
             persoo_close_<%= offerID %>();
             return false;
+        <% } else { %>
+            window.persoo('send', 'callToActionClick', {offerID: "<%= offerID %>"});
         <% } %>
     }
     </script>

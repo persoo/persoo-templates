@@ -1,6 +1,3 @@
-<% if (showTitleBlock) { %>
-    @@include templateParts/titleBlock/template.css
-<% } %>
 <% if (showRichTextBlock) { %>
     @@include templateParts/richTextBlock/template.css
 <% } %>

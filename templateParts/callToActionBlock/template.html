@@ -1,7 +1,7 @@
 <div class="persoo-block persoo-block--cta">
     <% var ctaButtonHref = ctaButtonLink;
        if (ctaAction == 'close') {
-           ctaButtonHref = 'javascript:persoo_close_' + offerID + '()';
+           ctaButtonHref = 'javascript:persoo_close_' + offerID + '(null, null)';
        }
        if (ctaAction == 'coupon') {
            ctaButtonHref = 'javascript:persoo_showCoupon_' + offerID + '()';
@@ -23,6 +23,7 @@
             function persoo_showCoupon_<%= offerID %>() {
                 document.getElementById("persoo--<%= offerID %>__cta__button").style.display = "none";
                 document.getElementById("persoo--<%= offerID %>__coupon").style.display = "inline-block";
+                window.persoo('send', 'showCoupon', {offerID: "<%= offerID %>"});
                 return false;
             }
         </script>

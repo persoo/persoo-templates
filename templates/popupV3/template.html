@@ -107,10 +107,10 @@ function printCSSProps(obj) {
 
                 @@include templateParts/backgroundImageBlockV2/template.html
 
-                <% if (imageLink) { %>
+                <% if (showImage && imageLink) { %>
                     <div class="persoo--popup__image">
                     <img
-                        class="persoo-block persoo-block--image"
+                        class="persoo-block--image"
                         src="<%= imageLink %>"
                         alt="popup image"
                     >
@@ -121,16 +121,17 @@ function printCSSProps(obj) {
 
                     @@include templateParts/innerContentBlockV2/template.html
 
-                    <div class="persoo-block persoo-block--separator"></div>
-                    <div class="persoo--popup__dismiss-links">
-                        <a
-                            class="persooAction persoo--popup__dismiss-links--close"
-                            data-action="close"
-                            href="javascript:persoo_close_<%= offerID %>()"
-                        >
-                            <%= closingTextInFooter %>
-                        </a>
-                    </div>
+                    <% if (showDismissLinkInFooter) { %>
+                        <div class="persoo--popup__dismiss-links">
+                            <a
+                                class="persooAction persoo--popup__dismiss-links--close"
+                                data-action="close"
+                                href="javascript:persoo_close_<%= offerID %>()"
+                            >
+                                <%= closingTextInFooter %>
+                            </a>
+                        </div>
+                    <% } %>
                 </div>
              </div>
          </div>
@@ -178,7 +179,7 @@ function printCSSProps(obj) {
                     'transform: '+ getPosition[position].transform +';'
                     : '' %>
         }
-        @media (max-width: 600px) {
+        @media (max-width: <%= mobileResponsivityMaxWidth %>px) {
             #persoo--<%= offerID %> .persoo--popup__box {
                 left: 0;
                 right: 0;
@@ -202,10 +203,6 @@ function printCSSProps(obj) {
             -webkit-flex-direction: <%= imagePosition == 'above' ? 'column' : (imagePosition == 'left' ? 'row' : 'row-reverse') %>;
             display: flex;
             flex-direction: <%= imagePosition == 'above' ? 'column' : (imagePosition == 'left' ? 'row' : 'row-reverse') %>;
-        }
-        .persoo--popup__image,
-        .persoo--popup__content {
-            flex: 1 0 auto;
         }
         .persoo--popup__scrollWrapper {
             overflow-y: auto;
@@ -290,7 +287,7 @@ function printCSSProps(obj) {
                 transition: all <%= animationDurationInSec %> ease;
             }
             <% if (animationEffect != 'fade') { %>
-                @media (max-width: 600px) {
+                @media (max-width: <%= mobileResponsivityMaxWidth %>px) {
                     #persoo--<%= offerID %>[data-animate-closing="true"] .persoo--popup__box {
                         bottom: 0;
                     }
@@ -345,9 +342,10 @@ function printCSSProps(obj) {
         }
         persooPopupInit_<%= offerID %>();
 
-        function persoo_close_<%= offerID %>(href) {
+        function persoo_close_<%= offerID %>(href, eventName) {
             var elem = document.getElementById("persoo--<%= offerID %>");
-            window.persoo('send', 'close', {offerID: "<%= offerID %>"});
+            eventName = eventName || 'close';
+            window.persoo('send', eventName, {offerID: "<%= offerID %>"});
             if (href) {
                 window.location.href = href;
             }

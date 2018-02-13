@@ -39,40 +39,27 @@
 
 /* Close X */
 .persoo--popup__close-x {
-    display: inline-block;
-    box-sizing: content-box;
     position: absolute;
-    text-align: center;
-    opacity: 1;
+    width: 22px;
+    height: 22px;
+    right: 0;
+    top: 0;
+    /* change color and size in decoded SVG. Note: svg must be encoded because of IE. */
+    background: url("data:image/svg+xml;charset=utf8,%3Csvg%20width%3D%2712%27%20height%3D%2712%27%20viewBox%3D%270%200%2012%2012%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20opacity%3D%270.6%27%3E%3Cpath%20d%3D%27M.566%201.698L0%201.13%201.132%200l.565.566L6%204.868%2010.302.566%2010.868%200%2012%201.132l-.566.565L7.132%206l4.302%204.3.566.568L10.868%2012l-.565-.566L6%207.132l-4.3%204.302L1.13%2012%200%2010.868l.566-.565L4.868%206%20.566%201.698z%27%3E%3C%2Fpath%3E%3C%2Fsvg%3E");
+    background-size: 14px 14px;
+    background-position: center center;
+    background-repeat: no-repeat;
     cursor: pointer;
-    color: black;
-    right:3px;
-    top:3px;
+    opacity: 1;
 }
 .persoo--popup__close-x:hover {
-    opacity: 0.8;
+    opacity: 0.7;
 }
 /* Choose close X position (in box corner | in page corner)
    and hide the other: */
 /* .persoo--popup__box > .persoo--popup__close-x */
 .persoo--popup > .persoo--popup__close-x {
     display: none;
-}
-.persoo--popup__icon {
-    background: transparent;
-    display: inline-block;
-    box-sizing: content-box;
-    font-style: normal;
-    vertical-align: middle;
-    position: relative;
-}
-.persoo--popup__close-x > span.persoo--popup__icon:before{
-    content:"\2716"; /* content:"\2715"; */
-    display: block;
-    font-weight: normal;
-    font-style: normal;
-    text-align: center;
-    -webkit-font-smoothing: antialiased;
 }
 .persoo--popup__dismiss-links {
     text-align:center;
@@ -105,7 +92,7 @@
 .persoo--popup__scrollWrapper {
     border-radius: 0px;
     border: 0px solid #000;
-    box-shadow: #000 2px 3px 15px;
+    box-shadow: rgba(0,0,0,0.5) 0px 0px 15px;
 }
 
 /* Form fields - delete them all if you have your own form styles */
@@ -195,8 +182,14 @@
 }
 
 /* persoo block styles */
-.persoo-block {
-    margin-bottom: 10px;
+.persoo-block--image,
+.persoo-block--collect-email,
+.persoo-block--richtext {
+    margin-bottom: 20px;
+}
+.persoo-block--richtext h1 {
+    margin-top: 0;
+    text-align: center;
 }
 .persoo--widget__content > div:last-child {
     margin-bottom: 0 !important;
@@ -229,7 +222,10 @@
     background-color: transparent; /* for outlined buttons */
     background-color: #40a4f4;
     color: #fff;
-    -ms-hyphens: manual;
+    word-wrap: normal;
+    -ms-hyphens: none;
+    -webkit-hyphens: none;
+    hyphens: none;
 }
 .persoo--widget__content input[type="text"],
 .persoo--widget__content .persoo-block--collect-email__form__email {

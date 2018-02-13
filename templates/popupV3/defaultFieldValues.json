@@ -13,7 +13,7 @@
     "overlayColor": "rgba(36, 39, 41, 0.1)",
     "imageLink": "https://placehold.it/330x200?text=medium+image+330x200",
     "customHTML": "<div>Your HTML code...</div>",
-    "richTextMessage": "<p>We just received new products. There<br>\n is a limited amount, go and take a look now!</p>",
+    "richTextMessage": "<p style=\"text-align:center;\">We just received new products. There<br/>  is a limited amount, go and take a look now!</p>",
     "ctaActionType": "button",
     "ctaButtonLabel": "SHOW&nbsp;ME",
     "ctaAction": "redirect",
