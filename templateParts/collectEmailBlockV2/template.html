@@ -65,13 +65,13 @@
                 } else {
                     window.persoo('send','submit', {
                         offerID: offerID,
-                        email: email,
                         updateSubscriptions: [{
                             listID: "<%= subscriptionListID %>",
-                            sublistID: "",
+                            sublistID: "<%= subscriptionListID && subscriptionSubListID ? subscriptionSubListID : '' %>",
                             action: 'subscribe',
                             data: email
-                        }]
+                        }],
+                        email: email
                     });  // TODO use callback for confirmation?
                 }
 

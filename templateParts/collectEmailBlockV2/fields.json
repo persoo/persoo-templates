@@ -47,6 +47,28 @@
     }
 },
 {
+    "id": "subscriptionSubListID",
+    "name": "Subscription SubList ID (i.e. for product related subscriptions)",
+    "group": "collectEmail",
+    "type": "text",
+    "defaultValue": "default",
+    "condition": {
+        "operator": "and",
+        "children": [
+            {
+                "fieldID": "innerContentType",
+                "operator": "match",
+                "fieldValue": "CollectEmail"
+            },
+            {
+                "fieldID": "subscriptionListID",
+                "operator": "!=",
+                "fieldValue": ""
+            }
+        ]
+    }
+},
+{
     "id": "collectEmailOnSubmitCallback",
     "name": "onSubmit callback",
     "group": "collectEmail",
@@ -63,7 +85,7 @@
     "name": "Consent checkbox text (empty for no checkbox)",
     "group": "collectEmail",
     "type": "richtext",
-    "defaultValue": "By signing up you agree with our <a href='#'>terms and privacy policy</a>.",
+    "defaultValue": "I agree with your <a href='#'>terms and privacy policy</a>.",
     "condition": {
         "fieldID": "innerContentType",
         "operator": "match",

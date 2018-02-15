@@ -238,6 +238,10 @@
     font-size: smaller;
     color: #030303db;
 }
+.persoo-block--collect-email__form__consentParent input[type="checkbox"] {
+    float: left;
+    margin-right: 8px;
+}
 
 .persoo--widget__content input[type="submit"]:hover,
 .persoo--widget__content .persoo-block--collect-email__form__submit:hover,
