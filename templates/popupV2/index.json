@@ -1,12 +1,12 @@
 {
     "class": "webWidget",
     "minScenariosCount": 0,
-    "name": "Pop-up",
+    "name": "Pop-up 2017",
     "defaultsForOfferTemplate": {
         "description": "Basic Pop-up with rich options.",
         "releaseStage": "beta",
         "data": {
-            "name": "Pop-up",
+            "name": "Pop-up 2017",
             "location": "popup"
         }
     },

@@ -117,7 +117,7 @@
     "name": "onClick callback",
     "group": "cta",
     "type": "javascript",
-    "defaultValue": "console.log('Call to action in offer \"' + offerID + '\" was clicked');",
+    "defaultValue": "/* console.log('Call to action in offer \"' + offerID + '\" was clicked'); */\n\n/* to pass extra params with persoo request:\nextraRequestData.paramX = 123;\n*/",
     "condition": {
         "fieldID": "innerContentType",
         "operator": "match",

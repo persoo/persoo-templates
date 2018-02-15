@@ -35,6 +35,19 @@
     }
 },
 {
+    "id": "collectEmailConsent",
+    "name": "Consent checkbox text (empty for no checkbox)",
+    "group": "collectEmail",
+    "type": "richtext",
+    "defaultValue": "I agree with your <a href='#'>terms and privacy policy</a>.",
+    "condition": {
+        "fieldID": "innerContentType",
+        "operator": "match",
+        "fieldValue": "CollectEmail"
+    }
+},
+
+{
     "id": "subscriptionListID",
     "name": "Subscription List ID (as defined in settings - subscriptions)",
     "group": "collectEmail",
@@ -73,19 +86,7 @@
     "name": "onSubmit callback",
     "group": "collectEmail",
     "type": "javascript",
-    "defaultValue": "/* create subscription list in settings:\nconsole.log('Email \"' + email + '\" submitted in offer \"' + offerID + '\".');*/",
-    "condition": {
-        "fieldID": "innerContentType",
-        "operator": "match",
-        "fieldValue": "CollectEmail"
-    }
-},
-{
-    "id": "collectEmailConsent",
-    "name": "Consent checkbox text (empty for no checkbox)",
-    "group": "collectEmail",
-    "type": "richtext",
-    "defaultValue": "I agree with your <a href='#'>terms and privacy policy</a>.",
+    "defaultValue": "/* console.log(isValid ? 'Valid':'Invalid') + ' submit of email \"' + email + '\" in offer \"' + offerID + '\".'); */\n\n/* to pass extra params with submit request:\nextraRequestData.paramX = 123;\n*/",
     "condition": {
         "fieldID": "innerContentType",
         "operator": "match",

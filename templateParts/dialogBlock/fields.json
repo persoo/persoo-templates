@@ -27,7 +27,7 @@
     "name": "Primary onClick callback",
     "group": "dialog",
     "type": "javascript",
-    "defaultValue": "console.log('Primary action in offer \"' + offerID + '\" was clicked');",
+    "defaultValue": "/* console.log('Primary action in offer \"' + offerID + '\" was clicked');*/\n\n/* to pass extra params with persoo request:\nextraRequestData.paramX = 123;\n*/",
     "condition": {
         "fieldID": "innerContentType",
         "operator": "match",
@@ -63,7 +63,7 @@
     "name": "Secondary onClick callback",
     "group": "dialog",
     "type": "javascript",
-    "defaultValue": "console.log('Secondary action in offer \"' + offerID + '\" was clicked');",
+    "defaultValue": "/* console.log('Secondary action in offer \"' + offerID + '\" was clicked');*/\n\n/* to pass extra params with persoo request:\nextraRequestData.paramX = 123;\n*/",
     "condition": {
         "fieldID": "innerContentType",
         "operator": "match",

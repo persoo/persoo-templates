@@ -11,18 +11,19 @@
     <script>
     function persoo_cta_clicked_<%= offerID %>(event) {
         var offerID="<%= offerID %>";
+        var extraRequestData = {};
         <%= ctaOnClickCallback %>;
 
         <% if (ctaAction == 'coupon') { %>
             document.getElementById("persoo--<%= offerID %>__cta__button").style.display = "none";
             document.getElementById("persoo--<%= offerID %>__coupon").style.display = "inline-block";
-            window.persoo('send', 'showCoupon', {offerID: "<%= offerID %>"});
+            window.persoo('send', 'showCoupon', {offerID: "<%= offerID %>"}, extraRequestData);
             return false;
         <% } else if (ctaAction == 'close') { %>
-            persoo_close_<%= offerID %>();
+            persoo_close_<%= offerID %>(null, null, extraRequestData);
             return false;
         <% } else { %>
-            window.persoo('send', 'callToActionClick', {offerID: "<%= offerID %>"});
+            window.persoo('send', 'callToActionClick', {offerID: "<%= offerID %>"}, extraRequestData);
         <% } %>
     }
     </script>

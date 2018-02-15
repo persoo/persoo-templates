@@ -20,13 +20,15 @@
     <script>
     function persoo_dialog_primary_clicked_<%= offerID %>(event) {
         var offerID="<%= offerID %>";
+        var extraRequestData = {};
         <%= dialogPrimaryCallback %>;
-        persoo_close_<%= offerID %>(null, "dialogPrimary");
+        persoo_close_<%= offerID %>(null, "dialogPrimary", extraRequestData);
     }
     function persoo_dialog_secondary_clicked_<%= offerID %>(event) {
         var offerID="<%= offerID %>";
+        var extraRequestData = {};
         <%= dialogSecondaryCallback %>;
-        persoo_close_<%= offerID %>(null, "dialogSecondary");
+        persoo_close_<%= offerID %>(null, "dialogSecondary", extraRequestData);
     }
     </script>
 </div>

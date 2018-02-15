@@ -342,10 +342,11 @@ function printCSSProps(obj) {
         }
         persooPopupInit_<%= offerID %>();
 
-        function persoo_close_<%= offerID %>(href, eventName) {
+        function persoo_close_<%= offerID %>(href, eventName, extraRequestData) {
             var elem = document.getElementById("persoo--<%= offerID %>");
             eventName = eventName || 'close';
-            window.persoo('send', eventName, {offerID: "<%= offerID %>"});
+            extraRequestData = extraRequestData || {};
+            window.persoo('send', eventName, {offerID: "<%= offerID %>"}, extraRequestData);
             if (href) {
                 window.location.href = href;
             }

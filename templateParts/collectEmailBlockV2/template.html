@@ -59,25 +59,34 @@
 
             if (isValid) {
                 /* submit */
+                var extraRequestData = {};
                 <%= collectEmailOnSubmitCallback %>;
-                if (window.persoo.offerActions && window.persoo.offerActions[offerID] && window.persoo.offerActions[offerID].submit) {
-                    window.persoo.offerActions[offerID].submit({offerID: offerID , email: email});
-                } else {
-                    window.persoo('send','submit', {
-                        offerID: offerID,
-                        updateSubscriptions: [{
-                            listID: "<%= subscriptionListID %>",
-                            sublistID: "<%= subscriptionListID && subscriptionSubListID ? subscriptionSubListID : '' %>",
-                            action: 'subscribe',
-                            data: email
-                        }],
-                        email: email
-                    });  // TODO use callback for confirmation?
-                }
+                window.persoo('send','submit', {
+                    offerID: offerID,
+                    locationID: "<%= locationID %>",
+                    subscriptionListID: "<%= subscriptionListID %>",
+                    subscriptionSubListID: "<%= subscriptionSubListID %>",
+                    updateSubscriptions: [{
+                        listID: "<%= subscriptionListID %>",
+                        sublistID: "<%= subscriptionListID && subscriptionSubListID ? subscriptionSubListID : '' %>",
+                        action: 'subscribe',
+                        data: email
+                    }],
+                    email: email
+                }, extraRequestData);  // TODO use callback for confirmation?
 
                 document.getElementById("persoo--<%= offerID %>__form").style.display = "none";
                 document.getElementById("persoo--<%= offerID %>__form__consentParent").style.display = "none";
                 document.getElementById("persoo--<%= offerID %>__thank-you").style.display = "inline-block";
+            } else {
+                /* submit */
+                var extraRequestData = {};
+                <%= collectEmailOnSubmitCallback %>;
+                window.persoo('send','submitError', {
+                    offerID: offerID,
+                    locationID: "<%= locationID %>"
+                }, extraRequestData);
+
             }
 
             return false;
