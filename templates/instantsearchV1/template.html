@@ -284,7 +284,8 @@
                         persooInstantSearch.widgets.searchBox({
                             container: '<%= widgetContainerSelectors.fulltextFilter %>',
                             placeholder: '<%= fulltextFilterPlaceholder %>',
-                            cssClasses: <%= addClassNamesFor('searchBox', {}, true) %>
+                            cssClasses: <%= addClassNamesFor('searchBox', {}, true) %>,
+                            autofocus: <%= fulltextFilterAutofocus %>
                         })
                     );
                 <% } %>

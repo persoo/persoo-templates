@@ -305,6 +305,13 @@
             "type": "text",
             "defaultValue": "Search for products..."
         },
+        {
+            "id": "fulltextFilterAutofocus",
+            "name": "Autofocus on the Input",
+            "group": "fulltextFilter",
+            "type": "checkbox",
+            "defaultValue": true
+        },
 
         {
             "id": "showFilters",
