@@ -2,8 +2,15 @@
     var inputSelector = '#persoo--' + offerID + ' .persoo-ac-search-bar__input';
     var formSelector = '#persoo--' + offerID + ' .persoo-ac-search-bar__form';
     var dropdownSelector = '#persoo--' + offerID + ' .persoo-ac-search-bar__dropdown';
+
+    function getNamedFunctionFromSource(functionSourceCode, functionName) {
+        return functionSourceCode.replace(/^\s*function\s+[a-zA-Z]*\s*\(/, 'function '+ functionName + '(');
+    }
+    function isFunctionSource(functionSourceCode) {
+        return !!(functionSourceCode && functionSourceCode.match(/^\s*function\s+/));
+    }
 %>
-<div id="persoo--<%= offerID %>" class="persoo-ac">
+<div id="persoo--<%= offerID %>" class="persoo-ac persooAction">
     <style type="text/css">
         <%= customCSS %>
     </style>
@@ -24,14 +31,70 @@
 
     <script>
         var persoo_<%= offerID %> = (function () {
+            var optionsWithOfferID = {offerID: "<%= offerID %>", locationID: "<%= locationID %>"};
+            function reportEventToPersoo(eventName, options) {
+                window.persoo('send', eventName, optionsWithOfferID, options);
+            }
             function initAutocomplete() {
+                var searchReported = false;
                 var myAutocomplete = new PersooAutocomplete('<%= inputSelector %>', '<%= dropdownSelector %>', {
                     autocompleteID: "persooAutocompleteDropdown",
                     datasets: [
+                        <% if (datasetsCount >= 4) { %>
+                            {
+                                id: "4",
+                                source: window.persoo.getAlgorithmSource('<%= dataset4Algorithm %>', <%= dataset4MaxResultsCount %>, optionsWithOfferID),
+                                group: "<%= dataset2Group %>",
+                                showWhenEmptyResults: <%= dataset4ShowWhenEmptyResults %>,
+                                <%
+                                   var templates4 = {};
+                                   if (dataset4HeaderTemplate) {
+                                       templates4.header = dataset4HeaderTemplate;
+                                   }
+                                   if (dataset4ItemTemplate) {
+                                       templates4.item = dataset4ItemTemplate;
+                                   }
+                                   if (dataset4FooterTemplate) {
+                                       templates4.footer = dataset4FooterTemplate;
+                                   }
+                                   if (dataset4EmptyTemplate) {
+                                       templates4.empty = dataset4EmptyTemplate;
+                                   }
+                                %>
+                                templates: <%= JSON.stringify(templates4) %>,
+                                classNames: <%= JSON.stringify(customClassNamesJSON.dataset4 || {}) %>
+                            },
+                        <% } %>
+                        <% if (datasetsCount >= 3) { %>
+                            {
+                                id: "3",
+                                source: window.persoo.getAlgorithmSource('<%= dataset3Algorithm %>', <%= dataset3MaxResultsCount %>, optionsWithOfferID),
+                                group: "<%= dataset3Group %>",
+                                showWhenEmptyResults: <%= dataset3ShowWhenEmptyResults %>,
+                                <%
+                                   var templates3 = {};
+                                   if (dataset3HeaderTemplate) {
+                                       templates3.header = dataset3HeaderTemplate;
+                                   }
+                                   if (dataset3ItemTemplate) {
+                                       templates3.item = dataset3ItemTemplate;
+                                   }
+                                   if (dataset3FooterTemplate) {
+                                       templates3.footer = dataset3FooterTemplate;
+                                   }
+                                   if (dataset3EmptyTemplate) {
+                                       templates3.empty = dataset3EmptyTemplate;
+                                   }
+                                %>
+                                templates: <%= JSON.stringify(templates3) %>,
+                                classNames: <%= JSON.stringify(customClassNamesJSON.dataset3 || {}) %>
+                            },
+                        <% } %>
                         <% if (datasetsCount >= 2) { %>
                             {
                                 id: "2",
-                                source: window.persoo.getAlgorithmSource('<%= dataset2Algorithm %>', <%= dataset2MaxResultsCount %>),
+                                source: window.persoo.getAlgorithmSource('<%= dataset2Algorithm %>', <%= dataset2MaxResultsCount %>, optionsWithOfferID),
+                                group: "<%= dataset2Group %>",
                                 showWhenEmptyResults: <%= dataset1ShowWhenEmptyResults %>,
                                 <%
                                    var templates2 = {};
@@ -54,7 +117,8 @@
                         <% } %>
                         {
                             id: "1",
-                            source: window.persoo.getAlgorithmSource('<%= dataset1Algorithm %>', <%= dataset1MaxResultsCount %>),
+                            source: window.persoo.getAlgorithmSource('<%= dataset1Algorithm %>', <%= dataset1MaxResultsCount %>, optionsWithOfferID),
+                            group: "<%= dataset1Group %>",
                             showWhenEmptyResults: <%= dataset1ShowWhenEmptyResults %>,
                             <%
                                 var templates1 = {};
@@ -73,42 +137,84 @@
                             %>
                             templates: <%= JSON.stringify(templates1) %>,
                             classNames: <%= JSON.stringify(customClassNamesJSON.dataset1 || {}) %>
-                        },
+                        }
                     ],
                     minChars: <%= minChars %>,
                     requestThrottlingInMs: <%= requestThrottlingInMs %>,
                     openOnFocus: <%= openOnFocus %>,
                     closeOnBlur: <%= closeOnBlur %>,
                     classNames: <%= JSON.stringify(customClassNamesJSON.dropdown || {}) %>,
-                        offsetLeft: null,
-                        offsetTop: null,
-                        width: null,
-                        onRender: function(state) {
-                            <% if (formSelector) { %>
-                                var formClassName = formNode.className;
-                                var formVisibleClassName = ' persoo-ac-search-bar__form--visible';
-                                var hasFormVisibleClassName = formClassName.match(formVisibleClassName) !== null;
+                    offsetLeft: null,
+                    offsetTop: null,
+                    width: null,
+                    onRender: function(state) {
+                        <% if (formSelector) { %>
+                            var formClassName = formNode.className;
+                            var formVisibleClassName = ' persoo-ac-search-bar__form--visible';
+                            var hasFormVisibleClassName = formClassName.match(formVisibleClassName) !== null;
 
-                                if (state.isVisible) {
-                                    formClassName = hasFormVisibleClassName ?
-                                        formClassName :
-                                    	formClassName + formVisibleClassName;
-                                } else {
-                                    formClassName = hasFormVisibleClassName ?
-                                        formClassName.replace(formVisibleClassName, '') :
-                                    	formClassName;
-                                }
+                            if (state.isVisible) {
+                                formClassName = hasFormVisibleClassName ?
+                                    formClassName :
+                                    formClassName + formVisibleClassName;
+                            } else {
+                                formClassName = hasFormVisibleClassName ?
+                                    formClassName.replace(formVisibleClassName, '') :
+                                    formClassName;
+                            }
 
-                                formNode.className = formClassName;
-                            <% } %>
+                            formNode.className = formClassName;
+                        <% } %>
+                        <% if (isFunctionSource(customOnRender)) { %>
+                            <%= getNamedFunctionFromSource(customOnRender, 'autocompleteCustomOnRender') %>
+                            autocompleteCustomOnRender(state);
+                        <% } %>
+                    },
+                    onQueryChanged: function(state) {
+                        if (!searchReported) {
+                            reportEventToPersoo('queryEntered');
+                            searchReported = true;
                         }
+                        <% if (isFunctionSource(customOnQueryChanged)) { %>
+                            <%= getNamedFunctionFromSource(customOnQueryChanged, 'autocompleteCustomOnQueryChanged') %>
+                            autocompleteCustomOnQueryChanged(state);
+                        <% } %>
+                    },
+                    onSelect: function(selectedItem, redirectToItemLink) {
+                        /* FIXME report also table/dataset */
+                        reportEventToPersoo('click', {id: selectedItem.id, itemID: selectedItem.itemID, itemGroupID: selectedItem.itemGroupID});
+                        redirectToItemLink();
+                        <% if (isFunctionSource(customOnSelect)) { %>
+                            <%= getNamedFunctionFromSource(customOnSelect, 'autocompleteCustomOnSelect') %>
+                            autocompleteCustomOnSelect(selectedItem, redirectToItemLink);
+                        <% } %>
+                    }
                 });
+
+                /* update search input */
+                <% if (inputSelector && formSelector) { %>
+                    var formNode2 = document.querySelector('<%= formSelector %>');
+                    formNode2.onsubmit = function() {
+                        var query = document.querySelector('<%= inputSelector %>').value;
+                        reportEventToPersoo('search');
+
+                        var targetLink = '<%= searchLink %>'.replace(/\$query/g, query);
+                        <% if (isFunctionSource(customOnSubmit)) { %>
+                            <%= getNamedFunctionFromSource(customOnSubmit, 'autocompleteCustomOnSubmit') %>
+                            var datasetsState = myAutocomplete.autocompleteManager.state.datasets;
+                            targetLink = autocompleteCustomOnSubmit(targetLink, datasetsState);
+                        <% } %>
+
+                        document.location.href = targetLink;
+                        return false;
+                    };
+                <% } %>
             }
             function loadScript(url, onloadFn, errorFn) {var d = document; var s=d.createElement("script");
                 s.src=url,s.type="text/javascript",s.async=true,s.onerror=errorFn,s.onload=onloadFn;
                 d.getElementsByTagName("head")[0].appendChild(s)};
 
-            var acLibLink = "https://scripts.persoo.cz/shared/autocompleteV2.4/persooAutocomplete.js";
+            var acLibLink = "https://scripts.persoo.cz/shared/autocompleteV2.5/persooAutocomplete.js";
             loadScript(acLibLink, initAutocomplete, function (){});
         })();
     </script>

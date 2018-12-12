@@ -368,6 +368,7 @@ module.exports = {
             for (var j = 0; j < 20; j++) {
                 var product = JSON.parse(JSON.stringify(sampleProduct));
                 product.title += ' ' + i + '.' + j;
+                product.itemGroupID = 'groupId' + (1000*i + j);
                 list.push(product);
             }
         }
@@ -378,6 +379,7 @@ module.exports = {
         for (var i = 0; i < count; i++) {
             var productClone = JSON.parse(JSON.stringify(sampleProduct));
             productClone.title += ' ' + i;
+            productClone.itemGroupID = 'groupId' + i;
             list.push(productClone);
         }
         return list;
