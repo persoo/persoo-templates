@@ -182,7 +182,8 @@
                     },
                     onSelect: function(selectedItem, redirectToItemLink) {
                         /* FIXME report also table/dataset */
-                        reportEventToPersoo('click', {id: selectedItem.id, itemID: selectedItem.itemID, itemGroupID: selectedItem.itemGroupID});
+                        var query = document.querySelector('<%= inputSelector %>').value;
+                        reportEventToPersoo('click', {id: selectedItem.id, itemID: selectedItem.itemID, itemGroupID: selectedItem.itemGroupID, query: query});
                         redirectToItemLink();
                         <% if (isFunctionSource(customOnSelect)) { %>
                             <%= getNamedFunctionFromSource(customOnSelect, 'autocompleteCustomOnSelect') %>
@@ -194,18 +195,22 @@
                 /* update search input */
                 <% if (inputSelector && formSelector) { %>
                     var formNode2 = document.querySelector('<%= formSelector %>');
-                    formNode2.onsubmit = function() {
+                    formNode2.onsubmit = function(e) {
                         var query = document.querySelector('<%= inputSelector %>').value;
-                        reportEventToPersoo('search');
+                        reportEventToPersoo('search', {query: query});
 
                         var targetLink = '<%= searchLink %>'.replace(/\$query/g, query);
                         <% if (isFunctionSource(customOnSubmit)) { %>
-                            <%= getNamedFunctionFromSource(customOnSubmit, 'autocompleteCustomOnSubmit') %>
-                            var datasetsState = myAutocomplete.autocompleteManager.state.datasets;
-                            targetLink = autocompleteCustomOnSubmit(targetLink, datasetsState);
+                            myAutocomplete.autocompleteManager.actions.waitForDataReceived(3000, function (){
+                                <%= getNamedFunctionFromSource(customOnSubmit, 'autocompleteCustomOnSubmit') %>
+                                var datasetsState = myAutocomplete.autocompleteManager.state.datasets;
+                                targetLink = autocompleteCustomOnSubmit(targetLink, datasetsState);
+                                document.location.href = targetLink;
+                            });
+                            e.preventDefault();
+                        <% } else { %>
+                            document.location.href = targetLink;
                         <% } %>
-
-                        document.location.href = targetLink;
                         return false;
                     };
                 <% } %>
