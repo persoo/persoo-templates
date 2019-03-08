@@ -60,6 +60,8 @@
                 var search = persooInstantSearch({
                     algorithmID: "<%= searchAlgorithm %>",
                     index: "products",
+                    offerID: "<%= offerID %>",
+                    locationID: "<%= locationID %>",
                     hideOnEmptyQuery: <%= hideOnEmptyInput %>,
                     urlSync: <%= !urlSync ? 'false' : JSON.stringify({
                         mapping: urlSyncMapping,
