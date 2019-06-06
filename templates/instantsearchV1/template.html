@@ -582,6 +582,14 @@
                     var filtersElem = document.querySelector('<%= widgetContainerSelectors.filters %>');
                     setHiddenClass(filtersElem, state.nbHits > 0);
                 });
+
+                search.destroy = function() {
+                    var sliderActiveObjects = document.querySelectorAll('.persoo-rangeSlider__body > div');
+                    for (var i = 0; i < sliderActiveObjects.length; i++) {
+                        sliderActiveObjects[i].noUiSlider && sliderActiveObjects[i].noUiSlider.destroy();
+                    }
+                };
+                window.persooInstantSearchInstance = search;
             }
             function loadScript(url, onloadFn, errorFn) {var d = document; var s=d.createElement("script");
                 s.src=url,s.type="text/javascript",s.async=true,s.onerror=errorFn,s.onload=onloadFn;
