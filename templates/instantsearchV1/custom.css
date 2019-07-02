@@ -915,3 +915,36 @@
 .persoo-hidden {
     display: none;
 }
+
+/* Loading efect */
+.persoo-loading {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 10%;
+}
+.persoo-loading-circle {
+    border: 16px solid #f3f3f3; /* loader background */
+    border-top: 16px solid #bd1e51; /* loader pie */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: persoo-loading-spin 2s linear infinite;
+}
+.persoo-loading-img {
+/* custom logo/img below loader
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    content: "";
+    background: #eee0 url(https://your.domain/path/img.png) no-repeat scroll center;
+    background-size: cover;
+*/
+}
+
+@keyframes persoo-loading-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

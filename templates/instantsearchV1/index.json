@@ -91,7 +91,7 @@
             "name": "Item Template",
             "group": "items",
             "type": "html",
-            "defaultValue": "<%\n    function prepareDescription(desc) {\n        desc = desc || '';\n        return desc.replace('\"', '\\\"');\n    }\n    function commas(n, s, d) {\n        s = s || ' ';\n        d = d || '.';\n        var parts = n.toString().split('.');\n        parts[0] = parts[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, s);\n        return parts.join(d);\n    }\n%>\n<a href=\"<%= item.link %>\"\n   class=\"persoo-result-item__link\">\n    <div class=\"persoo-result-item__img-container\">\n        <img src=<%= item.imageLink %>\n             class=\"persoo-result-item__img\">\n    </div>\n    <div class=\"persoo-result-item__title\" title=<%= prepareDescription(item.description) %>>\n        <%= item.title %>\n    </div>\n    <div class=\"persoo-result-item__price\">\n        <span class=\"persoo-result-item__price__current\">\n            <%= commas(item.price) %>&nbsp;Kč\n        </span>\n        <% if (item.priceOriginal && item.priceOriginal !== item.price) { %>\n            <span class=\"persoo-result-item__price__original\">\n                <%= commas(item.priceOriginal) %>&nbsp;Kč\n            </span>\n        <% } %> \n    </div>\n</a>"
+            "defaultValue": "<%\n    function prepareDescription(desc) {\n        desc = desc || '';\n        return desc.replace('\"', '\\\"');\n    }\n    function commas(n, s, d) {\n        s = s || ' ';\n        d = d || '.';\n        var parts = n.toString().split('.');\n        parts[0] = parts[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, s);\n        return parts.join(d);\n    }\n%>\n<a href=\"<%= item.link %>\"\n   class=\"persoo-result-item__link\">\n    <div class=\"persoo-result-item__img-container\">\n        <img src=\"<%= item.imageLink %>\"\n             class=\"persoo-result-item__img\">\n    </div>\n    <div class=\"persoo-result-item__title\" title=\"<%= prepareDescription(item.description) %>\">\n        <%= item.title %>\n    </div>\n    <div class=\"persoo-result-item__price\">\n        <span class=\"persoo-result-item__price__current\">\n            <%= commas(item.price) %>&nbsp;Kč\n        </span>\n        <% if (item.priceOriginal && item.priceOriginal !== item.price) { %>\n            <span class=\"persoo-result-item__price__original\">\n                <%= commas(item.priceOriginal) %>&nbsp;Kč\n            </span>\n        <% } %> \n    </div>\n</a>"
         },
         {
             "id": "emptyResultsTemplate",
@@ -345,7 +345,7 @@
                 {
                     "type": "refinementList",
                     "attributeName": "brand",
-                    "classNames": {"root": "persoo-brands"},
+                    "classNames":{"root":"persoo-brands"},
                     "headerTemplate": "Brand",
                     "collapsed": false
                 },

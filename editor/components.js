@@ -13,6 +13,11 @@ var templateStore = require('./templateStore.js');
 var offerStore = require('./offerStore.js');
 var contextStore = require('./contextStore.js');
 
+function ready(documentElem, callback) {
+  if (documentElem.readyState !== 'loading') { return callback() }
+  return documentElem.addEventListener('DOMContentLoaded', callback)
+}
+
 module.exports = {
     panelFormFields: {}, // list of formFields on each panelID
     isPreviewIframeLoaded: false,
@@ -298,16 +303,19 @@ module.exports = {
     mountPreview: function() {
         var previewIframe = document.getElementById('persooPreview');
         var previewDoc = previewIframe.contentWindow.document;
+        var that = this;
 
-        previewDoc.body.innerHTML = 'Here you will see the preview ...';
-
-        if (!this.isPreviewIframeLoaded) {
-            var that = this;
-            previewIframe.onload = function() {
-                that.isPreviewIframeLoaded = true;
-                that.renderPreview();
+        function mountPreviewInner() {
+            previewDoc.body.innerHTML = 'Here you will see the preview ...';
+            if (!that.isPreviewIframeLoaded) {
+                previewIframe.onload = function() {
+                    that.isPreviewIframeLoaded = true;
+                    that.renderPreview();
+                }
             }
         }
+        ready(previewDoc, mountPreviewInner);
+
     },
     renderPreview: function() {
         if (templateStore.currentTemplateID) {
@@ -326,7 +334,7 @@ module.exports = {
 
             var currentTemplate = templateStore.templates[templateStore.currentTemplateID];
             var templateString = currentTemplate.htmlBody || currentTemplate.template;
-            var currentOffer = offerStore.offers[templateStore.currentTemplateID];
+            var currentOffer = JSON.parse(JSON.stringify(offerStore.offers[templateStore.currentTemplateID]));
             var currentContext = {
                 offerID: "randomOfferID",
                 locationID: "randoLocationID",
