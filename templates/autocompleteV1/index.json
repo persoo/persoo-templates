@@ -83,6 +83,13 @@
         },
 
         {
+            "id": "customOnSubmitWaitForData",
+            "name": "onSubmit - wait for suggested data for final query before calling onSubmit javascript",
+            "group": "options",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
             "id": "customOnSubmit",
             "name": "onSubmit javascript (when search button clicked)",
             "group": "options",

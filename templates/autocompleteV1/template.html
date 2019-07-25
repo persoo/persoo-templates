@@ -13,6 +13,7 @@
 <div id="persoo--<%= offerID %>" class="persoo-ac persooAction">
     <style type="text/css">
         <%= customCSS %>
+
     </style>
 
     <%= searchBarTemplate %>
@@ -37,6 +38,12 @@
             }
             function initAutocomplete() {
                 var searchReported = false;
+                var inputElem = document.querySelector('<%= inputSelector %>');
+                var placeholdersToRotate = inputElem ? (inputElem.dataset.placeholdersToRotate || null) : null;
+                if (typeof placeholdersToRotate == 'string') {
+                    placeholdersToRotate = JSON.parse(placeholdersToRotate);
+                }
+                var placeholdersRotationPeriod = inputElem ? (inputElem.dataset.placeholdersRotationPeriod || 4000) : 4000;
                 var myAutocomplete = new PersooAutocomplete('<%= inputSelector %>', '<%= dropdownSelector %>', {
                     autocompleteID: "persooAutocompleteDropdown",
                     datasets: [
@@ -147,6 +154,8 @@
                     offsetLeft: null,
                     offsetTop: null,
                     width: null,
+                    placeholdersToRotate: placeholdersToRotate,
+                    placeholdersRotationPeriod: placeholdersRotationPeriod,
                     onRender: function(state) {
                         <% if (formSelector) { %>
                             var formClassName = formNode.className;
@@ -201,12 +210,17 @@
 
                         var targetLink = '<%= searchLink %>'.replace(/\$query/g, query);
                         <% if (isFunctionSource(customOnSubmit)) { %>
-                            myAutocomplete.autocompleteManager.actions.waitForDataReceived(3000, function (){
+                            var onSubmitInnerCallback = function (){
                                 <%= getNamedFunctionFromSource(customOnSubmit, 'autocompleteCustomOnSubmit') %>
                                 var datasetsState = myAutocomplete.autocompleteManager.state.datasets;
                                 targetLink = autocompleteCustomOnSubmit(targetLink, datasetsState);
                                 document.location.href = targetLink;
-                            });
+                            };
+                            <% if (customOnSubmitWaitForData) { %>
+                                myAutocomplete.autocompleteManager.actions.waitForDataReceived(3000, onSubmitInnerCallback);
+                            <% } else { %>
+                                onSubmitInnerCallback();
+                            <% } %>
                             e.preventDefault();
                         <% } else { %>
                             document.location.href = targetLink;
