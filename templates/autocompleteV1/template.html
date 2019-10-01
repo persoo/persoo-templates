@@ -24,7 +24,7 @@
             formNode.onsubmit = function() {
                 var query = document.querySelector('<%= inputSelector %>').value;
                 console.log("You searched for query '" + query + "'");
-                document.location.href = '<%= searchLink %>'.replace(/\$query/g, query);
+                document.location.href = '<%= searchLink %>'.replace(/\$query/g, encodeURIComponent(query));
                 return false;
             };
         </script>
@@ -208,7 +208,7 @@
                         var query = document.querySelector('<%= inputSelector %>').value;
                         reportEventToPersoo('search', {query: query});
 
-                        var targetLink = '<%= searchLink %>'.replace(/\$query/g, query);
+                        var targetLink = '<%= searchLink %>'.replace(/\$query/g, encodeURIComponent(query));
                         <% if (isFunctionSource(customOnSubmit)) { %>
                             var onSubmitInnerCallback = function (){
                                 <%= getNamedFunctionFromSource(customOnSubmit, 'autocompleteCustomOnSubmit') %>
