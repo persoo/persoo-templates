@@ -588,6 +588,20 @@
         },
 
         {
+            "id": "showNoResultsMessage",
+            "name": "Show No Results Message",
+            "group": "noresults",
+            "type": "checkbox",
+            "defaultValue": false
+        },
+        {
+             "id": "noResultsTemplate",
+             "name": "No Results Template",
+             "group": "noresults",
+             "type": "html",
+             "defaultValue": "No results found."
+        },
+        {
             "id": "searchBarTemplate",
             "name": "Search Bar Template as HTML",
             "group": "design",
@@ -668,6 +682,10 @@
         {
             "id": "dataset4",
             "name": "Suggested Dataset 4"
+        },
+        {
+            "id": "noresults",
+            "name": "No results found"
         },
         {
             "id": "options",

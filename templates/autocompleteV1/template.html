@@ -156,6 +156,8 @@
                     width: null,
                     placeholdersToRotate: placeholdersToRotate,
                     placeholdersRotationPeriod: placeholdersRotationPeriod,
+                    showWhenAllResultsEmpty: <%= showNoResultsMessage %>,
+                    noResultTemplate: <%= JSON.stringify(noResultsTemplate) %>,
                     onRender: function(state) {
                         <% if (formSelector) { %>
                             var formClassName = formNode.className;
