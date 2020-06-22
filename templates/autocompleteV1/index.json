@@ -664,6 +664,27 @@
             "group": "design",
             "type": "javascript",
             "defaultValue": "/* your own javascript */"
+        },
+        {
+            "id": "analyticsPushFunction",
+            "name": "Push Function (called only when query had changed)",
+            "group": "analytics",
+            "type": "javascript",
+            "defaultValue": "function push(state) {\n    // console.log('Virtual pageview for autocomplete dropdown, query=' + state.query);\n    // firstDatasetResultsCount = state.datasets[0] ? state.datasets[0].itemsCount : 0;\n  \n    // Google Analytics\n    //var pageURL = '/autocomplte/?term=' + state.query + '&foundResultsCount=' + firstDatasetResultsCount;\n    // window.ga('set', 'page', pageURL);\n    // window.ga('send', 'pageView');\n  \n    // Google Analytics includend by GTM\n    // persoo.actions.googleAnalyticsTrackPageview(pageURL);\n\n    // GTM\n    // dataLayer.push({\n    //     'event': 'autocomplete',\n    //     'Search Query': state.query,\n    //     'Number of Hits': firstDatasetResultsCount\n    // });\n    \n    // any other analytics service\n}"
+        },
+        {
+            "id": "analyticsTriggerOnUIInteraction",
+            "name": "Trigger Push Function on any click in autocomplete",
+            "group": "analytics",
+            "type": "checkbox",
+            "defaultValue": true
+        },
+        {
+            "id": "analyticsTriggerDelay",
+            "name": "Delay in ms between last key stroke and following Push Function call",
+            "group": "analytics",
+            "type": "number",
+            "defaultValue": 3000
         }
     ],
     "groups": [
@@ -694,6 +715,10 @@
         {
             "id": "design",
             "name": "HTML & CSS Styles"
+        },
+        {
+            "id": "analytics",
+            "name": "Analytics"
         }
     ],
     "template": "Note: this will be replaced by content of template.html",

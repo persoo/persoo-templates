@@ -158,6 +158,16 @@
                     placeholdersRotationPeriod: placeholdersRotationPeriod,
                     showWhenAllResultsEmpty: <%= showNoResultsMessage %>,
                     noResultTemplate: <%= JSON.stringify(noResultsTemplate) %>,
+                    <% if (isFunctionSource(analyticsPushFunction)) { %>
+                        analytics: {
+                            pushFunction: function (state) {
+                                <%= getNamedFunctionFromSource(analyticsPushFunction, 'autocompleteAnalyticsPushFunction') %>
+                                autocompleteAnalyticsPushFunction(state);
+                            },
+                            triggerDelayInMs: <%= analyticsTriggerDelay %>,
+                            triggerOnClick: <%= analyticsTriggerOnUIInteraction %>
+                        },
+                    <% } %>
                     onRender: function(state) {
                         <% if (formSelector) { %>
                             var formClassName = formNode.className;
@@ -235,7 +245,7 @@
                 s.src=url,s.type="text/javascript",s.async=true,s.onerror=errorFn,s.onload=onloadFn;
                 d.getElementsByTagName("head")[0].appendChild(s)};
 
-            var acLibLink = "https://scripts.persoo.cz/shared/autocompleteV2.5/persooAutocomplete.js";
+            var acLibLink = "https://scripts.persoo.cz/shared/autocompleteV2.6/persooAutocomplete.js";
             loadScript(acLibLink, initAutocomplete, function (){});
         })();
     </script>
